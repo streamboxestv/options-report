@@ -2,7 +2,8 @@
   {
     "reportTitle": "Options Report",
     "reportDate": "5/20",
-    "generatedAt": "2026-05-20 20:34:14",
+    "reportDateIso": "2026-05-20",
+    "generatedAt": "2026-05-20 20:55:14",
     "expiration": "5/22",
     "includedCount": 145,
     "requestedCount": 150,
@@ -222,7 +223,7 @@
       ]
     },
     "earningsThisWeek": {
-      "title": "Earnings This Week",
+      "title": "Earnings this Week",
       "rows": [
         {
           "ticker": "ELF",
