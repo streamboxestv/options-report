@@ -1,0 +1,279 @@
+{
+  "reportTitle": "Options Report",
+  "reportDate": "5/20",
+  "generatedAt": "2026-05-20 19:36:11",
+  "expiration": "5/22",
+  "includedCount": 145,
+  "requestedCount": 150,
+  "myPortfolio": {
+    "title": "My Portfolio Report",
+    "expiration": "5/22",
+    "rows": [
+      {
+        "ticker": "NVDA",
+        "price": 221.91,
+        "priceText": "$221.91",
+        "avgWeeklyMovePct": 7.254481337139151,
+        "avgWeeklyMovePctText": "7.25%",
+        "strike": 237.5,
+        "strikeText": "$237.50",
+        "premium": 222.00000000000003,
+        "premiumText": "$222.00",
+        "roiPct": 1.0004055698256051,
+        "roiPctText": "1.00%",
+        "action": "Sell"
+      },
+      {
+        "ticker": "GOOGL",
+        "price": 388.0,
+        "priceText": "$388.00",
+        "avgWeeklyMovePct": 6.19232060390598,
+        "avgWeeklyMovePctText": "6.19%",
+        "strike": 412.5,
+        "strikeText": "$412.50",
+        "premium": 16.0,
+        "premiumText": "$16.00",
+        "roiPct": 0.041237113402061855,
+        "roiPctText": "0.04%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "META",
+        "price": 604.98,
+        "priceText": "$604.98",
+        "avgWeeklyMovePct": 6.594282876261355,
+        "avgWeeklyMovePctText": "6.59%",
+        "strike": 645.0,
+        "strikeText": "$645.00",
+        "premium": 22.0,
+        "premiumText": "$22.00",
+        "roiPct": 0.036364838507058087,
+        "roiPctText": "0.04%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "TSLA",
+        "price": 414.75,
+        "priceText": "$414.75",
+        "avgWeeklyMovePct": 9.066342226856522,
+        "avgWeeklyMovePctText": "9.07%",
+        "strike": 452.5,
+        "strikeText": "$452.50",
+        "premium": 28.000000000000004,
+        "premiumText": "$28.00",
+        "roiPct": 0.06751054852320676,
+        "roiPctText": "0.07%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "AVGO",
+        "price": 416.34,
+        "priceText": "$416.34",
+        "avgWeeklyMovePct": 8.479827163964627,
+        "avgWeeklyMovePctText": "8.48%",
+        "strike": 452.5,
+        "strikeText": "$452.50",
+        "premium": 49.0,
+        "premiumText": "$49.00",
+        "roiPct": 0.11769227074026037,
+        "roiPctText": "0.12%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "NFLX",
+        "price": 88.1,
+        "priceText": "$88.10",
+        "avgWeeklyMovePct": 6.373795993138483,
+        "avgWeeklyMovePctText": "6.37%",
+        "strike": 94.0,
+        "strikeText": "$94.00",
+        "premium": 5.0,
+        "premiumText": "$5.00",
+        "roiPct": 0.05675368898978435,
+        "roiPctText": "0.06%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "AMD",
+        "price": 447.46,
+        "priceText": "$447.46",
+        "avgWeeklyMovePct": 11.428410422721454,
+        "avgWeeklyMovePctText": "11.43%",
+        "strike": 497.5,
+        "strikeText": "$497.50",
+        "premium": 107.0,
+        "premiumText": "$107.00",
+        "roiPct": 0.2391275197783042,
+        "roiPctText": "0.24%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "PLTR",
+        "price": 136.31,
+        "priceText": "$136.31",
+        "avgWeeklyMovePct": 10.883948039781869,
+        "avgWeeklyMovePctText": "10.88%",
+        "strike": 150.0,
+        "strikeText": "$150.00",
+        "premium": 5.0,
+        "premiumText": "$5.00",
+        "roiPct": 0.03668109456386179,
+        "roiPctText": "0.04%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "NBIS",
+        "price": 191.88,
+        "priceText": "$191.88",
+        "avgWeeklyMovePct": 18.31732491619108,
+        "avgWeeklyMovePctText": "18.32%",
+        "strike": 227.5,
+        "strikeText": "$227.50",
+        "premium": 56.99999999999999,
+        "premiumText": "$57.00",
+        "roiPct": 0.2970606629143214,
+        "roiPctText": "0.30%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "RKLB",
+        "price": 134.15,
+        "priceText": "$134.15",
+        "avgWeeklyMovePct": 18.50545398379714,
+        "avgWeeklyMovePctText": "18.51%",
+        "strike": 160.0,
+        "strikeText": "$160.00",
+        "premium": 15.0,
+        "premiumText": "$15.00",
+        "roiPct": 0.11181513231457324,
+        "roiPctText": "0.11%",
+        "action": "Wait"
+      }
+    ],
+    "totalPremium": 526.0,
+    "totalPremiumText": "$526.00"
+  },
+  "coveredCalls": {
+    "title": "Covered Calls",
+    "expiration": "5/22",
+    "rows": [
+      {
+        "ticker": "TE",
+        "price": 8.7,
+        "priceText": "$8.70",
+        "avgWeeklyMovePct": 24.68404835779838,
+        "avgWeeklyMovePctText": "24.68%",
+        "strike": 11.0,
+        "strikeText": "$11.00",
+        "premium": 20.0,
+        "premiumText": "$20.00",
+        "roiPct": 2.298850574712644,
+        "roiPctText": "2.30%",
+        "action": "Sell"
+      },
+      {
+        "ticker": "POET",
+        "price": 14.77,
+        "priceText": "$14.77",
+        "avgWeeklyMovePct": 23.443355553614094,
+        "avgWeeklyMovePctText": "23.44%",
+        "strike": 18.0,
+        "strikeText": "$18.00",
+        "premium": 22.0,
+        "premiumText": "$22.00",
+        "roiPct": 1.4895057549085984,
+        "roiPctText": "1.49%",
+        "action": "Sell"
+      }
+    ]
+  },
+  "cashSecuredPuts": {
+    "title": "Cash Secured Puts",
+    "expiration": "5/22",
+    "rows": [
+      {
+        "ticker": "FIGR",
+        "price": 36.41,
+        "priceText": "$36.41",
+        "avgWeeklyMovePct": 20.796862514516263,
+        "avgWeeklyMovePctText": "20.80%",
+        "strike": 29.0,
+        "strikeText": "$29.00",
+        "premium": 48.0,
+        "premiumText": "$48.00",
+        "roiPct": 1.318319143092557,
+        "roiPctText": "1.32%",
+        "action": "Sell"
+      }
+    ]
+  },
+  "earningsThisWeek": {
+    "title": "Earnings this Week",
+    "rows": [
+      {
+        "ticker": "ELF",
+        "price": 50.76,
+        "priceText": "$50.76",
+        "earningsDate": "2026-05-20",
+        "earningsDateText": "5/20",
+        "action": "Covered Call (strike: $57.00)",
+        "premium": 176.0,
+        "premiumText": "$176.00",
+        "roiPct": 3.467297084318361,
+        "roiPctText": "3.47%"
+      }
+    ]
+  },
+  "teamReview": {
+    "title": "Team Review",
+    "bestBalance": [
+      {
+        "ticker": "POET",
+        "price": 14.77,
+        "priceText": "$14.77",
+        "avgWeeklyMovePct": 23.443355553614094,
+        "avgWeeklyMovePctText": "23.44%",
+        "strike": 18.0,
+        "strikeText": "$18.00",
+        "premium": 22.0,
+        "premiumText": "$22.00",
+        "roiPct": 1.4895057549085984,
+        "roiPctText": "1.49%",
+        "action": "Sell",
+        "label": "Covered Call"
+      },
+      {
+        "ticker": "FIGR",
+        "price": 36.41,
+        "priceText": "$36.41",
+        "avgWeeklyMovePct": 20.796862514516263,
+        "avgWeeklyMovePctText": "20.80%",
+        "strike": 29.0,
+        "strikeText": "$29.00",
+        "premium": 48.0,
+        "premiumText": "$48.00",
+        "roiPct": 1.318319143092557,
+        "roiPctText": "1.32%",
+        "action": "Sell",
+        "label": "Cash Secured Put"
+      },
+      {
+        "ticker": "TE",
+        "price": 8.7,
+        "priceText": "$8.70",
+        "avgWeeklyMovePct": 24.68404835779838,
+        "avgWeeklyMovePctText": "24.68%",
+        "strike": 11.0,
+        "strikeText": "$11.00",
+        "premium": 20.0,
+        "premiumText": "$20.00",
+        "roiPct": 2.298850574712644,
+        "roiPctText": "2.30%",
+        "action": "Sell",
+        "label": "Covered Call"
+      }
+    ],
+    "bestBalanceWhy": "these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
+    "aggressivePremium": []
+  }
+}
