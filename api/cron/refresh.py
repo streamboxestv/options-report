@@ -164,7 +164,7 @@ class handler(BaseHTTPRequestHandler):
                 symbols=OPTIONS_REPORT_STOCKS,
                 report_title="Options Report",
                 batch_size=10,
-                batch_pause_seconds=2.0,
+                batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
             )
 
