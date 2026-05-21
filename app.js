@@ -188,6 +188,7 @@ function renderDashboard() {
   const optionColumns = [
     { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
     { key: "priceText", label: "Price", numeric: true },
+    { key: "trend", label: "Trend" },
     { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
     { key: "strikeText", label: "OTM Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.strikeText)}</span>` },
     { key: "premiumText", label: "Premium", numeric: true },
