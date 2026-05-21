@@ -1,0 +1,10 @@
+tests
+__pycache__
+docs
+instance
+*.pyc
+option_report_1.md
+option_report_2.md
+options_email_body.html
+options_email_body.txt
+codex_options_report_email_task.xml
