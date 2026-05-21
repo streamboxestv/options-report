@@ -1,6 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "fluid": true,
+  "functions": {
+    "api/cron/refresh.py": {
+      "maxDuration": 300
+    },
+    "api/report.py": {
+      "maxDuration": 30
+    },
+    "api/history.py": {
+      "maxDuration": 30
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/refresh",
