@@ -1,6 +1,6 @@
 const state = {
   snapshots: [],
-  selectedDate: null,
+  selectedDateIso: null,
 };
 
 function byId(id) {
@@ -12,7 +12,7 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
@@ -27,19 +27,27 @@ async function fetchJson(url) {
 function dedupeSnapshots(items) {
   const map = new Map();
   for (const item of items) {
-    if (!item || !item.reportDate) {
+    const dateIso = snapshotDateIso(item);
+    if (!item || !item.reportDate || !dateIso) {
       continue;
     }
-    const key = `${item.reportDate}::${item.expiration || ""}`;
+    const key = `${dateIso}::${item.expiration || ""}`;
     if (!map.has(key)) {
       map.set(key, item);
     }
   }
   return Array.from(map.values()).sort((a, b) => {
-    const aKey = a.reportDate || "";
-    const bKey = b.reportDate || "";
+    const aKey = snapshotDateIso(a) || "";
+    const bKey = snapshotDateIso(b) || "";
     return bKey.localeCompare(aKey, undefined, { numeric: true });
   });
+}
+
+function snapshotDateIso(snapshot) {
+  if (!snapshot) {
+    return null;
+  }
+  return snapshot.reportDateIso || snapshot.generatedAt?.slice(0, 10) || null;
 }
 
 function statCard(label, value, detail = "") {
@@ -98,12 +106,21 @@ function renderReviewList(targetId, rows) {
 
 function renderDateControls(snapshots) {
   const tabs = byId("date-tabs");
-  const select = byId("report-select");
+  const datePicker = byId("report-date-picker");
   tabs.innerHTML = "";
-  select.innerHTML = "";
+
+  const availableDates = snapshots
+    .map((snapshot) => snapshotDateIso(snapshot))
+    .filter(Boolean);
+  if (availableDates.length) {
+    datePicker.min = availableDates[availableDates.length - 1];
+    datePicker.max = availableDates[0];
+  }
+  datePicker.value = state.selectedDateIso || "";
 
   for (const snapshot of snapshots) {
-    const active = snapshot.reportDate === state.selectedDate;
+    const snapshotIso = snapshotDateIso(snapshot);
+    const active = snapshotIso === state.selectedDateIso;
     const label = `${snapshot.reportDate} - Exp ${snapshot.expiration || "N/A"}`;
 
     const button = document.createElement("button");
@@ -111,39 +128,34 @@ function renderDateControls(snapshots) {
     button.type = "button";
     button.textContent = label;
     button.addEventListener("click", () => {
-      state.selectedDate = snapshot.reportDate;
+      state.selectedDateIso = snapshotIso;
       renderDashboard();
     });
     tabs.appendChild(button);
-
-    const option = document.createElement("option");
-    option.value = snapshot.reportDate;
-    option.textContent = label;
-    option.selected = active;
-    select.appendChild(option);
   }
 
-  select.onchange = (event) => {
-    state.selectedDate = event.target.value;
+  datePicker.onchange = (event) => {
+    state.selectedDateIso = event.target.value;
     renderDashboard();
   };
 }
 
 function currentSnapshot() {
-  return state.snapshots.find((item) => item.reportDate === state.selectedDate) || state.snapshots[0];
+  return state.snapshots.find((item) => snapshotDateIso(item) === state.selectedDateIso) || null;
 }
 
 function renderDashboard() {
+  renderDateControls(state.snapshots);
   const snapshot = currentSnapshot();
   if (!snapshot) {
     byId("dashboard").classList.add("hidden");
     byId("loading-state").classList.add("hidden");
     byId("error-state").classList.remove("hidden");
-    byId("error-message").textContent = "No report snapshots are available yet.";
+    byId("error-message").textContent = state.selectedDateIso
+      ? `No report snapshot is available for ${state.selectedDateIso}.`
+      : "No report snapshots are available yet.";
     return;
   }
-
-  renderDateControls(state.snapshots);
 
   byId("hero-title").textContent = `${snapshot.reportTitle} - ${snapshot.reportDate}`;
   byId("hero-subtitle").textContent = `Expiration ${snapshot.expiration || "N/A"} - ${snapshot.includedCount ?? 0} included out of ${snapshot.requestedCount ?? 0} tracked symbols.`;
@@ -236,7 +248,7 @@ async function loadDashboard() {
       ]);
     }
     state.snapshots = dedupeSnapshots([latest, ...(history.snapshots || [])]);
-    state.selectedDate = state.snapshots[0]?.reportDate || null;
+    state.selectedDateIso = snapshotDateIso(state.snapshots[0]);
     renderDashboard();
   } catch (error) {
     byId("loading-state").classList.add("hidden");
