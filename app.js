@@ -12,7 +12,7 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
@@ -105,9 +105,7 @@ function renderReviewList(targetId, rows) {
 }
 
 function renderDateControls(snapshots) {
-  const tabs = byId("date-tabs");
   const datePicker = byId("report-date-picker");
-  tabs.innerHTML = "";
 
   const availableDates = snapshots
     .map((snapshot) => snapshotDateIso(snapshot))
@@ -118,22 +116,6 @@ function renderDateControls(snapshots) {
   }
   datePicker.value = state.selectedDateIso || "";
 
-  for (const snapshot of snapshots) {
-    const snapshotIso = snapshotDateIso(snapshot);
-    const active = snapshotIso === state.selectedDateIso;
-    const label = `${snapshot.reportDate} - Exp ${snapshot.expiration || "N/A"}`;
-
-    const button = document.createElement("button");
-    button.className = `date-tab${active ? " active" : ""}`;
-    button.type = "button";
-    button.textContent = label;
-    button.addEventListener("click", () => {
-      state.selectedDateIso = snapshotIso;
-      renderDashboard();
-    });
-    tabs.appendChild(button);
-  }
-
   datePicker.onchange = (event) => {
     state.selectedDateIso = event.target.value;
     renderDashboard();
@@ -142,6 +124,16 @@ function renderDateControls(snapshots) {
 
 function currentSnapshot() {
   return state.snapshots.find((item) => snapshotDateIso(item) === state.selectedDateIso) || null;
+}
+
+function isArchivePlaceholder(snapshot) {
+  return Boolean(
+    snapshot &&
+    (snapshot.includedCount ?? 0) === 0 &&
+    (snapshot.coveredCalls?.rows?.length || 0) === 0 &&
+    (snapshot.cashSecuredPuts?.rows?.length || 0) === 0 &&
+    (snapshot.myPortfolio?.rows?.length || 0) === 0
+  );
 }
 
 function renderDashboard() {
@@ -159,6 +151,16 @@ function renderDashboard() {
 
   byId("hero-title").textContent = `${snapshot.reportTitle} - ${snapshot.reportDate}`;
   byId("hero-subtitle").textContent = `Expiration ${snapshot.expiration || "N/A"} - ${snapshot.includedCount ?? 0} included out of ${snapshot.requestedCount ?? 0} tracked symbols.`;
+
+  const archiveNotice = byId("archive-notice");
+  const archiveNoticeText = byId("archive-notice-text");
+  if (isArchivePlaceholder(snapshot)) {
+    archiveNoticeText.textContent = snapshot.teamReview?.bestBalanceWhy || "This archived date does not have a preserved full snapshot.";
+    archiveNotice.classList.remove("hidden");
+  } else {
+    archiveNoticeText.textContent = "";
+    archiveNotice.classList.add("hidden");
+  }
 
   const statsHtml = [
     statCard("Report Date", snapshot.reportDate, `Expiration ${snapshot.expiration || "N/A"}`),
