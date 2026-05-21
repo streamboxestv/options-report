@@ -124,7 +124,8 @@ class handler(BaseHTTPRequestHandler):
             return
 
         now_utc = datetime.now(tz=ZoneInfo("UTC"))
-        if not should_run_refresh(now_utc):
+        force_refresh = "force=1" in (self.path or "")
+        if not force_refresh and not should_run_refresh(now_utc):
             chicago_now = now_utc.astimezone(CHICAGO_TZ)
             json_response(
                 self,
@@ -220,6 +221,7 @@ class handler(BaseHTTPRequestHandler):
             200,
             {
                 "ok": True,
+                "forced": force_refresh,
                 "reportDate": snapshot.get("reportDate"),
                 "reportDateIso": snapshot.get("reportDateIso"),
                 "expiration": expiration,
