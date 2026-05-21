@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Options Report Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Weekly Options Dashboard</p>
+        <h1 id="hero-title">Options Report</h1>
+        <p id="hero-subtitle" class="hero-subtitle">Loading the latest report snapshot...</p>
+      </div>
+      <div class="hero-meta">
+        <label class="date-filter-label" for="report-select">Report Date</label>
+        <select id="report-select" class="date-filter"></select>
+      </div>
+    </header>
+
+    <nav class="date-tabs-shell">
+      <div id="date-tabs" class="date-tabs"></div>
+    </nav>
+
+    <main id="dashboard" class="dashboard hidden">
+      <section class="stats-grid" id="stats-grid"></section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>My Portfolio Report</h2>
+            <p id="portfolio-expiration" class="panel-subtitle"></p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="portfolio-table"></table>
+        </div>
+      </section>
+
+      <section class="panel-grid">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Covered Calls</h2>
+              <p id="covered-expiration" class="panel-subtitle"></p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="covered-table"></table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Cash Secured Puts</h2>
+              <p id="puts-expiration" class="panel-subtitle"></p>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table id="puts-table"></table>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Earnings This Week</h2>
+            <p class="panel-subtitle">High-ROI setups filtered out because they carry this week's earnings risk.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="earnings-table"></table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Team Review</h2>
+            <p class="panel-subtitle">Shortlist synthesized from the report using the current earnings-week exclusions.</p>
+          </div>
+        </div>
+        <div class="review-grid">
+          <article class="review-card">
+            <div class="review-card-header">
+              <h3>Best Balance</h3>
+              <span class="review-chip">Lower drama</span>
+            </div>
+            <div id="best-balance-list" class="review-list"></div>
+            <p id="best-balance-why" class="review-why"></p>
+          </article>
+
+          <article class="review-card">
+            <div class="review-card-header">
+              <h3>Aggressive Premium</h3>
+              <span class="review-chip review-chip-warn">Higher risk</span>
+            </div>
+            <div id="aggressive-list" class="review-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <section id="loading-state" class="empty-state">
+      <h2>Preparing dashboard</h2>
+      <p>Pulling report snapshots and formatting the latest Options Report.</p>
+    </section>
+
+    <section id="error-state" class="empty-state hidden">
+      <h2>Dashboard unavailable</h2>
+      <p id="error-message">The report feed could not be loaded.</p>
+    </section>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
