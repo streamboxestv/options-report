@@ -1,20 +1,20 @@
-# Options Report - 5/21
+# Options Report - 5/22
 
 ## My Portfolio Report - Expiration 5/22
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium    |
 | --------- | ------: | ----------------: | ------------------: | ---------: |
-| META      | $601.88 |             6.60% |             $642.50 |      $7.00 |
-| TSLA      | $417.05 |             9.10% |             $455.00 |     $11.00 |
-| GOOGL     | $389.00 |             6.19% |             $412.50 |      $3.00 |
-| AMD       | $437.46 |            11.43% |             $487.50 |      $9.00 |
-| NFLX      |  $89.12 |             6.37% |              $95.00 |      $1.00 |
-| AVGO      | $413.15 |             8.48% |             $447.50 |      $6.00 |
-| RKLB      | $127.87 |            18.52% |             $152.50 |      $6.00 |
-| PLTR      | $137.67 |            10.90% |             $152.50 |      $1.00 |
-| NBIS      | $222.39 |            18.36% |             $262.50 |     $17.00 |
-| NVDA      | $219.29 |             7.26% |             $235.00 |     $21.00 |
-| **Total** |         |                   |                     | **$82.00** |
+| GOOGL     | $386.45 |             6.19% |             $410.00 |      $1.00 |
+| META      | $609.20 |             6.60% |             $650.00 |      $1.00 |
+| TSLA      | $426.49 |             9.10% |             $465.00 |      $1.00 |
+| AVGO      | $412.44 |             8.48% |             $447.50 |      $6.00 |
+| AMD       | $469.24 |            11.55% |             $522.50 |      $5.00 |
+| PLTR      | $134.93 |            10.91% |             $150.00 |      $1.00 |
+| NVDA      | $216.87 |             7.28% |             $232.50 |      $3.00 |
+| NFLX      |  $88.58 |             6.37% |              $94.00 |      $1.00 |
+| NBIS      | $217.70 |            18.37% |             $257.50 |      $8.00 |
+| RKLB      | $139.42 |            18.51% |             $165.00 |      $5.00 |
+| **Total** |         |                   |                     | **$32.00** |
 
 
 ## Covered Calls - Expiration 5/22
@@ -25,9 +25,9 @@
 
 ## Cash Secured Puts - Expiration 5/22
 
-| Ticker | Price | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | ----: | ----- | ----------------: | ---------: | ------: | ----: |
-| None   |   N/A | N/A   |               N/A |        N/A |     N/A |   N/A |
+| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
+| EL     | $86.50 | Buy   |             9.19% |     $79.00 | $100.00 | 1.16% |
 
 
 ## Earnings this Week
@@ -42,9 +42,9 @@
 ## Team Review
 
 **Best Balance**
-- None today.
+- Cash Secured Put: `EL` | price `$86.50` | avg weekly move `9.19%` | OTM strike `$79.00` | premium `$100.00` | ROI `1.16%`
 
-Why: no filtered candidates remain above the current threshold.
+Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
 - None beyond the best-balance group.
