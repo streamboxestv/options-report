@@ -441,8 +441,8 @@ def sma_series(values: List[float], length: int) -> List[float]:
     return results
 
 
-def wavetrend_last_signal(daily_bars: List[Dict]) -> str:
-    closes = [float(bar["c"]) for bar in daily_bars if bar.get("c") is not None]
+def wavetrend_last_signal(bars: List[Dict]) -> str:
+    closes = [float(bar["c"]) for bar in bars if bar.get("c") is not None]
     if len(closes) < 20:
         return "N/A"
 
@@ -690,283 +690,129 @@ def build_row(
     if not contracts or expiration_used is None:
         if expiration_override:
             raise RuntimeError(f"No Friday {option_type} contracts found for {symbol} on {expiration_override.isoformat()}")
-        raise RuntimeError(f"No Friday {option_type} contracts found for {symbol} in the next 8 weeks")
+        raise RuntimeError(f"No Friday {option_type} contracts found for {symbol} in the next 8 Fridays")
 
-    strike, last_price = choose_option_contract(
-        contracts=contracts,
-        price=price,
-        target_strike=target_strike,
-        option_type=option_type,
-    )
-    return OptionRow(
-        stock=symbol,
-        price=price,
-        trend=trend,
-        pct_otm=pct_otm,
-        strike=strike,
-        last_price=last_price,
-        action=action_for_premium(last_price, price),
-    ), expiration_used
-
-
-def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> str:
-    sell_rows = [row for row in rows if row.action == "Sell"]
-    sorted_rows = sorted(
-        sell_rows,
-        key=lambda row: roi_pct(row.last_price, row.price) if roi_pct(row.last_price, row.price) is not None else -1.0,
-        reverse=True,
-    )
-    if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
-    else:
-        table_rows = [
-            [
-                row.stock,
-                format_money(row.price),
-                row.trend,
-                f"{row.pct_otm * 100:.2f}%",
-                format_money(row.strike),
-                format_money(row.last_price * 100.0) if row.last_price is not None else "N/A",
-                f"{roi_pct(row.last_price, row.price):.2f}%" if roi_pct(row.last_price, row.price) is not None else "N/A",
-            ]
-            for row in sorted_rows
-        ]
-    return "\n".join([
-        f"## {title} - Expiration {expiration_label}",
-        "",
-        render_markdown_table(
-            ["Ticker", "Price", "Trend", "Avg Weekly Move %", "OTM Strike", "Premium", "ROI %"],
-            table_rows,
-            ["left", "right", "left", "right", "right", "right", "right"],
-        ),
-        "",
-    ])
-
-
-def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) -> str:
-    sell_rows = [row for row in rows if row.action == "Sell"]
-    sorted_rows = sorted(
-        sell_rows,
-        key=lambda row: roi_pct(row.last_price, row.price) if roi_pct(row.last_price, row.price) is not None else -1.0,
-        reverse=True,
-    )
-    if not sorted_rows:
-        body = '<tr><td colspan="6" style="padding:14px 16px;color:#6b7280;">None</td></tr>'
-    else:
-        body = "".join(
-            f"<tr>"
-            f"<td style='padding:14px 16px;font-weight:700;color:#0f172a;'>{escape(row.stock)}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(format_money(row.price))}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;color:#0f766e;font-weight:700;'>{escape(format_money(row.strike))}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(format_money(row.last_price * 100.0) if row.last_price is not None else 'N/A')}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(f'{row.pct_otm * 100:.2f}%')}</td>"
-            f"<td style='padding:14px 16px;text-align:center;'><span style='display:inline-block;padding:6px 12px;border-radius:999px;background:#dcfce7;color:#14532d;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;'>Sell</span></td>"
-            f"</tr>"
-            for row in sorted_rows
-        )
-    return (
-        '<section style="margin-top:28px;">'
-        f'<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;">'
-        f'<div><h2 style="margin:0;font-size:24px;color:#111827;">{escape(title)}</h2>'
-        f'<div style="margin-top:6px;color:#6b7280;font-size:14px;">Expiration {escape(expiration_label)}</div></div>'
-        '</div>'
-        '<div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;background:#ffffff;">'
-        '<table style="width:100%;border-collapse:collapse;">'
-        '<thead style="background:#f3f4f6;color:#374151;text-transform:uppercase;letter-spacing:0.08em;font-size:12px;">'
-        '<tr>'
-        '<th style="padding:12px 16px;text-align:left;">Ticker</th>'
-        '<th style="padding:12px 16px;text-align:right;">Price</th>'
-        '<th style="padding:12px 16px;text-align:right;">OTM Strike</th>'
-        '<th style="padding:12px 16px;text-align:right;">Premium</th>'
-        '<th style="padding:12px 16px;text-align:right;">Avg Weekly Move %</th>'
-        '<th style="padding:12px 16px;text-align:center;">Action</th>'
-        '</tr>'
-        '</thead>'
-        f'<tbody>{body}</tbody>'
-        '</table>'
-        '</div>'
-        '</section>'
-    )
+    strike, last_price = choose_option_contract(contracts, price, target_strike, option_type)
+    action = action_for_premium(last_price, price)
+    return OptionRow(symbol, price, trend, pct_otm, strike, last_price, action), expiration_used
 
 
 def load_my_portfolio_tickers() -> List[str]:
     if not os.path.exists(MY_PORTFOLIO_REPORT_FILE):
         return []
     with open(MY_PORTFOLIO_REPORT_FILE, "r", encoding="utf-8") as handle:
-        return [line.strip() for line in handle if line.strip()]
+        content = handle.read()
+    return [token.strip().upper() for token in re.split(r"[\s,]+", content) if token.strip()]
+
+
+def sorted_sell_rows(rows: Iterable[OptionRow]) -> List[OptionRow]:
+    sell_rows = [row for row in rows if row.action == "Sell"]
+    return sorted(
+        sell_rows,
+        key=lambda row: (
+            roi_pct(row.last_price, row.price) if roi_pct(row.last_price, row.price) is not None else -1.0,
+            row.stock,
+        ),
+        reverse=True,
+    )
 
 
 def render_portfolio_table(rows: List[OptionRow], expiration_label: str) -> str:
-    lines = [f"## My Portfolio Report - Expiration {expiration_label}", ""]
-    total_premium = 0.0
-    table_rows = []
-    for row in rows:
-        premium_value = row.last_price * 100.0 if row.last_price is not None else 0.0
-        total_premium += premium_value
-        table_rows.append(
+    sorted_rows = sorted(rows, key=lambda row: load_my_portfolio_tickers().index(row.stock) if row.stock in load_my_portfolio_tickers() else len(load_my_portfolio_tickers()))
+    headers = ["Ticker", "Price", "Avg Weekly Move %", "Covered Call Strike", "Premium"]
+    aligns = ["left", "right", "right", "right", "right"]
+    body = [
+        [
+            row.stock,
+            format_money(row.price),
+            f"{row.pct_otm * 100:.2f}%",
+            format_money(row.strike),
+            format_money(row.last_price * 100.0 if row.last_price is not None else None),
+        ]
+        for row in sorted_rows
+    ]
+    total_premium = sum((row.last_price or 0.0) * 100.0 for row in sorted_rows)
+    body.append(["**Total**", "", "", "", f"**{format_money(total_premium)}**"])
+    return f"## My Portfolio Report - Expiration {expiration_label}\n\n" + render_markdown_table(headers, body, aligns) + "\n"
+
+
+def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> str:
+    headers = ["Ticker", "Price", "Trend", "Avg Weekly Move %", "OTM Strike", "Premium", "ROI %"]
+    aligns = ["left", "right", "left", "right", "right", "right", "right"]
+    sell_rows = sorted_sell_rows(rows)
+    if not sell_rows:
+        body = [["None", "", "", "", "", "", ""]]
+    else:
+        body = [
             [
                 row.stock,
                 format_money(row.price),
+                row.trend,
                 f"{row.pct_otm * 100:.2f}%",
                 format_money(row.strike),
-                format_money(premium_value) if row.last_price is not None else "N/A",
+                format_money(row.last_price * 100.0 if row.last_price is not None else None),
+                f"{roi_pct(row.last_price, row.price):.2f}%" if roi_pct(row.last_price, row.price) is not None else "N/A",
             ]
-        )
-    table_rows.append(["**Total**", "", "", "", f"**{format_money(total_premium)}**"])
-    lines.append(
-        render_markdown_table(
-            ["Ticker", "Price", "Avg Weekly Move %", "Covered Call Strike", "Premium"],
-            table_rows,
-            ["left", "right", "right", "right", "right"],
-        )
-    )
-    lines.extend(["", ""])
-    return "\n".join(lines)
-
-
-def render_portfolio_html_table(rows: List[OptionRow], expiration_label: str) -> str:
-    total_premium = 0.0
-    table_rows = []
-    for row in rows:
-        premium_value = row.last_price * 100.0 if row.last_price is not None else 0.0
-        total_premium += premium_value
-        table_rows.append(
-            f"<tr>"
-            f"<td style='padding:14px 16px;font-weight:700;color:#0f172a;'>{escape(row.stock)}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(format_money(row.price))}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;color:#0f766e;font-weight:700;'>{escape(format_money(row.strike))}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(f'{row.pct_otm * 100:.2f}%')}</td>"
-            f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;'>{escape(format_money(premium_value) if row.last_price is not None else 'N/A')}</td>"
-            f"</tr>"
-        )
-    table_rows.append(
-        f"<tr style='background:#f9fafb;font-weight:700;'>"
-        f"<td style='padding:14px 16px;color:#0f172a;'>Total</td>"
-        f"<td style='padding:14px 16px;'></td>"
-        f"<td style='padding:14px 16px;'></td>"
-        f"<td style='padding:14px 16px;'></td>"
-        f"<td style='padding:14px 16px;text-align:right;font-variant-numeric:tabular-nums;color:#0f172a;'>{escape(format_money(total_premium))}</td>"
-        f"</tr>"
-    )
-    return (
-        '<section style="margin-top:28px;">'
-        f'<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;">'
-        '<div>'
-        '<h2 style="margin:0;font-size:24px;color:#111827;">My Portfolio Report</h2>'
-        f'<div style="margin-top:6px;color:#6b7280;font-size:14px;">Expiration {escape(expiration_label)}</div>'
-        '</div>'
-        '</div>'
-        '<div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;background:#ffffff;">'
-        '<table style="width:100%;border-collapse:collapse;">'
-        '<thead style="background:#f3f4f6;color:#374151;text-transform:uppercase;letter-spacing:0.08em;font-size:12px;">'
-        '<tr>'
-        '<th style="padding:12px 16px;text-align:left;">Ticker</th>'
-        '<th style="padding:12px 16px;text-align:right;">Price</th>'
-        '<th style="padding:12px 16px;text-align:right;">Covered Call Strike</th>'
-        '<th style="padding:12px 16px;text-align:right;">Avg Weekly Move %</th>'
-        '<th style="padding:12px 16px;text-align:right;">Premium</th>'
-        '</tr>'
-        '</thead>'
-        f'<tbody>{"".join(table_rows)}</tbody>'
-        '</table>'
-        '</div>'
-        '</section>'
-    )
-
-
-def render_summary_card(label: str, value: str) -> str:
-    return (
-        '<div style="flex:1 1 180px;min-width:180px;border:1px solid rgba(255,255,255,0.16);'
-        'border-radius:18px;padding:16px 18px;background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);">'
-        f'<div style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#cbd5e1;">{escape(label)}</div>'
-        f'<div style="margin-top:10px;font-size:28px;font-weight:800;line-height:1;color:#ffffff;">{escape(value)}</div>'
-        '</div>'
-    )
+            for row in sell_rows
+        ]
+    return f"## {title} - Expiration {expiration_label}\n\n" + render_markdown_table(headers, body, aligns) + "\n"
 
 
 def render_excluded_table(rows: List[ExcludedTickerRow]) -> str:
-    lines = ["## Earnings this Week", ""]
+    headers = ["Ticker", "Price", "Earnings Date", "Action", "Premium", "ROI %"]
+    aligns = ["left", "right", "left", "left", "right", "right"]
     filtered_rows = sorted(
         [row for row in rows if row.roi is not None and row.roi >= 2.0],
         key=lambda row: (row.roi if row.roi is not None else -1.0, row.stock),
         reverse=True,
     )
     if not filtered_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A"]]
-        lines.append("")
+        body = [["None", "", "", "", "", ""]]
     else:
-        table_rows = []
-        for row in filtered_rows:
-            earnings_text = f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A"
-            premium_text = format_money(row.premium) if row.premium is not None else "N/A"
-            roi_text = f"{row.roi:.2f}%" if row.roi is not None else "N/A"
-            table_rows.append([
+        body = [
+            [
                 row.stock,
                 format_money(row.price) if row.price is not None else "N/A",
-                earnings_text,
+                f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
                 row.options_label,
-                premium_text,
-                roi_text,
-            ])
-    lines.append(
-        render_markdown_table(
-            ["Ticker", "Price", "Earnings Date", "Action", "Premium", "ROI %"],
-            table_rows,
-            ["left", "right", "left", "left", "right", "right"],
-        )
-    )
-    lines.extend(["", ""])
-    return "\n".join(lines)
-
-
-def sorted_sell_rows(rows: List[OptionRow]) -> List[OptionRow]:
-    return sorted(
-        [row for row in rows if row.action == "Sell"],
-        key=lambda row: roi_pct(row.last_price, row.price) if roi_pct(row.last_price, row.price) is not None else -1.0,
-        reverse=True,
-    )
-
-
-def recommendation_score(row: OptionRow) -> float:
-    roi = roi_pct(row.last_price, row.price)
-    if roi is None:
-        return math.inf
-    return abs(roi - 1.5) + (row.pct_otm * 100.0) / 25.0
-
-
-def format_recommendation_line(label: str, row: OptionRow) -> str:
-    roi_text = f"{roi_pct(row.last_price, row.price):.2f}%" if roi_pct(row.last_price, row.price) is not None else "N/A"
-    premium_text = format_money(row.last_price * 100.0) if row.last_price is not None else "N/A"
-    return (
-        f"- {label}: `{row.stock}` | price `{format_money(row.price)}` | avg weekly move `{row.pct_otm * 100:.2f}%` | "
-        f"OTM strike `{format_money(row.strike)}` | premium `{premium_text}` | ROI `{roi_text}`"
-    )
+                format_money(row.premium) if row.premium is not None else "N/A",
+                f"{row.roi:.2f}%" if row.roi is not None else "N/A",
+            ]
+            for row in filtered_rows
+        ]
+    return "## Earnings this Week\n\n" + render_markdown_table(headers, body, aligns) + "\n"
 
 
 def build_recommendation_groups(
-    covered_calls: List[OptionRow], cash_secured_puts: List[OptionRow]
+    covered_calls: List[OptionRow],
+    cash_secured_puts: List[OptionRow],
 ) -> Tuple[List[RecommendationRow], List[RecommendationRow]]:
-    sell_covereds = sorted_sell_rows(covered_calls)
-    sell_puts = sorted_sell_rows(cash_secured_puts)
-
-    candidates: List[RecommendationRow] = [
-        RecommendationRow("Covered Call", row) for row in sell_covereds
-    ] + [
-        RecommendationRow("Cash Secured Put", row) for row in sell_puts
-    ]
-
-    best_balance = sorted(candidates, key=lambda item: recommendation_score(item.row))[:3]
-    aggressive = []
-    used = {(item.label, item.row.stock) for item in best_balance}
-    for item in sorted(
-        candidates,
-        key=lambda item: roi_pct(item.row.last_price, item.row.price) if roi_pct(item.row.last_price, item.row.price) is not None else -1.0,
+    covered_sell = [RecommendationRow("Covered Call", row) for row in sorted_sell_rows(covered_calls)]
+    put_sell = [RecommendationRow("Cash Secured Put", row) for row in sorted_sell_rows(cash_secured_puts)]
+    combined = covered_sell + put_sell
+    combined.sort(
+        key=lambda item: (
+            roi_pct(item.row.last_price, item.row.price) if roi_pct(item.row.last_price, item.row.price) is not None else -1.0,
+            item.row.stock,
+        ),
         reverse=True,
-    ):
-        key = (item.label, item.row.stock)
-        if key in used:
-            continue
-        aggressive.append(item)
+    )
+
+    best_balance: List[RecommendationRow] = []
+    aggressive: List[RecommendationRow] = []
+
+    lower_risk = [item for item in combined if 1.0 <= (roi_pct(item.row.last_price, item.row.price) or 0.0) <= 1.75]
+    best_balance.extend(lower_risk[:3])
+    if len(best_balance) < 3:
+        for item in combined:
+            if item not in best_balance:
+                best_balance.append(item)
+            if len(best_balance) == 3:
+                break
+
+    for item in combined:
+        if item not in best_balance:
+            aggressive.append(item)
         if len(aggressive) == 3:
             break
 
@@ -982,30 +828,140 @@ def recommendation_row_to_dict(item: RecommendationRow) -> Dict[str, object]:
 def render_recommendations(covered_calls: List[OptionRow], cash_secured_puts: List[OptionRow]) -> str:
     best_balance, aggressive = build_recommendation_groups(covered_calls, cash_secured_puts)
 
-    lines = ["## Team Review", ""]
-    lines.append("**Best Balance**")
+    lines = ["## Team Review", "", "**Best Balance**"]
     if best_balance:
         for item in best_balance:
-            lines.append(format_recommendation_line(item.label, item.row))
-        lines.extend(
-            [
-                "",
-                "Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
-            ]
-        )
+            roi_text = f"{roi_pct(item.row.last_price, item.row.price):.2f}%" if roi_pct(item.row.last_price, item.row.price) is not None else "N/A"
+            lines.append(
+                f"- {item.label}: `{item.row.stock}` | price `{format_money(item.row.price)}` | avg weekly move `{item.row.pct_otm * 100:.2f}%` | OTM strike `{format_money(item.row.strike)}` | premium `{format_money(item.row.last_price * 100.0 if item.row.last_price is not None else None)}` | ROI `{roi_text}`"
+            )
     else:
         lines.append("- None today.")
-        lines.extend(["", "Why: no filtered candidates remain above the current threshold."])
 
-    lines.extend(["", "**Aggressive Premium**"])
+    lines.extend(
+        [
+            "",
+            "Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
+            "",
+            "**Aggressive Premium**",
+        ]
+    )
     if aggressive:
         for item in aggressive:
-            lines.append(format_recommendation_line(item.label, item.row))
+            roi_text = f"{roi_pct(item.row.last_price, item.row.price):.2f}%" if roi_pct(item.row.last_price, item.row.price) is not None else "N/A"
+            lines.append(
+                f"- {item.label}: `{item.row.stock}` | price `{format_money(item.row.price)}` | avg weekly move `{item.row.pct_otm * 100:.2f}%` | OTM strike `{format_money(item.row.strike)}` | premium `{format_money(item.row.last_price * 100.0 if item.row.last_price is not None else None)}` | ROI `{roi_text}`"
+            )
     else:
         lines.append("- None beyond the best-balance group.")
+    return "\n".join(lines) + "\n"
 
-    lines.append("")
-    return "\n".join(lines)
+
+def render_summary_card(label: str, value: str) -> str:
+    return (
+        '<div style="flex:1 1 180px;min-width:180px;background:#ffffff;border:1px solid #e5e7eb;'
+        'border-radius:16px;padding:18px 20px;box-shadow:0 12px 30px rgba(15,23,42,0.06);">'
+        f'<div style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#6b7280;">{escape(label)}</div>'
+        f'<div style="margin-top:10px;font-size:30px;font-weight:700;color:#111827;">{escape(value)}</div>'
+        "</div>"
+    )
+
+
+def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) -> str:
+    sell_rows = sorted_sell_rows(rows)
+    if not sell_rows:
+        body = '<tr><td colspan="7" style="padding:16px 18px;color:#6b7280;">No sell candidates.</td></tr>'
+    else:
+        rendered_rows = []
+        for row in sell_rows:
+            roi = roi_pct(row.last_price, row.price)
+            roi_text = f"{roi:.2f}%" if roi is not None else "N/A"
+            rendered_rows.append(
+                "<tr>"
+                f'<td style="padding:14px 18px;font-weight:600;color:#111827;">{escape(row.stock)}</td>'
+                f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(format_money(row.price))}</td>'
+                f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(row.trend)}</td>'
+                f'<td style="padding:14px 18px;text-align:right;color:#111827;">{row.pct_otm * 100:.2f}%</td>'
+                f'<td style="padding:14px 18px;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.strike))}</td>'
+                f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(format_money(row.last_price * 100.0 if row.last_price is not None else None))}</td>'
+                f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(roi_text)}</td>'
+                "</tr>"
+            )
+        body = "".join(rendered_rows)
+
+    return (
+        '<section style="margin-top:28px;">'
+        f'<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;">'
+        f'<div><h2 style="margin:0;font-size:24px;color:#111827;">{escape(title)}</h2>'
+        f'<div style="margin-top:4px;color:#6b7280;font-size:14px;">Expiration {escape(expiration_label)}</div></div>'
+        "</div>"
+        '<div style="overflow:hidden;border:1px solid #e5e7eb;border-radius:18px;background:#ffffff;box-shadow:0 18px 40px rgba(15,23,42,0.06);">'
+        '<table style="width:100%;border-collapse:collapse;font-size:14px;">'
+        '<thead style="background:#f8fafc;color:#475569;">'
+        '<tr>'
+        '<th style="padding:14px 18px;text-align:left;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Ticker</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Price</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Trend</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Avg Weekly Move %</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">OTM Strike</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Premium</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">ROI %</th>'
+        '</tr>'
+        '</thead>'
+        f'<tbody>{body}</tbody>'
+        '</table>'
+        '</div>'
+        '</section>'
+    )
+
+
+def render_portfolio_html_table(rows: List[OptionRow], expiration_label: str) -> str:
+    ordering = load_my_portfolio_tickers()
+    sorted_rows = sorted(rows, key=lambda row: ordering.index(row.stock) if row.stock in ordering else len(ordering))
+    rendered_rows = []
+    total_premium = 0.0
+    for row in sorted_rows:
+        premium_value = row.last_price * 100.0 if row.last_price is not None else None
+        total_premium += premium_value or 0.0
+        rendered_rows.append(
+            "<tr>"
+            f'<td style="padding:14px 18px;font-weight:600;color:#111827;">{escape(row.stock)}</td>'
+            f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(format_money(row.price))}</td>'
+            f'<td style="padding:14px 18px;text-align:right;color:#111827;">{row.pct_otm * 100:.2f}%</td>'
+            f'<td style="padding:14px 18px;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.strike))}</td>'
+            f'<td style="padding:14px 18px;text-align:right;color:#111827;">{escape(format_money(premium_value))}</td>'
+            "</tr>"
+        )
+    rendered_rows.append(
+        "<tr style=\"background:#fafaf9;\">"
+        '<td style="padding:14px 18px;font-weight:700;color:#111827;">Total</td>'
+        '<td style="padding:14px 18px;" colspan="3"></td>'
+        f'<td style="padding:14px 18px;text-align:right;font-weight:700;color:#111827;">{escape(format_money(total_premium))}</td>'
+        "</tr>"
+    )
+
+    return (
+        '<section style="margin-top:4px;">'
+        f'<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;">'
+        f'<div><h2 style="margin:0;font-size:24px;color:#111827;">My Portfolio Report</h2>'
+        f'<div style="margin-top:4px;color:#6b7280;font-size:14px;">Expiration {escape(expiration_label)}</div></div>'
+        "</div>"
+        '<div style="overflow:hidden;border:1px solid #e5e7eb;border-radius:18px;background:#ffffff;box-shadow:0 18px 40px rgba(15,23,42,0.06);">'
+        '<table style="width:100%;border-collapse:collapse;font-size:14px;">'
+        '<thead style="background:#f8fafc;color:#475569;">'
+        '<tr>'
+        '<th style="padding:14px 18px;text-align:left;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Ticker</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Price</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Avg Weekly Move %</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Covered Call Strike</th>'
+        '<th style="padding:14px 18px;text-align:right;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Premium</th>'
+        '</tr>'
+        '</thead>'
+        f'<tbody>{"".join(rendered_rows)}</tbody>'
+        '</table>'
+        '</div>'
+        '</section>'
+    )
 
 
 def build_report_html(
@@ -1022,19 +978,14 @@ def build_report_html(
     cash_secured_put_label: str,
     skipped: List[str],
 ) -> str:
-    covered_count = len([row for row in covered_calls if row.action == "Sell"])
-    put_count = len([row for row in cash_secured_puts if row.action == "Sell"])
+    covered_count = len(sorted_sell_rows(covered_calls))
+    put_count = len(sorted_sell_rows(cash_secured_puts))
     skipped_items = "".join(
-        f"<li style='margin:6px 0;color:#4b5563;'>{escape(item)}</li>" for item in skipped
+        f'<li style="margin:0 0 6px 0;color:#4b5563;">{escape(item)}</li>' for item in skipped
     )
     skipped_section = (
-        "<section style=\"margin-top:28px;\">"
-        '<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;">'
-        '<div>'
-        '<h2 style="margin:0;font-size:24px;color:#111827;">Excluded Tickers</h2>'
-        '<div style="margin-top:6px;color:#6b7280;font-size:14px;">Names skipped because of missing prices, unavailable contracts, or data filters.</div>'
-        '</div>'
-        '</div>'
+        '<section style="margin-top:28px;">'
+        '<h2 style="margin:0 0 10px 0;font-size:20px;color:#111827;">Excluded Tickers</h2>'
         '<div style="border:1px solid #e5e7eb;border-radius:16px;padding:16px;background:#ffffff;">'
         f'<ul style="margin:0;padding-left:18px;">{skipped_items}</ul>'
         "</div>"
@@ -1164,9 +1115,8 @@ def build_report(
         try:
             earnings_date = get_earnings_date_safe(symbol)
             bars = get_weekly_bars(symbol, start, today, api_key, api_secret)
-            daily_bars = get_daily_bars(symbol, start, today, api_key, api_secret)
             pct_otm = average_weekly_move_pct(bars)
-            trend = wavetrend_last_signal(daily_bars)
+            trend = wavetrend_last_signal(bars)
             if earnings_in_report_week(earnings_date, report_start, report_expiration):
                 best_options_label = "N/A"
                 best_premium: Optional[float] = None
@@ -1237,9 +1187,6 @@ def build_report(
 
     def build_active_symbol(symbol: str) -> Dict[str, object]:
         try:
-            if symbol not in trend_by_symbol:
-                daily_bars = get_daily_bars(symbol, start, today, api_key, api_secret)
-                trend_by_symbol[symbol] = wavetrend_last_signal(daily_bars)
             covered_call, covered_call_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm_by_symbol[symbol], "call", api_key, api_secret, expiration_override)
             cash_secured_put, cash_secured_put_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm_by_symbol[symbol], "put", api_key, api_secret, expiration_override)
             return {
@@ -1289,8 +1236,8 @@ def build_report(
                 bars = get_weekly_bars(symbol, start, today, api_key, api_secret)
                 pct_otm = average_weekly_move_pct(bars)
             if symbol not in trend_by_symbol:
-                daily_bars = get_daily_bars(symbol, start, today, api_key, api_secret)
-                trend_by_symbol[symbol] = wavetrend_last_signal(daily_bars)
+                bars = get_weekly_bars(symbol, start, today, api_key, api_secret)
+                trend_by_symbol[symbol] = wavetrend_last_signal(bars)
             portfolio_row, portfolio_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm, "call", api_key, api_secret, expiration_override)
             return symbol, portfolio_row, portfolio_expiration
         except Exception:
