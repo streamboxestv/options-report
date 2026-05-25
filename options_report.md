@@ -1,4 +1,4 @@
-# Options Report - 5/23
+# Options Report - 5/25
 
 ## My Portfolio Report - Expiration 5/29
 
@@ -6,14 +6,14 @@
 | --------- | ------: | ----------------: | ------------------: | ----------: |
 | NVDA      | $215.34 |             7.29% |             $230.00 |      $68.00 |
 | GOOGL     | $383.03 |             6.20% |             $407.50 |      $35.00 |
-| TSLA      | $425.04 |             9.11% |             $465.00 |     $106.00 |
 | META      | $609.61 |             6.60% |             $650.00 |     $110.00 |
+| TSLA      | $425.04 |             9.11% |             $465.00 |     $106.00 |
 | AVGO      | $414.01 |             8.48% |             $450.00 |     $100.00 |
-| AMD       | $467.64 |            11.55% |             $522.50 |     $265.00 |
 | NFLX      |  $88.59 |             6.37% |              $94.00 |      $12.00 |
+| AMD       | $467.64 |            11.55% |             $522.50 |     $265.00 |
+| PLTR      | $136.84 |            10.91% |             $152.50 |      $14.00 |
 | NBIS      | $214.76 |            18.37% |             $255.00 |     $139.00 |
 | RKLB      | $135.74 |            18.52% |             $160.00 |     $100.00 |
-| PLTR      | $136.84 |            10.91% |             $152.50 |      $14.00 |
 | **Total** |         |                   |                     | **$949.00** |
 
 ## Covered Calls - Expiration 5/29
@@ -65,9 +65,9 @@
 ## Team Review
 
 **Best Balance**
-- Covered Call: `IOT` | price `$31.17` | avg weekly move `11.01%` | OTM strike `$34.50` | premium `$47.00` | ROI `1.51%`
-- Cash Secured Put: `QCOM` | price `$238.23` | avg weekly move `7.60%` | OTM strike `$220.00` | premium `$297.00` | ROI `1.25%`
 - Covered Call: `DUOL` | price `$106.61` | avg weekly move `13.22%` | OTM strike `$121.00` | premium `$163.00` | ROI `1.53%`
+- Covered Call: `IOT` | price `$31.17` | avg weekly move `11.01%` | OTM strike `$34.50` | premium `$47.00` | ROI `1.51%`
+- Cash Secured Put: `W` | price `$67.10` | avg weekly move `12.77%` | OTM strike `$59.00` | premium `$93.00` | ROI `1.39%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
@@ -75,3 +75,4 @@ Why: these are the strongest remaining candidates after the earnings-week exclus
 - Covered Call: `FIGR` | price `$33.94` | avg weekly move `20.98%` | OTM strike `$41.00` | premium `$460.00` | ROI `13.55%`
 - Covered Call: `TE` | price `$8.07` | avg weekly move `24.74%` | OTM strike `$10.00` | premium `$23.00` | ROI `2.85%`
 - Covered Call: `LUNR` | price `$38.26` | avg weekly move `19.55%` | OTM strike `$45.50` | premium `$101.00` | ROI `2.64%`
+
