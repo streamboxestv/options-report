@@ -1,78 +1,72 @@
-# Options Report - 5/25
+# Options Report - 5/26
 
 ## My Portfolio Report - Expiration 5/29
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | ------: | ----------------: | ------------------: | ----------: |
-| NVDA      | $215.34 |             7.29% |             $230.00 |      $68.00 |
-| GOOGL     | $383.03 |             6.20% |             $407.50 |      $35.00 |
-| META      | $609.61 |             6.60% |             $650.00 |     $110.00 |
-| TSLA      | $425.04 |             9.11% |             $465.00 |     $106.00 |
-| AVGO      | $414.01 |             8.48% |             $450.00 |     $100.00 |
-| NFLX      |  $88.59 |             6.37% |              $94.00 |      $12.00 |
-| AMD       | $467.64 |            11.55% |             $522.50 |     $265.00 |
-| PLTR      | $136.84 |            10.91% |             $152.50 |      $14.00 |
-| NBIS      | $214.76 |            18.37% |             $255.00 |     $139.00 |
-| RKLB      | $135.74 |            18.52% |             $160.00 |     $100.00 |
-| **Total** |         |                   |                     | **$949.00** |
+| NVDA      | $216.01 |             7.16% |             $232.50 |      $25.00 |
+| GOOGL     | $387.65 |             6.14% |             $412.50 |      $20.00 |
+| META      | $610.54 |             6.57% |             $650.00 |      $63.00 |
+| TSLA      | $428.17 |             9.01% |             $467.50 |      $73.00 |
+| AVGO      | $430.56 |             8.42% |             $467.50 |      $40.00 |
+| NFLX      |  $87.89 |             6.34% |              $93.00 |      $12.00 |
+| AMD       | $491.21 |            11.49% |             $547.50 |     $219.00 |
+| PLTR      | $135.47 |            10.80% |             $150.00 |       $9.00 |
+| NBIS      | $214.59 |            18.17% |             $252.50 |     $114.00 |
+| RKLB      | $142.66 |            18.26% |             $167.50 |      $68.00 |
+| **Total** |         |                   |                     | **$643.00** |
 
 ## Covered Calls - Expiration 5/29
 
-| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI %  |
-| ------ | ------: | ----- | ----------------: | ---------: | ------: | -----: |
-| FIGR   |  $33.94 | Sell  |            20.98% |     $41.00 | $460.00 | 13.55% |
-| TE     |   $8.07 | Buy   |            24.74% |     $10.00 |  $23.00 |  2.85% |
-| LUNR   |  $38.26 | Buy   |            19.55% |     $45.50 | $101.00 |  2.64% |
-| POET   |  $14.60 | Buy   |            23.45% |     $18.00 |  $34.00 |  2.33% |
-| RDW    |  $17.46 | Buy   |            22.75% |     $21.50 |  $40.00 |  2.29% |
-| NVTS   |  $29.27 | Buy   |            24.58% |     $36.00 |  $65.00 |  2.22% |
-| RGTI   |  $26.42 | Buy   |            21.47% |     $32.00 |  $53.00 |  2.01% |
-| HPE    |  $37.55 | Buy   |             8.01% |     $39.00 |  $73.00 |  1.94% |
-| QCOM   | $238.23 | Buy   |             7.60% |    $257.50 | $452.00 |  1.90% |
-| DUOL   | $106.61 | Sell  |            13.22% |    $121.00 | $163.00 |  1.53% |
-| IOT    |  $31.17 | Buy   |            11.01% |     $34.50 |  $47.00 |  1.51% |
-| AXTI   | $140.84 | Buy   |            26.09% |    $180.00 | $185.00 |  1.31% |
-| EXPE   | $214.62 | Sell  |             8.66% |    $232.50 | $266.00 |  1.24% |
-| QUBT   |  $12.31 | Buy   |            21.10% |     $15.00 |  $15.00 |  1.22% |
-| QBTS   |  $29.34 | Buy   |            21.20% |     $36.00 |  $34.00 |  1.16% |
-| FLY    |  $49.55 | Buy   |            22.01% |     $60.00 |  $50.00 |  1.01% |
-| AAOI   | $181.41 | Sell  |            23.97% |    $225.00 | $183.00 |  1.01% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| TE     |   $9.65 | Buy   |            24.78% |     $12.00 |  $33.00 | 3.42% |
+| RDW    |  $22.46 | Buy   |            22.63% |     $28.00 |  $68.00 | 3.03% |
+| QCOM   | $247.32 | Buy   |             7.60% |    $265.00 | $471.00 | 1.90% |
+| NVTS   |  $32.28 | Buy   |            23.61% |     $40.00 |  $50.00 | 1.55% |
+| POET   |  $13.57 | Sell  |            23.46% |     $17.00 |  $20.00 | 1.47% |
+| FLY    |  $59.41 | Buy   |            21.79% |     $70.00 |  $77.00 | 1.30% |
+| AXTI   | $134.96 | Sell  |            26.10% |    $170.00 | $164.00 | 1.22% |
+| ASTS   | $124.57 | Buy   |            20.53% |    $150.00 | $145.00 | 1.16% |
+| AAOI   | $183.84 | Sell  |            23.61% |    $227.50 | $212.00 | 1.15% |
+| LUNR   |  $44.84 | Buy   |            19.41% |     $54.00 |  $48.00 | 1.07% |
+| RGTI   |  $24.56 | Buy   |            21.12% |     $29.50 |  $25.00 | 1.02% |
+| QS     |   $8.97 | Buy   |            18.32% |     $10.50 |   $9.00 | 1.00% |
 
 ## Cash Secured Puts - Expiration 5/29
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| AMPX   |  $16.05 | Sell  |            21.81% |     $12.50 |  $31.00 | 1.93% |
-| W      |  $67.10 | Buy   |            12.77% |     $59.00 |  $93.00 | 1.39% |
-| QCOM   | $238.23 | Buy   |             7.60% |    $220.00 | $297.00 | 1.25% |
-| IOT    |  $31.17 | Buy   |            11.01% |     $27.50 |  $35.00 | 1.12% |
-| AXTI   | $140.84 | Buy   |            26.09% |    $104.00 | $150.00 | 1.07% |
+| CVNA   |  $73.21 | Buy   |            11.96% |     $64.50 |  $91.00 | 1.24% |
+| LUNR   |  $44.84 | Buy   |            19.41% |     $36.00 |  $54.00 | 1.20% |
+| QCOM   | $247.32 | Buy   |             7.60% |    $227.50 | $268.00 | 1.08% |
+| RDW    |  $22.46 | Buy   |            22.63% |     $17.50 |  $24.00 | 1.07% |
 
 
 ## Earnings this Week
 
-| Ticker | Price   | Earnings Date | Action                         | Premium | ROI % |
-| ------ | ------: | ------------- | ------------------------------ | ------: | ----: |
-| OKTA   |  $92.20 | 5/28          | Covered Call (strike: $100.00) | $319.00 | 3.46% |
-| PATH   |  $10.93 | 5/28          | Covered Call (strike: $12.50)  |  $36.00 | 3.29% |
-| ZS     | $182.31 | 5/26          | Covered Call (strike: $200.00) | $592.00 | 3.25% |
-| SNOW   | $172.23 | 5/27          | Covered Call (strike: $190.00) | $540.00 | 3.14% |
-| HPQ    |  $25.25 | 5/27          | Covered Call (strike: $27.00)  |  $79.00 | 3.13% |
-| MRVL   | $196.34 | 5/27          | Covered Call (strike: $217.50) | $583.00 | 2.97% |
-| DELL   | $295.20 | 5/28          | Covered Call (strike: $325.00) | $775.00 | 2.63% |
+| Ticker | Price   | Earnings Date | Action                            | Premium | ROI % |
+| ------ | ------: | ------------- | --------------------------------- | ------: | ----: |
+| OKTA   |  $93.98 | 5/28          | Cash Secured Put (strike: $86.00) | $384.00 | 4.09% |
+| PATH   |  $11.26 | 5/28          | Covered Call (strike: $12.50)     |  $40.00 | 3.55% |
+| MRVL   | $208.41 | 5/27          | Covered Call (strike: $232.50)    | $700.00 | 3.36% |
+| SNOW   | $177.69 | 5/27          | Covered Call (strike: $195.00)    | $575.00 | 3.24% |
+| ZS     | $186.95 | 5/26          | Covered Call (strike: $205.00)    | $578.00 | 3.09% |
+| HPQ    |  $24.45 | 5/27          | Covered Call (strike: $26.00)     |  $69.00 | 2.82% |
+| DELL   | $306.38 | 5/28          | Covered Call (strike: $335.00)    | $753.00 | 2.46% |
 
 
 ## Team Review
 
 **Best Balance**
-- Covered Call: `DUOL` | price `$106.61` | avg weekly move `13.22%` | OTM strike `$121.00` | premium `$163.00` | ROI `1.53%`
-- Covered Call: `IOT` | price `$31.17` | avg weekly move `11.01%` | OTM strike `$34.50` | premium `$47.00` | ROI `1.51%`
-- Cash Secured Put: `W` | price `$67.10` | avg weekly move `12.77%` | OTM strike `$59.00` | premium `$93.00` | ROI `1.39%`
+- Covered Call: `NVTS` | price `$32.28` | avg weekly move `23.61%` | OTM strike `$40.00` | premium `$50.00` | ROI `1.55%`
+- Covered Call: `POET` | price `$13.57` | avg weekly move `23.46%` | OTM strike `$17.00` | premium `$20.00` | ROI `1.47%`
+- Covered Call: `FLY` | price `$59.41` | avg weekly move `21.79%` | OTM strike `$70.00` | premium `$77.00` | ROI `1.30%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `FIGR` | price `$33.94` | avg weekly move `20.98%` | OTM strike `$41.00` | premium `$460.00` | ROI `13.55%`
-- Covered Call: `TE` | price `$8.07` | avg weekly move `24.74%` | OTM strike `$10.00` | premium `$23.00` | ROI `2.85%`
-- Covered Call: `LUNR` | price `$38.26` | avg weekly move `19.55%` | OTM strike `$45.50` | premium `$101.00` | ROI `2.64%`
+- Covered Call: `TE` | price `$9.65` | avg weekly move `24.78%` | OTM strike `$12.00` | premium `$33.00` | ROI `3.42%`
+- Covered Call: `RDW` | price `$22.46` | avg weekly move `22.63%` | OTM strike `$28.00` | premium `$68.00` | ROI `3.03%`
+- Covered Call: `QCOM` | price `$247.32` | avg weekly move `7.60%` | OTM strike `$265.00` | premium `$471.00` | ROI `1.90%`
 
