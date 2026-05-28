@@ -1,6 +1,283 @@
 [
   {
     "reportTitle": "Options Report",
+    "reportDate": "5/28",
+    "reportDateIso": "2026-05-28",
+    "generatedAt": "2026-05-28 14:59:15",
+    "expiration": "5/29",
+    "includedCount": 141,
+    "requestedCount": 150,
+    "myPortfolio": {
+      "title": "My Portfolio Report",
+      "expiration": "5/29",
+      "rows": [
+        {
+          "ticker": "META",
+          "price": 634.305,
+          "priceText": "$634.30",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 6.6567057076517795,
+          "avgWeeklyMovePctText": "6.66%",
+          "strike": 677.5,
+          "strikeText": "$677.50",
+          "premium": 39.0,
+          "premiumText": "$39.00",
+          "roiPct": 0.06148461702177975,
+          "roiPctText": "0.06%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NVDA",
+          "price": 211.99,
+          "priceText": "$211.99",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 7.220300651758653,
+          "avgWeeklyMovePctText": "7.22%",
+          "strike": 227.5,
+          "strikeText": "$227.50",
+          "premium": 2.0,
+          "premiumText": "$2.00",
+          "roiPct": 0.009434407283362423,
+          "roiPctText": "0.01%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "TSLA",
+          "price": 442.14,
+          "priceText": "$442.14",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 9.073410685243793,
+          "avgWeeklyMovePctText": "9.07%",
+          "strike": 482.5,
+          "strikeText": "$482.50",
+          "premium": 5.0,
+          "premiumText": "$5.00",
+          "roiPct": 0.011308635273895147,
+          "roiPctText": "0.01%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "GOOGL",
+          "price": 389.08,
+          "priceText": "$389.08",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 6.167115573206948,
+          "avgWeeklyMovePctText": "6.17%",
+          "strike": 412.5,
+          "strikeText": "$412.50",
+          "premium": 3.0,
+          "premiumText": "$3.00",
+          "roiPct": 0.007710496555978204,
+          "roiPctText": "0.01%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NFLX",
+          "price": 86.06,
+          "priceText": "$86.06",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 6.377069547679534,
+          "avgWeeklyMovePctText": "6.38%",
+          "strike": 92.0,
+          "strikeText": "$92.00",
+          "premium": 2.0,
+          "premiumText": "$2.00",
+          "roiPct": 0.023239600278875203,
+          "roiPctText": "0.02%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "PLTR",
+          "price": 137.89,
+          "priceText": "$137.89",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 10.854871645596367,
+          "avgWeeklyMovePctText": "10.85%",
+          "strike": 152.5,
+          "strikeText": "$152.50",
+          "premium": 5.0,
+          "premiumText": "$5.00",
+          "roiPct": 0.036260787584306335,
+          "roiPctText": "0.04%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AVGO",
+          "price": 422.23,
+          "priceText": "$422.23",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 8.46089470785364,
+          "avgWeeklyMovePctText": "8.46%",
+          "strike": 457.5,
+          "strikeText": "$457.50",
+          "premium": 9.0,
+          "premiumText": "$9.00",
+          "roiPct": 0.021315396821637494,
+          "roiPctText": "0.02%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "RKLB",
+          "price": 146.39,
+          "priceText": "$146.39",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 18.353624510205005,
+          "avgWeeklyMovePctText": "18.35%",
+          "strike": 172.5,
+          "strikeText": "$172.50",
+          "premium": 6.0,
+          "premiumText": "$6.00",
+          "roiPct": 0.0409864061752852,
+          "roiPctText": "0.04%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AMD",
+          "price": 510.75,
+          "priceText": "$510.75",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.550392746698204,
+          "avgWeeklyMovePctText": "11.55%",
+          "strike": 570.0,
+          "strikeText": "$570.00",
+          "premium": 30.0,
+          "premiumText": "$30.00",
+          "roiPct": 0.05873715124816446,
+          "roiPctText": "0.06%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NBIS",
+          "price": 224.36,
+          "priceText": "$224.36",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 18.348898457452126,
+          "avgWeeklyMovePctText": "18.35%",
+          "strike": 265.0,
+          "strikeText": "$265.00",
+          "premium": 16.0,
+          "premiumText": "$16.00",
+          "roiPct": 0.07131395970761276,
+          "roiPctText": "0.07%",
+          "action": "Wait"
+        }
+      ],
+      "totalPremium": 117.0,
+      "totalPremiumText": "$117.00"
+    },
+    "coveredCalls": {
+      "title": "Covered Calls",
+      "expiration": "5/29",
+      "rows": [
+        {
+          "ticker": "ETSY",
+          "price": 66.27,
+          "priceText": "$66.27",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.183245976240821,
+          "avgWeeklyMovePctText": "11.18%",
+          "strike": 74.0,
+          "strikeText": "$74.00",
+          "premium": 250.0,
+          "premiumText": "$250.00",
+          "roiPct": 3.7724460540214277,
+          "roiPctText": "3.77%",
+          "action": "Sell"
+        }
+      ]
+    },
+    "cashSecuredPuts": {
+      "title": "Cash Secured Puts",
+      "expiration": "5/29",
+      "rows": [
+        {
+          "ticker": "LUNR",
+          "price": 44.04,
+          "priceText": "$44.04",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.83009132387664,
+          "avgWeeklyMovePctText": "19.83%",
+          "strike": 35.5,
+          "strikeText": "$35.50",
+          "premium": 49.0,
+          "premiumText": "$49.00",
+          "roiPct": 1.1126248864668482,
+          "roiPctText": "1.11%",
+          "action": "Sell"
+        }
+      ]
+    },
+    "earningsThisWeek": {
+      "title": "Earnings this Week",
+      "rows": [
+        {
+          "ticker": "OKTA",
+          "price": 93.75,
+          "priceText": "$93.75",
+          "earningsDate": "2026-05-28",
+          "earningsDateText": "5/28",
+          "action": "Cash Secured Put (strike: $86.00)",
+          "premium": 350.0,
+          "premiumText": "$350.00",
+          "roiPct": 3.733333333333334,
+          "roiPctText": "3.73%"
+        },
+        {
+          "ticker": "PATH",
+          "price": 11.705,
+          "priceText": "$11.71",
+          "earningsDate": "2026-05-28",
+          "earningsDateText": "5/28",
+          "action": "Covered Call (strike: $13.00)",
+          "premium": 37.0,
+          "premiumText": "$37.00",
+          "roiPct": 3.1610422896198207,
+          "roiPctText": "3.16%"
+        }
+      ]
+    },
+    "teamReview": {
+      "title": "Team Review",
+      "bestBalance": [
+        {
+          "ticker": "LUNR",
+          "price": 44.04,
+          "priceText": "$44.04",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.83009132387664,
+          "avgWeeklyMovePctText": "19.83%",
+          "strike": 35.5,
+          "strikeText": "$35.50",
+          "premium": 49.0,
+          "premiumText": "$49.00",
+          "roiPct": 1.1126248864668482,
+          "roiPctText": "1.11%",
+          "action": "Sell",
+          "label": "Cash Secured Put"
+        },
+        {
+          "ticker": "ETSY",
+          "price": 66.27,
+          "priceText": "$66.27",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.183245976240821,
+          "avgWeeklyMovePctText": "11.18%",
+          "strike": 74.0,
+          "strikeText": "$74.00",
+          "premium": 250.0,
+          "premiumText": "$250.00",
+          "roiPct": 3.7724460540214277,
+          "roiPctText": "3.77%",
+          "action": "Sell",
+          "label": "Covered Call"
+        }
+      ],
+      "bestBalanceWhy": "these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
+      "aggressivePremium": []
+    }
+  },
+  {
+    "reportTitle": "Options Report",
     "reportDate": "5/27",
     "reportDateIso": "2026-05-27",
     "generatedAt": "2026-05-27 14:15:05",
