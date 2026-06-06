@@ -79,7 +79,7 @@ REPORT2_INPUT_STOCKS = [
     "GLW",
     "GLXY",
     "HIMS",
-    "HL",
+    "ARM",
     "HOOD",
     "HPE",
     "AAOI",
