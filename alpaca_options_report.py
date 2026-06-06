@@ -42,7 +42,7 @@ REPORT2_INPUT_STOCKS = [
     "CAVA",
     "CCJ",
     "CCL",
-    "CDE",
+    "ENPH",
     "CEG",
     "CELH",
     "CIFR",
