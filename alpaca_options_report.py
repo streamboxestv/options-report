@@ -1307,6 +1307,8 @@ def build_report(
             portfolio_rows.append(portfolio_row)
             portfolio_expirations[symbol] = portfolio_expiration
 
+    portfolio_rows.sort(key=lambda row: row.last_price or 0.0, reverse=True)
+
     covered_call_label = display_expiration(expiration_override or min(covered_call_expirations.values())) if covered_call_expirations else "N/A"
     cash_secured_put_label = display_expiration(expiration_override or min(cash_secured_put_expirations.values())) if cash_secured_put_expirations else "N/A"
     portfolio_label = display_expiration(expiration_override or min(portfolio_expirations.values())) if portfolio_expirations else "N/A"
