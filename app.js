@@ -12,7 +12,7 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
@@ -178,6 +178,10 @@ function renderDashboard() {
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
 
+  const sortedPortfolioRows = [...(snapshot.myPortfolio?.rows || [])].sort(
+    (left, right) => (right.premium || 0) - (left.premium || 0),
+  );
+
   renderTable(
     "portfolio-table",
     [
@@ -188,7 +192,7 @@ function renderDashboard() {
       { key: "premiumText", label: "Premium", numeric: true },
     ],
     [
-      ...(snapshot.myPortfolio?.rows || []),
+      ...sortedPortfolioRows,
       {
         ticker: "Total",
         priceText: "",
