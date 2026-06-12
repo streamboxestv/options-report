@@ -1,35 +1,34 @@
-# Options Report - 6/11
+# Options Report - 6/12
 
 ## My Portfolio Report - Expiration 6/12
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | ------: | ----------------: | ------------------: | ----------: |
-| ASTS      |  $93.08 |            20.75% |             $112.00 |      $39.00 |
-| CRWD      | $670.91 |             9.07% |             $732.50 |      $33.00 |
-| RKLB      | $109.58 |            18.43% |             $130.00 |      $31.00 |
-| AMD       | $472.72 |            11.92% |             $530.00 |      $25.00 |
-| META      | $561.61 |             6.75% |             $600.00 |      $18.00 |
-| GOOGL     | $348.23 |             6.24% |             $370.00 |      $12.00 |
-| AVGO      | $377.71 |             8.95% |             $412.50 |       $9.00 |
-| NBIS      | $214.56 |            18.31% |             $255.00 |       $9.00 |
-| NVDA      | $202.69 |             7.42% |             $217.50 |       $4.00 |
-| PLTR      | $130.16 |            11.18% |             $145.00 |       $4.00 |
-| **Total** |         |                   |                     | **$184.00** |
+| ASTS      |  $87.34 |            20.79% |             $105.00 |      $37.00 |
+| RKLB      | $106.13 |            18.44% |             $126.00 |      $28.00 |
+| CRWD      | $701.70 |             9.11% |             $765.00 |      $12.00 |
+| META      | $564.74 |             6.75% |             $602.50 |       $9.00 |
+| NBIS      | $237.79 |            18.27% |             $280.00 |       $6.00 |
+| GOOGL     | $361.22 |             6.24% |             $382.50 |       $3.00 |
+| AMD       | $515.15 |            11.95% |             $577.50 |       $3.00 |
+| AVGO      | $383.63 |             8.95% |             $417.50 |       $2.00 |
+| PLTR      | $128.91 |            11.18% |             $143.00 |       $2.00 |
+| NVDA      | $205.93 |             7.42% |             $220.00 |       $1.00 |
+| **Total** |         |                   |                     | **$103.00** |
 
 ## Covered Calls - Expiration 6/12
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| AMPX   |  $16.57 | Sell  |            22.16% |     $20.00 |  $33.00 | 1.99% |
-| TER    | $366.31 | Buy   |            11.26% |    $407.50 | $670.00 | 1.83% |
-| SATS   | $120.66 | Sell  |            11.77% |    $135.00 | $131.00 | 1.09% |
-| CAVA   |  $84.42 | Buy   |            11.04% |     $94.00 |  $91.00 | 1.08% |
+| HUT    | $121.64 | Buy   |            19.71% |    $146.00 | $394.00 | 3.24% |
+| SATS   | $116.62 | Sell  |            11.94% |    $131.00 | $180.00 | 1.54% |
 
 ## Cash Secured Puts - Expiration 6/12
 
-| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
-| IOT    | $31.80 | Sell  |            11.13% |     $28.50 |  $48.00 | 1.51% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| FTNT   | $145.16 | Sell  |             7.69% |    $134.00 | $200.00 | 1.38% |
+| GLXY   |  $34.67 | Buy   |            18.30% |     $28.50 |  $39.00 | 1.12% |
 
 
 ## Earnings this Week
@@ -43,13 +42,12 @@
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `IOT` | price `$31.80` | avg weekly move `11.13%` | OTM strike `$28.50` | premium `$48.00` | ROI `1.51%`
-- Covered Call: `TER` | price `$366.31` | avg weekly move `11.26%` | OTM strike `$407.50` | premium `$670.00` | ROI `1.83%`
-- Covered Call: `CAVA` | price `$84.42` | avg weekly move `11.04%` | OTM strike `$94.00` | premium `$91.00` | ROI `1.08%`
+- Cash Secured Put: `FTNT` | price `$145.16` | avg weekly move `7.69%` | OTM strike `$134.00` | premium `$200.00` | ROI `1.38%`
+- Covered Call: `SATS` | price `$116.62` | avg weekly move `11.94%` | OTM strike `$131.00` | premium `$180.00` | ROI `1.54%`
+- Cash Secured Put: `GLXY` | price `$34.67` | avg weekly move `18.30%` | OTM strike `$28.50` | premium `$39.00` | ROI `1.12%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `AMPX` | price `$16.57` | avg weekly move `22.16%` | OTM strike `$20.00` | premium `$33.00` | ROI `1.99%`
-- Covered Call: `SATS` | price `$120.66` | avg weekly move `11.77%` | OTM strike `$135.00` | premium `$131.00` | ROI `1.09%`
+- Covered Call: `HUT` | price `$121.64` | avg weekly move `19.71%` | OTM strike `$146.00` | premium `$394.00` | ROI `3.24%`
 
