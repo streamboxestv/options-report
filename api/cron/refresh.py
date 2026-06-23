@@ -115,6 +115,10 @@ def should_run_refresh(now_utc: datetime) -> bool:
     return chicago_now.weekday() < 5 and chicago_now.hour == 9
 
 
+def options_report_stocks() -> List[str]:
+    return ["ALAB" if symbol == "ALB" else symbol for symbol in OPTIONS_REPORT_STOCKS]
+
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         cron_secret = os.environ.get("CRON_SECRET")
@@ -162,7 +166,7 @@ class handler(BaseHTTPRequestHandler):
             markdown_report, _, snapshot = build_report(
                 api_key=api_key,
                 api_secret=api_secret,
-                symbols=OPTIONS_REPORT_STOCKS,
+                symbols=options_report_stocks(),
                 report_title="Options Report",
                 batch_size=10,
                 batch_pause_seconds=0.5,
