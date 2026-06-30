@@ -116,7 +116,11 @@ def should_run_refresh(now_utc: datetime) -> bool:
 
 
 def options_report_stocks() -> List[str]:
-    return ["ALAB" if symbol == "ALB" else symbol for symbol in OPTIONS_REPORT_STOCKS]
+    replacements = {
+        "ALB": "ALAB",
+        "CELH": "KLAC",
+    }
+    return [replacements.get(symbol, symbol) for symbol in OPTIONS_REPORT_STOCKS]
 
 
 class handler(BaseHTTPRequestHandler):
