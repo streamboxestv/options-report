@@ -278,7 +278,7 @@ class handler(BaseHTTPRequestHandler):
                 repository,
                 branch,
                 MARKDOWN_REPORT_PATH,
- markdown_report,
+                markdown_report,
                 markdown_sha,
                 github_token,
                 f"Refresh options report markdown for {report_date}",
