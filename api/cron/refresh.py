@@ -8,6 +8,7 @@ from http.server import BaseHTTPRequestHandler
 from typing import Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
 
+import alpaca_options_report as report_module
 from alpaca_options_report import OPTIONS_REPORT_STOCKS, build_report
 
 
@@ -124,6 +125,67 @@ def options_report_stocks() -> List[str]:
     return [replacements.get(symbol, symbol) for symbol in OPTIONS_REPORT_STOCKS]
 
 
+def snapshot_option_price(snapshot: Dict) -> Optional[float]:
+    trade = snapshot.get("latestTrade") or {}
+    last = trade.get("p")
+    if last is not None:
+        return float(last)
+
+    quote = snapshot.get("latestQuote") or {}
+    bid = quote.get("bp")
+    ask = quote.get("ap")
+    if bid is not None and ask is not None and float(bid) > 0 and float(ask) > 0:
+        return (float(bid) + float(ask)) / 2.0
+    if bid is not None and float(bid) > 0:
+        return float(bid)
+    if ask is not None and float(ask) > 0:
+        return float(ask)
+    return None
+
+
+def choose_priced_option_contract(contracts, price: float, target_strike: float, option_type: str) -> Tuple[float, Optional[float]]:
+    parsed = []
+    for snapshot in contracts:
+        greeks = snapshot.get("greeks") or {}
+        contract = snapshot.get("option_contract") or snapshot.get("contract") or {}
+        strike_value = contract.get("strike_price")
+        strike = float(strike_value) if strike_value is not None else report_module.strike_from_contract_symbol(snapshot.get("contract_symbol", ""))
+        if strike is None:
+            continue
+        if option_type == "call" and strike < price:
+            continue
+        if option_type == "put" and strike > price:
+            continue
+        option_price = snapshot_option_price(snapshot)
+        parsed.append(
+            {
+                "strike": strike,
+                "last": option_price,
+                "has_price": option_price is not None,
+                "delta_target_distance": abs(strike - target_strike),
+                "open_interest": float(contract.get("open_interest") or 0),
+                "delta": abs(float(greeks.get("delta"))) if greeks.get("delta") is not None else float("inf"),
+            }
+        )
+
+    if not parsed:
+        raise RuntimeError(f"No OTM {option_type} contracts available")
+
+    parsed.sort(
+        key=lambda item: (
+            0 if item["has_price"] else 1,
+            item["delta_target_distance"],
+            -item["open_interest"],
+            item["delta"],
+        )
+    )
+    best = parsed[0]
+    return best["strike"], best["last"]
+
+
+report_module.choose_option_contract = choose_priced_option_contract
+
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         cron_secret = os.environ.get("CRON_SECRET")
@@ -216,7 +278,7 @@ class handler(BaseHTTPRequestHandler):
                 repository,
                 branch,
                 MARKDOWN_REPORT_PATH,
-                markdown_report,
+ markdown_report,
                 markdown_sha,
                 github_token,
                 f"Refresh options report markdown for {report_date}",
