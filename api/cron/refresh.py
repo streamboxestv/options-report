@@ -121,6 +121,7 @@ def options_report_stocks() -> List[str]:
         "ALB": "ALAB",
         "CELH": "KLAC",
         "EOSE": "TXN",
+        "LYFT": "LITE",
         "PINS": "GNRC",
         "SMR": "SMTC",
     }
