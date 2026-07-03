@@ -3,7 +3,7 @@ import json
 import os
 import urllib.error
 import urllib.request
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from http.server import BaseHTTPRequestHandler
 from typing import Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
@@ -128,6 +128,69 @@ def options_report_stocks() -> List[str]:
     return [replacements.get(symbol, symbol) for symbol in OPTIONS_REPORT_STOCKS]
 
 
+def nth_weekday(year: int, month: int, weekday: int, occurrence: int) -> date:
+    current = date(year, month, 1)
+    current += timedelta(days=(weekday - current.weekday()) % 7)
+    return current + timedelta(days=7 * (occurrence - 1))
+
+
+def last_weekday(year: int, month: int, weekday: int) -> date:
+    if month == 12:
+        current = date(year + 1, 1, 1) - timedelta(days=1)
+    else:
+        current = date(year, month + 1, 1) - timedelta(days=1)
+    return current - timedelta(days=(current.weekday() - weekday) % 7)
+
+
+def observed_fixed_holiday(year: int, month: int, day: int) -> date:
+    holiday = date(year, month, day)
+    if holiday.weekday() == 5:
+        return holiday - timedelta(days=1)
+    if holiday.weekday() == 6:
+        return holiday + timedelta(days=1)
+    return holiday
+
+
+def easter_date(year: int) -> date:
+    a = year % 19
+    b = year // 100
+    c = year % 100
+    d = b // 4
+    e = b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i = c // 4
+    k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month = (h + l - 7 * m + 114) // 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+    return date(year, month, day)
+
+
+def market_holidays(year: int) -> set[date]:
+    return {
+        observed_fixed_holiday(year, 1, 1),
+        nth_weekday(year, 1, 0, 3),
+        nth_weekday(year, 2, 0, 3),
+        easter_date(year) - timedelta(days=2),
+        last_weekday(year, 5, 0),
+        observed_fixed_holiday(year, 6, 19),
+        observed_fixed_holiday(year, 7, 4),
+        nth_weekday(year, 9, 0, 1),
+        nth_weekday(year, 11, 3, 4),
+        observed_fixed_holiday(year, 12, 25),
+    }
+
+
+def expiration_override_for_today(today: date) -> Optional[date]:
+    tomorrow = today + timedelta(days=1)
+    if today.weekday() == 3 and tomorrow.weekday() == 4 and tomorrow in market_holidays(tomorrow.year):
+        return today
+    return None
+
+
 def snapshot_option_price(snapshot: Dict) -> Optional[float]:
     trade = snapshot.get("latestTrade") or {}
     last = trade.get("p")
@@ -233,11 +296,14 @@ class handler(BaseHTTPRequestHandler):
             return
 
         try:
+            today = now_utc.astimezone(CHICAGO_TZ).date()
+            expiration_override = expiration_override_for_today(today)
             markdown_report, _, snapshot = build_report(
                 api_key=api_key,
                 api_secret=api_secret,
                 symbols=options_report_stocks(),
                 report_title="Options Report",
+                expiration_override=expiration_override,
                 batch_size=10,
                 batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
