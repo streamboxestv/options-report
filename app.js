@@ -60,6 +60,27 @@ function statCard(label, value, detail = "") {
   `;
 }
 
+function formatMoney(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return "$0.00";
+  }
+  return number.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function portfolioPositionValueText(portfolio) {
+  if (portfolio?.totalPositionValueText) {
+    return portfolio.totalPositionValueText;
+  }
+  const total = (portfolio?.rows || []).reduce((sum, row) => sum + (Number(row.price) || 0) * 100, 0);
+  return formatMoney(total);
+}
+
 function renderTable(targetId, columns, rows) {
   const table = byId(targetId);
   const headerHtml = `
@@ -195,7 +216,7 @@ function renderDashboard() {
       ...sortedPortfolioRows,
       {
         ticker: "Total",
-        priceText: "",
+        priceText: portfolioPositionValueText(snapshot.myPortfolio),
         avgWeeklyMovePctText: "",
         strikeText: "",
         premiumText: snapshot.myPortfolio?.totalPremiumText || "$0.00",
