@@ -81,6 +81,26 @@ function portfolioPositionValueText(portfolio) {
   return formatMoney(total);
 }
 
+function skippedTickersDetail(snapshot) {
+  const skipped = Array.isArray(snapshot?.skippedTickers) ? snapshot.skippedTickers : [];
+  const tickers = skipped
+    .map((item) => {
+      if (typeof item === "string") {
+        return item.split(":")[0].trim();
+      }
+      return item?.ticker || String(item?.reason || "").split(":")[0].trim();
+    })
+    .filter(Boolean);
+
+  if (tickers.length) {
+    return `Skipped: ${tickers.join(", ")}`;
+  }
+  if ((snapshot?.requestedCount ?? 0) > (snapshot?.includedCount ?? 0)) {
+    return "Skipped tickers saved after next run";
+  }
+  return "Skipped: none";
+}
+
 function renderTable(targetId, columns, rows) {
   const table = byId(targetId);
   const headerHtml = `
@@ -211,7 +231,7 @@ function renderDashboard() {
 
   const statsHtml = [
     statCard("Report Date", snapshot.reportDate, `Expiration ${snapshot.expiration || "N/A"}`),
-    statCard("Universe Included", String(snapshot.includedCount ?? 0), `${snapshot.requestedCount ?? 0} names tracked`),
+    statCard("Universe Included", String(snapshot.includedCount ?? 0), skippedTickersDetail(snapshot)),
     statCard("Covered Call Premium", snapshot.myPortfolio?.totalPremiumText || "$0.00", `${snapshot.myPortfolio?.rows?.length || 0} portfolio names`),
     statCard("Cash Puts Premium", snapshot.myPortfolioPuts?.totalPremiumText || "$0.00", `${snapshot.myPortfolioPuts?.rows?.length || 0} portfolio names`),
   ].join("");
