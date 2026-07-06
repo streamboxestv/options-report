@@ -243,7 +243,7 @@ function renderDashboard() {
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
 
   renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike");
-  renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Secured Puts");
+  renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Put Strike");
 
   const optionColumns = [
     { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
