@@ -1,9 +1,11 @@
 import base64
 import json
 import os
+import re
 import urllib.error
 import urllib.request
 from datetime import date, datetime, timedelta
+from html import unescape
 from http.server import BaseHTTPRequestHandler
 from typing import Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
@@ -109,6 +111,18 @@ def merge_history(existing_history: List[Dict[str, object]], snapshot: Dict[str,
         reverse=True,
     )
     return filtered
+
+
+def skipped_tickers_from_html(html_report: str) -> List[Dict[str, str]]:
+    rows: List[Dict[str, str]] = []
+    for raw_item in re.findall(r"<li[^>]*>(.*?)</li>", html_report, flags=re.IGNORECASE | re.DOTALL):
+        reason = unescape(re.sub(r"<[^>]+>", "", raw_item)).strip()
+        if not reason:
+            continue
+        ticker = reason.split(":", 1)[0].strip()
+        if ticker:
+            rows.append({"ticker": ticker, "reason": reason})
+    return rows
 
 
 def should_run_refresh(now_utc: datetime) -> bool:
@@ -354,7 +368,7 @@ class handler(BaseHTTPRequestHandler):
         try:
             today = now_utc.astimezone(CHICAGO_TZ).date()
             expiration_override = expiration_override_for_today(today)
-            markdown_report, _, snapshot = build_report(
+            markdown_report, html_report, snapshot = build_report(
                 api_key=api_key,
                 api_secret=api_secret,
                 symbols=options_report_stocks(),
@@ -364,6 +378,7 @@ class handler(BaseHTTPRequestHandler):
                 batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
             )
+            snapshot["skippedTickers"] = skipped_tickers_from_html(html_report)
             add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
 
             latest_sha, _ = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
