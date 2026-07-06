@@ -105,6 +105,32 @@ function renderTable(targetId, columns, rows) {
   table.innerHTML = `${headerHtml}<tbody>${bodyRows}</tbody>`;
 }
 
+function renderPortfolioTable(targetId, portfolio, strikeLabel) {
+  const sortedRows = [...(portfolio?.rows || [])].sort(
+    (left, right) => (right.premium || 0) - (left.premium || 0),
+  );
+  renderTable(
+    targetId,
+    [
+      { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
+      { key: "priceText", label: "Price", numeric: true },
+      { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
+      { key: "strikeText", label: strikeLabel, numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.strikeText)}</span>` },
+      { key: "premiumText", label: "Premium", numeric: true },
+    ],
+    [
+      ...sortedRows,
+      {
+        ticker: "Total",
+        priceText: portfolioPositionValueText(portfolio),
+        avgWeeklyMovePctText: "",
+        strikeText: "",
+        premiumText: portfolio?.totalPremiumText || "$0.00",
+      },
+    ],
+  );
+}
+
 function renderReviewList(targetId, rows) {
   const target = byId(targetId);
   if (!rows.length) {
@@ -196,33 +222,12 @@ function renderDashboard() {
   byId("stats-grid").innerHTML = statsHtml;
 
   byId("portfolio-expiration").textContent = `Expiration ${snapshot.myPortfolio?.expiration || "N/A"}`;
+  byId("portfolio-put-expiration").textContent = `Expiration ${snapshot.myPortfolioPuts?.expiration || snapshot.myPortfolio?.expiration || "N/A"}`;
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
 
-  const sortedPortfolioRows = [...(snapshot.myPortfolio?.rows || [])].sort(
-    (left, right) => (right.premium || 0) - (left.premium || 0),
-  );
-
-  renderTable(
-    "portfolio-table",
-    [
-      { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
-      { key: "priceText", label: "Price", numeric: true },
-      { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
-      { key: "strikeText", label: "Covered Call Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.strikeText)}</span>` },
-      { key: "premiumText", label: "Premium", numeric: true },
-    ],
-    [
-      ...sortedPortfolioRows,
-      {
-        ticker: "Total",
-        priceText: portfolioPositionValueText(snapshot.myPortfolio),
-        avgWeeklyMovePctText: "",
-        strikeText: "",
-        premiumText: snapshot.myPortfolio?.totalPremiumText || "$0.00",
-      },
-    ],
-  );
+  renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike");
+  renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Secured Puts");
 
   const optionColumns = [
     { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
