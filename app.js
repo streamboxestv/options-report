@@ -212,12 +212,8 @@ function renderDashboard() {
   const statsHtml = [
     statCard("Report Date", snapshot.reportDate, `Expiration ${snapshot.expiration || "N/A"}`),
     statCard("Universe Included", String(snapshot.includedCount ?? 0), `${snapshot.requestedCount ?? 0} names tracked`),
-    statCard("Portfolio Premium", snapshot.myPortfolio?.totalPremiumText || "$0.00", `${snapshot.myPortfolio?.rows?.length || 0} portfolio names`),
-    statCard(
-      "Sell Candidates",
-      String((snapshot.coveredCalls?.rows?.length || 0) + (snapshot.cashSecuredPuts?.rows?.length || 0)),
-      `${snapshot.coveredCalls?.rows?.length || 0} calls - ${snapshot.cashSecuredPuts?.rows?.length || 0} puts`,
-    ),
+    statCard("Covered Call Premium", snapshot.myPortfolio?.totalPremiumText || "$0.00", `${snapshot.myPortfolio?.rows?.length || 0} portfolio names`),
+    statCard("Cash Puts Premium", snapshot.myPortfolioPuts?.totalPremiumText || "$0.00", `${snapshot.myPortfolioPuts?.rows?.length || 0} portfolio names`),
   ].join("");
   byId("stats-grid").innerHTML = statsHtml;
 
