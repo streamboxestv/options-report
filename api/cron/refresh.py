@@ -252,6 +252,62 @@ def choose_priced_option_contract(contracts, price: float, target_strike: float,
 report_module.choose_option_contract = choose_priced_option_contract
 
 
+def portfolio_position_value(rows: List[Dict[str, object]]) -> float:
+    return sum(float(row.get("price") or 0.0) * 100.0 for row in rows)
+
+
+def add_my_portfolio_puts(
+    snapshot: Dict[str, object],
+    api_key: str,
+    api_secret: str,
+    expiration_override: Optional[date],
+) -> None:
+    portfolio = snapshot.get("myPortfolio") if isinstance(snapshot.get("myPortfolio"), dict) else {}
+    source_rows = portfolio.get("rows") if isinstance(portfolio.get("rows"), list) else []
+    put_rows: List[Dict[str, object]] = []
+    expirations: List[date] = []
+
+    for row in source_rows:
+        try:
+            symbol = str(row.get("ticker") or "")
+            price = float(row.get("price") or 0.0)
+            pct_otm = float(row.get("avgWeeklyMovePct") or 0.0) / 100.0
+            trend = str(row.get("trend") or "N/A")
+            if not symbol or price <= 0:
+                continue
+            put_row, put_expiration = report_module.build_row(
+                symbol,
+                price,
+                trend,
+                pct_otm,
+                "put",
+                api_key,
+                api_secret,
+                expiration_override,
+            )
+            put_rows.append(report_module.option_row_to_dict(put_row))
+            expirations.append(put_expiration)
+        except Exception:
+            continue
+
+    position_value = portfolio_position_value(source_rows)
+    total_premium = sum(float(row.get("premium") or 0.0) for row in put_rows)
+    expiration_label = report_module.display_expiration(expiration_override or min(expirations)) if expirations else str(portfolio.get("expiration") or "N/A")
+
+    portfolio["totalPositionValue"] = position_value
+    portfolio["totalPositionValueText"] = report_module.format_money(position_value)
+    snapshot["myPortfolio"] = portfolio
+    snapshot["myPortfolioPuts"] = {
+        "title": "My Portfolio Cash Secured Puts",
+        "expiration": expiration_label,
+        "rows": put_rows,
+        "totalPositionValue": position_value,
+        "totalPositionValueText": report_module.format_money(position_value),
+        "totalPremium": total_premium,
+        "totalPremiumText": report_module.format_money(total_premium),
+    }
+
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         cron_secret = os.environ.get("CRON_SECRET")
@@ -308,6 +364,7 @@ class handler(BaseHTTPRequestHandler):
                 batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
             )
+            add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
 
             latest_sha, _ = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
             history_sha, history_text = fetch_repo_file(repository, REPORT_HISTORY_PATH, branch, github_token)
