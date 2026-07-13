@@ -125,6 +125,57 @@ def skipped_tickers_from_html(html_report: str) -> List[Dict[str, str]]:
     return rows
 
 
+def earnings_date_text(earnings_iso: str) -> str:
+    try:
+        earnings_date = date.fromisoformat(earnings_iso)
+    except ValueError:
+        return "N/A"
+    return f"{earnings_date.month}/{earnings_date.day}"
+
+
+def include_all_earnings_skips(snapshot: Dict[str, object]) -> None:
+    earnings = snapshot.get("earningsThisWeek") if isinstance(snapshot.get("earningsThisWeek"), dict) else {}
+    existing_rows = earnings.get("rows") if isinstance(earnings.get("rows"), list) else []
+    rows_by_ticker = {
+        str(row.get("ticker")): row
+        for row in existing_rows
+        if isinstance(row, dict) and row.get("ticker")
+    }
+
+    skipped = snapshot.get("skippedTickers") if isinstance(snapshot.get("skippedTickers"), list) else []
+    for item in skipped:
+        if not isinstance(item, dict):
+            continue
+        ticker = str(item.get("ticker") or "").strip()
+        reason = str(item.get("reason") or "")
+        match = re.search(r"earnings during report week \((\d{4}-\d{2}-\d{2})\)", reason)
+        if not ticker or not match or ticker in rows_by_ticker:
+            continue
+        earnings_iso = match.group(1)
+        rows_by_ticker[ticker] = {
+            "ticker": ticker,
+            "price": None,
+            "priceText": "N/A",
+            "earningsDate": earnings_iso,
+            "earningsDateText": earnings_date_text(earnings_iso),
+            "action": "Earnings this week",
+            "premium": None,
+            "premiumText": "N/A",
+            "roiPct": None,
+            "roiPctText": "N/A",
+        }
+
+    earnings["title"] = str(earnings.get("title") or "Earnings this Week")
+    earnings["rows"] = sorted(
+        rows_by_ticker.values(),
+        key=lambda row: (
+            str(row.get("earningsDate") or "9999-12-31"),
+            str(row.get("ticker") or ""),
+        ),
+    )
+    snapshot["earningsThisWeek"] = earnings
+
+
 def should_run_refresh(now_utc: datetime) -> bool:
     chicago_now = now_utc.astimezone(CHICAGO_TZ)
     return chicago_now.weekday() < 5 and chicago_now.hour == 9
@@ -380,6 +431,7 @@ class handler(BaseHTTPRequestHandler):
                 enforce_min_price_filter=True,
             )
             snapshot["skippedTickers"] = skipped_tickers_from_html(html_report)
+            include_all_earnings_skips(snapshot)
             add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
 
             latest_sha, _ = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
