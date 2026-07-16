@@ -1,57 +1,52 @@
-# Options Report - 7/15
+# Options Report - 7/16
 
 ## My Portfolio Report - Expiration 7/17
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | ------: | ----------------: | ------------------: | ----------: |
-| MU        | $907.58 |            13.89% |           $1,035.00 |     $232.00 |
-| AMD       | $517.04 |            12.11% |             $580.00 |     $136.00 |
-| NBIS      | $193.96 |            19.25% |             $232.50 |      $72.00 |
-| CRWD      | $207.81 |             9.58% |             $227.50 |      $40.00 |
-| AVGO      | $388.95 |             9.24% |             $425.00 |      $33.00 |
-| ASTS      |  $66.53 |            20.79% |              $80.00 |      $11.00 |
-| NVDA      | $209.59 |             7.49% |             $225.00 |      $11.00 |
-| RKLB      |  $78.15 |            18.53% |              $93.00 |       $8.00 |
-| IONQ      |  $37.73 |            19.08% |              $45.00 |       $4.00 |
-| PLTR      | $133.77 |            11.56% |             $149.00 |       $4.00 |
-| **Total** |         |                   |                     | **$551.00** |
+| MU        | $871.26 |            14.00% |             $995.00 |      $72.00 |
+| AMD       | $511.41 |            12.15% |             $572.50 |      $41.00 |
+| NBIS      | $187.07 |            19.34% |             $222.50 |      $22.00 |
+| CRWD      | $203.30 |             9.59% |             $222.50 |      $13.00 |
+| AVGO      | $383.35 |             9.27% |             $420.00 |       $7.00 |
+| NVDA      | $207.76 |             7.49% |             $222.50 |       $6.00 |
+| ASTS      |  $57.37 |            21.12% |              $70.00 |       $6.00 |
+| RKLB      |  $69.49 |            18.74% |              $82.50 |       $4.00 |
+| PLTR      | $131.30 |            11.56% |             $146.00 |       $3.00 |
+| IONQ      |  $36.09 |            19.20% |              $43.00 |       $3.00 |
+| **Total** |         |                   |                     | **$177.00** |
 
 ## Covered Calls - Expiration 7/17
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| LRCX   | $330.82 | Sell  |            11.00% |    $367.50 | $670.00 | 2.03% |
-| KLAC   | $219.90 | Sell  |             9.83% |    $242.00 | $275.00 | 1.25% |
-| TER    | $334.13 | Sell  |            12.22% |    $375.00 | $390.00 | 1.17% |
-| AXTI   |  $53.70 | Sell  |            28.41% |     $68.50 |  $60.00 | 1.12% |
+| TXN    | $291.00 | Sell  |             7.41% |    $312.50 | $582.00 | 2.00% |
+| PYPL   |  $56.33 | Buy   |             7.70% |     $61.00 |  $59.00 | 1.05% |
 
 ## Cash Secured Puts - Expiration 7/17
 
-| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
-| IOT    | $37.01 | Buy   |            11.62% |     $32.50 |  $52.00 | 1.41% |
-| ETSY   | $86.23 | Buy   |            10.78% |     $77.00 |  $89.00 | 1.03% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| APO    | $119.64 | Sell  |             7.54% |    $111.00 | $132.00 | 1.10% |
+| RCAT   |   $7.82 | Sell  |            23.96% |      $6.00 |   $8.00 | 1.02% |
 
 
 ## Earnings this Week
 
-
-| Ticker | Price | Earnings Date | Action | Premium | ROI % |
-| ------ | ----: | ------------- | ------ | ------: | ----: |
-| None   |   N/A | N/A           | N/A    |     N/A |   N/A |
+| Ticker | Price  | Earnings Date | Action                        | Premium | ROI % |
+| ------ | -----: | ------------- | ----------------------------- | ------: | ----: |
+| NFLX   | $73.45 | 7/16          | Covered Call (strike: $78.00) | $158.00 | 2.15% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `IOT` | price `$37.01` | avg weekly move `11.62%` | OTM strike `$32.50` | premium `$52.00` | ROI `1.41%`
-- Covered Call: `KLAC` | price `$219.90` | avg weekly move `9.83%` | OTM strike `$242.00` | premium `$275.00` | ROI `1.25%`
-- Covered Call: `TER` | price `$334.13` | avg weekly move `12.22%` | OTM strike `$375.00` | premium `$390.00` | ROI `1.17%`
+- Cash Secured Put: `APO` | price `$119.64` | avg weekly move `7.54%` | OTM strike `$111.00` | premium `$132.00` | ROI `1.10%`
+- Covered Call: `PYPL` | price `$56.33` | avg weekly move `7.70%` | OTM strike `$61.00` | premium `$59.00` | ROI `1.05%`
+- Covered Call: `TXN` | price `$291.00` | avg weekly move `7.41%` | OTM strike `$312.50` | premium `$582.00` | ROI `2.00%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `LRCX` | price `$330.82` | avg weekly move `11.00%` | OTM strike `$367.50` | premium `$670.00` | ROI `2.03%`
-- Covered Call: `AXTI` | price `$53.70` | avg weekly move `28.41%` | OTM strike `$68.50` | premium `$60.00` | ROI `1.12%`
-- Cash Secured Put: `ETSY` | price `$86.23` | avg weekly move `10.78%` | OTM strike `$77.00` | premium `$89.00` | ROI `1.03%`
+- Cash Secured Put: `RCAT` | price `$7.82` | avg weekly move `23.96%` | OTM strike `$6.00` | premium `$8.00` | ROI `1.02%`
 
