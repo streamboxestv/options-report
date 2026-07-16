@@ -19,6 +19,7 @@ DEFAULT_REPOSITORY = "streamboxestv/options-report"
 DEFAULT_BRANCH = "main"
 LATEST_REPORT_PATH = "latest_report.json"
 REPORT_HISTORY_PATH = "report_history.json"
+REPORT_HISTORY_BACKUP_PATH = "report_history_backup.json"
 MARKDOWN_REPORT_PATH = "options_report.md"
 CHICAGO_TZ = ZoneInfo("America/Chicago")
 
@@ -111,6 +112,25 @@ def merge_history(existing_history: List[Dict[str, object]], snapshot: Dict[str,
         reverse=True,
     )
     return filtered
+
+
+def parse_history_payload(history_text: Optional[str]) -> List[Dict[str, object]]:
+    if not history_text:
+        return []
+    try:
+        payload = json.loads(history_text)
+    except json.JSONDecodeError:
+        return []
+    if not isinstance(payload, list):
+        return []
+    return [item for item in payload if isinstance(item, dict)]
+
+
+def choose_history_base(
+    history: List[Dict[str, object]],
+    backup_history: List[Dict[str, object]],
+) -> List[Dict[str, object]]:
+    return backup_history if len(backup_history) > len(history) else history
 
 
 def skipped_tickers_from_html(html_report: str) -> List[Dict[str, str]]:
@@ -437,13 +457,13 @@ class handler(BaseHTTPRequestHandler):
 
             latest_sha, _ = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
             history_sha, history_text = fetch_repo_file(repository, REPORT_HISTORY_PATH, branch, github_token)
+            history_backup_sha, history_backup_text = fetch_repo_file(repository, REPORT_HISTORY_BACKUP_PATH, branch, github_token)
             markdown_sha, _ = fetch_repo_file(repository, MARKDOWN_REPORT_PATH, branch, github_token)
 
-            existing_history: List[Dict[str, object]] = []
-            if history_text:
-                payload = json.loads(history_text)
-                if isinstance(payload, list):
-                    existing_history = [item for item in payload if isinstance(item, dict)]
+            existing_history = choose_history_base(
+                parse_history_payload(history_text),
+                parse_history_payload(history_backup_text),
+            )
 
             merged_history = merge_history(existing_history, snapshot)
             latest_json = json.dumps(snapshot, indent=2) + "\n"
@@ -468,6 +488,15 @@ class handler(BaseHTTPRequestHandler):
                 history_sha,
                 github_token,
                 f"Update options report history for {report_date}",
+            )
+            update_repo_file(
+                repository,
+                branch,
+                REPORT_HISTORY_BACKUP_PATH,
+                history_json,
+                history_backup_sha,
+                github_token,
+                f"Back up options report history for {report_date}",
             )
             update_repo_file(
                 repository,
