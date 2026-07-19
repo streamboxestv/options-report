@@ -211,6 +211,7 @@ def options_report_stocks() -> List[str]:
         "QS": "OUST",
         "SATS": "ECHO",
         "SMR": "SMTC",
+        "UUUU": "SKHY",
     }
     return [replacements.get(symbol, symbol) for symbol in OPTIONS_REPORT_STOCKS]
 
