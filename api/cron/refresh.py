@@ -68,6 +68,16 @@ def fetch_repo_file(repository: str, path: str, branch: str, token: str) -> Tupl
     encoding = payload.get("encoding")
     if content and encoding == "base64":
         decoded = base64.b64decode(content).decode("utf-8")
+    elif payload.get("download_url"):
+        request = urllib.request.Request(
+            payload["download_url"],
+            headers={
+                "Authorization": f"Bearer {token}",
+                "User-Agent": "options-report-vercel-cron",
+            },
+        )
+        with urllib.request.urlopen(request, timeout=60) as response:
+            decoded = response.read().decode("utf-8")
     else:
         decoded = None
     return payload.get("sha"), decoded
