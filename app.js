@@ -262,11 +262,7 @@ function renderDashboard() {
     "earnings-table",
     [
       { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
-      { key: "priceText", label: "Price", numeric: true },
       { key: "earningsDateText", label: "Earnings Date" },
-      { key: "action", label: "Action", render: (row) => `<span class="mono">${escapeHtml(row.action)}</span>` },
-      { key: "premiumText", label: "Premium", numeric: true },
-      { key: "roiPctText", label: "ROI %", numeric: true },
     ],
     snapshot.earningsThisWeek?.rows || [],
   );
