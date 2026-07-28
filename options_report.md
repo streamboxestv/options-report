@@ -1,82 +1,75 @@
-# Options Report - 7/27
+# Options Report - 7/28
 
 ## My Portfolio Report - Expiration 7/31
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium       |
 | --------- | ------: | ----------------: | ------------------: | ------------: |
-| MU        | $895.05 |            14.20% |           $1,020.00 |       $938.00 |
-| AMD       | $502.88 |            12.28% |             $565.00 |       $349.00 |
-| NBIS      | $190.17 |            19.63% |             $227.50 |       $293.00 |
-| AVGO      | $382.75 |             9.24% |             $417.50 |       $120.00 |
-| CRWD      | $185.90 |             9.60% |             $203.75 |        $76.00 |
-| NVDA      | $202.82 |             7.48% |             $217.50 |        $41.00 |
-| PLTR      | $127.71 |            11.55% |             $142.00 |        $30.00 |
-| RKLB      |  $66.30 |            18.72% |              $79.00 |        $28.00 |
-| ASTS      |  $58.02 |            21.09% |              $70.00 |        $25.00 |
-| IONQ      |  $36.84 |            19.05% |              $44.00 |        $24.00 |
-| **Total** |         |                   |                     | **$1,924.00** |
+| MU        | $815.72 |            14.40% |             $935.00 |       $522.00 |
+| NBIS      | $167.16 |            19.91% |             $200.00 |       $256.00 |
+| AMD       | $455.41 |            12.50% |             $512.50 |       $223.00 |
+| AVGO      | $378.52 |             9.28% |             $412.50 |        $89.00 |
+| CRWD      | $176.39 |             9.69% |             $193.75 |        $66.00 |
+| PLTR      | $119.24 |            11.74% |             $133.00 |        $24.00 |
+| NVDA      | $194.10 |             7.57% |             $210.00 |        $23.00 |
+| RKLB      |  $61.27 |            18.85% |              $73.00 |        $23.00 |
+| IONQ      |  $32.60 |            19.19% |              $39.00 |        $17.00 |
+| ASTS      |  $54.06 |            21.20% |              $66.00 |        $13.00 |
+| **Total** |         |                   |                     | **$1,256.00** |
 
 ## Covered Calls - Expiration 7/31
 
-| Ticker | Price     | Trend | Avg Weekly Move % | OTM Strike | Premium   | ROI % |
-| ------ | --------: | ----- | ----------------: | ---------: | --------: | ----: |
-| SMTC   |   $119.81 | Sell  |            13.32% |    $135.00 | $1,066.00 | 8.90% |
-| HUT    |   $105.03 | Sell  |            20.10% |    $126.00 |   $279.00 | 2.66% |
-| MBLY   |     $8.28 | Sell  |            11.40% |      $9.00 |    $20.00 | 2.42% |
-| ASML   | $1,678.17 | Sell  |             8.04% |  $1,812.50 | $3,859.00 | 2.30% |
-| WDC    |   $499.50 | Sell  |            14.62% |    $572.50 |   $992.00 | 1.99% |
-| ALAB   |   $283.11 | Sell  |            19.08% |    $337.50 |   $548.00 | 1.94% |
-| AMAT   |   $518.49 | Sell  |            10.18% |    $572.50 |   $839.00 | 1.62% |
-| AAOI   |    $97.01 | Sell  |            24.55% |    $121.00 |   $140.00 | 1.44% |
-| SNDK   | $1,320.34 | Sell  |            20.07% |  $1,585.00 | $1,570.00 | 1.19% |
-| HPE    |    $47.89 | Sell  |             9.81% |     $52.50 |    $54.00 | 1.13% |
-| OUST   |    $34.17 | Sell  |            21.56% |     $41.50 |    $35.00 | 1.02% |
-| MU     |   $895.05 | Sell  |            14.20% |  $1,020.00 |   $898.00 | 1.00% |
+| Ticker | Price     | Trend | Avg Weekly Move % | OTM Strike | Premium   | ROI %  |
+| ------ | --------: | ----- | ----------------: | ---------: | --------: | -----: |
+| SMTC   |   $111.17 | Sell  |            13.50% |    $125.00 | $2,215.00 | 19.92% |
+| AMAT   |   $478.12 | Sell  |            10.36% |    $527.50 | $2,100.00 |  4.39% |
+| GLXY   |    $20.29 | Sell  |            18.33% |     $24.00 |    $52.00 |  2.56% |
+| FIGR   |    $26.88 | Sell  |            20.07% |     $32.50 |    $43.00 |  1.60% |
+| ROKU   |   $143.54 | Sell  |             9.11% |    $157.50 |   $211.00 |  1.47% |
+| NBIS   |   $167.16 | Sell  |            19.91% |    $200.00 |   $242.00 |  1.45% |
+| WDC    |   $434.51 | Sell  |            14.94% |    $500.00 |   $589.00 |  1.36% |
+| SNDK   | $1,104.99 | Sell  |            20.50% |  $1,330.00 | $1,407.00 |  1.27% |
+| EL     |    $83.78 | Buy   |             9.11% |     $91.00 |   $105.00 |  1.25% |
+| MP     |    $40.26 | Sell  |            14.56% |     $46.00 |    $50.00 |  1.24% |
+| MRVL   |   $172.84 | Sell  |            13.40% |    $195.00 |   $184.00 |  1.06% |
 
 ## Cash Secured Puts - Expiration 7/31
 
-| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| FLY    |  $19.95 | Sell  |            22.08% |     $15.50 |  $97.00 | 4.86% |
-| SMTC   | $119.81 | Sell  |            13.32% |    $105.00 | $405.00 | 3.38% |
-| IOT    |  $34.83 | Sell  |            11.81% |     $30.50 |  $60.00 | 1.72% |
-| MBLY   |   $8.28 | Sell  |            11.40% |      $7.50 |  $12.00 | 1.45% |
-| OUST   |  $34.17 | Sell  |            21.56% |     $27.00 |  $41.00 | 1.20% |
-| MU     | $895.05 | Sell  |            14.20% |    $770.00 | $951.00 | 1.06% |
-| AMAT   | $518.49 | Sell  |            10.18% |    $465.00 | $530.00 | 1.02% |
-| RCAT   |   $7.86 | Buy   |            23.31% |      $6.00 |   $8.00 | 1.02% |
+| Ticker | Price     | Trend | Avg Weekly Move % | OTM Strike | Premium   | ROI % |
+| ------ | --------: | ----- | ----------------: | ---------: | --------: | ----: |
+| SMTC   |   $111.17 | Sell  |            13.50% |     $95.00 |   $245.00 | 2.20% |
+| NBIS   |   $167.16 | Sell  |            19.91% |    $134.00 |   $207.00 | 1.24% |
+| AMAT   |   $478.12 | Sell  |            10.36% |    $427.50 |   $555.00 | 1.16% |
+| SNDK   | $1,104.99 | Sell  |            20.50% |    $880.00 | $1,116.00 | 1.01% |
 
 
 ## Earnings this Week
 
-| Ticker | Price   | Earnings Date | Action                             | Premium   | ROI % |
-| ------ | ------: | ------------- | ---------------------------------- | --------: | ----: |
-| KLAC   | $205.11 | 7/28          | Covered Call (strike: $226.00)     | $1,490.00 | 7.26% |
-| TER    | $335.40 | 7/28          | Covered Call (strike: $377.50)     | $1,748.00 | 5.21% |
-| BE     | $183.88 | 7/28          | Covered Call (strike: $225.00)     |   $814.00 | 4.43% |
-| AXTI   |  $47.05 | 7/30          | Covered Call (strike: $60.00)      |   $177.00 | 3.76% |
-| FTNT   | $154.77 | 7/29          | Cash Secured Put (strike: $143.00) |   $568.00 | 3.67% |
-| LRCX   | $293.78 | 7/29          | Covered Call (strike: $327.50)     | $1,023.00 | 3.48% |
-| RBLX   |  $46.33 | 7/30          | Covered Call (strike: $52.00)      |   $145.00 | 3.13% |
-| CMG    |  $32.84 | 7/29          | Cash Secured Put (strike: $30.50)  |    $94.00 | 2.86% |
-| ARM    | $262.54 | 7/29          | Covered Call (strike: $300.00)     |   $670.00 | 2.55% |
-| ENPH   |  $37.15 | 7/28          | Covered Call (strike: $42.50)      |    $92.00 | 2.48% |
-| CVNA   |  $63.62 | 7/29          | Covered Call (strike: $71.00)      |   $147.00 | 2.31% |
-| NVTS   |  $11.36 | 7/27          | Covered Call (strike: $14.00)      |    $25.00 | 2.20% |
-| GNRC   | $203.06 | 7/29          | Covered Call (strike: $222.50)     |   $435.00 | 2.14% |
+| Ticker | Price   | Earnings Date | Action                         | Premium   | ROI % |
+| ------ | ------: | ------------- | ------------------------------ | --------: | ----: |
+| AXTI   |  $41.06 | 7/30          | Covered Call (strike: $53.00)  |   $340.00 | 8.28% |
+| TER    | $307.74 | 7/28          | Covered Call (strike: $345.00) | $2,339.00 | 7.60% |
+| KLAC   | $190.33 | 7/28          | Covered Call (strike: $210.00) | $1,300.00 | 6.83% |
+| BE     | $165.06 | 7/28          | Covered Call (strike: $202.50) |   $952.00 | 5.77% |
+| FTNT   | $147.92 | 7/29          | Covered Call (strike: $160.00) |   $549.00 | 3.71% |
+| GNRC   | $191.44 | 7/29          | Covered Call (strike: $210.00) |   $610.00 | 3.19% |
+| RBLX   |  $48.34 | 7/30          | Covered Call (strike: $54.00)  |   $142.00 | 2.94% |
+| ARM    | $243.34 | 7/29          | Covered Call (strike: $277.50) |   $641.00 | 2.63% |
+| CVNA   |  $62.94 | 7/29          | Covered Call (strike: $70.50)  |   $165.00 | 2.62% |
+| LRCX   | $265.50 | 7/29          | Covered Call (strike: $295.00) |   $667.00 | 2.51% |
+| ENPH   |  $35.75 | 7/28          | Covered Call (strike: $41.00)  |    $83.00 | 2.32% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `MBLY` | price `$8.28` | avg weekly move `11.40%` | OTM strike `$7.50` | premium `$12.00` | ROI `1.45%`
-- Covered Call: `AMAT` | price `$518.49` | avg weekly move `10.18%` | OTM strike `$572.50` | premium `$839.00` | ROI `1.62%`
-- Cash Secured Put: `IOT` | price `$34.83` | avg weekly move `11.81%` | OTM strike `$30.50` | premium `$60.00` | ROI `1.72%`
+- Covered Call: `ROKU` | price `$143.54` | avg weekly move `9.11%` | OTM strike `$157.50` | premium `$211.00` | ROI `1.47%`
+- Covered Call: `EL` | price `$83.78` | avg weekly move `9.11%` | OTM strike `$91.00` | premium `$105.00` | ROI `1.25%`
+- Covered Call: `WDC` | price `$434.51` | avg weekly move `14.94%` | OTM strike `$500.00` | premium `$589.00` | ROI `1.36%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `SMTC` | price `$119.81` | avg weekly move `13.32%` | OTM strike `$135.00` | premium `$1,066.00` | ROI `8.90%`
-- Cash Secured Put: `FLY` | price `$19.95` | avg weekly move `22.08%` | OTM strike `$15.50` | premium `$97.00` | ROI `4.86%`
-- Cash Secured Put: `SMTC` | price `$119.81` | avg weekly move `13.32%` | OTM strike `$105.00` | premium `$405.00` | ROI `3.38%`
+- Covered Call: `SMTC` | price `$111.17` | avg weekly move `13.50%` | OTM strike `$125.00` | premium `$2,215.00` | ROI `19.92%`
+- Covered Call: `AMAT` | price `$478.12` | avg weekly move `10.36%` | OTM strike `$527.50` | premium `$2,100.00` | ROI `4.39%`
+- Covered Call: `GLXY` | price `$20.29` | avg weekly move `18.33%` | OTM strike `$24.00` | premium `$52.00` | ROI `2.56%`
 
