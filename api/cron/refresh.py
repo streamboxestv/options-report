@@ -218,6 +218,7 @@ def options_report_stocks() -> List[str]:
         "EOSE": "TXN",
         "LYFT": "LITE",
         "PINS": "GNRC",
+        "QBTS": "AXON",
         "QS": "OUST",
         "SATS": "ECHO",
         "SMR": "SMTC",
