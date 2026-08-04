@@ -101,6 +101,23 @@ function skippedTickersDetail(snapshot) {
   return "Skipped: none";
 }
 
+function earningsTickerSet(snapshot) {
+  const rows = Array.isArray(snapshot?.earningsThisWeek?.rows) ? snapshot.earningsThisWeek.rows : [];
+  return new Set(
+    rows
+      .map((row) => String(row?.ticker || "").trim().toUpperCase())
+      .filter(Boolean),
+  );
+}
+
+function renderPortfolioTicker(row, earningsTickers) {
+  const ticker = String(row.ticker || "");
+  const isEarningsTicker = earningsTickers.has(ticker.toUpperCase());
+  const className = isEarningsTicker ? "ticker ticker-earnings" : "ticker";
+  const title = isEarningsTicker ? ' title="Earnings this week"' : "";
+  return `<span class="${className}"${title}>${escapeHtml(ticker)}</span>`;
+}
+
 function renderTable(targetId, columns, rows) {
   const table = byId(targetId);
   const headerHtml = `
@@ -125,14 +142,14 @@ function renderTable(targetId, columns, rows) {
   table.innerHTML = `${headerHtml}<tbody>${bodyRows}</tbody>`;
 }
 
-function renderPortfolioTable(targetId, portfolio, strikeLabel) {
+function renderPortfolioTable(targetId, portfolio, strikeLabel, earningsTickers = new Set()) {
   const sortedRows = [...(portfolio?.rows || [])].sort(
     (left, right) => (right.premium || 0) - (left.premium || 0),
   );
   renderTable(
     targetId,
     [
-      { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
+      { key: "ticker", label: "Ticker", render: (row) => renderPortfolioTicker(row, earningsTickers) },
       { key: "priceText", label: "Price", numeric: true },
       { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
       { key: "strikeText", label: strikeLabel, numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.strikeText)}</span>` },
@@ -242,8 +259,9 @@ function renderDashboard() {
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
 
-  renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike");
-  renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Put Strike");
+  const earningsTickers = earningsTickerSet(snapshot);
+  renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike", earningsTickers);
+  renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Put Strike", earningsTickers);
 
   const optionColumns = [
     { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },

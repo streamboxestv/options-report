@@ -257,6 +257,14 @@ tbody tr:hover {
   font-weight: 800;
 }
 
+.ticker-earnings {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: #ffedd5;
+  color: #c2410c;
+}
+
 .metric-strong {
   color: var(--accent);
   font-weight: 800;
