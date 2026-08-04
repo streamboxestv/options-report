@@ -1,83 +1,83 @@
-# Options Report - 8/3
+# Options Report - 8/4
 
 ## My Portfolio Report - Expiration 8/7
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium       |
 | --------- | ------: | ----------------: | ------------------: | ------------: |
-| MU        | $806.99 |            14.42% |             $925.00 |       $738.00 |
-| AMD       | $473.95 |            12.45% |             $532.50 |       $671.00 |
-| NBIS      | $204.93 |            19.86% |             $245.00 |       $294.00 |
-| PLTR      | $125.11 |            11.47% |             $139.00 |       $248.00 |
-| BE        | $218.53 |            23.06% |             $270.00 |       $152.00 |
-| CRWD      | $194.26 |             9.59% |             $212.50 |        $79.00 |
-| AVGO      | $382.04 |             9.27% |             $417.50 |        $72.00 |
-| NVDA      | $205.52 |             7.57% |             $220.00 |        $39.00 |
-| ASTS      |  $62.06 |            21.09% |              $75.00 |        $38.00 |
-| RKLB      |  $67.19 |            18.79% |              $80.00 |        $36.00 |
-| IONQ      |  $39.16 |            19.19% |              $46.50 |        $30.00 |
-| **Total** |         |                   |                     | **$2,397.00** |
+| AMD       | $513.40 |            12.60% |             $577.50 |       $665.00 |
+| MU        | $876.24 |            14.59% |           $1,005.00 |       $594.00 |
+| NBIS      | $218.94 |            20.02% |             $262.50 |       $237.00 |
+| BE        | $225.51 |            23.16% |             $277.50 |       $137.00 |
+| AVGO      | $410.62 |             9.40% |             $450.00 |        $69.00 |
+| CRWD      | $212.13 |             9.73% |             $232.50 |        $61.00 |
+| IONQ      |  $39.99 |            19.30% |              $47.50 |        $61.00 |
+| ASTS      |  $67.47 |            21.33% |              $82.00 |        $43.00 |
+| RKLB      |  $72.93 |            18.98% |              $87.00 |        $30.00 |
+| NVDA      | $210.14 |             7.63% |             $225.00 |        $28.00 |
+| PLTR      | $154.71 |            11.81% |             $175.00 |        $23.00 |
+| **Total** |         |                   |                     | **$1,948.00** |
 
 ## Covered Calls - Expiration 8/7
 
-| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium   | ROI % |
-| ------ | ------: | ----- | ----------------: | ---------: | --------: | ----: |
-| SMTC   | $116.84 | Sell  |            13.57% |    $135.00 |   $585.00 | 5.01% |
-| UAL    | $129.60 | Buy   |             9.23% |    $142.00 |   $615.00 | 4.75% |
-| KLAC   | $179.37 | Sell  |            10.20% |    $198.00 |   $544.00 | 3.03% |
-| TER    | $357.01 | Sell  |            12.56% |    $402.50 | $1,065.00 | 2.98% |
-| GNRC   | $202.05 | Sell  |             9.68% |    $222.50 |   $363.00 | 1.80% |
-| NBIS   | $204.93 | Buy   |            19.86% |    $245.00 |   $290.00 | 1.42% |
-| AMAT   | $507.92 | Sell  |            10.43% |    $560.00 |   $531.00 | 1.05% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| KLAC   | $191.10 | Sell  |            10.33% |    $210.00 | $700.00 | 3.66% |
+| SMTC   | $126.16 | Sell  |            13.73% |    $145.00 | $290.00 | 2.30% |
+| PL     |  $22.28 | Sell  |            18.27% |     $26.50 |  $38.00 | 1.71% |
+| IOT    |  $38.16 | Buy   |            11.91% |     $42.50 |  $50.00 | 1.31% |
+| FSLR   | $233.60 | Buy   |            10.46% |    $257.50 | $299.00 | 1.28% |
+| ACHR   |   $5.01 | Buy   |            14.69% |      $5.50 |   $6.00 | 1.20% |
+| NBIS   | $218.94 | Buy   |            20.02% |    $262.50 | $230.00 | 1.05% |
 
 ## Cash Secured Puts - Expiration 8/7
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| SMTC   | $116.84 | Sell  |            13.57% |    $100.00 | $480.00 | 4.11% |
-| KLAC   | $179.37 | Sell  |            10.20% |    $162.00 | $730.00 | 4.07% |
-| FIGR   |  $25.55 | Sell  |            19.99% |     $20.50 |  $48.00 | 1.88% |
-| IOT    |  $37.04 | Buy   |            11.90% |     $32.50 |  $63.00 | 1.70% |
-| FSLR   | $236.51 | Buy   |            10.42% |    $212.50 | $350.00 | 1.48% |
-| AMAT   | $507.92 | Sell  |            10.43% |    $455.00 | $644.00 | 1.27% |
-| UAL    | $129.60 | Buy   |             9.23% |    $118.00 | $158.00 | 1.22% |
-| LRCX   | $288.65 | Sell  |            11.41% |    $255.00 | $325.00 | 1.13% |
-| NBIS   | $204.93 | Buy   |            19.86% |    $165.00 | $218.00 | 1.06% |
+| IOT    |  $38.16 | Buy   |            11.91% |     $33.50 | $205.00 | 5.37% |
+| KLAC   | $191.10 | Sell  |            10.33% |    $172.00 | $915.00 | 4.79% |
+| SMTC   | $126.16 | Sell  |            13.73% |    $110.00 | $440.00 | 3.49% |
+| TER    | $391.30 | Buy   |            12.71% |    $342.50 | $780.00 | 1.99% |
+| LRCX   | $309.23 | Sell  |            11.55% |    $272.50 | $473.00 | 1.53% |
+| PANW   | $364.26 | Buy   |             8.73% |    $332.50 | $436.00 | 1.20% |
 
 
 ## Earnings this Week
 
 | Ticker | Price   | Earnings Date | Action                             | Premium   | ROI % |
 | ------ | ------: | ------------- | ---------------------------------- | --------: | ----: |
-| IONQ   |  $39.16 | 8/5           | Cash Secured Put (strike: $31.50)  |   $294.00 | 7.51% |
-| FSLY   |  $22.90 | 8/5           | Covered Call (strike: $26.50)      |    $96.00 | 4.19% |
-| ALAB   | $303.21 | 8/4           | Covered Call (strike: $362.50)     | $1,203.00 | 3.97% |
-| DDOG   | $272.97 | 8/6           | Cash Secured Put (strike: $242.50) | $1,010.00 | 3.70% |
-| ETSY   |  $82.96 | 8/5           | Cash Secured Put (strike: $74.00)  |   $305.00 | 3.68% |
-| AXON   | $564.74 | 8/5           | Covered Call (strike: $630.00)     | $1,800.00 | 3.19% |
-| DUOL   | $137.01 | 8/5           | Cash Secured Put (strike: $119.00) |   $430.00 | 3.14% |
-| SOUN   |   $6.10 | 8/5           | Covered Call (strike: $7.00)       |    $19.00 | 3.11% |
-| TTD    |  $18.45 | 8/6           | Covered Call (strike: $20.50)      |    $57.00 | 3.09% |
-| BROS   |  $68.05 | 8/5           | Cash Secured Put (strike: $61.00)  |   $204.00 | 3.00% |
-| UPST   |  $28.95 | 8/4           | Covered Call (strike: $33.00)      |    $81.00 | 2.80% |
-| KTOS   |  $48.26 | 8/4           | Cash Secured Put (strike: $41.50)  |   $135.00 | 2.80% |
-| OUST   |  $40.50 | 8/6           | Covered Call (strike: $49.00)      |   $110.00 | 2.72% |
-| SHOP   | $118.59 | 8/5           | Covered Call (strike: $132.00)     |   $310.00 | 2.61% |
-| AAOI   | $102.02 | 8/6           | Covered Call (strike: $127.00)     |   $258.00 | 2.53% |
-| ZETA   |  $22.39 | 8/4           | Covered Call (strike: $25.50)      |    $54.00 | 2.41% |
-| SPOT   | $498.15 | 8/4           | Covered Call (strike: $542.50)     | $1,000.00 | 2.01% |
+| AXON   | $597.08 | 8/5           | Cash Secured Put (strike: $530.00) | $2,332.00 | 3.91% |
+| HUT    | $101.85 | 8/4           | Covered Call (strike: $123.00)     |   $330.00 | 3.24% |
+| BROS   |  $64.28 | 8/5           | Covered Call (strike: $71.00)      |   $205.00 | 3.19% |
+| FSLY   |  $23.93 | 8/5           | Covered Call (strike: $28.00)      |    $75.00 | 3.13% |
+| DDOG   | $283.97 | 8/6           | Cash Secured Put (strike: $252.50) |   $883.00 | 3.11% |
+| AAOI   | $127.81 | 8/6           | Covered Call (strike: $160.00)     |   $396.00 | 3.10% |
+| ETSY   |  $85.44 | 8/5           | Cash Secured Put (strike: $77.00)  |   $257.00 | 3.01% |
+| DUOL   | $132.90 | 8/5           | Cash Secured Put (strike: $115.00) |   $380.00 | 2.86% |
+| LUMN   |   $6.59 | 8/4           | Covered Call (strike: $7.50)       |    $18.00 | 2.73% |
+| IONQ   |  $39.99 | 8/5           | Cash Secured Put (strike: $32.50)  |   $103.00 | 2.58% |
+| ALAB   | $342.67 | 8/4           | Covered Call (strike: $410.00)     |   $867.00 | 2.53% |
+| TTD    |  $18.62 | 8/6           | Covered Call (strike: $21.00)      |    $46.00 | 2.47% |
+| MCHP   |  $78.67 | 8/6           | Cash Secured Put (strike: $71.00)  |   $188.00 | 2.39% |
+| OSCR   |  $30.28 | 8/6           | Covered Call (strike: $34.50)      |    $70.00 | 2.31% |
+| UPST   |  $30.07 | 8/4           | Covered Call (strike: $34.00)      |    $68.00 | 2.26% |
+| SOUN   |   $6.35 | 8/5           | Cash Secured Put (strike: $5.50)   |    $14.00 | 2.20% |
+| TOST   |  $33.45 | 8/4           | Cash Secured Put (strike: $30.50)  |    $73.00 | 2.18% |
+| NET    | $295.44 | 8/6           | Cash Secured Put (strike: $262.50) |   $640.00 | 2.17% |
+| ZETA   |  $23.59 | 8/4           | Covered Call (strike: $27.00)      |    $50.00 | 2.12% |
+| OUST   |  $45.73 | 8/6           | Cash Secured Put (strike: $36.00)  |    $92.00 | 2.01% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `FSLR` | price `$236.51` | avg weekly move `10.42%` | OTM strike `$212.50` | premium `$350.00` | ROI `1.48%`
-- Cash Secured Put: `AMAT` | price `$507.92` | avg weekly move `10.43%` | OTM strike `$455.00` | premium `$644.00` | ROI `1.27%`
-- Cash Secured Put: `UAL` | price `$129.60` | avg weekly move `9.23%` | OTM strike `$118.00` | premium `$158.00` | ROI `1.22%`
+- Cash Secured Put: `LRCX` | price `$309.23` | avg weekly move `11.55%` | OTM strike `$272.50` | premium `$473.00` | ROI `1.53%`
+- Covered Call: `FSLR` | price `$233.60` | avg weekly move `10.46%` | OTM strike `$257.50` | premium `$299.00` | ROI `1.28%`
+- Cash Secured Put: `PANW` | price `$364.26` | avg weekly move `8.73%` | OTM strike `$332.50` | premium `$436.00` | ROI `1.20%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `SMTC` | price `$116.84` | avg weekly move `13.57%` | OTM strike `$135.00` | premium `$585.00` | ROI `5.01%`
-- Covered Call: `UAL` | price `$129.60` | avg weekly move `9.23%` | OTM strike `$142.00` | premium `$615.00` | ROI `4.75%`
-- Cash Secured Put: `SMTC` | price `$116.84` | avg weekly move `13.57%` | OTM strike `$100.00` | premium `$480.00` | ROI `4.11%`
+- Cash Secured Put: `IOT` | price `$38.16` | avg weekly move `11.91%` | OTM strike `$33.50` | premium `$205.00` | ROI `5.37%`
+- Cash Secured Put: `KLAC` | price `$191.10` | avg weekly move `10.33%` | OTM strike `$172.00` | premium `$915.00` | ROI `4.79%`
+- Covered Call: `KLAC` | price `$191.10` | avg weekly move `10.33%` | OTM strike `$210.00` | premium `$700.00` | ROI `3.66%`
 
