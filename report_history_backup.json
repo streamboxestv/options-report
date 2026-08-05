@@ -1,6 +1,1554 @@
 [
   {
     "reportTitle": "Options Report",
+    "reportDate": "8/5",
+    "reportDateIso": "2026-08-05",
+    "generatedAt": "2026-08-05 14:36:14",
+    "expiration": "8/7",
+    "includedCount": 92,
+    "requestedCount": 150,
+    "myPortfolio": {
+      "title": "My Portfolio Report",
+      "expiration": "8/7",
+      "rows": [
+        {
+          "ticker": "MU",
+          "price": 907.05,
+          "priceText": "$907.05",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 14.659524291445008,
+          "avgWeeklyMovePctText": "14.66%",
+          "strike": 1040.0,
+          "strikeText": "$1,040.00",
+          "premium": 241.0,
+          "premiumText": "$241.00",
+          "roiPct": 0.26569648861694506,
+          "roiPctText": "0.27%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AMD",
+          "price": 483.19,
+          "priceText": "$483.19",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 12.661616090010577,
+          "avgWeeklyMovePctText": "12.66%",
+          "strike": 545.0,
+          "strikeText": "$545.00",
+          "premium": 130.0,
+          "premiumText": "$130.00",
+          "roiPct": 0.26904530308988184,
+          "roiPctText": "0.27%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NBIS",
+          "price": 220.44,
+          "priceText": "$220.44",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 20.039905365845012,
+          "avgWeeklyMovePctText": "20.04%",
+          "strike": 265.0,
+          "strikeText": "$265.00",
+          "premium": 108.0,
+          "premiumText": "$108.00",
+          "roiPct": 0.48992923244420256,
+          "roiPctText": "0.49%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "BE",
+          "price": 235.43,
+          "priceText": "$235.43",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 23.229653926039557,
+          "avgWeeklyMovePctText": "23.23%",
+          "strike": 290.0,
+          "strikeText": "$290.00",
+          "premium": 90.0,
+          "premiumText": "$90.00",
+          "roiPct": 0.3822792337425137,
+          "roiPctText": "0.38%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AVGO",
+          "price": 421.175,
+          "priceText": "$421.18",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 9.458683405505546,
+          "avgWeeklyMovePctText": "9.46%",
+          "strike": 460.0,
+          "strikeText": "$460.00",
+          "premium": 47.0,
+          "premiumText": "$47.00",
+          "roiPct": 0.11159256840980589,
+          "roiPctText": "0.11%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "IONQ",
+          "price": 40.24,
+          "priceText": "$40.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.31486469924129,
+          "avgWeeklyMovePctText": "19.31%",
+          "strike": 48.0,
+          "strikeText": "$48.00",
+          "premium": 44.0,
+          "premiumText": "$44.00",
+          "roiPct": 1.0934393638170974,
+          "roiPctText": "1.09%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "ASTS",
+          "price": 69.23,
+          "priceText": "$69.23",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 21.318100356032346,
+          "avgWeeklyMovePctText": "21.32%",
+          "strike": 84.0,
+          "strikeText": "$84.00",
+          "premium": 38.0,
+          "premiumText": "$38.00",
+          "roiPct": 0.5488949877220858,
+          "roiPctText": "0.55%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "CRWD",
+          "price": 213.305,
+          "priceText": "$213.31",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 9.7911226966278,
+          "avgWeeklyMovePctText": "9.79%",
+          "strike": 235.0,
+          "strikeText": "$235.00",
+          "premium": 28.999999999999996,
+          "premiumText": "$29.00",
+          "roiPct": 0.13595555659736058,
+          "roiPctText": "0.14%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NVDA",
+          "price": 220.235,
+          "priceText": "$220.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 7.7120640540109395,
+          "avgWeeklyMovePctText": "7.71%",
+          "strike": 237.5,
+          "strikeText": "$237.50",
+          "premium": 17.0,
+          "premiumText": "$17.00",
+          "roiPct": 0.0771902740254728,
+          "roiPctText": "0.08%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "PLTR",
+          "price": 161.66,
+          "priceText": "$161.66",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.922028309858133,
+          "avgWeeklyMovePctText": "11.92%",
+          "strike": 180.0,
+          "strikeText": "$180.00",
+          "premium": 17.0,
+          "premiumText": "$17.00",
+          "roiPct": 0.10515897562786095,
+          "roiPctText": "0.11%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "RKLB",
+          "price": 75.47,
+          "priceText": "$75.47",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.009981655603124,
+          "avgWeeklyMovePctText": "19.01%",
+          "strike": 90.0,
+          "strikeText": "$90.00",
+          "premium": 14.000000000000002,
+          "premiumText": "$14.00",
+          "roiPct": 0.18550417384391152,
+          "roiPctText": "0.19%",
+          "action": "Wait"
+        }
+      ],
+      "totalPremium": 775.0,
+      "totalPremiumText": "$775.00",
+      "totalPositionValue": 304742.5,
+      "totalPositionValueText": "$304,742.50"
+    },
+    "coveredCalls": {
+      "title": "Covered Calls",
+      "expiration": "8/7",
+      "rows": [
+        {
+          "ticker": "SMTC",
+          "price": 124.05,
+          "priceText": "$124.05",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 13.770213209810716,
+          "avgWeeklyMovePctText": "13.77%",
+          "strike": 140.0,
+          "strikeText": "$140.00",
+          "premium": 597.0,
+          "premiumText": "$597.00",
+          "roiPct": 4.812575574365175,
+          "roiPctText": "4.81%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "KLAC",
+          "price": 193.02,
+          "priceText": "$193.02",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 10.41042615777851,
+          "avgWeeklyMovePctText": "10.41%",
+          "strike": 214.0,
+          "strikeText": "$214.00",
+          "premium": 750.0,
+          "premiumText": "$750.00",
+          "roiPct": 3.8856077090456944,
+          "roiPctText": "3.89%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "IOT",
+          "price": 38.74,
+          "priceText": "$38.74",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.956888168993814,
+          "avgWeeklyMovePctText": "11.96%",
+          "strike": 43.5,
+          "strikeText": "$43.50",
+          "premium": 73.0,
+          "premiumText": "$73.00",
+          "roiPct": 1.8843572534847701,
+          "roiPctText": "1.88%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "LRCX",
+          "price": 307.93,
+          "priceText": "$307.93",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 11.614519575483234,
+          "avgWeeklyMovePctText": "11.61%",
+          "strike": 342.5,
+          "strikeText": "$342.50",
+          "premium": 484.0,
+          "premiumText": "$484.00",
+          "roiPct": 1.571785795472997,
+          "roiPctText": "1.57%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "FIGR",
+          "price": 28.855,
+          "priceText": "$28.86",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 20.240478789298862,
+          "avgWeeklyMovePctText": "20.24%",
+          "strike": 34.5,
+          "strikeText": "$34.50",
+          "premium": 42.0,
+          "premiumText": "$42.00",
+          "roiPct": 1.4555536302200658,
+          "roiPctText": "1.46%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "TER",
+          "price": 391.24,
+          "priceText": "$391.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 12.773616975017596,
+          "avgWeeklyMovePctText": "12.77%",
+          "strike": 440.0,
+          "strikeText": "$440.00",
+          "premium": 487.0,
+          "premiumText": "$487.00",
+          "roiPct": 1.244760249463245,
+          "roiPctText": "1.24%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "AMAT",
+          "price": 536.125,
+          "priceText": "$536.12",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 10.58747852718677,
+          "avgWeeklyMovePctText": "10.59%",
+          "strike": 592.5,
+          "strikeText": "$592.50",
+          "premium": 558.0,
+          "premiumText": "$558.00",
+          "roiPct": 1.0408020517603171,
+          "roiPctText": "1.04%",
+          "action": "Sell"
+        }
+      ]
+    },
+    "cashSecuredPuts": {
+      "title": "Cash Secured Puts",
+      "expiration": "8/7",
+      "rows": [
+        {
+          "ticker": "KLAC",
+          "price": 193.02,
+          "priceText": "$193.02",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 10.41042615777851,
+          "avgWeeklyMovePctText": "10.41%",
+          "strike": 172.0,
+          "strikeText": "$172.00",
+          "premium": 430.0,
+          "premiumText": "$430.00",
+          "roiPct": 2.227748419852865,
+          "roiPctText": "2.23%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "SMTC",
+          "price": 124.05,
+          "priceText": "$124.05",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 13.770213209810716,
+          "avgWeeklyMovePctText": "13.77%",
+          "strike": 105.0,
+          "strikeText": "$105.00",
+          "premium": 265.0,
+          "premiumText": "$265.00",
+          "roiPct": 2.136235388956066,
+          "roiPctText": "2.14%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "TER",
+          "price": 391.24,
+          "priceText": "$391.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 12.773616975017596,
+          "avgWeeklyMovePctText": "12.77%",
+          "strike": 342.5,
+          "strikeText": "$342.50",
+          "premium": 780.0,
+          "premiumText": "$780.00",
+          "roiPct": 1.9936611798384622,
+          "roiPctText": "1.99%",
+          "action": "Sell"
+        }
+      ]
+    },
+    "earningsThisWeek": {
+      "title": "Earnings this Week",
+      "rows": [
+        {
+          "ticker": "ECHO",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-03",
+          "earningsDateText": "8/3",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "PLTR",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-03",
+          "earningsDateText": "8/3",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "ALAB",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AMD",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AMPX",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "ANET",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "APO",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "CIFR",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "CPNG",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "HUT",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "KTOS",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "LUMN",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SPOT",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "TOST",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "UPST",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "W",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "ZETA",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-04",
+          "earningsDateText": "8/4",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "APP",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AXON",
+          "price": 604.21,
+          "priceText": "$604.21",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Covered Call (strike: $675.00)",
+          "premium": 1660.0000000000002,
+          "premiumText": "$1,660.00",
+          "roiPct": 2.7473891527780077,
+          "roiPctText": "2.75%"
+        },
+        {
+          "ticker": "BROS",
+          "price": 65.92,
+          "priceText": "$65.92",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $59.00)",
+          "premium": 140.0,
+          "premiumText": "$140.00",
+          "roiPct": 2.12378640776699,
+          "roiPctText": "2.12%"
+        },
+        {
+          "ticker": "CRCL",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "DASH",
+          "price": 207.735,
+          "priceText": "$207.74",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $187.50)",
+          "premium": 448.00000000000006,
+          "premiumText": "$448.00",
+          "roiPct": 2.1565937372132766,
+          "roiPctText": "2.16%"
+        },
+        {
+          "ticker": "DUOL",
+          "price": 137.645,
+          "priceText": "$137.65",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $119.00)",
+          "premium": 450.0,
+          "premiumText": "$450.00",
+          "roiPct": 3.2692796687129935,
+          "roiPctText": "3.27%"
+        },
+        {
+          "ticker": "ETSY",
+          "price": 85.77,
+          "priceText": "$85.77",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $77.00)",
+          "premium": 257.0,
+          "premiumText": "$257.00",
+          "roiPct": 2.9963856826396174,
+          "roiPctText": "3.00%"
+        },
+        {
+          "ticker": "EXPE",
+          "price": 319.9,
+          "priceText": "$319.90",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $292.50)",
+          "premium": 765.0,
+          "premiumText": "$765.00",
+          "roiPct": 2.391372303844952,
+          "roiPctText": "2.39%"
+        },
+        {
+          "ticker": "FSLY",
+          "price": 25.86,
+          "priceText": "$25.86",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Cash Secured Put (strike: $21.50)",
+          "premium": 94.0,
+          "premiumText": "$94.00",
+          "roiPct": 3.634957463263728,
+          "roiPctText": "3.63%"
+        },
+        {
+          "ticker": "GLXY",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "IONQ",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "JOBY",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RDW",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SHOP",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SNDK",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SOUN",
+          "price": 6.52,
+          "priceText": "$6.52",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Covered Call (strike: $7.50)",
+          "premium": 18.0,
+          "premiumText": "$18.00",
+          "roiPct": 2.7607361963190185,
+          "roiPctText": "2.76%"
+        },
+        {
+          "ticker": "UBER",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "WDC",
+          "price": 550.14,
+          "priceText": "$550.14",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Covered Call (strike: $632.50)",
+          "premium": 1135.0,
+          "premiumText": "$1,135.00",
+          "roiPct": 2.063111208056131,
+          "roiPctText": "2.06%"
+        },
+        {
+          "ticker": "WULF",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "XYZ",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-05",
+          "earningsDateText": "8/5",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AAOI",
+          "price": 134.17,
+          "priceText": "$134.17",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $167.50)",
+          "premium": 340.0,
+          "premiumText": "$340.00",
+          "roiPct": 2.5340985317134983,
+          "roiPctText": "2.53%"
+        },
+        {
+          "ticker": "CEG",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "CLSK",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "DDOG",
+          "price": 288.79,
+          "priceText": "$288.79",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $322.50)",
+          "premium": 802.0,
+          "premiumText": "$802.00",
+          "roiPct": 2.7771044703763974,
+          "roiPctText": "2.78%"
+        },
+        {
+          "ticker": "DKNG",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "FISV",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "MCHP",
+          "price": 78.145,
+          "priceText": "$78.14",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $86.00)",
+          "premium": 187.0,
+          "premiumText": "$187.00",
+          "roiPct": 2.392987395226822,
+          "roiPctText": "2.39%"
+        },
+        {
+          "ticker": "MP",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "NET",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "OSCR",
+          "price": 30.82,
+          "priceText": "$30.82",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $35.00)",
+          "premium": 65.0,
+          "premiumText": "$65.00",
+          "roiPct": 2.109020116807268,
+          "roiPctText": "2.11%"
+        },
+        {
+          "ticker": "OUST",
+          "price": 46.325,
+          "priceText": "$46.33",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $56.00)",
+          "premium": 140.0,
+          "premiumText": "$140.00",
+          "roiPct": 3.0221262817053423,
+          "roiPctText": "3.02%"
+        },
+        {
+          "ticker": "RCAT",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RGTI",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RKT",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "ROKU",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "TTD",
+          "price": 19.235,
+          "priceText": "$19.23",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Covered Call (strike: $21.50)",
+          "premium": 55.00000000000001,
+          "premiumText": "$55.00",
+          "roiPct": 2.8593709383935537,
+          "roiPctText": "2.86%"
+        },
+        {
+          "ticker": "U",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-06",
+          "earningsDateText": "8/6",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "OKLO",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-07",
+          "earningsDateText": "8/7",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "TE",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-07",
+          "earningsDateText": "8/7",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "VST",
+          "price": null,
+          "priceText": "N/A",
+          "earningsDate": "2026-08-07",
+          "earningsDateText": "8/7",
+          "action": "Earnings this week",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        }
+      ]
+    },
+    "teamReview": {
+      "title": "Team Review",
+      "bestBalance": [
+        {
+          "ticker": "LRCX",
+          "price": 307.93,
+          "priceText": "$307.93",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 11.614519575483234,
+          "avgWeeklyMovePctText": "11.61%",
+          "strike": 342.5,
+          "strikeText": "$342.50",
+          "premium": 484.0,
+          "premiumText": "$484.00",
+          "roiPct": 1.571785795472997,
+          "roiPctText": "1.57%",
+          "action": "Sell",
+          "label": "Covered Call"
+        },
+        {
+          "ticker": "TER",
+          "price": 391.24,
+          "priceText": "$391.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 12.773616975017596,
+          "avgWeeklyMovePctText": "12.77%",
+          "strike": 440.0,
+          "strikeText": "$440.00",
+          "premium": 487.0,
+          "premiumText": "$487.00",
+          "roiPct": 1.244760249463245,
+          "roiPctText": "1.24%",
+          "action": "Sell",
+          "label": "Covered Call"
+        },
+        {
+          "ticker": "FIGR",
+          "price": 28.855,
+          "priceText": "$28.86",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 20.240478789298862,
+          "avgWeeklyMovePctText": "20.24%",
+          "strike": 34.5,
+          "strikeText": "$34.50",
+          "premium": 42.0,
+          "premiumText": "$42.00",
+          "roiPct": 1.4555536302200658,
+          "roiPctText": "1.46%",
+          "action": "Sell",
+          "label": "Covered Call"
+        }
+      ],
+      "bestBalanceWhy": "these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
+      "aggressivePremium": [
+        {
+          "ticker": "SMTC",
+          "price": 124.05,
+          "priceText": "$124.05",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 13.770213209810716,
+          "avgWeeklyMovePctText": "13.77%",
+          "strike": 140.0,
+          "strikeText": "$140.00",
+          "premium": 597.0,
+          "premiumText": "$597.00",
+          "roiPct": 4.812575574365175,
+          "roiPctText": "4.81%",
+          "action": "Sell",
+          "label": "Covered Call"
+        },
+        {
+          "ticker": "KLAC",
+          "price": 193.02,
+          "priceText": "$193.02",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 10.41042615777851,
+          "avgWeeklyMovePctText": "10.41%",
+          "strike": 214.0,
+          "strikeText": "$214.00",
+          "premium": 750.0,
+          "premiumText": "$750.00",
+          "roiPct": 3.8856077090456944,
+          "roiPctText": "3.89%",
+          "action": "Sell",
+          "label": "Covered Call"
+        },
+        {
+          "ticker": "KLAC",
+          "price": 193.02,
+          "priceText": "$193.02",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 10.41042615777851,
+          "avgWeeklyMovePctText": "10.41%",
+          "strike": 172.0,
+          "strikeText": "$172.00",
+          "premium": 430.0,
+          "premiumText": "$430.00",
+          "roiPct": 2.227748419852865,
+          "roiPctText": "2.23%",
+          "action": "Sell",
+          "label": "Cash Secured Put"
+        }
+      ]
+    },
+    "skippedTickers": [
+      {
+        "ticker": "ALAB",
+        "reason": "ALAB: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "AMPX",
+        "reason": "AMPX: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "APO",
+        "reason": "APO: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "AMD",
+        "reason": "AMD: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "APP",
+        "reason": "APP: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "ANET",
+        "reason": "ANET: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "BROS",
+        "reason": "BROS: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "CEG",
+        "reason": "CEG: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "CLSK",
+        "reason": "CLSK: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "CIFR",
+        "reason": "CIFR: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "CPNG",
+        "reason": "CPNG: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "CRCL",
+        "reason": "CRCL: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "DKNG",
+        "reason": "DKNG: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "DUOL",
+        "reason": "DUOL: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "DDOG",
+        "reason": "DDOG: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "ETSY",
+        "reason": "ETSY: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "FSLY",
+        "reason": "FSLY: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "DASH",
+        "reason": "DASH: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "EXPE",
+        "reason": "EXPE: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "FISV",
+        "reason": "FISV: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "SPOT",
+        "reason": "SPOT: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "GLXY",
+        "reason": "GLXY: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "AAOI",
+        "reason": "AAOI: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "IONQ",
+        "reason": "IONQ: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "SNDK",
+        "reason": "SNDK: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "HUT",
+        "reason": "HUT: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "LUMN",
+        "reason": "LUMN: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "JOBY",
+        "reason": "JOBY: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "MP",
+        "reason": "MP: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "NET",
+        "reason": "NET: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "MCHP",
+        "reason": "MCHP: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "WDC",
+        "reason": "WDC: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "OKLO",
+        "reason": "OKLO: earnings during report week (2026-08-07)"
+      },
+      {
+        "ticker": "OSCR",
+        "reason": "OSCR: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "KTOS",
+        "reason": "KTOS: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "PLTR",
+        "reason": "PLTR: earnings during report week (2026-08-03)"
+      },
+      {
+        "ticker": "AXON",
+        "reason": "AXON: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "OUST",
+        "reason": "OUST: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "RGTI",
+        "reason": "RGTI: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "RDW",
+        "reason": "RDW: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "RKT",
+        "reason": "RKT: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "RCAT",
+        "reason": "RCAT: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "ROKU",
+        "reason": "ROKU: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "ECHO",
+        "reason": "ECHO: earnings during report week (2026-08-03)"
+      },
+      {
+        "ticker": "SHOP",
+        "reason": "SHOP: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "SOUN",
+        "reason": "SOUN: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "TE",
+        "reason": "TE: earnings during report week (2026-08-07)"
+      },
+      {
+        "ticker": "TOST",
+        "reason": "TOST: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "UBER",
+        "reason": "UBER: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "TTD",
+        "reason": "TTD: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "UPST",
+        "reason": "UPST: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "U",
+        "reason": "U: earnings during report week (2026-08-06)"
+      },
+      {
+        "ticker": "SKHY",
+        "reason": "SKHY: Expected at least 8 weekly bars for SKHY, received 5"
+      },
+      {
+        "ticker": "XYZ",
+        "reason": "XYZ: earnings during report week (2026-08-05)"
+      },
+      {
+        "ticker": "W",
+        "reason": "W: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "VST",
+        "reason": "VST: earnings during report week (2026-08-07)"
+      },
+      {
+        "ticker": "ZETA",
+        "reason": "ZETA: earnings during report week (2026-08-04)"
+      },
+      {
+        "ticker": "WULF",
+        "reason": "WULF: earnings during report week (2026-08-05)"
+      }
+    ],
+    "myPortfolioPuts": {
+      "title": "My Portfolio Cash Secured Puts",
+      "expiration": "8/7",
+      "rows": [
+        {
+          "ticker": "MU",
+          "price": 907.05,
+          "priceText": "$907.05",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 14.659524291445008,
+          "avgWeeklyMovePctText": "14.66%",
+          "strike": 775.0,
+          "strikeText": "$775.00",
+          "premium": 200.89999999999998,
+          "premiumText": "$200.90",
+          "roiPct": 0.22148723885122099,
+          "roiPctText": "0.22%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AMD",
+          "price": 483.19,
+          "priceText": "$483.19",
+          "trend": "Sell",
+          "avgWeeklyMovePct": 12.661616090010577,
+          "avgWeeklyMovePctText": "12.66%",
+          "strike": 422.5,
+          "strikeText": "$422.50",
+          "premium": 74.0,
+          "premiumText": "$74.00",
+          "roiPct": 0.1531488648357789,
+          "roiPctText": "0.15%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NBIS",
+          "price": 220.44,
+          "priceText": "$220.44",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 20.039905365845012,
+          "avgWeeklyMovePctText": "20.04%",
+          "strike": 177.5,
+          "strikeText": "$177.50",
+          "premium": 59.0,
+          "premiumText": "$59.00",
+          "roiPct": 0.26764652513155507,
+          "roiPctText": "0.27%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "BE",
+          "price": 235.43,
+          "priceText": "$235.43",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 23.229653926039557,
+          "avgWeeklyMovePctText": "23.23%",
+          "strike": 180.0,
+          "strikeText": "$180.00",
+          "premium": 43.0,
+          "premiumText": "$43.00",
+          "roiPct": 0.18264452278808987,
+          "roiPctText": "0.18%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "AVGO",
+          "price": 421.175,
+          "priceText": "$421.18",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 9.458683405505546,
+          "avgWeeklyMovePctText": "9.46%",
+          "strike": 382.5,
+          "strikeText": "$382.50",
+          "premium": 30.0,
+          "premiumText": "$30.00",
+          "roiPct": 0.07122929898498248,
+          "roiPctText": "0.07%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "IONQ",
+          "price": 40.24,
+          "priceText": "$40.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.31486469924129,
+          "avgWeeklyMovePctText": "19.31%",
+          "strike": 32.5,
+          "strikeText": "$32.50",
+          "premium": 137.0,
+          "premiumText": "$137.00",
+          "roiPct": 3.4045725646123257,
+          "roiPctText": "3.40%",
+          "action": "Sell"
+        },
+        {
+          "ticker": "ASTS",
+          "price": 69.23,
+          "priceText": "$69.23",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 21.318100356032346,
+          "avgWeeklyMovePctText": "21.32%",
+          "strike": 54.0,
+          "strikeText": "$54.00",
+          "premium": 5.0,
+          "premiumText": "$5.00",
+          "roiPct": 0.07222302470027445,
+          "roiPctText": "0.07%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "CRWD",
+          "price": 213.305,
+          "priceText": "$213.31",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 9.7911226966278,
+          "avgWeeklyMovePctText": "9.79%",
+          "strike": 192.5,
+          "strikeText": "$192.50",
+          "premium": 28.000000000000004,
+          "premiumText": "$28.00",
+          "roiPct": 0.13126743395607232,
+          "roiPctText": "0.13%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "NVDA",
+          "price": 220.235,
+          "priceText": "$220.24",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 7.7120640540109395,
+          "avgWeeklyMovePctText": "7.71%",
+          "strike": 202.5,
+          "strikeText": "$202.50",
+          "premium": 10.0,
+          "premiumText": "$10.00",
+          "roiPct": 0.04540604354439576,
+          "roiPctText": "0.05%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "PLTR",
+          "price": 161.66,
+          "priceText": "$161.66",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 11.922028309858133,
+          "avgWeeklyMovePctText": "11.92%",
+          "strike": 142.0,
+          "strikeText": "$142.00",
+          "premium": 9.0,
+          "premiumText": "$9.00",
+          "roiPct": 0.05567239886180873,
+          "roiPctText": "0.06%",
+          "action": "Wait"
+        },
+        {
+          "ticker": "RKLB",
+          "price": 75.47,
+          "priceText": "$75.47",
+          "trend": "Buy",
+          "avgWeeklyMovePct": 19.009981655603124,
+          "avgWeeklyMovePctText": "19.01%",
+          "strike": 61.0,
+          "strikeText": "$61.00",
+          "premium": 4.0,
+          "premiumText": "$4.00",
+          "roiPct": 0.05300119252683186,
+          "roiPctText": "0.05%",
+          "action": "Wait"
+        }
+      ],
+      "totalPositionValue": 304742.5,
+      "totalPositionValueText": "$304,742.50",
+      "totalPremium": 599.9,
+      "totalPremiumText": "$599.90"
+    }
+  },
+  {
+    "reportTitle": "Options Report",
     "reportDate": "8/4",
     "reportDateIso": "2026-08-04",
     "generatedAt": "2026-08-04 14:12:03",
