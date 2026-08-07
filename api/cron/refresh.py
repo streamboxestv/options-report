@@ -215,6 +215,7 @@ def options_report_stocks() -> List[str]:
     replacements = {
         "ALB": "ALAB",
         "CELH": "KLAC",
+        "CPNG": "COHR",
         "EOSE": "TXN",
         "LYFT": "LITE",
         "PINS": "GNRC",
