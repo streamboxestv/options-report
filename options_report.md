@@ -1,37 +1,38 @@
-# Options Report - 8/12
+# Options Report - 8/13
 
 ## My Portfolio Report - Expiration 8/14
 
-| Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
-| --------- | ------: | ----------------: | ------------------: | ----------: |
-| LITE      | $899.83 |            18.47% |           $1,065.00 |     $225.00 |
-| MU        | $925.95 |            14.71% |           $1,060.00 |      $76.00 |
-| NBIS      | $232.33 |            20.32% |             $280.00 |      $48.00 |
-| BE        | $234.84 |            23.21% |             $290.00 |      $22.00 |
-| CRWD      | $223.84 |             9.80% |             $245.00 |      $15.00 |
-| AMD       | $490.80 |            12.58% |             $552.50 |      $15.00 |
-| ASTS      |  $73.44 |            21.19% |              $89.00 |      $11.00 |
-| AVGO      | $422.18 |             9.45% |             $462.50 |      $10.00 |
-| PLTR      | $168.51 |            11.92% |             $187.50 |       $9.00 |
-| RKLB      |  $81.05 |            19.13% |              $97.00 |       $8.00 |
-| NVDA      | $224.65 |             7.74% |             $242.50 |       $5.00 |
-| IONQ      |  $43.77 |            19.15% |              $52.00 |       $4.00 |
-| **Total** |         |                   |                     | **$448.00** |
+| Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium    |
+| --------- | ------: | ----------------: | ------------------: | ---------: |
+| NBIS      | $267.37 |            20.52% |             $322.50 |     $20.00 |
+| LITE      | $937.25 |            18.53% |           $1,110.00 |     $18.00 |
+| MU        | $938.97 |            14.73% |           $1,075.00 |     $14.00 |
+| IONQ      |  $47.27 |            19.25% |              $56.00 |     $12.00 |
+| BE        | $243.85 |            23.22% |             $300.00 |      $7.00 |
+| AMD       | $491.00 |            12.60% |             $552.50 |      $5.00 |
+| CRWD      | $224.35 |             9.80% |             $247.50 |      $4.00 |
+| PLTR      | $176.31 |            11.91% |             $197.50 |      $4.00 |
+| RKLB      |  $83.54 |            19.12% |             $100.00 |      $4.00 |
+| NVDA      | $225.85 |             7.76% |             $242.50 |      $2.00 |
+| AVGO      | $421.67 |             9.46% |             $462.50 |      $2.00 |
+| ASTS      |  $73.66 |            21.19% |              $89.00 |      $2.00 |
+| **Total** |         |                   |                     | **$94.00** |
 
 ## Covered Calls - Expiration 8/14
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| TER    | $405.36 | Buy   |            12.82% |    $457.50 | $645.00 | 1.59% |
-| ECHO   |  $90.56 | Buy   |            11.62% |    $101.00 | $109.00 | 1.20% |
-| GNRC   | $220.01 | Buy   |             9.96% |    $242.50 | $232.00 | 1.05% |
+| SMTC   | $138.31 | Buy   |            13.87% |    $155.00 | $242.00 | 1.75% |
+| OUST   |  $47.82 | Buy   |            21.42% |     $58.00 |  $74.00 | 1.55% |
+| TER    | $408.30 | Buy   |            12.82% |    $460.00 | $531.00 | 1.30% |
+| ECHO   |  $92.76 | Buy   |            11.66% |    $104.00 | $115.00 | 1.24% |
 
 ## Cash Secured Puts - Expiration 8/14
 
-| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| SMTC   | $140.29 | Buy   |            13.86% |    $120.00 | $210.00 | 1.50% |
-| EL     |  $86.94 | Buy   |             9.07% |     $79.00 |  $95.00 | 1.09% |
+
+| Ticker | Price | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ----: | ----- | ----------------: | ---------: | ------: | ----: |
+| None   |   N/A | N/A   |               N/A |        N/A |     N/A |   N/A |
 
 
 ## Earnings this Week
@@ -45,13 +46,12 @@
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `SMTC` | price `$140.29` | avg weekly move `13.86%` | OTM strike `$120.00` | premium `$210.00` | ROI `1.50%`
-- Covered Call: `TER` | price `$405.36` | avg weekly move `12.82%` | OTM strike `$457.50` | premium `$645.00` | ROI `1.59%`
-- Covered Call: `ECHO` | price `$90.56` | avg weekly move `11.62%` | OTM strike `$101.00` | premium `$109.00` | ROI `1.20%`
+- Covered Call: `TER` | price `$408.30` | avg weekly move `12.82%` | OTM strike `$460.00` | premium `$531.00` | ROI `1.30%`
+- Covered Call: `ECHO` | price `$92.76` | avg weekly move `11.66%` | OTM strike `$104.00` | premium `$115.00` | ROI `1.24%`
+- Covered Call: `SMTC` | price `$138.31` | avg weekly move `13.87%` | OTM strike `$155.00` | premium `$242.00` | ROI `1.75%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Cash Secured Put: `EL` | price `$86.94` | avg weekly move `9.07%` | OTM strike `$79.00` | premium `$95.00` | ROI `1.09%`
-- Covered Call: `GNRC` | price `$220.01` | avg weekly move `9.96%` | OTM strike `$242.50` | premium `$232.00` | ROI `1.05%`
+- Covered Call: `OUST` | price `$47.82` | avg weekly move `21.42%` | OTM strike `$58.00` | premium `$74.00` | ROI `1.55%`
 
