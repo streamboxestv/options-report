@@ -217,6 +217,7 @@ def options_report_stocks() -> List[str]:
     replacements = {
         "ALB": "ALAB",
         "CCJ": "AVAV",
+        "CCL": "MDB",
         "CELH": "KLAC",
         "CPNG": "COHR",
         "EL": "AMBA",
@@ -227,6 +228,7 @@ def options_report_stocks() -> List[str]:
         "QBTS": "AXON",
         "QS": "OUST",
         "QUBT": "QBTS",
+        "RCL": "UUUU",
         "SATS": "ECHO",
         "SMR": "SMTC",
         "UUUU": "SKHY",
