@@ -258,6 +258,7 @@ function renderDashboard() {
   byId("portfolio-put-expiration").textContent = `Expiration ${snapshot.myPortfolioPuts?.expiration || snapshot.myPortfolio?.expiration || "N/A"}`;
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
+  byId("pmcc-subtitle").textContent = `Weekly expiration ${snapshot.pmccCandidates?.weeklyExpiration || snapshot.expiration || "N/A"} - 100 is strongest.`;
 
   const earningsTickers = earningsTickerSet(snapshot);
   renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike", earningsTickers);
@@ -275,6 +276,24 @@ function renderDashboard() {
 
   renderTable("covered-table", optionColumns, snapshot.coveredCalls?.rows || []);
   renderTable("puts-table", optionColumns, snapshot.cashSecuredPuts?.rows || []);
+
+  renderTable(
+    "pmcc-table",
+    [
+      { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
+      { key: "priceText", label: "Price", numeric: true },
+      { key: "below52wHighPctText", label: "Below 52W High", numeric: true },
+      { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
+      { key: "leapsExpirationText", label: "LEAPS Exp" },
+      { key: "leapsStrikeText", label: "LEAPS Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.leapsStrikeText)}</span>` },
+      { key: "leapsDeltaText", label: "LEAPS Delta", numeric: true },
+      { key: "leapsCostText", label: "LEAPS Cost", numeric: true },
+      { key: "weeklyCallStrikeText", label: "Weekly Call Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.weeklyCallStrikeText)}</span>` },
+      { key: "weeklyCallPremiumText", label: "Weekly Call Premium", numeric: true },
+      { key: "scoreText", label: "Score", numeric: true, render: (row) => `<span class="score-pill">${escapeHtml(row.scoreText)}</span>` },
+    ],
+    snapshot.pmccCandidates?.rows || [],
+  );
 
   renderTable(
     "earnings-table",

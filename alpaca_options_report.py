@@ -213,6 +213,23 @@ class RecommendationRow:
     row: OptionRow
 
 
+@dataclass
+class PmccRow:
+    stock: str
+    price: float
+    pct_otm: float
+    below_52w_high_pct: float
+    leaps_expiration: date
+    leaps_strike: float
+    leaps_delta: float
+    leaps_price: float
+    short_call_expiration: date
+    short_call_strike: float
+    short_call_delta: Optional[float]
+    short_call_price: Optional[float]
+    score: int
+
+
 def api_get(path: str, api_key: str, api_secret: str, params: Optional[Dict[str, str]] = None) -> Dict:
     query = ""
     if params:
@@ -611,6 +628,232 @@ def option_row_to_dict(row: OptionRow) -> Dict[str, object]:
     }
 
 
+def option_snapshot_price(snapshot: Dict) -> Optional[float]:
+    trade = snapshot.get("latestTrade") or {}
+    last = trade.get("p")
+    if last is not None:
+        return float(last)
+
+    quote = snapshot.get("latestQuote") or {}
+    bid = quote.get("bp")
+    ask = quote.get("ap")
+    if bid is not None and ask is not None and float(bid) > 0 and float(ask) > 0:
+        return (float(bid) + float(ask)) / 2.0
+    if bid is not None and float(bid) > 0:
+        return float(bid)
+    if ask is not None and float(ask) > 0:
+        return float(ask)
+    return None
+
+
+def option_snapshot_strike(snapshot: Dict) -> Optional[float]:
+    contract = snapshot.get("option_contract") or snapshot.get("contract") or {}
+    strike_value = contract.get("strike_price")
+    if strike_value is not None:
+        return float(strike_value)
+    return strike_from_contract_symbol(snapshot.get("contract_symbol", ""))
+
+
+def option_snapshot_delta(snapshot: Dict) -> Optional[float]:
+    greeks = snapshot.get("greeks") or {}
+    delta = greeks.get("delta")
+    return float(delta) if delta is not None else None
+
+
+def option_snapshot_open_interest(snapshot: Dict) -> float:
+    contract = snapshot.get("option_contract") or snapshot.get("contract") or {}
+    return float(contract.get("open_interest") or 0.0)
+
+
+def option_snapshot_spread(snapshot: Dict) -> float:
+    quote = snapshot.get("latestQuote") or {}
+    bid = quote.get("bp")
+    ask = quote.get("ap")
+    if bid is None or ask is None:
+        return math.inf
+    return max(0.0, float(ask) - float(bid))
+
+
+def nearest_weekly_expiration(today: date, expiration_override: Optional[date]) -> date:
+    return expiration_override or fridays_from(today, 1)[0]
+
+
+def leap_expiration_candidates(today: date) -> List[date]:
+    candidates: List[date] = []
+    for year_offset in (1, 2, 3):
+        year = today.year + year_offset
+        for month in (1, 6, 12):
+            candidates.extend(fridays_from(date(year, month, 15), 1))
+    sorted_candidates = sorted({item for item in candidates if item >= today + timedelta(days=500)})
+    practical_window = [item for item in sorted_candidates if (item - today).days <= 760]
+    first_longer = next((item for item in sorted_candidates if (item - today).days > 760), None)
+    if first_longer:
+        practical_window.append(first_longer)
+    return practical_window
+
+
+def choose_leaps_contract(symbol: str, price: float, today: date, api_key: str, api_secret: str) -> Tuple[date, Dict]:
+    parsed: List[Tuple[date, Dict[str, object]]] = []
+    for expiration_date in leap_expiration_candidates(today):
+        try:
+            contracts = paged_option_chain(symbol, expiration_date, "call", api_key, api_secret)
+        except Exception:
+            continue
+        best_for_expiration: Optional[Dict[str, object]] = None
+        for snapshot in contracts:
+            strike = option_snapshot_strike(snapshot)
+            delta = option_snapshot_delta(snapshot)
+            option_price = option_snapshot_price(snapshot)
+            if strike is None or delta is None or option_price is None:
+                continue
+            abs_delta = abs(delta)
+            if not 0.75 <= abs_delta <= 0.95:
+                continue
+            item = {
+                "snapshot": snapshot,
+                "strike": strike,
+                "delta": abs_delta,
+                "price": option_price,
+                "delta_distance": abs(abs_delta - 0.85),
+                "open_interest": option_snapshot_open_interest(snapshot),
+                "spread": option_snapshot_spread(snapshot),
+            }
+            if best_for_expiration is None or (
+                item["delta_distance"],
+                item["spread"],
+                -item["open_interest"],
+            ) < (
+                best_for_expiration["delta_distance"],
+                best_for_expiration["spread"],
+                -best_for_expiration["open_interest"],
+            ):
+                best_for_expiration = item
+        if best_for_expiration:
+            parsed.append((expiration_date, best_for_expiration))
+
+    if not parsed:
+        raise RuntimeError(f"No usable 0.85-delta LEAPS found for {symbol}")
+
+    parsed.sort(key=lambda item: item[0])
+    best_expiration, best = parsed[0]
+    for expiration_date, candidate in parsed[1:]:
+        extra_cost_pct = (candidate["price"] - best["price"]) / best["price"] if best["price"] > 0 else math.inf
+        extra_time_pct = ((expiration_date - today).days - (best_expiration - today).days) / max((best_expiration - today).days, 1)
+        if extra_time_pct > 0 and extra_cost_pct <= extra_time_pct * 0.75:
+            best_expiration, best = expiration_date, candidate
+
+    return best_expiration, best["snapshot"]
+
+
+def choose_pmcc_short_call(
+    symbol: str,
+    price: float,
+    pct_otm: float,
+    expiration_date: date,
+    api_key: str,
+    api_secret: str,
+) -> Dict:
+    min_strike = price * (1 + pct_otm)
+    contracts = paged_option_chain(symbol, expiration_date, "call", api_key, api_secret)
+    parsed = []
+    for snapshot in contracts:
+        strike = option_snapshot_strike(snapshot)
+        if strike is None or strike < min_strike:
+            continue
+        delta = option_snapshot_delta(snapshot)
+        option_price = option_snapshot_price(snapshot)
+        abs_delta = abs(delta) if delta is not None else math.inf
+        if abs_delta < 0.05 or abs_delta > 0.30:
+            continue
+        parsed.append(
+            {
+                "snapshot": snapshot,
+                "strike": strike,
+                "delta": abs_delta if math.isfinite(abs_delta) else None,
+                "price": option_price,
+                "has_price": option_price is not None,
+                "delta_distance": abs(abs_delta - 0.20) if math.isfinite(abs_delta) else math.inf,
+                "strike_distance": abs(strike - min_strike),
+                "open_interest": option_snapshot_open_interest(snapshot),
+                "spread": option_snapshot_spread(snapshot),
+            }
+        )
+
+    if not parsed:
+        raise RuntimeError(f"No PMCC weekly short call found for {symbol}")
+
+    parsed.sort(
+        key=lambda item: (
+            0 if item["has_price"] else 1,
+            item["delta_distance"],
+            item["strike_distance"],
+            item["spread"],
+            -item["open_interest"],
+        )
+    )
+    return parsed[0]["snapshot"]
+
+
+def pmcc_score(price: float, pct_otm: float, below_52w_high_pct: float, short_call_price: Optional[float]) -> int:
+    score = 0
+    if 75 <= price <= 500:
+        score += 10
+    elif price >= 50:
+        score += 5
+
+    weekly_move_pct = pct_otm * 100.0
+    if 2 <= weekly_move_pct <= 5:
+        score += 20
+    elif 5 < weekly_move_pct <= 8:
+        score += 12
+    elif 0 < weekly_move_pct < 2:
+        score += 8
+
+    if -30 <= below_52w_high_pct <= -10:
+        score += 20
+    elif -40 <= below_52w_high_pct < -30:
+        score += 10
+    elif -10 < below_52w_high_pct <= 0:
+        score += 8
+
+    score += 15
+    score += 15
+    score += 10
+    if short_call_price is not None and short_call_price > 0:
+        score += 10
+    return min(score, 100)
+
+
+def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
+    return {
+        "ticker": row.stock,
+        "price": row.price,
+        "priceText": format_money(row.price),
+        "below52wHighPct": row.below_52w_high_pct,
+        "below52wHighPctText": f"{row.below_52w_high_pct:.2f}%",
+        "avgWeeklyMovePct": row.pct_otm * 100.0,
+        "avgWeeklyMovePctText": f"{row.pct_otm * 100:.2f}%",
+        "leapsExpiration": row.leaps_expiration.isoformat(),
+        "leapsExpirationText": display_expiration(row.leaps_expiration),
+        "leapsStrike": row.leaps_strike,
+        "leapsStrikeText": format_money(row.leaps_strike),
+        "leapsDelta": row.leaps_delta,
+        "leapsDeltaText": f"{row.leaps_delta:.2f}",
+        "leapsCost": row.leaps_price * 100.0,
+        "leapsCostText": format_money(row.leaps_price * 100.0),
+        "weeklyCallExpiration": row.short_call_expiration.isoformat(),
+        "weeklyCallExpirationText": display_expiration(row.short_call_expiration),
+        "weeklyCallStrike": row.short_call_strike,
+        "weeklyCallStrikeText": format_money(row.short_call_strike),
+        "weeklyCallDelta": row.short_call_delta,
+        "weeklyCallDeltaText": f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A",
+        "weeklyCallPremium": row.short_call_price * 100.0 if row.short_call_price is not None else None,
+        "weeklyCallPremiumText": format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+        "score": row.score,
+        "scoreText": f"{row.score}",
+    }
+
+
 def excluded_row_to_dict(row: ExcludedTickerRow) -> Dict[str, object]:
     return {
         "ticker": row.stock,
@@ -743,6 +986,50 @@ def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> st
     return "\n".join(lines)
 
 
+def render_pmcc_table(rows: List[PmccRow]) -> str:
+    lines = ["## PMCC Candidates", ""]
+    sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
+    if not sorted_rows:
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+    else:
+        table_rows = []
+        for row in sorted_rows:
+            table_rows.append([
+                row.stock,
+                format_money(row.price),
+                f"{row.below_52w_high_pct:.2f}%",
+                f"{row.pct_otm * 100:.2f}%",
+                display_expiration(row.leaps_expiration),
+                format_money(row.leaps_strike),
+                f"{row.leaps_delta:.2f}",
+                format_money(row.leaps_price * 100.0),
+                format_money(row.short_call_strike),
+                format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+                str(row.score),
+            ])
+    lines.append(
+        render_markdown_table(
+            [
+                "Ticker",
+                "Price",
+                "Below 52W High",
+                "Avg Weekly Move %",
+                "LEAPS Exp",
+                "LEAPS Strike",
+                "LEAPS Delta",
+                "LEAPS Cost",
+                "Weekly Call Strike",
+                "Weekly Call Premium",
+                "Score",
+            ],
+            table_rows,
+            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right"],
+        )
+    )
+    lines.append("")
+    return "\n".join(lines)
+
+
 def render_summary_card(label: str, value: str) -> str:
     return (
         '<div style="background:#f7f3eb;border:1px solid #e7dcc7;border-radius:14px;'
@@ -804,6 +1091,64 @@ def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) 
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Premium</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">ROI %</th>'
         '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Action</th>'
+        "</tr>"
+        "</thead>"
+        f"<tbody>{''.join(table_rows)}</tbody>"
+        "</table>"
+        "</div>"
+        "</section>"
+    )
+
+
+def render_pmcc_html_table(rows: List[PmccRow]) -> str:
+    table_rows = []
+    sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
+    if not sorted_rows:
+        table_rows.append(
+            "<tr>"
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="10">No PMCC candidates</td>'
+            "</tr>"
+        )
+    else:
+        for row in sorted_rows:
+            short_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
+            table_rows.append(
+                "<tr>"
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.price))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.below_52w_high_pct:.2f}%</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.pct_otm * 100:.2f}%</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(display_expiration(row.leaps_expiration))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.leaps_strike))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.leaps_delta:.2f}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.leaps_price * 100.0))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.short_call_strike))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(short_premium)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#111827;">{row.score}</td>'
+                "</tr>"
+            )
+    return (
+        '<section style="margin-top:28px;">'
+        '<div style="display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:10px;">'
+        '<h2 style="margin:0;font-size:22px;color:#111827;">PMCC Candidates</h2>'
+        '<div style="font-size:13px;color:#6b7280;">Weekly short call outside avg weekly move</div>'
+        "</div>"
+        '<div style="border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;background:#ffffff;">'
+        '<table style="width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">'
+        "<thead>"
+        '<tr style="background:#111827;color:#f9fafb;">'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Ticker</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Price</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Below 52W High</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Avg Weekly Move %</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Exp</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Strike</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Delta</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Cost</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Strike</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Premium</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
         "</tr>"
         "</thead>"
         f"<tbody>{''.join(table_rows)}</tbody>"
@@ -1031,6 +1376,7 @@ def build_report_html(
     covered_call_label: str,
     cash_secured_puts: List[OptionRow],
     cash_secured_put_label: str,
+    pmcc_rows: List[PmccRow],
     skipped: List[str],
 ) -> str:
     covered_count = sum(1 for row in covered_calls if row.action == "Sell")
@@ -1067,6 +1413,7 @@ def build_report_html(
         f'{render_portfolio_html_table(portfolio_rows, portfolio_expiration_label)}'
         f'{render_html_table("Covered Calls", covered_calls, covered_call_label)}'
         f'{render_html_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label)}'
+        f'{render_pmcc_html_table(pmcc_rows)}'
         f"{skipped_section}"
         "</div>"
         "</div>"
@@ -1124,6 +1471,7 @@ def build_report(
     earnings_cache_lock = threading.Lock()
 
     pct_otm_by_symbol = {}
+    high_52w_by_symbol: Dict[str, float] = {}
     trend_by_symbol: Dict[str, str] = {}
     skipped: List[str] = []
     excluded_rows: List[ExcludedTickerRow] = []
@@ -1171,6 +1519,7 @@ def build_report(
             earnings_date = get_earnings_date_safe(symbol)
             bars = get_weekly_bars(symbol, start, today, api_key, api_secret)
             pct_otm = average_weekly_move_pct(bars)
+            high_52w = max(float(bar["h"]) for bar in bars[-52:] if bar.get("h") is not None)
             trend = wavetrend_last_signal(bars)
             if earnings_in_report_week(earnings_date, report_start, report_expiration):
                 best_options_label = "N/A"
@@ -1202,6 +1551,7 @@ def build_report(
                 "status": "active",
                 "symbol": symbol,
                 "pct_otm": pct_otm,
+                "high_52w": high_52w,
                 "trend": trend,
             }
         except Exception as exc:
@@ -1222,6 +1572,7 @@ def build_report(
                 status = result["status"]
                 if status == "active":
                     pct_otm_by_symbol[symbol] = float(result["pct_otm"])
+                    high_52w_by_symbol[symbol] = float(result["high_52w"])
                     trend_by_symbol[symbol] = str(result["trend"])
                     active_symbols.append(symbol)
                 else:
@@ -1234,6 +1585,7 @@ def build_report(
     covered_calls = []
     cash_secured_puts = []
     portfolio_rows = []
+    pmcc_rows: List[PmccRow] = []
     covered_call_expirations: Dict[str, date] = {}
     cash_secured_put_expirations: Dict[str, date] = {}
     portfolio_expirations: Dict[str, date] = {}
@@ -1279,6 +1631,94 @@ def build_report(
         if batch_pause_seconds > 0 and batch_index < len(active_batches) - 1:
             time.sleep(batch_pause_seconds)
 
+    pmcc_short_expiration = nearest_weekly_expiration(today, expiration_override)
+
+    def build_pmcc_symbol(symbol: str) -> Optional[PmccRow]:
+        price = latest_prices.get(symbol)
+        pct_otm = pct_otm_by_symbol.get(symbol)
+        high_52w = high_52w_by_symbol.get(symbol)
+        if price is None or pct_otm is None or high_52w is None or high_52w <= 0:
+            return None
+        weekly_move_pct = pct_otm * 100.0
+        below_52w_high_pct = ((price - high_52w) / high_52w) * 100.0
+        if price < 50 or price > 700:
+            return None
+        if weekly_move_pct <= 0 or weekly_move_pct > 8:
+            return None
+        if below_52w_high_pct > 0 or below_52w_high_pct < -45:
+            return None
+        try:
+            leaps_expiration, leaps_snapshot = choose_leaps_contract(symbol, price, today, api_key, api_secret)
+            short_snapshot = choose_pmcc_short_call(
+                symbol,
+                price,
+                pct_otm,
+                pmcc_short_expiration,
+                api_key,
+                api_secret,
+            )
+            leaps_strike = option_snapshot_strike(leaps_snapshot)
+            leaps_delta = option_snapshot_delta(leaps_snapshot)
+            leaps_price = option_snapshot_price(leaps_snapshot)
+            short_strike = option_snapshot_strike(short_snapshot)
+            short_delta = option_snapshot_delta(short_snapshot)
+            short_price = option_snapshot_price(short_snapshot)
+            if (
+                leaps_strike is None
+                or leaps_delta is None
+                or leaps_price is None
+                or short_strike is None
+            ):
+                return None
+            score = pmcc_score(price, pct_otm, below_52w_high_pct, short_price)
+            return PmccRow(
+                stock=symbol,
+                price=price,
+                pct_otm=pct_otm,
+                below_52w_high_pct=below_52w_high_pct,
+                leaps_expiration=leaps_expiration,
+                leaps_strike=leaps_strike,
+                leaps_delta=abs(leaps_delta),
+                leaps_price=leaps_price,
+                short_call_expiration=pmcc_short_expiration,
+                short_call_strike=short_strike,
+                short_call_delta=abs(short_delta) if short_delta is not None else None,
+                short_call_price=short_price,
+                score=score,
+            )
+        except Exception:
+            return None
+
+    preliminary_pmcc_symbols = sorted(
+        active_symbols,
+        key=lambda symbol: (
+            -pmcc_score(
+                latest_prices.get(symbol, 0.0),
+                pct_otm_by_symbol.get(symbol, 0.0),
+                ((latest_prices.get(symbol, 0.0) - high_52w_by_symbol.get(symbol, 1.0)) / high_52w_by_symbol.get(symbol, 1.0)) * 100.0
+                if high_52w_by_symbol.get(symbol, 0.0) > 0
+                else -100.0,
+                1.0,
+            ),
+            symbol,
+        ),
+    )[:20]
+
+    pmcc_batches = batched_symbols(preliminary_pmcc_symbols)
+    for batch_index, symbol_batch in enumerate(pmcc_batches):
+        max_workers = min(len(symbol_batch), 4) or 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(build_pmcc_symbol, symbol) for symbol in symbol_batch]
+            for future in concurrent.futures.as_completed(futures):
+                row = future.result()
+                if row is not None:
+                    pmcc_rows.append(row)
+        if batch_pause_seconds > 0 and batch_index < len(pmcc_batches) - 1:
+            time.sleep(batch_pause_seconds)
+
+    pmcc_rows.sort(key=lambda row: (row.score, row.short_call_price or 0.0), reverse=True)
+    pmcc_rows = pmcc_rows[:10]
+
     portfolio_tickers = load_my_portfolio_tickers()
     def build_portfolio_symbol(symbol: str) -> Optional[Tuple[str, OptionRow, date]]:
         if symbol not in latest_prices:
@@ -1323,6 +1763,7 @@ def build_report(
         render_portfolio_table(portfolio_rows, portfolio_label),
         render_table("Covered Calls", covered_calls, covered_call_label),
         render_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label),
+        render_pmcc_table(pmcc_rows),
     ]
     if excluded_rows:
         parts.extend(["", render_excluded_table(excluded_rows)])
@@ -1360,6 +1801,11 @@ def build_report(
             "expiration": cash_secured_put_label,
             "rows": [option_row_to_dict(row) for row in sorted_sell_rows(cash_secured_puts)],
         },
+        "pmccCandidates": {
+            "title": "PMCC Candidates",
+            "weeklyExpiration": display_expiration(pmcc_short_expiration),
+            "rows": [pmcc_row_to_dict(row) for row in pmcc_rows],
+        },
         "earningsThisWeek": {
             "title": "Earnings this Week",
             "rows": [excluded_row_to_dict(row) for row in filtered_excluded_rows],
@@ -1383,6 +1829,7 @@ def build_report(
         covered_call_label=covered_call_label,
         cash_secured_puts=cash_secured_puts,
         cash_secured_put_label=cash_secured_put_label,
+        pmcc_rows=pmcc_rows,
         skipped=skipped,
     )
     return markdown_report, html_report, snapshot
