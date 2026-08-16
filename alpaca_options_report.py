@@ -841,7 +841,7 @@ def pmcc_score(price: float, pct_otm: float, below_52w_high_pct: float, short_ca
     weekly_move_pct = pct_otm * 100.0
     if 2 <= weekly_move_pct <= 5:
         score += 20
-    elif 5 < weekly_move_pct <= 8:
+    elif 5 < weekly_move_pct <= 10:
         score += 12
     elif 0 < weekly_move_pct < 2:
         score += 8
@@ -1684,7 +1684,7 @@ def build_report(
         below_52w_high_pct = ((price - high_52w) / high_52w) * 100.0
         if price < 50 or price > 700:
             return None
-        if weekly_move_pct <= 0 or weekly_move_pct > 8:
+        if weekly_move_pct <= 0 or weekly_move_pct > 10:
             return None
         if below_52w_high_pct > 0 or below_52w_high_pct < -45:
             return None
