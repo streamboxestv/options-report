@@ -305,6 +305,7 @@ function renderDashboard() {
     [
       { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
       { key: "earningsDateText", label: "Earnings Date" },
+      { key: "expectedMovePctText", label: "Expected % Move", numeric: true, render: (row) => escapeHtml(row.expectedMovePctText || "N/A") },
     ],
     snapshot.earningsThisWeek?.rows || [],
   );

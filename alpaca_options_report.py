@@ -205,6 +205,7 @@ class ExcludedTickerRow:
     options_label: str
     premium: Optional[float]
     roi: Optional[float]
+    expected_move_pct: Optional[float] = None
 
 
 @dataclass
@@ -674,6 +675,42 @@ def option_snapshot_spread(snapshot: Dict) -> float:
     return max(0.0, float(ask) - float(bid))
 
 
+def expected_earnings_move_pct(
+    symbol: str,
+    price: float,
+    expiration_date: date,
+    api_key: str,
+    api_secret: str,
+) -> Optional[float]:
+    if price <= 0:
+        return None
+
+    calls = paged_option_chain(symbol, expiration_date, "call", api_key, api_secret)
+    puts = paged_option_chain(symbol, expiration_date, "put", api_key, api_secret)
+    call_by_strike: Dict[float, float] = {}
+    put_by_strike: Dict[float, float] = {}
+
+    for snapshot in calls:
+        strike = option_snapshot_strike(snapshot)
+        option_price = option_snapshot_price(snapshot)
+        if strike is not None and option_price is not None:
+            call_by_strike[strike] = option_price
+
+    for snapshot in puts:
+        strike = option_snapshot_strike(snapshot)
+        option_price = option_snapshot_price(snapshot)
+        if strike is not None and option_price is not None:
+            put_by_strike[strike] = option_price
+
+    shared_strikes = set(call_by_strike).intersection(put_by_strike)
+    if not shared_strikes:
+        return None
+
+    atm_strike = min(shared_strikes, key=lambda strike: abs(strike - price))
+    straddle_price = call_by_strike[atm_strike] + put_by_strike[atm_strike]
+    return (straddle_price / price) * 100.0 if straddle_price > 0 else None
+
+
 def nearest_weekly_expiration(today: date, expiration_override: Optional[date]) -> date:
     return expiration_override or fridays_from(today, 1)[0]
 
@@ -861,6 +898,8 @@ def excluded_row_to_dict(row: ExcludedTickerRow) -> Dict[str, object]:
         "priceText": format_money(row.price) if row.price is not None else "N/A",
         "earningsDate": row.earnings_date.isoformat() if row.earnings_date else None,
         "earningsDateText": f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
+        "expectedMovePct": row.expected_move_pct,
+        "expectedMovePctText": f"{row.expected_move_pct:.2f}%" if row.expected_move_pct is not None else "N/A",
         "action": row.options_label,
         "premium": row.premium,
         "premiumText": format_money(row.premium) if row.premium is not None else "N/A",
@@ -1240,38 +1279,33 @@ def render_portfolio_html_table(rows: List[OptionRow], expiration_label: str) ->
 
 
 def render_excluded_table(rows: List[ExcludedTickerRow]) -> str:
-    filtered_rows = [row for row in rows if row.roi is not None and row.roi >= 2.0]
+    filtered_rows = [row for row in rows if row.earnings_date is not None]
     lines = ["## Earnings this Week", ""]
     if not filtered_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        table_rows = [["None", "N/A", "N/A"]]
         lines.append("")
     else:
         sorted_rows = sorted(
             filtered_rows,
             key=lambda row: (
-                row.roi if row.roi is not None else -1.0,
+                row.earnings_date or date.max,
                 row.stock,
             ),
-            reverse=True,
         )
         table_rows = []
         for row in sorted_rows:
             earnings_text = f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A"
-            premium_text = format_money(row.premium) if row.premium is not None else "N/A"
-            roi_text = f"{row.roi:.2f}%" if row.roi is not None else "N/A"
+            expected_move_text = f"{row.expected_move_pct:.2f}%" if row.expected_move_pct is not None else "N/A"
             table_rows.append([
                 row.stock,
-                format_money(row.price) if row.price is not None else "N/A",
                 earnings_text,
-                row.options_label,
-                premium_text,
-                roi_text,
+                expected_move_text,
             ])
     lines.append(
         render_markdown_table(
-            ["Ticker", "Price", "Earnings Date", "Action", "Premium", "ROI %"],
+            ["Ticker", "Earnings Date", "Expected % Move"],
             table_rows,
-            ["left", "right", "left", "left", "right", "right"],
+            ["left", "left", "right"],
         )
     )
     lines.append("")
@@ -1522,6 +1556,13 @@ def build_report(
             high_52w = max(float(bar["h"]) for bar in bars[-52:] if bar.get("h") is not None)
             trend = wavetrend_last_signal(bars)
             if earnings_in_report_week(earnings_date, report_start, report_expiration):
+                expected_move = expected_earnings_move_pct(
+                    symbol,
+                    latest_prices[symbol],
+                    report_expiration,
+                    api_key,
+                    api_secret,
+                )
                 best_options_label = "N/A"
                 best_premium: Optional[float] = None
                 best_roi: Optional[float] = None
@@ -1545,7 +1586,7 @@ def build_report(
                     "status": "excluded",
                     "symbol": symbol,
                     "skip_message": f"{symbol}: earnings during report week ({earnings_date.isoformat()})",
-                    "excluded_row": ExcludedTickerRow(symbol, latest_prices[symbol], earnings_date, best_options_label, best_premium, best_roi),
+                    "excluded_row": ExcludedTickerRow(symbol, latest_prices[symbol], earnings_date, best_options_label, best_premium, best_roi, expected_move),
                 }
             return {
                 "status": "active",
@@ -1772,9 +1813,8 @@ def build_report(
     markdown_report = "\n".join(parts)
     best_balance, aggressive = build_recommendation_groups(covered_calls, cash_secured_puts)
     filtered_excluded_rows = sorted(
-        [row for row in excluded_rows if row.roi is not None and row.roi >= 2.0],
-        key=lambda row: (row.roi if row.roi is not None else -1.0, row.stock),
-        reverse=True,
+        [row for row in excluded_rows if row.earnings_date is not None],
+        key=lambda row: (row.earnings_date or date.max, row.stock),
     )
     snapshot = {
         "reportTitle": report_title,

@@ -188,6 +188,8 @@ def include_all_earnings_skips(snapshot: Dict[str, object]) -> None:
             "priceText": "N/A",
             "earningsDate": earnings_iso,
             "earningsDateText": earnings_date_text(earnings_iso),
+            "expectedMovePct": None,
+            "expectedMovePctText": "N/A",
             "action": "Earnings this week",
             "premium": None,
             "premiumText": "N/A",
