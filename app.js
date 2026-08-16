@@ -292,7 +292,12 @@ function renderDashboard() {
       { key: "weeklyCallPremiumText", label: "Weekly Call Premium", numeric: true },
       { key: "scoreText", label: "Score", numeric: true, render: (row) => `<span class="score-pill">${escapeHtml(row.scoreText)}</span>` },
     ],
-    snapshot.pmccCandidates?.rows || [],
+    [...(snapshot.pmccCandidates?.rows || [])].sort(
+      (left, right) =>
+        (right.score || 0) - (left.score || 0)
+        || (right.weeklyCallPremium || 0) - (left.weeklyCallPremium || 0)
+        || String(left.ticker || "").localeCompare(String(right.ticker || "")),
+    ),
   );
 
   renderTable(
