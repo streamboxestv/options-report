@@ -1076,11 +1076,11 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
     lines = ["## PMCC Candidates", ""]
     sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
     if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
     else:
         table_rows = []
         for row in sorted_rows:
-            stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
+            _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
             table_rows.append([
                 row.stock,
                 format_money(row.price),
@@ -1092,7 +1092,6 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 format_money(row.leaps_price * 100.0),
                 format_money(row.short_call_strike),
                 format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
-                f"{stock_yield_pct:.2f}%" if stock_yield_pct is not None else "N/A",
                 f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
                 str(row.score),
             ])
@@ -1109,12 +1108,11 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 "LEAPS Cost",
                 "Weekly Call Strike",
                 "Weekly Call Premium",
-                "Prem / Stock",
-                "Prem / LEAPS",
+                "ROI %",
                 "Score",
             ],
             table_rows,
-            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right", "right", "right"],
+            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right", "right"],
         )
     )
     lines.append("")
@@ -1198,13 +1196,13 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         table_rows.append(
             "<tr>"
             '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="12">No PMCC candidates</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="11">No PMCC candidates</td>'
             "</tr>"
         )
     else:
         for row in sorted_rows:
             short_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
-            stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
+            _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
             table_rows.append(
                 "<tr>"
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
@@ -1217,7 +1215,6 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.leaps_price * 100.0))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.short_call_strike))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(short_premium)}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{stock_yield_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{leaps_yield_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#111827;">{row.score}</td>'
                 "</tr>"
@@ -1242,8 +1239,7 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Cost</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Strike</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Premium</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Prem / Stock</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Prem / LEAPS</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">ROI %</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
         "</tr>"
         "</thead>"
