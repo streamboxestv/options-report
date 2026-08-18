@@ -163,13 +163,46 @@ def earnings_date_text(earnings_iso: str) -> str:
     return f"{earnings_date.month}/{earnings_date.day}"
 
 
+def snapshot_report_window(snapshot: Dict[str, object]) -> Tuple[Optional[date], Optional[date]]:
+    report_date_iso = str(snapshot.get("reportDateIso") or "")
+    try:
+        report_start = date.fromisoformat(report_date_iso)
+    except ValueError:
+        return None, None
+
+    expiration_text = str(snapshot.get("expiration") or "")
+    match = re.match(r"^(\d{1,2})/(\d{1,2})(?:/(\d{4}))?$", expiration_text)
+    if not match:
+        return report_start, None
+
+    month = int(match.group(1))
+    day = int(match.group(2))
+    year = int(match.group(3)) if match.group(3) else report_start.year
+    expiration = date(year, month, day)
+    if expiration < report_start:
+        expiration = date(year + 1, month, day)
+    return report_start, expiration
+
+
+def earnings_row_in_report_week(row: Dict[str, object], report_start: Optional[date], expiration: Optional[date]) -> bool:
+    if report_start is None or expiration is None:
+        return True
+    earnings_iso = str(row.get("earningsDate") or "")
+    try:
+        earnings_date = date.fromisoformat(earnings_iso)
+    except ValueError:
+        return False
+    return report_start <= earnings_date <= expiration
+
+
 def include_all_earnings_skips(snapshot: Dict[str, object]) -> None:
     earnings = snapshot.get("earningsThisWeek") if isinstance(snapshot.get("earningsThisWeek"), dict) else {}
     existing_rows = earnings.get("rows") if isinstance(earnings.get("rows"), list) else []
+    report_start, report_expiration = snapshot_report_window(snapshot)
     rows_by_ticker = {
         str(row.get("ticker")): row
         for row in existing_rows
-        if isinstance(row, dict) and row.get("ticker")
+        if isinstance(row, dict) and row.get("ticker") and earnings_row_in_report_week(row, report_start, report_expiration)
     }
 
     skipped = snapshot.get("skippedTickers") if isinstance(snapshot.get("skippedTickers"), list) else []
@@ -182,6 +215,8 @@ def include_all_earnings_skips(snapshot: Dict[str, object]) -> None:
         if not ticker or not match or ticker in rows_by_ticker:
             continue
         earnings_iso = match.group(1)
+        if not earnings_row_in_report_week({"earningsDate": earnings_iso}, report_start, report_expiration):
+            continue
         rows_by_ticker[ticker] = {
             "ticker": ticker,
             "price": None,

@@ -123,7 +123,10 @@ function renderTable(targetId, columns, rows) {
   const headerHtml = `
     <thead>
       <tr>
-        ${columns.map((column) => `<th class="${column.numeric ? "num" : ""}">${escapeHtml(column.label)}</th>`).join("")}
+        ${columns.map((column) => {
+          const classes = [column.numeric ? "num" : "", column.align === "center" ? "center" : ""].filter(Boolean).join(" ");
+          return `<th class="${classes}">${escapeHtml(column.label)}</th>`;
+        }).join("")}
       </tr>
     </thead>
   `;
@@ -133,7 +136,8 @@ function renderTable(targetId, columns, rows) {
       <tr>
         ${columns.map((column) => {
           const value = typeof column.render === "function" ? column.render(row) : escapeHtml(row[column.key] ?? "");
-          return `<td class="${column.numeric ? "num" : ""}">${value}</td>`;
+          const classes = [column.numeric ? "num" : "", column.align === "center" ? "center" : ""].filter(Boolean).join(" ");
+          return `<td class="${classes}">${value}</td>`;
         }).join("")}
       </tr>
     `).join("")
@@ -306,7 +310,7 @@ function renderDashboard() {
     "earnings-table",
     [
       { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
-      { key: "earningsDateText", label: "Earnings Date" },
+      { key: "earningsDateText", label: "Earnings Date", align: "center" },
       { key: "expectedMovePctText", label: "Expected % Move", numeric: true, render: (row) => escapeHtml(row.expectedMovePctText || "N/A") },
     ],
     snapshot.earningsThisWeek?.rows || [],

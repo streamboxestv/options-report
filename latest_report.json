@@ -443,20 +443,6 @@
     "title": "Earnings this Week",
     "rows": [
       {
-        "ticker": "SKHY",
-        "price": 172.335,
-        "priceText": "$172.34",
-        "earningsDate": "2026-07-29",
-        "earningsDateText": "7/29",
-        "expectedMovePct": null,
-        "expectedMovePctText": "N/A",
-        "action": "N/A",
-        "premium": null,
-        "premiumText": "N/A",
-        "roiPct": null,
-        "roiPctText": "N/A"
-      },
-      {
         "ticker": "BULL",
         "price": 8.215,
         "priceText": "$8.21",

@@ -49,7 +49,6 @@
 
 | Ticker | Earnings Date | Expected % Move |
 | ------ | ------------- | --------------: |
-| SKHY   | 7/29          |             N/A |
 | BULL   | 8/19          |           9.01% |
 | BABA   | 8/20          |           7.11% |
 
