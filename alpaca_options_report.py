@@ -870,6 +870,8 @@ def pmcc_score(
         score += 20
     elif 5 < weekly_move_pct <= 10:
         score += 12
+    elif weekly_move_pct > 10:
+        score += 6
     elif 0 < weekly_move_pct < 2:
         score += 8
 
@@ -1739,7 +1741,7 @@ def build_report(
         below_52w_high_pct = ((price - high_52w) / high_52w) * 100.0
         if price < 50 or price > 700:
             return None
-        if weekly_move_pct <= 0 or weekly_move_pct > 10:
+        if weekly_move_pct <= 0:
             return None
         if below_52w_high_pct > 0 or below_52w_high_pct < -45:
             return None
