@@ -499,6 +499,10 @@ def display_expiration(expiration_date: date) -> str:
     return f"{expiration_date.month}/{expiration_date.day}"
 
 
+def display_expiration_with_year(expiration_date: date) -> str:
+    return f"{expiration_date.month}/{expiration_date.day}/{expiration_date.year}"
+
+
 def paged_option_chain(
     symbol: str,
     expiration_date: date,
@@ -871,7 +875,7 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "avgWeeklyMovePct": row.pct_otm * 100.0,
         "avgWeeklyMovePctText": f"{row.pct_otm * 100:.2f}%",
         "leapsExpiration": row.leaps_expiration.isoformat(),
-        "leapsExpirationText": display_expiration(row.leaps_expiration),
+        "leapsExpirationText": display_expiration_with_year(row.leaps_expiration),
         "leapsStrike": row.leaps_strike,
         "leapsStrikeText": format_money(row.leaps_strike),
         "leapsDelta": row.leaps_delta,
@@ -879,7 +883,7 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "leapsCost": row.leaps_price * 100.0,
         "leapsCostText": format_money(row.leaps_price * 100.0),
         "weeklyCallExpiration": row.short_call_expiration.isoformat(),
-        "weeklyCallExpirationText": display_expiration(row.short_call_expiration),
+        "weeklyCallExpirationText": display_expiration_with_year(row.short_call_expiration),
         "weeklyCallStrike": row.short_call_strike,
         "weeklyCallStrikeText": format_money(row.short_call_strike),
         "weeklyCallDelta": row.short_call_delta,
@@ -1038,7 +1042,7 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 format_money(row.price),
                 f"{row.below_52w_high_pct:.2f}%",
                 f"{row.pct_otm * 100:.2f}%",
-                display_expiration(row.leaps_expiration),
+                display_expiration_with_year(row.leaps_expiration),
                 format_money(row.leaps_strike),
                 f"{row.leaps_delta:.2f}",
                 format_money(row.leaps_price * 100.0),
@@ -1158,7 +1162,7 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.price))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.below_52w_high_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.pct_otm * 100:.2f}%</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(display_expiration(row.leaps_expiration))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(display_expiration_with_year(row.leaps_expiration))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.leaps_strike))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.leaps_delta:.2f}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.leaps_price * 100.0))}</td>'
@@ -1843,7 +1847,7 @@ def build_report(
         },
         "pmccCandidates": {
             "title": "PMCC Candidates",
-            "weeklyExpiration": display_expiration(pmcc_short_expiration),
+            "weeklyExpiration": display_expiration_with_year(pmcc_short_expiration),
             "rows": [pmcc_row_to_dict(row) for row in pmcc_rows],
         },
         "earningsThisWeek": {
