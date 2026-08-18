@@ -290,6 +290,8 @@ function renderDashboard() {
       { key: "leapsCostText", label: "LEAPS Cost", numeric: true },
       { key: "weeklyCallStrikeText", label: "Weekly Call Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.weeklyCallStrikeText)}</span>` },
       { key: "weeklyCallPremiumText", label: "Weekly Call Premium", numeric: true },
+      { key: "weeklyPremiumStockYieldPctText", label: "Prem / Stock", numeric: true, render: (row) => escapeHtml(row.weeklyPremiumStockYieldPctText || "N/A") },
+      { key: "weeklyPremiumLeapsYieldPctText", label: "Prem / LEAPS", numeric: true, render: (row) => escapeHtml(row.weeklyPremiumLeapsYieldPctText || "N/A") },
       { key: "scoreText", label: "Score", numeric: true, render: (row) => `<span class="score-pill">${escapeHtml(row.scoreText)}</span>` },
     ],
     [...(snapshot.pmccCandidates?.rows || [])].sort(

@@ -804,7 +804,7 @@ def choose_pmcc_short_call(
         delta = option_snapshot_delta(snapshot)
         option_price = option_snapshot_price(snapshot)
         abs_delta = abs(delta) if delta is not None else math.inf
-        if abs_delta < 0.05 or abs_delta > 0.30:
+        if option_price is None or abs_delta < 0.20 or abs_delta > 0.30:
             continue
         parsed.append(
             {
@@ -812,8 +812,7 @@ def choose_pmcc_short_call(
                 "strike": strike,
                 "delta": abs_delta if math.isfinite(abs_delta) else None,
                 "price": option_price,
-                "has_price": option_price is not None,
-                "delta_distance": abs(abs_delta - 0.20) if math.isfinite(abs_delta) else math.inf,
+                "delta_distance": abs(abs_delta - 0.28) if math.isfinite(abs_delta) else math.inf,
                 "strike_distance": abs(strike - min_strike),
                 "open_interest": option_snapshot_open_interest(snapshot),
                 "spread": option_snapshot_spread(snapshot),
@@ -825,8 +824,8 @@ def choose_pmcc_short_call(
 
     parsed.sort(
         key=lambda item: (
-            0 if item["has_price"] else 1,
             item["delta_distance"],
+            -item["price"],
             item["strike_distance"],
             item["spread"],
             -item["open_interest"],
@@ -835,7 +834,31 @@ def choose_pmcc_short_call(
     return parsed[0]["snapshot"]
 
 
-def pmcc_score(price: float, pct_otm: float, below_52w_high_pct: float, short_call_price: Optional[float]) -> int:
+def pmcc_premium_yields(price: float, leaps_price: Optional[float], short_call_price: Optional[float]) -> Tuple[Optional[float], Optional[float]]:
+    if short_call_price is None or short_call_price <= 0 or price <= 0:
+        return None, None
+    stock_yield_pct = (short_call_price / price) * 100.0
+    leaps_yield_pct = (short_call_price / leaps_price) * 100.0 if leaps_price is not None and leaps_price > 0 else None
+    return stock_yield_pct, leaps_yield_pct
+
+
+def pmcc_meets_premium_floor(price: float, leaps_price: Optional[float], short_call_price: Optional[float]) -> bool:
+    stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(price, leaps_price, short_call_price)
+    return (
+        stock_yield_pct is not None
+        and leaps_yield_pct is not None
+        and stock_yield_pct >= 0.35
+        and leaps_yield_pct >= 1.0
+    )
+
+
+def pmcc_score(
+    price: float,
+    pct_otm: float,
+    below_52w_high_pct: float,
+    short_call_price: Optional[float],
+    leaps_price: Optional[float] = None,
+) -> int:
     score = 0
     if 75 <= price <= 500:
         score += 10
@@ -857,15 +880,29 @@ def pmcc_score(price: float, pct_otm: float, below_52w_high_pct: float, short_ca
     elif -10 < below_52w_high_pct <= 0:
         score += 8
 
-    score += 15
-    score += 15
     score += 10
-    if short_call_price is not None and short_call_price > 0:
+    score += 10
+    score += 10
+
+    stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(price, leaps_price, short_call_price)
+    if stock_yield_pct is not None and stock_yield_pct >= 0.75:
         score += 10
+    elif stock_yield_pct is not None and stock_yield_pct >= 0.50:
+        score += 7
+    elif stock_yield_pct is not None and stock_yield_pct >= 0.35:
+        score += 4
+
+    if leaps_yield_pct is not None and leaps_yield_pct >= 2.0:
+        score += 10
+    elif leaps_yield_pct is not None and leaps_yield_pct >= 1.5:
+        score += 7
+    elif leaps_yield_pct is not None and leaps_yield_pct >= 1.0:
+        score += 4
     return min(score, 100)
 
 
 def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
+    stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
     return {
         "ticker": row.stock,
         "price": row.price,
@@ -890,6 +927,10 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "weeklyCallDeltaText": f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A",
         "weeklyCallPremium": row.short_call_price * 100.0 if row.short_call_price is not None else None,
         "weeklyCallPremiumText": format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+        "weeklyPremiumStockYieldPct": stock_yield_pct,
+        "weeklyPremiumStockYieldPctText": f"{stock_yield_pct:.2f}%" if stock_yield_pct is not None else "N/A",
+        "weeklyPremiumLeapsYieldPct": leaps_yield_pct,
+        "weeklyPremiumLeapsYieldPctText": f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
         "score": row.score,
         "scoreText": f"{row.score}",
     }
@@ -1033,10 +1074,11 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
     lines = ["## PMCC Candidates", ""]
     sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
     if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
     else:
         table_rows = []
         for row in sorted_rows:
+            stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
             table_rows.append([
                 row.stock,
                 format_money(row.price),
@@ -1048,6 +1090,8 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 format_money(row.leaps_price * 100.0),
                 format_money(row.short_call_strike),
                 format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+                f"{stock_yield_pct:.2f}%" if stock_yield_pct is not None else "N/A",
+                f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
                 str(row.score),
             ])
     lines.append(
@@ -1063,10 +1107,12 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 "LEAPS Cost",
                 "Weekly Call Strike",
                 "Weekly Call Premium",
+                "Prem / Stock",
+                "Prem / LEAPS",
                 "Score",
             ],
             table_rows,
-            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right"],
+            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right", "right", "right"],
         )
     )
     lines.append("")
@@ -1150,12 +1196,13 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         table_rows.append(
             "<tr>"
             '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="10">No PMCC candidates</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="12">No PMCC candidates</td>'
             "</tr>"
         )
     else:
         for row in sorted_rows:
             short_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
+            stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
             table_rows.append(
                 "<tr>"
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
@@ -1168,6 +1215,8 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.leaps_price * 100.0))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.short_call_strike))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(short_premium)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{stock_yield_pct:.2f}%</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{leaps_yield_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#111827;">{row.score}</td>'
                 "</tr>"
             )
@@ -1191,6 +1240,8 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Cost</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Strike</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Premium</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Prem / Stock</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Prem / LEAPS</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
         "</tr>"
         "</thead>"
@@ -1715,7 +1766,9 @@ def build_report(
                 or short_strike is None
             ):
                 return None
-            score = pmcc_score(price, pct_otm, below_52w_high_pct, short_price)
+            if not pmcc_meets_premium_floor(price, leaps_price, short_price):
+                return None
+            score = pmcc_score(price, pct_otm, below_52w_high_pct, short_price, leaps_price)
             return PmccRow(
                 stock=symbol,
                 price=price,
@@ -1747,7 +1800,7 @@ def build_report(
             ),
             symbol,
         ),
-    )[:20]
+    )[:30]
 
     pmcc_batches = batched_symbols(preliminary_pmcc_symbols)
     for batch_index, symbol_batch in enumerate(pmcc_batches):
