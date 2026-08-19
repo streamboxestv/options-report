@@ -1,34 +1,36 @@
-# Options Report - 8/18
+# Options Report - 8/19
 
 ## My Portfolio Report - Expiration 8/21
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | ------: | ----------------: | ------------------: | ----------: |
-| LITE      | $885.76 |            18.61% |           $1,050.00 |     $183.00 |
-| MU        | $940.96 |            14.82% |           $1,080.00 |     $107.00 |
-| NBIS      | $256.41 |            20.43% |             $310.00 |      $65.00 |
-| AMD       | $477.87 |            12.58% |             $537.50 |      $46.00 |
-| BE        | $208.60 |            23.24% |             $257.50 |      $29.00 |
-| CRWD      | $209.89 |             9.78% |             $230.00 |      $27.00 |
-| AVGO      | $378.57 |             9.54% |             $415.00 |      $19.00 |
-| NVDA      | $219.04 |             7.69% |             $235.00 |      $13.00 |
-| RKLB      |  $78.24 |            18.96% |              $92.00 |      $13.00 |
-| PLTR      | $171.54 |            11.55% |             $192.50 |      $11.00 |
-| IONQ      |  $44.67 |            19.16% |              $53.00 |       $8.00 |
-| ASTS      |  $66.50 |            21.13% |              $81.00 |       $6.00 |
-| **Total** |         |                   |                     | **$527.00** |
+| MU        | $924.61 |            14.88% |           $1,060.00 |      $55.00 |
+| LITE      | $837.88 |            18.76% |           $1,000.00 |      $35.00 |
+| NBIS      | $216.84 |            20.84% |             $262.50 |      $26.00 |
+| CRWD      | $198.98 |             9.90% |             $217.50 |      $22.00 |
+| AMD       | $465.42 |            12.65% |             $525.00 |      $17.00 |
+| BE        | $200.78 |            23.33% |             $247.50 |      $17.00 |
+| AVGO      | $359.75 |             9.64% |             $395.00 |      $13.00 |
+| ASTS      |  $64.72 |            21.20% |              $78.00 |       $8.00 |
+| NVDA      | $217.26 |             7.71% |             $235.00 |       $7.00 |
+| RKLB      |  $74.78 |            19.05% |              $89.00 |       $6.00 |
+| PLTR      | $172.34 |            11.56% |             $192.50 |       $5.00 |
+| IONQ      |  $42.64 |            19.23% |              $51.00 |       $3.00 |
+| **Total** |         |                   |                     | **$214.00** |
 
 ## Covered Calls - Expiration 8/21
 
-| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
-| MCHP   | $75.85 | Sell  |             9.78% |     $83.00 |  $84.00 | 1.11% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| OUST   |  $39.82 | Sell  |            21.60% |     $48.50 |  $78.00 | 1.96% |
+| FIGR   |  $35.76 | Buy   |            20.15% |     $43.00 |  $47.00 | 1.31% |
+| MDB    | $425.88 | Buy   |            12.25% |    $477.50 | $426.00 | 1.00% |
 
 ## Cash Secured Puts - Expiration 8/21
 
-| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
-| AMBA   | $74.81 | Sell  |            13.90% |     $64.00 |  $75.00 | 1.00% |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| ROKU   | $157.28 | Buy   |             8.81% |    $143.00 | $175.00 | 1.11% |
 
 ## PMCC Candidates
 
@@ -42,18 +44,19 @@
 | Ticker | Earnings Date | Expected % Move |
 | ------ | ------------- | --------------: |
 | SKHY   | 7/29          |             N/A |
-| BULL   | 8/19          |           8.92% |
+| BULL   | 8/19          |           8.41% |
 | BABA   | 8/20          |           6.55% |
 
 
 ## Team Review
 
 **Best Balance**
-- Covered Call: `MCHP` | price `$75.85` | avg weekly move `9.78%` | OTM strike `$83.00` | premium `$84.00` | ROI `1.11%`
-- Cash Secured Put: `AMBA` | price `$74.81` | avg weekly move `13.90%` | OTM strike `$64.00` | premium `$75.00` | ROI `1.00%`
+- Cash Secured Put: `ROKU` | price `$157.28` | avg weekly move `8.81%` | OTM strike `$143.00` | premium `$175.00` | ROI `1.11%`
+- Covered Call: `MDB` | price `$425.88` | avg weekly move `12.25%` | OTM strike `$477.50` | premium `$426.00` | ROI `1.00%`
+- Covered Call: `FIGR` | price `$35.76` | avg weekly move `20.15%` | OTM strike `$43.00` | premium `$47.00` | ROI `1.31%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- None beyond the best-balance group.
+- Covered Call: `OUST` | price `$39.82` | avg weekly move `21.60%` | OTM strike `$48.50` | premium `$78.00` | ROI `1.96%`
 
