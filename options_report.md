@@ -1,41 +1,38 @@
-# Options Report - 8/20
+# Options Report - 8/21
 
 ## My Portfolio Report - Expiration 8/21
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium    |
 | --------- | ------: | ----------------: | ------------------: | ---------: |
-| LITE      | $860.96 |            18.77% |           $1,020.00 |     $33.00 |
-| MU        | $953.76 |            14.88% |           $1,100.00 |     $10.00 |
-| NBIS      | $216.31 |            20.86% |             $262.50 |      $7.00 |
-| CRWD      | $195.12 |             9.94% |             $215.00 |      $5.00 |
-| AMD       | $465.80 |            12.65% |             $525.00 |      $4.00 |
-| IONQ      |  $40.91 |            19.30% |              $49.00 |      $3.00 |
-| AVGO      | $365.89 |             9.64% |             $400.00 |      $3.00 |
-| RKLB      |  $73.53 |            19.08% |              $88.00 |      $3.00 |
-| ASTS      |  $64.48 |            21.20% |              $78.00 |      $2.00 |
-| NVDA      | $217.56 |             7.71% |             $235.00 |      $2.00 |
-| PLTR      | $175.31 |            11.57% |             $195.00 |      $2.00 |
-| BE        | $202.09 |            23.34% |             $250.00 |      $2.00 |
-| **Total** |         |                   |                     | **$76.00** |
+| LITE      | $874.02 |            18.77% |           $1,040.00 |      $8.00 |
+| NBIS      | $221.74 |            20.85% |             $267.50 |      $4.00 |
+| AVGO      | $369.01 |             9.64% |             $405.00 |      $3.00 |
+| MU        | $966.49 |            14.87% |           $1,110.00 |      $2.00 |
+| ASTS      |  $66.19 |            21.22% |              $80.00 |      $1.00 |
+| NVDA      | $215.07 |             7.73% |             $232.50 |      $1.00 |
+| CRWD      | $189.66 |            10.02% |             $207.50 |      $1.00 |
+| IONQ      |  $43.91 |            19.30% |              $52.00 |      $1.00 |
+| AMD       | $466.90 |            12.66% |             $525.00 |      $1.00 |
+| PLTR      | $174.31 |            11.57% |             $195.00 |      $1.00 |
+| RKLB      |  $72.44 |            19.13% |              $86.00 |      $1.00 |
+| BE        | $200.74 |            23.36% |             $247.50 |      $1.00 |
+| **Total** |         |                   |                     | **$25.00** |
 
 ## Covered Calls - Expiration 8/21
 
-
-| Ticker | Price | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | ----: | ----- | ----------------: | ---------: | ------: | ----: |
-| None   |   N/A | N/A   |               N/A |        N/A |     N/A |   N/A |
+| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
+| FIGR   |  $39.20 | Buy   |            20.28% |     $47.00 |  $73.00 | 1.86% |
+| ROKU   | $157.97 | Buy   |             8.82% |    $172.50 | $211.00 | 1.34% |
+| MDB    | $424.36 | Buy   |            12.29% |    $477.50 | $428.00 | 1.01% |
 
 ## Cash Secured Puts - Expiration 8/21
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| AMBA   |  $73.21 | Sell  |            13.97% |     $63.00 | $285.00 | 3.89% |
-| GNRC   | $207.80 | Sell  |            10.02% |    $187.50 | $710.00 | 3.42% |
-| HUT    |  $86.25 | Sell  |            20.75% |     $68.00 | $210.00 | 2.43% |
-| IOT    |  $39.28 | Sell  |            12.00% |     $34.50 |  $80.00 | 2.04% |
-| BROS   |  $49.08 | Sell  |            10.49% |     $44.00 |  $77.00 | 1.57% |
-| ROKU   | $157.28 | Buy   |             8.82% |    $143.00 | $175.00 | 1.11% |
-| PL     |  $21.98 | Sell  |            18.38% |     $18.00 |  $22.00 | 1.00% |
+| ECHO   |  $86.60 | Sell  |            11.69% |     $77.00 | $212.00 | 2.45% |
+| BROS   |  $48.94 | Sell  |            10.49% |     $44.00 |  $77.00 | 1.57% |
+| FTNT   | $150.41 | Sell  |             7.30% |    $139.00 | $211.00 | 1.40% |
 
 ## PMCC Candidates
 
@@ -49,21 +46,21 @@
 | Ticker | Earnings Date | Expected % Move |
 | ------ | ------------- | --------------: |
 | SKHY   | 7/29          |             N/A |
-| BULL   | 8/19          |           4.22% |
-| BABA   | 8/20          |           3.80% |
+| BULL   | 8/19          |           3.58% |
+| BABA   | 8/20          |           1.16% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `BROS` | price `$49.08` | avg weekly move `10.49%` | OTM strike `$44.00` | premium `$77.00` | ROI `1.57%`
-- Cash Secured Put: `ROKU` | price `$157.28` | avg weekly move `8.82%` | OTM strike `$143.00` | premium `$175.00` | ROI `1.11%`
-- Cash Secured Put: `IOT` | price `$39.28` | avg weekly move `12.00%` | OTM strike `$34.50` | premium `$80.00` | ROI `2.04%`
+- Cash Secured Put: `FTNT` | price `$150.41` | avg weekly move `7.30%` | OTM strike `$139.00` | premium `$211.00` | ROI `1.40%`
+- Cash Secured Put: `BROS` | price `$48.94` | avg weekly move `10.49%` | OTM strike `$44.00` | premium `$77.00` | ROI `1.57%`
+- Covered Call: `ROKU` | price `$157.97` | avg weekly move `8.82%` | OTM strike `$172.50` | premium `$211.00` | ROI `1.34%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Cash Secured Put: `AMBA` | price `$73.21` | avg weekly move `13.97%` | OTM strike `$63.00` | premium `$285.00` | ROI `3.89%`
-- Cash Secured Put: `GNRC` | price `$207.80` | avg weekly move `10.02%` | OTM strike `$187.50` | premium `$710.00` | ROI `3.42%`
-- Cash Secured Put: `HUT` | price `$86.25` | avg weekly move `20.75%` | OTM strike `$68.00` | premium `$210.00` | ROI `2.43%`
+- Cash Secured Put: `ECHO` | price `$86.60` | avg weekly move `11.69%` | OTM strike `$77.00` | premium `$212.00` | ROI `2.45%`
+- Covered Call: `FIGR` | price `$39.20` | avg weekly move `20.28%` | OTM strike `$47.00` | premium `$73.00` | ROI `1.86%`
+- Covered Call: `MDB` | price `$424.36` | avg weekly move `12.29%` | OTM strike `$477.50` | premium `$428.00` | ROI `1.01%`
 
