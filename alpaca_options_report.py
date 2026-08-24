@@ -843,13 +843,8 @@ def pmcc_premium_yields(price: float, leaps_price: Optional[float], short_call_p
 
 
 def pmcc_meets_premium_floor(price: float, leaps_price: Optional[float], short_call_price: Optional[float]) -> bool:
-    stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(price, leaps_price, short_call_price)
-    return (
-        stock_yield_pct is not None
-        and leaps_yield_pct is not None
-        and stock_yield_pct >= 0.35
-        and leaps_yield_pct >= 1.0
-    )
+    _, leaps_yield_pct = pmcc_premium_yields(price, leaps_price, short_call_price)
+    return leaps_yield_pct is not None and leaps_yield_pct >= 0.50
 
 
 def pmcc_score(
@@ -900,6 +895,8 @@ def pmcc_score(
         score += 7
     elif leaps_yield_pct is not None and leaps_yield_pct >= 1.0:
         score += 4
+    elif leaps_yield_pct is not None and leaps_yield_pct >= 0.50:
+        score += 2
     return min(score, 100)
 
 
