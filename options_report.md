@@ -1,38 +1,35 @@
-# Options Report - 8/24
+# Options Report - 8/25
 
 ## My Portfolio Report - Expiration 8/28
 
 | Ticker    | Price   | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | ------: | ----------------: | ------------------: | ----------: |
-| CRWD      | $192.14 |             9.91% |             $210.00 |     $245.00 |
-| LITE      | $815.63 |            18.62% |             $967.50 |     $172.00 |
-| NVDA      | $209.84 |             7.67% |             $225.00 |     $164.00 |
-| MU        | $902.47 |            14.86% |           $1,035.00 |     $150.00 |
-| NBIS      | $204.87 |            20.76% |             $247.50 |      $65.00 |
-| AMD       | $457.38 |            12.61% |             $515.00 |      $48.00 |
-| AVGO      | $363.74 |             9.54% |             $397.50 |      $30.00 |
-| BE        | $198.03 |            23.23% |             $245.00 |      $23.00 |
-| ASTS      |  $65.14 |            21.02% |              $79.00 |      $19.00 |
-| RKLB      |  $69.31 |            18.90% |              $82.00 |      $15.00 |
-| IONQ      |  $42.32 |            19.13% |              $50.00 |      $14.00 |
-| PLTR      | $176.38 |            11.54% |             $197.50 |      $14.00 |
-| **Total** |         |                   |                     | **$959.00** |
+| CRWD      | $188.69 |             9.92% |             $207.50 |     $211.00 |
+| NVDA      | $211.30 |             7.68% |             $227.50 |     $150.00 |
+| LITE      | $863.44 |            18.70% |           $1,025.00 |     $121.00 |
+| MU        | $925.44 |            14.88% |           $1,065.00 |      $86.00 |
+| NBIS      | $218.30 |            20.84% |             $265.00 |      $33.00 |
+| AMD       | $475.39 |            12.65% |             $535.00 |      $25.00 |
+| AVGO      | $358.33 |             9.57% |             $392.50 |      $23.00 |
+| BE        | $212.10 |            23.39% |             $262.50 |      $20.00 |
+| PLTR      | $174.00 |            11.56% |             $195.00 |      $13.00 |
+| IONQ      |  $41.43 |            19.18% |              $49.50 |      $10.00 |
+| RKLB      |  $67.16 |            18.96% |              $80.00 |       $7.00 |
+| ASTS      |  $61.72 |            21.15% |              $75.00 |       $6.00 |
+| **Total** |         |                   |                     | **$705.00** |
 
 ## Covered Calls - Expiration 8/28
 
-| Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
-| ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| CRSP   |  $57.24 | Buy   |            11.70% |     $64.00 | $105.00 | 1.83% |
-| LITE   | $815.63 | Sell  |            18.62% |    $967.50 | $947.00 | 1.16% |
-| MDB    | $410.26 | Sell  |            11.74% |    $457.50 | $435.00 | 1.06% |
-| IOT    |  $40.65 | Buy   |            11.89% |     $45.50 |  $41.00 | 1.01% |
+| Ticker | Price  | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
+| ------ | -----: | ----- | ----------------: | ---------: | ------: | ----: |
+| FIGR   | $39.66 | Buy   |            19.99% |     $47.50 |  $73.00 | 1.84% |
+| MBLY   |  $8.63 | Sell  |            11.65% |      $9.50 |  $12.00 | 1.39% |
 
 ## Cash Secured Puts - Expiration 8/28
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| GNRC   | $201.43 | Sell  |             9.94% |    $182.50 | $243.00 | 1.21% |
-| AMBA   |  $70.89 | Sell  |            13.50% |     $61.00 |  $82.00 | 1.16% |
+| MDB    | $410.75 | Sell  |            11.74% |    $362.50 | $472.00 | 1.15% |
 
 ## PMCC Candidates
 
@@ -46,26 +43,24 @@
 | Ticker | Earnings Date | Expected % Move |
 | ------ | ------------- | --------------: |
 | SMTC   | 8/25          |             N/A |
-| CRM    | 8/26          |           7.96% |
-| CRWD   | 8/26          |           9.16% |
-| NVDA   | 8/26          |           6.02% |
-| OKTA   | 8/26          |          12.74% |
-| AFRM   | 8/27          |          11.26% |
-| IREN   | 8/27          |          13.14% |
-| MRVL   | 8/27          |          10.87% |
+| CRM    | 8/26          |           7.63% |
+| CRWD   | 8/26          |           8.38% |
+| NVDA   | 8/26          |           5.93% |
+| OKTA   | 8/26          |          13.36% |
+| AFRM   | 8/27          |          10.58% |
+| IREN   | 8/27          |          12.85% |
+| MRVL   | 8/27          |          10.20% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `GNRC` | price `$201.43` | avg weekly move `9.94%` | OTM strike `$182.50` | premium `$243.00` | ROI `1.21%`
-- Covered Call: `CRSP` | price `$57.24` | avg weekly move `11.70%` | OTM strike `$64.00` | premium `$105.00` | ROI `1.83%`
-- Cash Secured Put: `AMBA` | price `$70.89` | avg weekly move `13.50%` | OTM strike `$61.00` | premium `$82.00` | ROI `1.16%`
+- Covered Call: `MBLY` | price `$8.63` | avg weekly move `11.65%` | OTM strike `$9.50` | premium `$12.00` | ROI `1.39%`
+- Cash Secured Put: `MDB` | price `$410.75` | avg weekly move `11.74%` | OTM strike `$362.50` | premium `$472.00` | ROI `1.15%`
+- Covered Call: `FIGR` | price `$39.66` | avg weekly move `19.99%` | OTM strike `$47.50` | premium `$73.00` | ROI `1.84%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Covered Call: `LITE` | price `$815.63` | avg weekly move `18.62%` | OTM strike `$967.50` | premium `$947.00` | ROI `1.16%`
-- Covered Call: `MDB` | price `$410.26` | avg weekly move `11.74%` | OTM strike `$457.50` | premium `$435.00` | ROI `1.06%`
-- Covered Call: `IOT` | price `$40.65` | avg weekly move `11.89%` | OTM strike `$45.50` | premium `$41.00` | ROI `1.01%`
+- None beyond the best-balance group.
 
