@@ -251,6 +251,7 @@ def should_run_refresh(now_utc: datetime) -> bool:
 def options_report_stocks() -> List[str]:
     replacements = {
         "ALB": "ALAB",
+        "BABA": "RBRK",
         "CCJ": "AVAV",
         "CCL": "MDB",
         "CELH": "KLAC",
