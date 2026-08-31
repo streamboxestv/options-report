@@ -220,6 +220,7 @@ class PmccRow:
     price: float
     pct_otm: float
     below_52w_high_pct: float
+    earnings_date: Optional[date]
     leaps_expiration: date
     leaps_strike: float
     leaps_delta: float
@@ -228,6 +229,7 @@ class PmccRow:
     short_call_strike: float
     short_call_delta: Optional[float]
     short_call_price: Optional[float]
+    action: str
     score: int
 
 
@@ -902,6 +904,16 @@ def pmcc_score(
 
 def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
     stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
+    short_call_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
+    short_call_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
+    leaps_leg_text = (
+        f"{display_expiration_with_year(row.leaps_expiration)} {format_money(row.leaps_strike)}C | "
+        f"Delta {row.leaps_delta:.2f} | Cost {format_money(row.leaps_price * 100.0)}"
+    )
+    short_call_leg_text = (
+        f"{display_expiration_with_year(row.short_call_expiration)} {format_money(row.short_call_strike)}C | "
+        f"Delta {short_call_delta} | Prem {short_call_premium}"
+    )
     return {
         "ticker": row.stock,
         "price": row.price,
@@ -923,13 +935,18 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "weeklyCallStrike": row.short_call_strike,
         "weeklyCallStrikeText": format_money(row.short_call_strike),
         "weeklyCallDelta": row.short_call_delta,
-        "weeklyCallDeltaText": f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A",
+        "weeklyCallDeltaText": short_call_delta,
         "weeklyCallPremium": row.short_call_price * 100.0 if row.short_call_price is not None else None,
-        "weeklyCallPremiumText": format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+        "weeklyCallPremiumText": short_call_premium,
         "weeklyPremiumStockYieldPct": stock_yield_pct,
         "weeklyPremiumStockYieldPctText": f"{stock_yield_pct:.2f}%" if stock_yield_pct is not None else "N/A",
         "weeklyPremiumLeapsYieldPct": leaps_yield_pct,
         "weeklyPremiumLeapsYieldPctText": f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
+        "leapsLegText": leaps_leg_text,
+        "shortCallLegText": short_call_leg_text,
+        "earningsDate": row.earnings_date.isoformat() if row.earnings_date else None,
+        "earningsDateText": f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
+        "action": row.action,
         "score": row.score,
         "scoreText": f"{row.score}",
     }
@@ -1073,23 +1090,23 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
     lines = ["## PMCC Candidates", ""]
     sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
     if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
     else:
         table_rows = []
         for row in sorted_rows:
             _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
+            short_call_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
+            short_call_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
             table_rows.append([
                 row.stock,
                 format_money(row.price),
                 f"{row.below_52w_high_pct:.2f}%",
                 f"{row.pct_otm * 100:.2f}%",
-                display_expiration_with_year(row.leaps_expiration),
-                format_money(row.leaps_strike),
-                f"{row.leaps_delta:.2f}",
-                format_money(row.leaps_price * 100.0),
-                format_money(row.short_call_strike),
-                format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A",
+                f"{display_expiration_with_year(row.leaps_expiration)} {format_money(row.leaps_strike)}C / Delta {row.leaps_delta:.2f} / Cost {format_money(row.leaps_price * 100.0)}",
+                f"{display_expiration_with_year(row.short_call_expiration)} {format_money(row.short_call_strike)}C / Delta {short_call_delta} / Prem {short_call_premium}",
                 f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
+                f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
+                row.action,
                 str(row.score),
             ])
     lines.append(
@@ -1099,17 +1116,15 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 "Price",
                 "Below 52W High",
                 "Avg Weekly Move %",
-                "LEAPS Exp",
-                "LEAPS Strike",
-                "LEAPS Delta",
-                "LEAPS Cost",
-                "Weekly Call Strike",
-                "Weekly Call Premium",
+                "LEAPS to Buy",
+                "Short Call to Sell",
                 "ROI %",
+                "Earnings",
+                "Action",
                 "Score",
             ],
             table_rows,
-            ["left", "right", "right", "right", "left", "right", "right", "right", "right", "right", "right", "right"],
+            ["left", "right", "right", "right", "left", "left", "right", "center", "left", "right"],
         )
     )
     lines.append("")
@@ -1193,34 +1208,33 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         table_rows.append(
             "<tr>"
             '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="11">No PMCC candidates</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="9">No PMCC candidates</td>'
             "</tr>"
         )
     else:
         for row in sorted_rows:
             short_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
+            short_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
             _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
+            earnings_text = f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A"
             table_rows.append(
                 "<tr>"
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.price))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.below_52w_high_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.pct_otm * 100:.2f}%</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(display_expiration_with_year(row.leaps_expiration))}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.leaps_strike))}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{row.leaps_delta:.2f}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.leaps_price * 100.0))}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#0f766e;">{escape(format_money(row.short_call_strike))}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(short_premium)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;"><strong>{escape(display_expiration_with_year(row.leaps_expiration))} {escape(format_money(row.leaps_strike))}C</strong><br><span style="color:#6b7280;font-size:12px;">Delta {row.leaps_delta:.2f} &nbsp; Cost {escape(format_money(row.leaps_price * 100.0))}</span></td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;"><strong>{escape(display_expiration_with_year(row.short_call_expiration))} {escape(format_money(row.short_call_strike))}C</strong><br><span style="color:#6b7280;font-size:12px;">Delta {escape(short_delta)} &nbsp; Prem {escape(short_premium)}</span></td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{leaps_yield_pct:.2f}%</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:center;color:#111827;">{escape(earnings_text)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#0f766e;font-weight:700;">{escape(row.action)}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#111827;">{row.score}</td>'
                 "</tr>"
             )
     return (
         '<section style="margin-top:28px;">'
-        '<div style="display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:10px;">'
+        '<div style="margin-bottom:10px;">'
         '<h2 style="margin:0;font-size:22px;color:#111827;">PMCC Candidates</h2>'
-        '<div style="font-size:13px;color:#6b7280;">Weekly short call outside avg weekly move</div>'
         "</div>"
         '<div style="border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;background:#ffffff;">'
         '<table style="width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">'
@@ -1230,13 +1244,11 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Price</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Below 52W High</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Avg Weekly Move %</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Exp</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Strike</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Delta</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">LEAPS Cost</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Strike</th>'
-        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Weekly Call Premium</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">LEAPS to Buy</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Short Call to Sell</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">ROI %</th>'
+        '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Earnings</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Action</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
         "</tr>"
         "</thead>"
@@ -1738,6 +1750,8 @@ def build_report(
             return None
         if below_52w_high_pct > 0 or below_52w_high_pct < -45:
             return None
+        earnings_date = get_earnings_date_safe(symbol)
+        action = "Eligible - aggressive" if weekly_move_pct > 10 else "Eligible - wider strike" if weekly_move_pct > 8 else "Eligible"
         try:
             leaps_expiration, leaps_snapshot = choose_leaps_contract(symbol, price, today, api_key, api_secret)
             short_snapshot = choose_pmcc_short_call(
@@ -1769,6 +1783,7 @@ def build_report(
                 price=price,
                 pct_otm=pct_otm,
                 below_52w_high_pct=below_52w_high_pct,
+                earnings_date=earnings_date,
                 leaps_expiration=leaps_expiration,
                 leaps_strike=leaps_strike,
                 leaps_delta=abs(leaps_delta),
@@ -1777,6 +1792,7 @@ def build_report(
                 short_call_strike=short_strike,
                 short_call_delta=abs(short_delta) if short_delta is not None else None,
                 short_call_price=short_price,
+                action=action,
                 score=score,
             )
         except Exception:

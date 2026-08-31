@@ -172,6 +172,28 @@ function renderPortfolioTable(targetId, portfolio, strikeLabel, earningsTickers 
   );
 }
 
+function renderTradeLeg(value) {
+  const parts = String(value || "N/A").split("|").map((part) => part.trim()).filter(Boolean);
+  if (!parts.length) {
+    return "N/A";
+  }
+  const [contract, ...details] = parts;
+  return `
+    <span class="trade-leg-contract">${escapeHtml(contract)}</span>
+    ${details.length ? `<span class="trade-leg-detail">${escapeHtml(details.join("  "))}</span>` : ""}
+  `;
+}
+
+function pmccLeapsLegText(row) {
+  return row.leapsLegText
+    || `${row.leapsExpirationText || "N/A"} ${row.leapsStrikeText || "N/A"}C | Delta ${row.leapsDeltaText || "N/A"} | Cost ${row.leapsCostText || "N/A"}`;
+}
+
+function pmccShortCallLegText(row) {
+  return row.shortCallLegText
+    || `${row.weeklyCallExpirationText || "N/A"} ${row.weeklyCallStrikeText || "N/A"}C | Delta ${row.weeklyCallDeltaText || "N/A"} | Prem ${row.weeklyCallPremiumText || "N/A"}`;
+}
+
 function renderReviewList(targetId, rows) {
   const target = byId(targetId);
   if (!rows.length) {
@@ -262,8 +284,6 @@ function renderDashboard() {
   byId("portfolio-put-expiration").textContent = `Expiration ${snapshot.myPortfolioPuts?.expiration || snapshot.myPortfolio?.expiration || "N/A"}`;
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
-  byId("pmcc-subtitle").textContent = `Weekly expiration ${snapshot.pmccCandidates?.weeklyExpiration || snapshot.expiration || "N/A"} - 100 is strongest.`;
-
   const earningsTickers = earningsTickerSet(snapshot);
   renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike", earningsTickers);
   renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Put Strike", earningsTickers);
@@ -288,13 +308,11 @@ function renderDashboard() {
       { key: "priceText", label: "Price", numeric: true },
       { key: "below52wHighPctText", label: "Below 52W High", numeric: true },
       { key: "avgWeeklyMovePctText", label: "Avg Weekly Move %", numeric: true },
-      { key: "leapsExpirationText", label: "LEAPS Exp" },
-      { key: "leapsStrikeText", label: "LEAPS Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.leapsStrikeText)}</span>` },
-      { key: "leapsDeltaText", label: "LEAPS Delta", numeric: true },
-      { key: "leapsCostText", label: "LEAPS Cost", numeric: true },
-      { key: "weeklyCallStrikeText", label: "Weekly Call Strike", numeric: true, render: (row) => `<span class="metric-strong mono">${escapeHtml(row.weeklyCallStrikeText)}</span>` },
-      { key: "weeklyCallPremiumText", label: "Weekly Call Premium", numeric: true },
+      { key: "leapsLegText", label: "LEAPS to Buy", render: (row) => renderTradeLeg(pmccLeapsLegText(row)) },
+      { key: "shortCallLegText", label: "Short Call to Sell", render: (row) => renderTradeLeg(pmccShortCallLegText(row)) },
       { key: "weeklyPremiumLeapsYieldPctText", label: "ROI %", numeric: true, render: (row) => escapeHtml(row.weeklyPremiumLeapsYieldPctText || "N/A") },
+      { key: "earningsDateText", label: "Earnings", align: "center", render: (row) => escapeHtml(row.earningsDateText || "N/A") },
+      { key: "action", label: "Action", render: (row) => `<span class="pmcc-action">${escapeHtml(row.action || "Eligible")}</span>` },
       { key: "scoreText", label: "Score", numeric: true, render: (row) => `<span class="score-pill">${escapeHtml(row.scoreText)}</span>` },
     ],
     [...(snapshot.pmccCandidates?.rows || [])].sort(

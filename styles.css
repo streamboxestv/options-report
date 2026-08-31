@@ -275,6 +275,26 @@ tbody tr:hover {
   font-weight: 800;
 }
 
+.trade-leg-contract {
+  display: block;
+  color: var(--ink);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.trade-leg-detail {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.pmcc-action {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .score-pill {
   display: inline-block;
   min-width: 42px;
