@@ -717,8 +717,12 @@ def expected_earnings_move_pct(
     return (straddle_price / price) * 100.0 if straddle_price > 0 else None
 
 
-def nearest_weekly_expiration(today: date, expiration_override: Optional[date]) -> date:
-    return expiration_override or fridays_from(today, 1)[0]
+def nearest_pmcc_short_call_expiration(today: date) -> date:
+    expirations = fridays_from(today, 6)
+    for expiration_date in expirations:
+        if 14 <= (expiration_date - today).days <= 21:
+            return expiration_date
+    return next((expiration_date for expiration_date in expirations if (expiration_date - today).days >= 14), expirations[-1])
 
 
 def leap_expiration_candidates(today: date) -> List[date]:
@@ -806,7 +810,7 @@ def choose_pmcc_short_call(
         delta = option_snapshot_delta(snapshot)
         option_price = option_snapshot_price(snapshot)
         abs_delta = abs(delta) if delta is not None else math.inf
-        if option_price is None or abs_delta < 0.20 or abs_delta > 0.30:
+        if option_price is None or abs_delta < 0.10 or abs_delta > 0.20:
             continue
         parsed.append(
             {
@@ -814,7 +818,7 @@ def choose_pmcc_short_call(
                 "strike": strike,
                 "delta": abs_delta if math.isfinite(abs_delta) else None,
                 "price": option_price,
-                "delta_distance": abs(abs_delta - 0.28) if math.isfinite(abs_delta) else math.inf,
+                "delta_distance": abs(abs_delta - 0.18) if math.isfinite(abs_delta) else math.inf,
                 "strike_distance": abs(strike - min_strike),
                 "open_interest": option_snapshot_open_interest(snapshot),
                 "spread": option_snapshot_spread(snapshot),
@@ -1734,7 +1738,7 @@ def build_report(
         if batch_pause_seconds > 0 and batch_index < len(active_batches) - 1:
             time.sleep(batch_pause_seconds)
 
-    pmcc_short_expiration = nearest_weekly_expiration(today, expiration_override)
+    pmcc_short_expiration = nearest_pmcc_short_call_expiration(today)
 
     def build_pmcc_symbol(symbol: str) -> Optional[PmccRow]:
         price = latest_prices.get(symbol)
@@ -1811,7 +1815,7 @@ def build_report(
             ),
             symbol,
         ),
-    )[:30]
+    )[:90]
 
     pmcc_batches = batched_symbols(preliminary_pmcc_symbols)
     for batch_index, symbol_batch in enumerate(pmcc_batches):
@@ -1822,6 +1826,8 @@ def build_report(
                 row = future.result()
                 if row is not None:
                     pmcc_rows.append(row)
+        if len(pmcc_rows) >= 10:
+            break
         if batch_pause_seconds > 0 and batch_index < len(pmcc_batches) - 1:
             time.sleep(batch_pause_seconds)
 
