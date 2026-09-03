@@ -259,6 +259,7 @@ def options_report_stocks() -> List[str]:
         "CPNG": "COHR",
         "EL": "AMBA",
         "EOSE": "TXN",
+        "LUV": "CRDO",
         "LYFT": "LITE",
         "NU": "CRSP",
         "PINS": "GNRC",
