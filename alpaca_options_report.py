@@ -1092,9 +1092,17 @@ def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> st
 
 def render_pmcc_table(rows: List[PmccRow]) -> str:
     lines = ["## PMCC Candidates", ""]
-    sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
+    sorted_rows = sorted(
+        rows,
+        key=lambda row: (
+            pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)[1] or 0.0,
+            row.score,
+            row.short_call_price or 0.0,
+        ),
+        reverse=True,
+    )
     if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
     else:
         table_rows = []
         for row in sorted_rows:
@@ -1110,7 +1118,6 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 f"{display_expiration_with_year(row.short_call_expiration)} {format_money(row.short_call_strike)}C / Delta {short_call_delta} / Prem {short_call_premium}",
                 f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
                 f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
-                row.action,
                 str(row.score),
             ])
     lines.append(
@@ -1124,11 +1131,10 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 "Short Call to Sell",
                 "ROI %",
                 "Earnings",
-                "Action",
                 "Score",
             ],
             table_rows,
-            ["left", "right", "right", "right", "left", "left", "right", "center", "left", "right"],
+            ["left", "right", "right", "right", "left", "left", "right", "center", "right"],
         )
     )
     lines.append("")
@@ -1207,12 +1213,20 @@ def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) 
 
 def render_pmcc_html_table(rows: List[PmccRow]) -> str:
     table_rows = []
-    sorted_rows = sorted(rows, key=lambda row: row.score, reverse=True)
+    sorted_rows = sorted(
+        rows,
+        key=lambda row: (
+            pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)[1] or 0.0,
+            row.score,
+            row.short_call_price or 0.0,
+        ),
+        reverse=True,
+    )
     if not sorted_rows:
         table_rows.append(
             "<tr>"
             '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="9">No PMCC candidates</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="8">No PMCC candidates</td>'
             "</tr>"
         )
     else:
@@ -1231,7 +1245,6 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;"><strong>{escape(display_expiration_with_year(row.short_call_expiration))} {escape(format_money(row.short_call_strike))}C</strong><br><span style="color:#6b7280;font-size:12px;">Delta {escape(short_delta)} &nbsp; Prem {escape(short_premium)}</span></td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{leaps_yield_pct:.2f}%</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:center;color:#111827;">{escape(earnings_text)}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#0f766e;font-weight:700;">{escape(row.action)}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;font-weight:700;color:#111827;">{row.score}</td>'
                 "</tr>"
             )
@@ -1252,7 +1265,6 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Short Call to Sell</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">ROI %</th>'
         '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Earnings</th>'
-        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Action</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
         "</tr>"
         "</thead>"
@@ -1831,7 +1843,14 @@ def build_report(
         if batch_pause_seconds > 0 and batch_index < len(pmcc_batches) - 1:
             time.sleep(batch_pause_seconds)
 
-    pmcc_rows.sort(key=lambda row: (row.score, row.short_call_price or 0.0), reverse=True)
+    pmcc_rows.sort(
+        key=lambda row: (
+            pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)[1] or 0.0,
+            row.score,
+            row.short_call_price or 0.0,
+        ),
+        reverse=True,
+    )
     pmcc_rows = pmcc_rows[:10]
 
     portfolio_tickers = load_my_portfolio_tickers()

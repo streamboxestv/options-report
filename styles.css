@@ -290,11 +290,6 @@ tbody tr:hover {
   white-space: nowrap;
 }
 
-.pmcc-action {
-  color: var(--accent);
-  font-weight: 700;
-}
-
 .score-pill {
   display: inline-block;
   min-width: 42px;

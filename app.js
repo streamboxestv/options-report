@@ -312,12 +312,12 @@ function renderDashboard() {
       { key: "shortCallLegText", label: "Short Call to Sell", render: (row) => renderTradeLeg(pmccShortCallLegText(row)) },
       { key: "weeklyPremiumLeapsYieldPctText", label: "ROI %", numeric: true, render: (row) => escapeHtml(row.weeklyPremiumLeapsYieldPctText || "N/A") },
       { key: "earningsDateText", label: "Earnings", align: "center", render: (row) => escapeHtml(row.earningsDateText || "N/A") },
-      { key: "action", label: "Action", render: (row) => `<span class="pmcc-action">${escapeHtml(row.action || "Eligible")}</span>` },
       { key: "scoreText", label: "Score", numeric: true, render: (row) => `<span class="score-pill">${escapeHtml(row.scoreText)}</span>` },
     ],
     [...(snapshot.pmccCandidates?.rows || [])].sort(
       (left, right) =>
-        (right.score || 0) - (left.score || 0)
+        (right.weeklyPremiumLeapsYieldPct || 0) - (left.weeklyPremiumLeapsYieldPct || 0)
+        || (right.score || 0) - (left.score || 0)
         || (right.weeklyCallPremium || 0) - (left.weeklyCallPremium || 0)
         || String(left.ticker || "").localeCompare(String(right.ticker || "")),
     ),
