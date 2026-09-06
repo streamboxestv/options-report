@@ -301,6 +301,25 @@ tbody tr:hover {
   text-align: center;
 }
 
+.status-pill {
+  display: inline-block;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.status-qualified {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.status-muted {
+  background: #f0ebe3;
+  color: var(--muted);
+}
+
 .mono {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.92rem;

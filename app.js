@@ -194,6 +194,12 @@ function pmccShortCallLegText(row) {
     || `${row.weeklyCallExpirationText || "N/A"} ${row.weeklyCallStrikeText || "N/A"}C | Delta ${row.weeklyCallDeltaText || "N/A"} | Prem ${row.weeklyCallPremiumText || "N/A"}`;
 }
 
+function renderStatus(value) {
+  const text = String(value || "N/A");
+  const qualified = text.toLowerCase() === "qualified";
+  return `<span class="status-pill ${qualified ? "status-qualified" : "status-muted"}">${escapeHtml(text)}</span>`;
+}
+
 function renderReviewList(targetId, rows) {
   const target = byId(targetId);
   if (!rows.length) {
@@ -284,6 +290,7 @@ function renderDashboard() {
   byId("portfolio-put-expiration").textContent = `Expiration ${snapshot.myPortfolioPuts?.expiration || snapshot.myPortfolio?.expiration || "N/A"}`;
   byId("covered-expiration").textContent = `Expiration ${snapshot.coveredCalls?.expiration || "N/A"}`;
   byId("puts-expiration").textContent = `Expiration ${snapshot.cashSecuredPuts?.expiration || "N/A"}`;
+  byId("credit-spreads-expiration").textContent = `Target expiration ${snapshot.creditSpreadCandidates?.expiration || "N/A"}`;
   const earningsTickers = earningsTickerSet(snapshot);
   renderPortfolioTable("portfolio-table", snapshot.myPortfolio, "Covered Call Strike", earningsTickers);
   renderPortfolioTable("portfolio-put-table", snapshot.myPortfolioPuts, "Cash Put Strike", earningsTickers);
@@ -319,6 +326,27 @@ function renderDashboard() {
         (right.weeklyPremiumLeapsYieldPct || 0) - (left.weeklyPremiumLeapsYieldPct || 0)
         || (right.score || 0) - (left.score || 0)
         || (right.weeklyCallPremium || 0) - (left.weeklyCallPremium || 0)
+        || String(left.ticker || "").localeCompare(String(right.ticker || "")),
+    ),
+  );
+
+  renderTable(
+    "credit-spreads-table",
+    [
+      { key: "ticker", label: "Ticker", render: (row) => `<span class="ticker">${escapeHtml(row.ticker)}</span>` },
+      { key: "strategy", label: "Strategy" },
+      { key: "expirationText", label: "Expiration", align: "center" },
+      { key: "shortStrikeText", label: "Short Strike", render: (row) => `<span class="metric-strong mono">${escapeHtml(row.shortStrikeText || "N/A")}</span>` },
+      { key: "longStrikeText", label: "Long Strike", render: (row) => `<span class="metric-strong mono">${escapeHtml(row.longStrikeText || "N/A")}</span>` },
+      { key: "creditText", label: "Credit", numeric: true },
+      { key: "maxLossText", label: "Max Loss", numeric: true },
+      { key: "maxRoiPctText", label: "Max ROI", numeric: true },
+      { key: "status", label: "Status", render: (row) => renderStatus(row.status) },
+    ],
+    [...(snapshot.creditSpreadCandidates?.rows || [])].sort(
+      (left, right) =>
+        (right.maxRoiPct || -1) - (left.maxRoiPct || -1)
+        || (right.credit || 0) - (left.credit || 0)
         || String(left.ticker || "").localeCompare(String(right.ticker || "")),
     ),
   );

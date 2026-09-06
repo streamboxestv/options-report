@@ -180,6 +180,8 @@ OPTIONS_REPORT_STOCKS = REPORT2_STOCKS
 MY_PORTFOLIO_REPORT_FILE = "my_portfolio_report.txt"
 EARNINGS_CACHE_FILE = "earnings_calendar_cache.json"
 REPORT_HISTORY_FILE = "report_history.json"
+CREDIT_SPREAD_SYMBOLS = ["SPY", "QQQ", "AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "TSLA"]
+ETF_SYMBOLS = {"SPY", "QQQ"}
 
 DATA_BASE_URL = "https://data.alpaca.markets"
 STOCK_FEED = "iex"
@@ -231,6 +233,23 @@ class PmccRow:
     short_call_price: Optional[float]
     action: str
     score: int
+
+
+@dataclass
+class CreditSpreadRow:
+    stock: str
+    price: Optional[float]
+    strategy: str
+    expiration: Optional[date]
+    option_type: Optional[str]
+    short_strike: Optional[float]
+    long_strike: Optional[float]
+    short_delta: Optional[float]
+    long_delta: Optional[float]
+    credit: Optional[float]
+    max_loss: Optional[float]
+    max_roi_pct: Optional[float]
+    status: str
 
 
 def api_get(path: str, api_key: str, api_secret: str, params: Optional[Dict[str, str]] = None) -> Dict:
@@ -840,6 +859,136 @@ def choose_pmcc_short_call(
     return parsed[0]["snapshot"]
 
 
+def nearest_credit_spread_expiration(today: date) -> date:
+    expirations = fridays_from(today, 8)
+    preferred = [expiration_date for expiration_date in expirations if 24 <= (expiration_date - today).days <= 40]
+    candidates = preferred or expirations
+    return min(candidates, key=lambda expiration_date: (abs((expiration_date - today).days - 30), expiration_date))
+
+
+def credit_spread_status_row(symbol: str, price: Optional[float], status: str) -> CreditSpreadRow:
+    return CreditSpreadRow(
+        stock=symbol,
+        price=price,
+        strategy="No Trade",
+        expiration=None,
+        option_type=None,
+        short_strike=None,
+        long_strike=None,
+        short_delta=None,
+        long_delta=None,
+        credit=None,
+        max_loss=None,
+        max_roi_pct=None,
+        status=status,
+    )
+
+
+def choose_credit_spread(
+    symbol: str,
+    price: float,
+    trend: str,
+    expiration_date: date,
+    api_key: str,
+    api_secret: str,
+) -> CreditSpreadRow:
+    if trend == "Buy":
+        strategy = "Bull Put"
+        option_type = "put"
+        long_strike_filter = lambda strike, short_strike: strike < short_strike
+    elif trend == "Sell":
+        strategy = "Bear Call"
+        option_type = "call"
+        long_strike_filter = lambda strike, short_strike: strike > short_strike
+    else:
+        return credit_spread_status_row(symbol, price, "No Trade - Neutral Trend")
+
+    contracts = paged_option_chain(symbol, expiration_date, option_type, api_key, api_secret)
+    parsed = []
+    for snapshot in contracts:
+        strike = option_snapshot_strike(snapshot)
+        delta = option_snapshot_delta(snapshot)
+        option_price = option_snapshot_price(snapshot)
+        if strike is None or delta is None or option_price is None:
+            continue
+        if option_type == "put" and strike >= price:
+            continue
+        if option_type == "call" and strike <= price:
+            continue
+        parsed.append(
+            {
+                "snapshot": snapshot,
+                "strike": strike,
+                "delta": abs(delta),
+                "price": option_price,
+                "open_interest": option_snapshot_open_interest(snapshot),
+                "spread": option_snapshot_spread(snapshot),
+            }
+        )
+
+    short_candidates = [item for item in parsed if 0.15 <= item["delta"] <= 0.25]
+    candidates = []
+    for short_item in short_candidates:
+        for long_item in parsed:
+            if not long_strike_filter(long_item["strike"], short_item["strike"]):
+                continue
+            spread_width = abs(short_item["strike"] - long_item["strike"])
+            if spread_width < 5 or spread_width > 10:
+                continue
+            credit_per_share = short_item["price"] - long_item["price"]
+            if credit_per_share <= 0:
+                continue
+            credit_ratio = credit_per_share / spread_width
+            if credit_ratio < 0.15:
+                continue
+            max_loss_per_share = spread_width - credit_per_share
+            if max_loss_per_share <= 0:
+                continue
+            max_roi_pct = (credit_per_share / max_loss_per_share) * 100.0
+            candidates.append(
+                {
+                    "short": short_item,
+                    "long": long_item,
+                    "spread_width": spread_width,
+                    "credit": credit_per_share * 100.0,
+                    "max_loss": max_loss_per_share * 100.0,
+                    "max_roi_pct": max_roi_pct,
+                    "delta_distance": abs(short_item["delta"] - 0.20),
+                    "credit_ratio": credit_ratio,
+                }
+            )
+
+    if not candidates:
+        return credit_spread_status_row(symbol, price, f"No Trade - No {strategy} Meets Credit/Delta")
+
+    candidates.sort(
+        key=lambda item: (
+            item["max_roi_pct"],
+            item["credit_ratio"],
+            -item["delta_distance"],
+            -(item["short"]["spread"] + item["long"]["spread"]),
+            item["short"]["open_interest"] + item["long"]["open_interest"],
+        ),
+        reverse=True,
+    )
+    best = candidates[0]
+    return CreditSpreadRow(
+        stock=symbol,
+        price=price,
+        strategy=strategy,
+        expiration=expiration_date,
+        option_type=option_type,
+        short_strike=best["short"]["strike"],
+        long_strike=best["long"]["strike"],
+        short_delta=best["short"]["delta"],
+        long_delta=best["long"]["delta"],
+        credit=best["credit"],
+        max_loss=best["max_loss"],
+        max_roi_pct=best["max_roi_pct"],
+        status="Qualified",
+    )
+
+
 def pmcc_premium_yields(price: float, leaps_price: Optional[float], short_call_price: Optional[float]) -> Tuple[Optional[float], Optional[float]]:
     if short_call_price is None or short_call_price <= 0 or price <= 0:
         return None, None
@@ -953,6 +1102,39 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "action": row.action,
         "score": row.score,
         "scoreText": f"{row.score}",
+    }
+
+
+def credit_spread_leg_text(row: CreditSpreadRow, strike: Optional[float], action: str) -> str:
+    if strike is None or row.option_type is None:
+        return "N/A"
+    option_label = "Put" if row.option_type == "put" else "Call"
+    return f"{format_money(strike)} {option_label} ({action})"
+
+
+def credit_spread_row_to_dict(row: CreditSpreadRow) -> Dict[str, object]:
+    return {
+        "ticker": row.stock,
+        "price": row.price,
+        "priceText": format_money(row.price) if row.price is not None else "N/A",
+        "strategy": row.strategy,
+        "expiration": row.expiration.isoformat() if row.expiration else None,
+        "expirationText": display_expiration_with_year(row.expiration) if row.expiration else "N/A",
+        "shortStrike": row.short_strike,
+        "shortStrikeText": credit_spread_leg_text(row, row.short_strike, "Sell"),
+        "longStrike": row.long_strike,
+        "longStrikeText": credit_spread_leg_text(row, row.long_strike, "Buy"),
+        "shortDelta": row.short_delta,
+        "shortDeltaText": f"{row.short_delta:.2f}" if row.short_delta is not None else "N/A",
+        "longDelta": row.long_delta,
+        "longDeltaText": f"{row.long_delta:.2f}" if row.long_delta is not None else "N/A",
+        "credit": row.credit,
+        "creditText": format_money(row.credit) if row.credit is not None else "N/A",
+        "maxLoss": row.max_loss,
+        "maxLossText": format_money(row.max_loss) if row.max_loss is not None else "N/A",
+        "maxRoiPct": row.max_roi_pct,
+        "maxRoiPctText": f"{row.max_roi_pct:.2f}%" if row.max_roi_pct is not None else "N/A",
+        "status": row.status,
     }
 
 
@@ -1141,6 +1323,49 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
     return "\n".join(lines)
 
 
+def sorted_credit_spread_rows(rows: List[CreditSpreadRow]) -> List[CreditSpreadRow]:
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.max_roi_pct is not None,
+            row.max_roi_pct or -1.0,
+            row.credit or 0.0,
+            row.stock,
+        ),
+        reverse=True,
+    )
+
+
+def render_credit_spread_table(rows: List[CreditSpreadRow]) -> str:
+    lines = ["## Credit Spread Candidates", ""]
+    sorted_rows = sorted_credit_spread_rows(rows)
+    if not sorted_rows:
+        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+    else:
+        table_rows = []
+        for row in sorted_rows:
+            table_rows.append([
+                row.stock,
+                row.strategy,
+                display_expiration_with_year(row.expiration) if row.expiration else "N/A",
+                credit_spread_leg_text(row, row.short_strike, "Sell"),
+                credit_spread_leg_text(row, row.long_strike, "Buy"),
+                format_money(row.credit) if row.credit is not None else "N/A",
+                format_money(row.max_loss) if row.max_loss is not None else "N/A",
+                f"{row.max_roi_pct:.2f}%" if row.max_roi_pct is not None else "N/A",
+                row.status,
+            ])
+    lines.append(
+        render_markdown_table(
+            ["Ticker", "Strategy", "Expiration", "Short Strike", "Long Strike", "Credit", "Max Loss", "Max ROI", "Status"],
+            table_rows,
+            ["left", "left", "center", "left", "left", "right", "right", "right", "left"],
+        )
+    )
+    lines.append("")
+    return "\n".join(lines)
+
+
 def render_summary_card(label: str, value: str) -> str:
     return (
         '<div style="background:#f7f3eb;border:1px solid #e7dcc7;border-radius:14px;'
@@ -1266,6 +1491,59 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">ROI %</th>'
         '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Earnings</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Score</th>'
+        "</tr>"
+        "</thead>"
+        f"<tbody>{''.join(table_rows)}</tbody>"
+        "</table>"
+        "</div>"
+        "</section>"
+    )
+
+
+def render_credit_spread_html_table(rows: List[CreditSpreadRow]) -> str:
+    table_rows = []
+    sorted_rows = sorted_credit_spread_rows(rows)
+    if not sorted_rows:
+        table_rows.append(
+            "<tr>"
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
+            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="8">No credit spread candidates</td>'
+            "</tr>"
+        )
+    else:
+        for row in sorted_rows:
+            table_rows.append(
+                "<tr>"
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;">{escape(row.strategy)}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:center;color:#111827;">{escape(display_expiration_with_year(row.expiration) if row.expiration else "N/A")}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.short_strike, "Sell"))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.long_strike, "Buy"))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.credit) if row.credit is not None else "N/A")}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.max_loss) if row.max_loss is not None else "N/A")}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(f"{row.max_roi_pct:.2f}%" if row.max_roi_pct is not None else "N/A")}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;">{escape(row.status)}</td>'
+                "</tr>"
+            )
+    return (
+        '<section style="margin-top:28px;">'
+        '<div style="margin-bottom:10px;">'
+        '<h2 style="margin:0;font-size:22px;color:#111827;">Credit Spread Candidates</h2>'
+        '<div style="margin-top:6px;font-size:13px;color:#6b7280;">30 DTE scan. Bull Put when trend is Buy; Bear Call when trend is Sell.</div>'
+        "</div>"
+        '<div style="border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;background:#ffffff;">'
+        '<table style="width:100%;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">'
+        "<thead>"
+        '<tr style="background:#111827;color:#f9fafb;">'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Ticker</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Strategy</th>'
+        '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Expiration</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Short Strike</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Long Strike</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Credit</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Max Loss</th>'
+        '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Max ROI</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Status</th>'
         "</tr>"
         "</thead>"
         f"<tbody>{''.join(table_rows)}</tbody>"
@@ -1489,6 +1767,7 @@ def build_report_html(
     cash_secured_puts: List[OptionRow],
     cash_secured_put_label: str,
     pmcc_rows: List[PmccRow],
+    credit_spread_rows: List[CreditSpreadRow],
     skipped: List[str],
 ) -> str:
     covered_count = sum(1 for row in covered_calls if row.action == "Sell")
@@ -1526,6 +1805,7 @@ def build_report_html(
         f'{render_html_table("Covered Calls", covered_calls, covered_call_label)}'
         f'{render_html_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label)}'
         f'{render_pmcc_html_table(pmcc_rows)}'
+        f'{render_credit_spread_html_table(credit_spread_rows)}'
         f"{skipped_section}"
         "</div>"
         "</div>"
@@ -1579,6 +1859,9 @@ def build_report(
     report_expiration = expiration_override or fridays_from(today, 1)[0]
     report_start = monday_of_week(report_expiration)
     latest_prices = get_latest_prices(symbols, api_key, api_secret)
+    missing_credit_symbols = [symbol for symbol in CREDIT_SPREAD_SYMBOLS if symbol not in latest_prices]
+    if missing_credit_symbols:
+        latest_prices.update(get_latest_prices(missing_credit_symbols, api_key, api_secret))
     earnings_cache = load_earnings_cache()
     earnings_cache_lock = threading.Lock()
 
@@ -1705,6 +1988,7 @@ def build_report(
     cash_secured_puts = []
     portfolio_rows = []
     pmcc_rows: List[PmccRow] = []
+    credit_spread_rows: List[CreditSpreadRow] = []
     covered_call_expirations: Dict[str, date] = {}
     cash_secured_put_expirations: Dict[str, date] = {}
     portfolio_expirations: Dict[str, date] = {}
@@ -1853,6 +2137,44 @@ def build_report(
     )
     pmcc_rows = pmcc_rows[:10]
 
+    credit_spread_expiration = nearest_credit_spread_expiration(today)
+
+    def ensure_symbol_market_context(symbol: str) -> Tuple[Optional[float], Optional[float], Optional[str]]:
+        price = latest_prices.get(symbol)
+        if price is None:
+            return None, None, None
+        pct_otm = pct_otm_by_symbol.get(symbol)
+        trend = trend_by_symbol.get(symbol)
+        if pct_otm is None or trend is None:
+            bars = get_weekly_bars(symbol, start, today, api_key, api_secret)
+            if pct_otm is None:
+                pct_otm = average_weekly_move_pct(bars)
+                pct_otm_by_symbol[symbol] = pct_otm
+            if trend is None:
+                trend = wavetrend_last_signal(bars)
+                trend_by_symbol[symbol] = trend
+        return price, pct_otm, trend
+
+    def build_credit_spread_symbol(symbol: str) -> CreditSpreadRow:
+        try:
+            price, _pct_otm, trend = ensure_symbol_market_context(symbol)
+            if price is None or trend is None:
+                return credit_spread_status_row(symbol, price, "No Trade - Missing Price/Trend")
+            earnings_date = None if symbol in ETF_SYMBOLS else get_earnings_date_safe(symbol)
+            if earnings_date is not None and today <= earnings_date <= credit_spread_expiration:
+                return credit_spread_status_row(symbol, price, "Skip - Earnings Before Expiration")
+            return choose_credit_spread(symbol, price, trend, credit_spread_expiration, api_key, api_secret)
+        except Exception as exc:
+            return credit_spread_status_row(symbol, latest_prices.get(symbol), f"No Trade - {exc}")
+
+    max_workers = min(len(CREDIT_SPREAD_SYMBOLS), 4) or 1
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = [executor.submit(build_credit_spread_symbol, symbol) for symbol in CREDIT_SPREAD_SYMBOLS]
+        for future in concurrent.futures.as_completed(futures):
+            credit_spread_rows.append(future.result())
+
+    credit_spread_rows = sorted_credit_spread_rows(credit_spread_rows)
+
     portfolio_tickers = load_my_portfolio_tickers()
     def build_portfolio_symbol(symbol: str) -> Optional[Tuple[str, OptionRow, date]]:
         if symbol not in latest_prices:
@@ -1898,6 +2220,7 @@ def build_report(
         render_table("Covered Calls", covered_calls, covered_call_label),
         render_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label),
         render_pmcc_table(pmcc_rows),
+        render_credit_spread_table(credit_spread_rows),
     ]
     if excluded_rows:
         parts.extend(["", render_excluded_table(excluded_rows)])
@@ -1939,6 +2262,11 @@ def build_report(
             "weeklyExpiration": display_expiration_with_year(pmcc_short_expiration),
             "rows": [pmcc_row_to_dict(row) for row in pmcc_rows],
         },
+        "creditSpreadCandidates": {
+            "title": "Credit Spread Candidates",
+            "expiration": display_expiration_with_year(credit_spread_expiration),
+            "rows": [credit_spread_row_to_dict(row) for row in credit_spread_rows],
+        },
         "earningsThisWeek": {
             "title": "Earnings this Week",
             "rows": [excluded_row_to_dict(row) for row in filtered_excluded_rows],
@@ -1963,6 +2291,7 @@ def build_report(
         cash_secured_puts=cash_secured_puts,
         cash_secured_put_label=cash_secured_put_label,
         pmcc_rows=pmcc_rows,
+        credit_spread_rows=credit_spread_rows,
         skipped=skipped,
     )
     return markdown_report, html_report, snapshot
