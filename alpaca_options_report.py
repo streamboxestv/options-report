@@ -335,10 +335,11 @@ def save_earnings_cache(cache: Dict[str, Dict[str, str]]) -> None:
 
 def parse_earnings_date_from_html(html: str) -> Optional[date]:
     patterns = [
+        r'The next estimated earnings date is .*?([A-Za-z]+ \d{1,2}, \d{4})',
         r'Earnings Date<!----></span>.*?<td[^>]*title=\"([A-Za-z]+ \d{1,2}, \d{4})\"',
-        r'The last earnings date was .*?([A-Za-z]+ \d{1,2}, \d{4})',
         r'"id":"earningsdate","title":"Earnings Date","value":"([A-Za-z]+ \d{1,2}, \d{4})"',
         r'"id":"earningsdate","title":"Earnings Date","value":"[^"]+","hover":"([A-Za-z]+ \d{1,2}, \d{4})"',
+        r'The last earnings date was .*?([A-Za-z]+ \d{1,2}, \d{4})',
     ]
     for pattern in patterns:
         match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
@@ -353,15 +354,25 @@ def parse_earnings_date_from_html(html: str) -> Optional[date]:
     return None
 
 
+def future_earnings_date(earnings_date: Optional[date], today: date) -> Optional[date]:
+    if earnings_date is None or earnings_date < today:
+        return None
+    return earnings_date
+
+
 def get_earnings_date(symbol: str, cache: Dict[str, Dict[str, str]], today: date) -> Optional[date]:
     cached = cache.get(symbol)
     if cached and cached.get("fetched_on") == today.isoformat():
         earnings_iso = cached.get("earnings_date")
-        return date.fromisoformat(earnings_iso) if earnings_iso else None
+        if not earnings_iso:
+            return None
+        cached_date = date.fromisoformat(earnings_iso)
+        if cached_date >= today:
+            return cached_date
 
     url = f"{STOCK_ANALYSIS_BASE_URL}/{symbol.lower()}/statistics/"
     html = http_get_text(url)
-    earnings_date = parse_earnings_date_from_html(html)
+    earnings_date = future_earnings_date(parse_earnings_date_from_html(html), today)
     cache[symbol] = {
         "fetched_on": today.isoformat(),
         "earnings_date": earnings_date.isoformat() if earnings_date else "",
@@ -1059,6 +1070,7 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
     stock_yield_pct, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
     short_call_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
     short_call_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
+    earnings_date = future_earnings_date(row.earnings_date, date.today())
     leaps_leg_text = (
         f"{display_expiration_with_year(row.leaps_expiration)} {format_money(row.leaps_strike)}C | "
         f"Delta {row.leaps_delta:.2f} | Cost {format_money(row.leaps_price * 100.0)}"
@@ -1097,8 +1109,8 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
         "weeklyPremiumLeapsYieldPctText": f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
         "leapsLegText": leaps_leg_text,
         "shortCallLegText": short_call_leg_text,
-        "earningsDate": row.earnings_date.isoformat() if row.earnings_date else None,
-        "earningsDateText": f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
+        "earningsDate": earnings_date.isoformat() if earnings_date else None,
+        "earningsDateText": f"{earnings_date.month}/{earnings_date.day}" if earnings_date else "N/A",
         "action": row.action,
         "score": row.score,
         "scoreText": f"{row.score}",
@@ -1291,6 +1303,7 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
             _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
             short_call_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
             short_call_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
+            earnings_date = future_earnings_date(row.earnings_date, date.today())
             table_rows.append([
                 row.stock,
                 format_money(row.price),
@@ -1299,7 +1312,7 @@ def render_pmcc_table(rows: List[PmccRow]) -> str:
                 f"{display_expiration_with_year(row.leaps_expiration)} {format_money(row.leaps_strike)}C / Delta {row.leaps_delta:.2f} / Cost {format_money(row.leaps_price * 100.0)}",
                 f"{display_expiration_with_year(row.short_call_expiration)} {format_money(row.short_call_strike)}C / Delta {short_call_delta} / Prem {short_call_premium}",
                 f"{leaps_yield_pct:.2f}%" if leaps_yield_pct is not None else "N/A",
-                f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A",
+                f"{earnings_date.month}/{earnings_date.day}" if earnings_date else "N/A",
                 str(row.score),
             ])
     lines.append(
@@ -1459,7 +1472,8 @@ def render_pmcc_html_table(rows: List[PmccRow]) -> str:
             short_premium = format_money(row.short_call_price * 100.0) if row.short_call_price is not None else "N/A"
             short_delta = f"{row.short_call_delta:.2f}" if row.short_call_delta is not None else "N/A"
             _, leaps_yield_pct = pmcc_premium_yields(row.price, row.leaps_price, row.short_call_price)
-            earnings_text = f"{row.earnings_date.month}/{row.earnings_date.day}" if row.earnings_date else "N/A"
+            earnings_date = future_earnings_date(row.earnings_date, date.today())
+            earnings_text = f"{earnings_date.month}/{earnings_date.day}" if earnings_date else "N/A"
             table_rows.append(
                 "<tr>"
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
@@ -1882,11 +1896,15 @@ def build_report(
             cached = earnings_cache.get(symbol)
             if cached and cached.get("fetched_on") == today.isoformat():
                 earnings_iso = cached.get("earnings_date")
-                return date.fromisoformat(earnings_iso) if earnings_iso else None
+                if not earnings_iso:
+                    return None
+                cached_date = date.fromisoformat(earnings_iso)
+                if cached_date >= today:
+                    return cached_date
 
         url = f"{STOCK_ANALYSIS_BASE_URL}/{symbol.lower()}/statistics/"
         html = http_get_text(url)
-        earnings_date = parse_earnings_date_from_html(html)
+        earnings_date = future_earnings_date(parse_earnings_date_from_html(html), today)
         with earnings_cache_lock:
             earnings_cache[symbol] = {
                 "fetched_on": today.isoformat(),
