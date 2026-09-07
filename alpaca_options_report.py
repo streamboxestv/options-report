@@ -1105,11 +1105,11 @@ def pmcc_row_to_dict(row: PmccRow) -> Dict[str, object]:
     }
 
 
-def credit_spread_leg_text(row: CreditSpreadRow, strike: Optional[float], action: str) -> str:
+def credit_spread_leg_text(row: CreditSpreadRow, strike: Optional[float]) -> str:
     if strike is None or row.option_type is None:
         return "N/A"
     option_label = "Put" if row.option_type == "put" else "Call"
-    return f"{format_money(strike)} {option_label} ({action})"
+    return f"{format_money(strike)} {option_label}"
 
 
 def credit_spread_row_to_dict(row: CreditSpreadRow) -> Dict[str, object]:
@@ -1121,9 +1121,9 @@ def credit_spread_row_to_dict(row: CreditSpreadRow) -> Dict[str, object]:
         "expiration": row.expiration.isoformat() if row.expiration else None,
         "expirationText": display_expiration_with_year(row.expiration) if row.expiration else "N/A",
         "shortStrike": row.short_strike,
-        "shortStrikeText": credit_spread_leg_text(row, row.short_strike, "Sell"),
+        "shortStrikeText": credit_spread_leg_text(row, row.short_strike),
         "longStrike": row.long_strike,
-        "longStrikeText": credit_spread_leg_text(row, row.long_strike, "Buy"),
+        "longStrikeText": credit_spread_leg_text(row, row.long_strike),
         "shortDelta": row.short_delta,
         "shortDeltaText": f"{row.short_delta:.2f}" if row.short_delta is not None else "N/A",
         "longDelta": row.long_delta,
@@ -1348,8 +1348,8 @@ def render_credit_spread_table(rows: List[CreditSpreadRow]) -> str:
                 row.stock,
                 row.strategy,
                 display_expiration_with_year(row.expiration) if row.expiration else "N/A",
-                credit_spread_leg_text(row, row.short_strike, "Sell"),
-                credit_spread_leg_text(row, row.long_strike, "Buy"),
+                credit_spread_leg_text(row, row.short_strike),
+                credit_spread_leg_text(row, row.long_strike),
                 format_money(row.credit) if row.credit is not None else "N/A",
                 format_money(row.max_loss) if row.max_loss is not None else "N/A",
                 f"{row.max_roi_pct:.2f}%" if row.max_roi_pct is not None else "N/A",
@@ -1357,7 +1357,7 @@ def render_credit_spread_table(rows: List[CreditSpreadRow]) -> str:
             ])
     lines.append(
         render_markdown_table(
-            ["Ticker", "Strategy", "Expiration", "Short Strike", "Long Strike", "Credit", "Max Loss", "Max ROI", "Status"],
+            ["Ticker", "Strategy", "Expiration", "Short Strike (Sell)", "Long Strike (Buy)", "Credit", "Max Loss", "Max ROI", "Status"],
             table_rows,
             ["left", "left", "center", "left", "left", "right", "right", "right", "left"],
         )
@@ -1517,8 +1517,8 @@ def render_credit_spread_html_table(rows: List[CreditSpreadRow]) -> str:
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;font-weight:700;color:#111827;">{escape(row.stock)}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;">{escape(row.strategy)}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:center;color:#111827;">{escape(display_expiration_with_year(row.expiration) if row.expiration else "N/A")}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.short_strike, "Sell"))}</td>'
-                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.long_strike, "Buy"))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.short_strike))}</td>'
+                f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#111827;font-weight:700;">{escape(credit_spread_leg_text(row, row.long_strike))}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.credit) if row.credit is not None else "N/A")}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(format_money(row.max_loss) if row.max_loss is not None else "N/A")}</td>'
                 f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#111827;">{escape(f"{row.max_roi_pct:.2f}%" if row.max_roi_pct is not None else "N/A")}</td>'
@@ -1538,8 +1538,8 @@ def render_credit_spread_html_table(rows: List[CreditSpreadRow]) -> str:
         '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Ticker</th>'
         '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Strategy</th>'
         '<th style="padding:12px 14px;text-align:center;font-size:12px;letter-spacing:0.04em;">Expiration</th>'
-        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Short Strike</th>'
-        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Long Strike</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Short Strike (Sell)</th>'
+        '<th style="padding:12px 14px;text-align:left;font-size:12px;letter-spacing:0.04em;">Long Strike (Buy)</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Credit</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Max Loss</th>'
         '<th style="padding:12px 14px;text-align:right;font-size:12px;letter-spacing:0.04em;">Max ROI</th>'
