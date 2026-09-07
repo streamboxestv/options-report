@@ -1818,8 +1818,8 @@ def build_report_html(
         f'{render_portfolio_html_table(portfolio_rows, portfolio_expiration_label)}'
         f'{render_html_table("Covered Calls", covered_calls, covered_call_label)}'
         f'{render_html_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label)}'
-        f'{render_pmcc_html_table(pmcc_rows)}'
         f'{render_credit_spread_html_table(credit_spread_rows)}'
+        f'{render_pmcc_html_table(pmcc_rows)}'
         f"{skipped_section}"
         "</div>"
         "</div>"
@@ -2247,8 +2247,8 @@ def build_report(
         render_portfolio_table(portfolio_rows, portfolio_label),
         render_table("Covered Calls", covered_calls, covered_call_label),
         render_table("Cash Secured Puts", cash_secured_puts, cash_secured_put_label),
-        render_pmcc_table(pmcc_rows),
         render_credit_spread_table(credit_spread_rows),
+        render_pmcc_table(pmcc_rows),
     ]
     if excluded_rows:
         parts.extend(["", render_excluded_table(excluded_rows)])
