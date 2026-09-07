@@ -578,6 +578,7 @@ class handler(BaseHTTPRequestHandler):
                 "forced": force_refresh,
                 "reportDate": snapshot.get("reportDate"),
                 "reportDateIso": snapshot.get("reportDateIso"),
+                "pricingRefreshedAt": snapshot.get("pricingRefreshedAt"),
                 "expiration": expiration,
                 "repository": repository,
                 "branch": branch,

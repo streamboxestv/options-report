@@ -1984,6 +1984,17 @@ def build_report(
             time.sleep(batch_pause_seconds)
     save_earnings_cache(earnings_cache)
 
+    portfolio_tickers = load_my_portfolio_tickers()
+    pricing_symbols = dedupe_keep_order(symbols + CREDIT_SPREAD_SYMBOLS + portfolio_tickers)
+    pricing_refreshed_dt = datetime.now()
+    try:
+        fresh_prices = get_latest_prices(pricing_symbols, api_key, api_secret)
+        latest_prices.update(fresh_prices)
+        pricing_refreshed_dt = datetime.now()
+    except Exception as exc:
+        skipped.append(f"Live pricing refresh: {exc}")
+    pricing_refreshed_at = pricing_refreshed_dt.strftime("%Y-%m-%d %H:%M:%S")
+
     covered_calls = []
     cash_secured_puts = []
     portfolio_rows = []
@@ -2175,7 +2186,6 @@ def build_report(
 
     credit_spread_rows = sorted_credit_spread_rows(credit_spread_rows)
 
-    portfolio_tickers = load_my_portfolio_tickers()
     def build_portfolio_symbol(symbol: str) -> Optional[Tuple[str, OptionRow, date]]:
         if symbol not in latest_prices:
             return None
@@ -2237,6 +2247,7 @@ def build_report(
         "reportDate": report_date_label,
         "reportDateIso": report_date_iso,
         "generatedAt": generated_at,
+        "pricingRefreshedAt": pricing_refreshed_at,
         "expiration": covered_call_label if covered_call_label != "N/A" else cash_secured_put_label,
         "includedCount": len(final_symbols),
         "requestedCount": len(symbols),
