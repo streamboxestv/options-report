@@ -1,89 +1,94 @@
-# Options Report - 9/7
+# Options Report - 9/8
 
 ## My Portfolio Report - Expiration 9/11
 
 | Ticker    | Price     | Avg Weekly Move % | Covered Call Strike | Premium     |
 | --------- | --------: | ----------------: | ------------------: | ----------: |
-| MU        | $1,014.74 |            14.87% |           $1,165.00 |     $233.00 |
-| BE        |   $250.80 |            23.63% |             $310.00 |     $212.00 |
-| LITE      |   $879.72 |            18.78% |           $1,045.00 |     $154.00 |
-| NBIS      |   $224.55 |            21.06% |             $272.50 |      $85.00 |
-| AMD       |   $476.08 |            12.69% |             $537.50 |      $50.00 |
-| AVGO      |   $357.83 |             9.42% |             $392.50 |      $42.00 |
-| CRWD      |   $213.04 |            10.49% |             $235.00 |      $41.00 |
-| NVDA      |   $229.83 |             7.88% |             $247.50 |      $25.00 |
-| PLTR      |   $174.25 |            11.75% |             $195.00 |      $24.00 |
-| ASTS      |    $62.29 |            21.16% |              $75.00 |      $17.00 |
-| IONQ      |    $39.76 |            19.35% |              $47.50 |      $16.00 |
-| RKLB      |    $64.25 |            18.81% |              $76.00 |      $11.00 |
-| **Total** |           |                   |                     | **$910.00** |
+| MU        | $1,018.81 |            14.56% |           $1,165.00 |     $130.00 |
+| NBIS      |   $239.14 |            20.34% |             $287.50 |      $57.00 |
+| BE        |   $273.18 |            23.25% |             $335.00 |      $48.00 |
+| AMD       |   $497.83 |            12.55% |             $560.00 |      $41.00 |
+| AVGO      |   $368.95 |             9.26% |             $402.50 |      $35.00 |
+| CRWD      |   $207.46 |            10.43% |             $230.00 |      $20.00 |
+| IONQ      |    $42.37 |            18.92% |              $50.00 |      $20.00 |
+| ASTS      |    $65.31 |            21.01% |              $79.00 |      $15.00 |
+| NVDA      |   $227.58 |             7.79% |             $245.00 |      $13.00 |
+| PLTR      |   $172.52 |            11.62% |             $192.50 |      $10.00 |
+| RKLB      |    $65.60 |            18.57% |              $78.00 |      $10.00 |
+| LITE      |   $970.08 |            18.71% |           $1,150.00 |      $10.00 |
+| **Total** |           |                   |                     | **$409.00** |
 
 ## Covered Calls - Expiration 9/11
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| SMTC   | $147.79 | Buy   |            14.40% |    $170.00 | $220.00 | 1.49% |
-| PURR   |  $12.17 | Buy   |            20.75% |     $14.50 |  $15.00 | 1.23% |
-| AMBA   |  $62.86 | Sell  |            13.80% |     $72.00 |  $66.00 | 1.05% |
-| GNRC   | $187.45 | Sell  |            10.18% |    $207.50 | $190.00 | 1.01% |
+| AXTI   |  $67.33 | Buy   |            30.53% |     $88.00 | $118.00 | 1.75% |
+| MDB    | $358.67 | Sell  |            12.14% |    $402.50 | $540.00 | 1.51% |
+| SMTC   | $159.13 | Buy   |            14.41% |    $180.00 | $231.00 | 1.45% |
+| COHR   | $309.62 | Buy   |            16.77% |    $362.50 | $426.00 | 1.38% |
+| PURR   |  $11.97 | Buy   |            20.37% |     $14.50 |  $15.00 | 1.25% |
+| GLXY   |  $26.86 | Buy   |            18.38% |     $32.00 |  $32.00 | 1.19% |
+| FSLR   | $210.50 | Buy   |            10.27% |    $232.50 | $239.00 | 1.14% |
+| EXPE   | $281.07 | Sell  |             9.11% |    $307.50 | $299.00 | 1.06% |
+| GNRC   | $187.89 | Sell  |            10.08% |    $207.50 | $190.00 | 1.01% |
 
 ## Cash Secured Puts - Expiration 9/11
 
 | Ticker | Price   | Trend | Avg Weekly Move % | OTM Strike | Premium | ROI % |
 | ------ | ------: | ----- | ----------------: | ---------: | ------: | ----: |
-| GLXY   |  $26.33 | Buy   |            18.74% |     $21.50 |  $62.00 | 2.35% |
-| EXPE   | $297.87 | Sell  |             9.13% |    $270.00 | $415.00 | 1.39% |
-| ECHO   |  $89.80 | Buy   |            10.58% |     $80.00 | $105.00 | 1.17% |
+| CRSP   |  $54.34 | Sell  |            11.70% |     $48.00 | $127.00 | 2.34% |
+| BROS   |  $46.21 | Sell  |            10.28% |     $41.00 |  $77.00 | 1.67% |
+| SMTC   | $159.13 | Buy   |            14.41% |    $135.00 | $160.00 | 1.01% |
+
+## Credit Spread Candidates
+
+| Ticker | Strategy  | Expiration | Short Strike (Sell) | Long Strike (Buy) | Credit  | Max Loss | Max ROI | Status                                     |
+| ------ | --------- | :--------: | ------------------- | ----------------- | ------: | -------: | ------: | ------------------------------------------ |
+| SPY    | Bear Call | 10/9/2026  | $788.00 Call        | $793.00 Call      | $188.00 |  $312.00 |  60.26% | Qualified                                  |
+| META   | Bull Put  | 10/9/2026  | $565.00 Put         | $560.00 Put       | $133.00 |  $367.00 |  36.24% | Qualified                                  |
+| QQQ    | Bull Put  | 10/9/2026  | $691.00 Put         | $684.00 Put       | $163.00 |  $537.00 |  30.35% | Qualified                                  |
+| TSLA   | Bull Put  | 10/9/2026  | $335.00 Put         | $330.00 Put       | $116.00 |  $384.00 |  30.21% | Qualified                                  |
+| AAPL   | Bear Call | 10/9/2026  | $335.00 Call        | $340.00 Call      |  $92.00 |  $408.00 |  22.55% | Qualified                                  |
+| MSFT   | Bear Call | 10/9/2026  | $525.00 Call        | $530.00 Call      |  $90.00 |  $410.00 |  21.95% | Qualified                                  |
+| NVDA   | Bull Put  | 10/9/2026  | $210.00 Put         | $205.00 Put       |  $82.00 |  $418.00 |  19.62% | Qualified                                  |
+| AMZN   | Bear Call | 10/9/2026  | $275.00 Call        | $280.00 Call      |  $78.00 |  $422.00 |  18.48% | Qualified                                  |
+| GOOGL  | No Trade  |    N/A     | N/A                 | N/A               |     N/A |      N/A |     N/A | No Trade - No Bear Call Meets Credit/Delta |
 
 ## PMCC Candidates
 
 | Ticker | Price   | Below 52W High | Avg Weekly Move % | LEAPS to Buy                                       | Short Call to Sell                             | ROI % | Earnings | Score |
 | ------ | ------: | -------------: | ----------------: | -------------------------------------------------- | ---------------------------------------------- | ----: | :------: | ----: |
-| ETSY   |  $76.50 |        -12.42% |            10.31% | 12/15/2028 $50.00C / Delta 0.85 / Cost $3,914.50   | 9/25/2026 $85.00C / Delta 0.19 / Prem $184.00  | 4.70% |   8/5    |    86 |
-| KKR    | $107.73 |        -28.62% |             7.95% | 1/21/2028 $75.00C / Delta 0.85 / Cost $4,254.00    | 9/25/2026 $117.00C / Delta 0.18 / Prem $86.00  | 2.02% |   7/30   |    92 |
-| UAL    | $111.39 |        -19.71% |             9.33% | 1/21/2028 $75.00C / Delta 0.86 / Cost $4,496.00    | 9/25/2026 $123.00C / Delta 0.18 / Prem $90.00  | 2.00% |  10/14   |    92 |
-| MCHP   |  $74.14 |        -29.13% |             9.67% | 12/15/2028 $50.00C / Delta 0.85 / Cost $3,385.00   | 9/25/2026 $83.00C / Delta 0.18 / Prem $67.00   | 1.98% |   8/6    |    84 |
-| UBER   |  $75.75 |        -25.73% |             7.26% | 12/15/2028 $50.00C / Delta 0.86 / Cost $3,560.00   | 9/25/2026 $82.00C / Delta 0.19 / Prem $70.00   | 1.97% |   8/5    |    89 |
-| APO    | $133.56 |        -11.74% |             7.58% | 12/15/2028 $100.00C / Delta 0.85 / Cost $4,935.00  | 9/25/2026 $144.00C / Delta 0.18 / Prem $95.00  | 1.93% |   8/4    |    86 |
-| PYPL   |  $54.95 |        -29.84% |             7.86% | 12/15/2028 $40.00C / Delta 0.85 / Cost $2,110.00   | 9/25/2026 $60.00C / Delta 0.16 / Prem $39.00   | 1.85% |   7/28   |    81 |
-| DAL    |  $80.16 |        -15.99% |             7.57% | 1/21/2028 $57.50C / Delta 0.85 / Cost $3,223.00    | 9/25/2026 $87.00C / Delta 0.16 / Prem $50.00   | 1.55% |   10/8   |    86 |
-| FTNT   | $156.25 |        -10.13% |             7.65% | 1/21/2028 $105.00C / Delta 0.85 / Cost $7,932.00   | 9/25/2026 $175.00C / Delta 0.14 / Prem $108.00 | 1.36% |   7/29   |    83 |
-| AMZN   | $258.40 |        -10.02% |             6.57% | 12/15/2028 $180.00C / Delta 0.85 / Cost $11,032.00 | 9/25/2026 $280.00C / Delta 0.15 / Prem $135.00 | 1.22% |   7/30   |    83 |
-
-## Credit Spread Candidates
-
-| Ticker | Strategy  | Expiration | Short Strike        | Long Strike        | Credit  | Max Loss | Max ROI | Status    |
-| ------ | --------- | :--------: | ------------------- | ------------------ | ------: | -------: | ------: | --------- |
-| META   | Bull Put  | 10/9/2026  | $575.00 Put (Sell)  | $570.00 Put (Buy)  | $233.00 |  $267.00 |  87.27% | Qualified |
-| SPY    | Bear Call | 10/9/2026  | $790.00 Call (Sell) | $795.00 Call (Buy) | $112.00 |  $388.00 |  28.87% | Qualified |
-| NVDA   | Bull Put  | 10/9/2026  | $215.00 Put (Sell)  | $210.00 Put (Buy)  | $107.00 |  $393.00 |  27.23% | Qualified |
-| AAPL   | Bull Put  | 10/9/2026  | $305.00 Put (Sell)  | $300.00 Put (Buy)  | $100.00 |  $400.00 |  25.00% | Qualified |
-| QQQ    | Bull Put  | 10/9/2026  | $691.00 Put (Sell)  | $686.00 Put (Buy)  |  $96.00 |  $404.00 |  23.76% | Qualified |
-| TSLA   | Bull Put  | 10/9/2026  | $325.00 Put (Sell)  | $320.00 Put (Buy)  |  $95.00 |  $405.00 |  23.46% | Qualified |
-| MSFT   | Bull Put  | 10/9/2026  | $475.00 Put (Sell)  | $470.00 Put (Buy)  |  $90.00 |  $410.00 |  21.95% | Qualified |
-| GOOGL  | Bear Call | 10/9/2026  | $370.00 Call (Sell) | $375.00 Call (Buy) |  $84.00 |  $416.00 |  20.19% | Qualified |
-| AMZN   | Bear Call | 10/9/2026  | $280.00 Call (Sell) | $285.00 Call (Buy) |  $77.00 |  $423.00 |  18.20% | Qualified |
+| KKR    | $107.31 |        -28.91% |             7.83% | 1/21/2028 $77.50C / Delta 0.84 / Cost $3,190.00    | 9/25/2026 $117.00C / Delta 0.17 / Prem $86.00  | 2.70% |   N/A    |    92 |
+| APO    | $134.03 |        -11.44% |             7.51% | 12/15/2028 $100.00C / Delta 0.86 / Cost $4,921.50  | 9/25/2026 $145.00C / Delta 0.17 / Prem $125.00 | 2.54% |   N/A    |    92 |
+| VST    | $153.56 |        -29.85% |             9.96% | 12/15/2028 $105.00C / Delta 0.85 / Cost $6,292.00  | 9/25/2026 $170.00C / Delta 0.18 / Prem $155.00 | 2.46% |   N/A    |    92 |
+| UAL    | $109.00 |        -21.43% |             9.23% | 1/21/2028 $75.00C / Delta 0.84 / Cost $4,496.00    | 9/25/2026 $120.00C / Delta 0.17 / Prem $97.00  | 2.16% |  10/14   |    92 |
+| MCHP   |  $74.24 |        -29.04% |             9.61% | 12/15/2028 $50.00C / Delta 0.86 / Cost $3,390.00   | 9/25/2026 $82.00C / Delta 0.18 / Prem $70.00   | 2.06% |   N/A    |    87 |
+| FTNT   | $153.93 |        -11.46% |             7.62% | 1/21/2028 $105.00C / Delta 0.84 / Cost $7,932.00   | 9/25/2026 $170.00C / Delta 0.18 / Prem $162.00 | 2.04% |   N/A    |    92 |
+| UBER   |  $72.86 |        -28.57% |             7.22% | 12/15/2028 $50.00C / Delta 0.85 / Cost $3,335.00   | 9/25/2026 $79.00C / Delta 0.17 / Prem $57.00   | 1.71% |   N/A    |    84 |
+| EXPE   | $281.07 |        -17.52% |             9.11% | 1/21/2028 $190.00C / Delta 0.85 / Cost $15,372.00  | 9/25/2026 $310.00C / Delta 0.18 / Prem $230.00 | 1.50% |   N/A    |    86 |
+| DAL    |  $79.30 |        -16.89% |             7.47% | 1/21/2028 $57.50C / Delta 0.85 / Cost $3,223.00    | 9/25/2026 $86.00C / Delta 0.14 / Prem $47.00   | 1.46% |   10/8   |    83 |
+| AMZN   | $255.33 |        -11.09% |             6.48% | 12/15/2028 $175.00C / Delta 0.85 / Cost $11,683.00 | 9/25/2026 $275.00C / Delta 0.15 / Prem $131.00 | 1.12% |   N/A    |    83 |
 
 
 ## Earnings this Week
 
 | Ticker | Earnings Date | Expected % Move |
 | ------ | ------------- | --------------: |
-| AVAV   | 9/9           |          12.84% |
-| ORCL   | 9/10          |          11.80% |
+| AVAV   | 9/9           |          12.03% |
+| ORCL   | 9/10          |          11.43% |
 
 
 ## Team Review
 
 **Best Balance**
-- Cash Secured Put: `EXPE` | price `$297.87` | avg weekly move `9.13%` | OTM strike `$270.00` | premium `$415.00` | ROI `1.39%`
-- Covered Call: `SMTC` | price `$147.79` | avg weekly move `14.40%` | OTM strike `$170.00` | premium `$220.00` | ROI `1.49%`
-- Cash Secured Put: `ECHO` | price `$89.80` | avg weekly move `10.58%` | OTM strike `$80.00` | premium `$105.00` | ROI `1.17%`
+- Covered Call: `MDB` | price `$358.67` | avg weekly move `12.14%` | OTM strike `$402.50` | premium `$540.00` | ROI `1.51%`
+- Cash Secured Put: `BROS` | price `$46.21` | avg weekly move `10.28%` | OTM strike `$41.00` | premium `$77.00` | ROI `1.67%`
+- Covered Call: `SMTC` | price `$159.13` | avg weekly move `14.41%` | OTM strike `$180.00` | premium `$231.00` | ROI `1.45%`
 
 Why: these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.
 
 **Aggressive Premium**
-- Cash Secured Put: `GLXY` | price `$26.33` | avg weekly move `18.74%` | OTM strike `$21.50` | premium `$62.00` | ROI `2.35%`
-- Covered Call: `PURR` | price `$12.17` | avg weekly move `20.75%` | OTM strike `$14.50` | premium `$15.00` | ROI `1.23%`
-- Covered Call: `AMBA` | price `$62.86` | avg weekly move `13.80%` | OTM strike `$72.00` | premium `$66.00` | ROI `1.05%`
+- Cash Secured Put: `CRSP` | price `$54.34` | avg weekly move `11.70%` | OTM strike `$48.00` | premium `$127.00` | ROI `2.34%`
+- Covered Call: `AXTI` | price `$67.33` | avg weekly move `30.53%` | OTM strike `$88.00` | premium `$118.00` | ROI `1.75%`
+- Covered Call: `COHR` | price `$309.62` | avg weekly move `16.77%` | OTM strike `$362.50` | premium `$426.00` | ROI `1.38%`
 
