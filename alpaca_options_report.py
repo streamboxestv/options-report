@@ -362,16 +362,21 @@ def future_earnings_date(earnings_date: Optional[date], today: date) -> Optional
 
 def get_earnings_date(symbol: str, cache: Dict[str, Dict[str, str]], today: date) -> Optional[date]:
     cached = cache.get(symbol)
-    if cached and cached.get("fetched_on") == today.isoformat():
+    fallback_cached_date: Optional[date] = None
+    if cached:
         earnings_iso = cached.get("earnings_date")
-        if not earnings_iso:
-            return None
-        cached_date = date.fromisoformat(earnings_iso)
-        if cached_date >= today:
-            return cached_date
+        if earnings_iso:
+            cached_date = date.fromisoformat(earnings_iso)
+            if cached_date >= today:
+                fallback_cached_date = cached_date
+        if cached.get("fetched_on") == today.isoformat():
+            return fallback_cached_date
 
     url = f"{STOCK_ANALYSIS_BASE_URL}/{symbol.lower()}/statistics/"
-    html = http_get_text(url)
+    try:
+        html = http_get_text(url)
+    except Exception:
+        return fallback_cached_date
     earnings_date = future_earnings_date(parse_earnings_date_from_html(html), today)
     cache[symbol] = {
         "fetched_on": today.isoformat(),
@@ -1883,6 +1888,7 @@ def build_report(
     high_52w_by_symbol: Dict[str, float] = {}
     trend_by_symbol: Dict[str, str] = {}
     skipped: List[str] = []
+    warnings: List[str] = []
     excluded_rows: List[ExcludedTickerRow] = []
     active_symbols: List[str] = []
 
@@ -1892,18 +1898,24 @@ def build_report(
         return [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
 
     def get_earnings_date_safe(symbol: str) -> Optional[date]:
+        fallback_cached_date: Optional[date] = None
         with earnings_cache_lock:
             cached = earnings_cache.get(symbol)
-            if cached and cached.get("fetched_on") == today.isoformat():
+            if cached:
                 earnings_iso = cached.get("earnings_date")
-                if not earnings_iso:
-                    return None
-                cached_date = date.fromisoformat(earnings_iso)
-                if cached_date >= today:
-                    return cached_date
+                if earnings_iso:
+                    cached_date = date.fromisoformat(earnings_iso)
+                    if cached_date >= today:
+                        fallback_cached_date = cached_date
+                if cached.get("fetched_on") == today.isoformat():
+                    return fallback_cached_date
 
         url = f"{STOCK_ANALYSIS_BASE_URL}/{symbol.lower()}/statistics/"
-        html = http_get_text(url)
+        try:
+            html = http_get_text(url)
+        except Exception as exc:
+            warnings.append(f"{symbol}: earnings lookup unavailable ({exc})")
+            return fallback_cached_date
         earnings_date = future_earnings_date(parse_earnings_date_from_html(html), today)
         with earnings_cache_lock:
             earnings_cache[symbol] = {
@@ -2266,6 +2278,7 @@ def build_report(
         "reportDateIso": report_date_iso,
         "generatedAt": generated_at,
         "pricingRefreshedAt": pricing_refreshed_at,
+        "warnings": warnings,
         "expiration": covered_call_label if covered_call_label != "N/A" else cash_secured_put_label,
         "includedCount": len(final_symbols),
         "requestedCount": len(symbols),
