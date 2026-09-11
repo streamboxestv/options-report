@@ -186,6 +186,14 @@ ETF_SYMBOLS = {"SPY", "QQQ"}
 DATA_BASE_URL = "https://data.alpaca.markets"
 STOCK_FEED = "iex"
 STOCK_ANALYSIS_BASE_URL = "https://stockanalysis.com/stocks"
+NASDAQ_EARNINGS_CALENDAR_URL = "https://api.nasdaq.com/api/calendar/earnings"
+NASDAQ_EARNINGS_LOOKAHEAD_DAYS = 120
+NASDAQ_EARNINGS_HEADERS = {
+    "Accept": "application/json, text/plain, */*",
+    "Origin": "https://www.nasdaq.com",
+    "Referer": "https://www.nasdaq.com/market-activity/earnings",
+    "User-Agent": "Mozilla/5.0",
+}
 
 
 @dataclass
@@ -312,6 +320,32 @@ def http_get_text(url: str) -> str:
     raise RuntimeError(f"Failed request for {url}: {last_error}")
 
 
+def http_get_json(url: str, headers: Optional[Dict[str, str]] = None) -> Dict:
+    request_headers = headers or {
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0",
+    }
+    last_error: Optional[Exception] = None
+    for attempt in range(4):
+        req = urllib.request.Request(url, headers=request_headers)
+        try:
+            with urllib.request.urlopen(req, timeout=30) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            if exc.code in {429, 500, 502, 503, 504} and attempt < 3:
+                time.sleep(1 + attempt)
+                last_error = exc
+                continue
+            raise RuntimeError(f"HTTP {exc.code} for {url}") from exc
+        except urllib.error.URLError as exc:
+            last_error = exc
+            if attempt < 3:
+                time.sleep(1 + attempt)
+                continue
+            raise RuntimeError(f"Network error for {url}: {exc}") from exc
+    raise RuntimeError(f"Failed request for {url}: {last_error}")
+
+
 def load_earnings_cache() -> Dict[str, Dict[str, str]]:
     if not os.path.exists(EARNINGS_CACHE_FILE):
         return {}
@@ -352,6 +386,21 @@ def parse_earnings_date_from_html(html: str) -> Optional[date]:
             except ValueError:
                 continue
     return None
+
+
+def parse_nasdaq_earnings_symbols(payload: Dict) -> List[str]:
+    rows = ((payload.get("data") or {}).get("rows")) or []
+    symbols: List[str] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        raw_symbol = str(row.get("symbol") or "").strip().upper()
+        if not raw_symbol:
+            continue
+        symbol = re.sub(r"[^A-Z0-9.\-]", "", raw_symbol)
+        if symbol:
+            symbols.append(symbol)
+    return symbols
 
 
 def future_earnings_date(earnings_date: Optional[date], today: date) -> Optional[date]:
@@ -1883,6 +1932,9 @@ def build_report(
         latest_prices.update(get_latest_prices(missing_credit_symbols, api_key, api_secret))
     earnings_cache = load_earnings_cache()
     earnings_cache_lock = threading.Lock()
+    nasdaq_earnings_cache: Dict[date, List[str]] = {}
+    nasdaq_earnings_cache_lock = threading.Lock()
+    nasdaq_warning_logged = False
 
     pct_otm_by_symbol = {}
     high_52w_by_symbol: Dict[str, float] = {}
@@ -1896,6 +1948,38 @@ def build_report(
         if batch_size <= 0:
             return [items]
         return [items[i:i + batch_size] for i in range(0, len(items), batch_size)]
+
+    def get_nasdaq_earnings_symbols(day_value: date) -> List[str]:
+        nonlocal nasdaq_warning_logged
+        with nasdaq_earnings_cache_lock:
+            cached_symbols = nasdaq_earnings_cache.get(day_value)
+            if cached_symbols is not None:
+                return cached_symbols
+
+        url = NASDAQ_EARNINGS_CALENDAR_URL + "?" + urllib.parse.urlencode({"date": day_value.isoformat()})
+        try:
+            payload = http_get_json(url, NASDAQ_EARNINGS_HEADERS)
+            symbols_for_day = parse_nasdaq_earnings_symbols(payload)
+        except Exception as exc:
+            symbols_for_day = []
+            with nasdaq_earnings_cache_lock:
+                if not nasdaq_warning_logged:
+                    warnings.append(f"Nasdaq earnings backup unavailable ({exc})")
+                    nasdaq_warning_logged = True
+
+        with nasdaq_earnings_cache_lock:
+            nasdaq_earnings_cache[day_value] = symbols_for_day
+        return symbols_for_day
+
+    def get_nasdaq_earnings_date(symbol: str) -> Optional[date]:
+        lookup_symbol = symbol.upper()
+        end_date = today + timedelta(days=NASDAQ_EARNINGS_LOOKAHEAD_DAYS)
+        cursor = today
+        while cursor <= end_date:
+            if cursor.weekday() < 5 and lookup_symbol in get_nasdaq_earnings_symbols(cursor):
+                return cursor
+            cursor += timedelta(days=1)
+        return None
 
     def get_earnings_date_safe(symbol: str) -> Optional[date]:
         fallback_cached_date: Optional[date] = None
@@ -1915,12 +1999,22 @@ def build_report(
             html = http_get_text(url)
         except Exception as exc:
             warnings.append(f"{symbol}: earnings lookup unavailable ({exc})")
+            nasdaq_earnings_date = get_nasdaq_earnings_date(symbol)
+            if nasdaq_earnings_date:
+                with earnings_cache_lock:
+                    earnings_cache[symbol] = {
+                        "fetched_on": today.isoformat(),
+                        "earnings_date": nasdaq_earnings_date.isoformat(),
+                        "source": "nasdaq",
+                    }
+                return nasdaq_earnings_date
             return fallback_cached_date
         earnings_date = future_earnings_date(parse_earnings_date_from_html(html), today)
         with earnings_cache_lock:
             earnings_cache[symbol] = {
                 "fetched_on": today.isoformat(),
                 "earnings_date": earnings_date.isoformat() if earnings_date else "",
+                "source": "stockanalysis",
             }
         return earnings_date
 
