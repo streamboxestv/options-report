@@ -261,7 +261,7 @@ def options_report_stocks() -> List[str]:
         "EOSE": "TXN",
         "LUV": "CRDO",
         "LYFT": "LITE",
-        "NU": "CRSP",
+        "NU": "ADBE",
         "PINS": "GNRC",
         "QBTS": "AXON",
         "QS": "OUST",
