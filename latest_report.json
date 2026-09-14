@@ -1,427 +1,1006 @@
 {
   "reportTitle": "Options Report",
-  "reportDate": "9/11",
-  "reportDateIso": "2026-09-11",
-  "generatedAt": "2026-09-11 14:35:55",
-  "pricingRefreshedAt": "2026-09-11 14:35:54",
-  "expiration": "N/A",
-  "includedCount": 0,
+  "reportDate": "9/14",
+  "reportDateIso": "2026-09-14",
+  "generatedAt": "2026-09-14 14:39:45",
+  "pricingRefreshedAt": "2026-09-14 14:38:19",
+  "warnings": [
+    "RBRK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rbrk/statistics/)",
+    "ACHR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/achr/statistics/)",
+    "TER: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ter/statistics/)",
+    "ALAB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/alab/statistics/)",
+    "AFRM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/afrm/statistics/)",
+    "AAPL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/aapl/statistics/)",
+    "AI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ai/statistics/)",
+    "PURR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/purr/statistics/)",
+    "AMAT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amat/statistics/)",
+    "AMPX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ampx/statistics/)",
+    "APLD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/apld/statistics/)",
+    "AMD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amd/statistics/)",
+    "APO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/apo/statistics/)",
+    "ASTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/asts/statistics/)",
+    "AVGO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/avgo/statistics/)",
+    "ANET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/anet/statistics/)",
+    "AMZN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amzn/statistics/)",
+    "APP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/app/statistics/)",
+    "BE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/be/statistics/)",
+    "AXTI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/axti/statistics/)",
+    "BROS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bros/statistics/)",
+    "CAVA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cava/statistics/)",
+    "MDB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mdb/statistics/)",
+    "ENPH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/enph/statistics/)",
+    "CEG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ceg/statistics/)",
+    "BULL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bull/statistics/)",
+    "KLAC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/klac/statistics/)",
+    "AVAV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/avav/statistics/)",
+    "CIFR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cifr/statistics/)",
+    "CLSK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/clsk/statistics/)",
+    "COIN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/coin/statistics/)",
+    "COHR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cohr/statistics/)",
+    "CRM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crm/statistics/)",
+    "CMG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cmg/statistics/)",
+    "CRWD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crwd/statistics/)",
+    "CRCL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crcl/statistics/)",
+    "CORZ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/corz/statistics/)",
+    "CRWV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crwv/statistics/)",
+    "CVNA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cvna/statistics/)",
+    "DAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dal/statistics/)",
+    "DASH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dash/statistics/)",
+    "DKNG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dkng/statistics/)",
+    "DELL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dell/statistics/)",
+    "FSLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fsly/statistics/)",
+    "AMBA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amba/statistics/)",
+    "DDOG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ddog/statistics/)",
+    "ASML: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/asml/statistics/)",
+    "DUOL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/duol/statistics/)",
+    "TXN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/txn/statistics/)",
+    "ETSY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/etsy/statistics/)",
+    "EXPE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/expe/statistics/)",
+    "FIGR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/figr/statistics/)",
+    "FCX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fcx/statistics/)",
+    "NFLX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nflx/statistics/)",
+    "FTNT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ftnt/statistics/)",
+    "FSLR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fslr/statistics/)",
+    "FISV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fisv/statistics/)",
+    "FLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fly/statistics/)",
+    "SPOT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/spot/statistics/)",
+    "GLW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/glw/statistics/)",
+    "HOOD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hood/statistics/)",
+    "ARM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/arm/statistics/)",
+    "AAOI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/aaoi/statistics/)",
+    "HPE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hpe/statistics/)",
+    "GLXY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/glxy/statistics/)",
+    "HIMS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hims/statistics/)",
+    "SNDK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sndk/statistics/)",
+    "HUT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hut/statistics/)",
+    "INTC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/intc/statistics/)",
+    "IONQ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ionq/statistics/)",
+    "IOT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/iot/statistics/)",
+    "IREN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/iren/statistics/)",
+    "JOBY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/joby/statistics/)",
+    "LRCX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lrcx/statistics/)",
+    "KKR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/kkr/statistics/)",
+    "CRDO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crdo/statistics/)",
+    "LUNR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lunr/statistics/)",
+    "LUMN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lumn/statistics/)",
+    "LITE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lite/statistics/)",
+    "MBLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mbly/statistics/)",
+    "MRVL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mrvl/statistics/)",
+    "MSTR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mstr/statistics/)",
+    "NET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/net/statistics/)",
+    "MSFT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/msft/statistics/)",
+    "MP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mp/statistics/)",
+    "MU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mu/statistics/)",
+    "MCHP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mchp/statistics/)",
+    "NBIS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nbis/statistics/)",
+    "NOW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/now/statistics/)",
+    "NVDA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/)",
+    "ADBE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/adbe/statistics/)",
+    "OKLO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oklo/statistics/)",
+    "ORCL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/orcl/statistics/)",
+    "NVTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvts/statistics/)",
+    "OKTA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/okta/statistics/)",
+    "ONON: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/onon/statistics/)",
+    "WDC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wdc/statistics/)",
+    "ONDS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/onds/statistics/)",
+    "KTOS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ktos/statistics/)",
+    "OSCR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oscr/statistics/)",
+    "PANW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/panw/statistics/)",
+    "GNRC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/gnrc/statistics/)",
+    "PATH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/path/statistics/)",
+    "POET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/poet/statistics/)",
+    "PLTR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pltr/statistics/)",
+    "PL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pl/statistics/)",
+    "PYPL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pypl/statistics/)",
+    "AXON: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/axon/statistics/)",
+    "QCOM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/qcom/statistics/)",
+    "OUST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oust/statistics/)",
+    "RCAT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rcat/statistics/)",
+    "RDDT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rddt/statistics/)",
+    "QBTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/qbts/statistics/)",
+    "RIVN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rivn/statistics/)",
+    "RBLX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rblx/statistics/)",
+    "RDW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rdw/statistics/)",
+    "RKLB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rklb/statistics/)",
+    "RGTI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rgti/statistics/)",
+    "RKT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rkt/statistics/)",
+    "ROKU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/roku/statistics/)",
+    "SMTC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/smtc/statistics/)",
+    "SMCI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/smci/statistics/)",
+    "ECHO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/echo/statistics/)",
+    "SHOP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/shop/statistics/)",
+    "SOFI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sofi/statistics/)",
+    "UUUU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uuuu/statistics/)",
+    "SNOW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/snow/statistics/)",
+    "SOUN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/soun/statistics/)",
+    "TEM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tem/statistics/)",
+    "TSLA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/)",
+    "TOST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tost/statistics/)",
+    "TSM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsm/statistics/)",
+    "U: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/u/statistics/)",
+    "UAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ual/statistics/)",
+    "UEC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uec/statistics/)",
+    "TTD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ttd/statistics/)",
+    "UBER: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uber/statistics/)",
+    "USAR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/usar/statistics/)",
+    "UPST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/upst/statistics/)",
+    "VRT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vrt/statistics/)",
+    "WULF: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wulf/statistics/)",
+    "W: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/w/statistics/)",
+    "XYZ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/xyz/statistics/)",
+    "META: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/meta/statistics/)",
+    "GOOGL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/googl/statistics/)",
+    "SKHY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/skhy/statistics/)",
+    "VST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vst/statistics/)",
+    "ZETA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/zeta/statistics/)",
+    "ZS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/zs/statistics/)",
+    "ADBE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/adbe/statistics/)",
+    "NVDA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/)",
+    "RBRK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rbrk/statistics/)",
+    "SKHY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/skhy/statistics/)",
+    "SMTC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/smtc/statistics/)",
+    "NVDA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/)"
+  ],
+  "expiration": "9/18",
+  "includedCount": 149,
   "requestedCount": 150,
   "myPortfolio": {
     "title": "My Portfolio Report",
-    "expiration": "9/11",
+    "expiration": "9/18",
     "rows": [
       {
         "ticker": "LITE",
-        "price": 939.46,
-        "priceText": "$939.46",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 18.834792626367328,
-        "avgWeeklyMovePctText": "18.83%",
-        "strike": 1115.0,
-        "strikeText": "$1,115.00",
-        "premium": 5.0,
-        "premiumText": "$5.00",
-        "roiPct": 0.005322206373874354,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "NBIS",
-        "price": 230.99,
-        "priceText": "$230.99",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 20.516759513321635,
-        "avgWeeklyMovePctText": "20.52%",
-        "strike": 277.5,
-        "strikeText": "$277.50",
-        "premium": 3.0,
-        "premiumText": "$3.00",
-        "roiPct": 0.01298757521970648,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "PLTR",
-        "price": 166.95,
-        "priceText": "$166.95",
+        "price": 849.99,
+        "priceText": "$849.99",
         "trend": "Sell",
-        "avgWeeklyMovePct": 11.690157000610455,
-        "avgWeeklyMovePctText": "11.69%",
-        "strike": 187.5,
-        "strikeText": "$187.50",
-        "premium": 2.0,
-        "premiumText": "$2.00",
-        "roiPct": 0.011979634621144057,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "NVDA",
-        "price": 220.09,
-        "priceText": "$220.09",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 7.873983253731362,
-        "avgWeeklyMovePctText": "7.87%",
-        "strike": 237.5,
-        "strikeText": "$237.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.00454359580171748,
-        "roiPctText": "0.00%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "ASTS",
-        "price": 60.335,
-        "priceText": "$60.34",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 21.16510574565066,
-        "avgWeeklyMovePctText": "21.17%",
-        "strike": 73.0,
-        "strikeText": "$73.00",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.01657412778652523,
-        "roiPctText": "0.02%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "MU",
-        "price": 978.17,
-        "priceText": "$978.17",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 14.647383599735111,
-        "avgWeeklyMovePctText": "14.65%",
-        "strike": 1120.0,
-        "strikeText": "$1,120.00",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.0010223171841295482,
-        "roiPctText": "0.00%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "AVGO",
-        "price": 364.69,
-        "priceText": "$364.69",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 9.296041279117977,
-        "avgWeeklyMovePctText": "9.30%",
-        "strike": 397.5,
-        "strikeText": "$397.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.002742054895939017,
-        "roiPctText": "0.00%",
+        "avgWeeklyMovePct": 18.771721406054446,
+        "avgWeeklyMovePctText": "18.77%",
+        "strike": 1010.0,
+        "strikeText": "$1,010.00",
+        "premium": 175.0,
+        "premiumText": "$175.00",
+        "roiPct": 0.20588477511500136,
+        "roiPctText": "0.21%",
         "action": "Wait"
       },
       {
         "ticker": "CRWD",
-        "price": 207.29,
-        "priceText": "$207.29",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 10.478370528203957,
-        "avgWeeklyMovePctText": "10.48%",
-        "strike": 230.0,
-        "strikeText": "$230.00",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.004824159390226254,
-        "roiPctText": "0.00%",
+        "price": 231.15,
+        "priceText": "$231.15",
+        "trend": "Buy",
+        "avgWeeklyMovePct": 10.34242446189955,
+        "avgWeeklyMovePctText": "10.34%",
+        "strike": 255.0,
+        "strikeText": "$255.00",
+        "premium": 112.00000000000001,
+        "premiumText": "$112.00",
+        "roiPct": 0.48453385247674674,
+        "roiPctText": "0.48%",
         "action": "Wait"
       },
       {
-        "ticker": "IONQ",
-        "price": 37.21,
-        "priceText": "$37.21",
+        "ticker": "MU",
+        "price": 912.44,
+        "priceText": "$912.44",
         "trend": "Sell",
-        "avgWeeklyMovePct": 19.22531731930596,
-        "avgWeeklyMovePctText": "19.23%",
-        "strike": 44.5,
-        "strikeText": "$44.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.026874496103198062,
-        "roiPctText": "0.03%",
+        "avgWeeklyMovePct": 14.508349225736941,
+        "avgWeeklyMovePctText": "14.51%",
+        "strike": 1045.0,
+        "strikeText": "$1,045.00",
+        "premium": 108.0,
+        "premiumText": "$108.00",
+        "roiPct": 0.11836394721844726,
+        "roiPctText": "0.12%",
         "action": "Wait"
       },
       {
         "ticker": "AMD",
-        "price": 518.07,
-        "priceText": "$518.07",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 12.649592250974456,
-        "avgWeeklyMovePctText": "12.65%",
-        "strike": 582.5,
-        "strikeText": "$582.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.00193024108711178,
-        "roiPctText": "0.00%",
+        "price": 483.97,
+        "priceText": "$483.97",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 12.552782895308992,
+        "avgWeeklyMovePctText": "12.55%",
+        "strike": 545.0,
+        "strikeText": "$545.00",
+        "premium": 56.99999999999999,
+        "premiumText": "$57.00",
+        "roiPct": 0.11777589520011568,
+        "roiPctText": "0.12%",
         "action": "Wait"
       },
       {
-        "ticker": "RKLB",
-        "price": 63.9,
-        "priceText": "$63.90",
+        "ticker": "NBIS",
+        "price": 212.965,
+        "priceText": "$212.97",
         "trend": "Sell",
-        "avgWeeklyMovePct": 18.686394401300515,
-        "avgWeeklyMovePctText": "18.69%",
-        "strike": 76.0,
-        "strikeText": "$76.00",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.01564945226917058,
-        "roiPctText": "0.02%",
+        "avgWeeklyMovePct": 20.45507344519297,
+        "avgWeeklyMovePctText": "20.46%",
+        "strike": 257.5,
+        "strikeText": "$257.50",
+        "premium": 48.0,
+        "premiumText": "$48.00",
+        "roiPct": 0.2253891484516235,
+        "roiPctText": "0.23%",
         "action": "Wait"
       },
       {
         "ticker": "BE",
-        "price": 274.29,
-        "priceText": "$274.29",
+        "price": 255.09,
+        "priceText": "$255.09",
         "trend": "Buy",
-        "avgWeeklyMovePct": 23.332753182178664,
-        "avgWeeklyMovePctText": "23.33%",
-        "strike": 337.5,
-        "strikeText": "$337.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.0036457763680775817,
-        "roiPctText": "0.00%",
+        "avgWeeklyMovePct": 22.94047371100342,
+        "avgWeeklyMovePctText": "22.94%",
+        "strike": 312.5,
+        "strikeText": "$312.50",
+        "premium": 36.0,
+        "premiumText": "$36.00",
+        "roiPct": 0.1411266611784076,
+        "roiPctText": "0.14%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "ANET",
+        "price": 189.76,
+        "priceText": "$189.76",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 10.99493901793929,
+        "avgWeeklyMovePctText": "10.99%",
+        "strike": 210.0,
+        "strikeText": "$210.00",
+        "premium": 31.0,
+        "premiumText": "$31.00",
+        "roiPct": 0.16336424957841483,
+        "roiPctText": "0.16%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "AVGO",
+        "price": 344.985,
+        "priceText": "$344.99",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 9.16648867143172,
+        "avgWeeklyMovePctText": "9.17%",
+        "strike": 377.5,
+        "strikeText": "$377.50",
+        "premium": 23.0,
+        "premiumText": "$23.00",
+        "roiPct": 0.06666956534342072,
+        "roiPctText": "0.07%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "PLTR",
+        "price": 167.86,
+        "priceText": "$167.86",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 11.48849932096751,
+        "avgWeeklyMovePctText": "11.49%",
+        "strike": 187.5,
+        "strikeText": "$187.50",
+        "premium": 16.0,
+        "premiumText": "$16.00",
+        "roiPct": 0.09531752651018706,
+        "roiPctText": "0.10%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "NVDA",
+        "price": 210.47,
+        "priceText": "$210.47",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 7.793499435619972,
+        "avgWeeklyMovePctText": "7.79%",
+        "strike": 227.5,
+        "strikeText": "$227.50",
+        "premium": 14.000000000000002,
+        "premiumText": "$14.00",
+        "roiPct": 0.06651779350976388,
+        "roiPctText": "0.07%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "ASTS",
+        "price": 59.54,
+        "priceText": "$59.54",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 20.973448549862596,
+        "avgWeeklyMovePctText": "20.97%",
+        "strike": 72.0,
+        "strikeText": "$72.00",
+        "premium": 12.0,
+        "premiumText": "$12.00",
+        "roiPct": 0.20154517971111857,
+        "roiPctText": "0.20%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "IONQ",
+        "price": 37.47,
+        "priceText": "$37.47",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 18.961404101542357,
+        "avgWeeklyMovePctText": "18.96%",
+        "strike": 44.5,
+        "strikeText": "$44.50",
+        "premium": 10.0,
+        "premiumText": "$10.00",
+        "roiPct": 0.26688017080330934,
+        "roiPctText": "0.27%",
         "action": "Wait"
       }
     ],
-    "totalPremium": 19.0,
-    "totalPremiumText": "$19.00",
-    "totalPositionValue": 406144.5,
-    "totalPositionValueText": "$406,144.50"
+    "totalPremium": 642.0,
+    "totalPremiumText": "$642.00",
+    "totalPositionValue": 395569.0,
+    "totalPositionValueText": "$395,569.00"
   },
   "coveredCalls": {
     "title": "Covered Calls",
-    "expiration": "N/A",
+    "expiration": "9/18",
     "rows": []
   },
   "cashSecuredPuts": {
     "title": "Cash Secured Puts",
-    "expiration": "N/A",
-    "rows": []
+    "expiration": "9/18",
+    "rows": [
+      {
+        "ticker": "DUOL",
+        "price": 147.84,
+        "priceText": "$147.84",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 12.904787578292432,
+        "avgWeeklyMovePctText": "12.90%",
+        "strike": 129.0,
+        "strikeText": "$129.00",
+        "premium": 501.99999999999994,
+        "premiumText": "$502.00",
+        "roiPct": 3.3955627705627704,
+        "roiPctText": "3.40%",
+        "action": "Sell"
+      },
+      {
+        "ticker": "QBTS",
+        "price": 16.92,
+        "priceText": "$16.92",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 20.45610725547837,
+        "avgWeeklyMovePctText": "20.46%",
+        "strike": 13.5,
+        "strikeText": "$13.50",
+        "premium": 54.0,
+        "premiumText": "$54.00",
+        "roiPct": 3.1914893617021276,
+        "roiPctText": "3.19%",
+        "action": "Sell"
+      },
+      {
+        "ticker": "FIGR",
+        "price": 35.5,
+        "priceText": "$35.50",
+        "trend": "Buy",
+        "avgWeeklyMovePct": 19.579285204206904,
+        "avgWeeklyMovePctText": "19.58%",
+        "strike": 29.0,
+        "strikeText": "$29.00",
+        "premium": 68.0,
+        "premiumText": "$68.00",
+        "roiPct": 1.915492957746479,
+        "roiPctText": "1.92%",
+        "action": "Sell"
+      },
+      {
+        "ticker": "OUST",
+        "price": 34.46,
+        "priceText": "$34.46",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 21.209479773936305,
+        "avgWeeklyMovePctText": "21.21%",
+        "strike": 27.0,
+        "strikeText": "$27.00",
+        "premium": 57.99999999999999,
+        "premiumText": "$58.00",
+        "roiPct": 1.6831108531630876,
+        "roiPctText": "1.68%",
+        "action": "Sell"
+      }
+    ]
   },
   "pmccCandidates": {
     "title": "PMCC Candidates",
-    "weeklyExpiration": "9/25/2026",
-    "rows": []
+    "weeklyExpiration": "10/2/2026",
+    "rows": [
+      {
+        "ticker": "SHOP",
+        "price": 129.53,
+        "priceText": "$129.53",
+        "below52wHighPct": -28.898037601207633,
+        "below52wHighPctText": "-28.90%",
+        "avgWeeklyMovePct": 12.091766891968373,
+        "avgWeeklyMovePctText": "12.09%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 85.0,
+        "leapsStrikeText": "$85.00",
+        "leapsDelta": 0.8487,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 6766.0,
+        "leapsCostText": "$6,766.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 147.0,
+        "weeklyCallStrikeText": "$147.00",
+        "weeklyCallDelta": 0.1572,
+        "weeklyCallDeltaText": "0.16",
+        "weeklyCallPremium": 257.0,
+        "weeklyCallPremiumText": "$257.00",
+        "weeklyPremiumStockYieldPct": 1.9840963483362926,
+        "weeklyPremiumStockYieldPctText": "1.98%",
+        "weeklyPremiumLeapsYieldPct": 3.798403783624002,
+        "weeklyPremiumLeapsYieldPctText": "3.80%",
+        "leapsLegText": "12/15/2028 $85.00C | Delta 0.85 | Cost $6,766.00",
+        "shortCallLegText": "10/2/2026 $147.00C | Delta 0.16 | Prem $257.00",
+        "earningsDate": "2026-11-03",
+        "earningsDateText": "11/3",
+        "action": "Eligible - aggressive",
+        "score": 86,
+        "scoreText": "86"
+      },
+      {
+        "ticker": "UAL",
+        "price": 107.915,
+        "priceText": "$107.92",
+        "below52wHighPct": -22.212210769119864,
+        "below52wHighPctText": "-22.21%",
+        "avgWeeklyMovePct": 9.24550622595027,
+        "avgWeeklyMovePctText": "9.25%",
+        "leapsExpiration": "2028-06-16",
+        "leapsExpirationText": "6/16/2028",
+        "leapsStrike": 75.0,
+        "leapsStrikeText": "$75.00",
+        "leapsDelta": 0.8424,
+        "leapsDeltaText": "0.84",
+        "leapsCost": 4638.0,
+        "leapsCostText": "$4,638.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 119.0,
+        "weeklyCallStrikeText": "$119.00",
+        "weeklyCallDelta": 0.1672,
+        "weeklyCallDeltaText": "0.17",
+        "weeklyCallPremium": 150.0,
+        "weeklyCallPremiumText": "$150.00",
+        "weeklyPremiumStockYieldPct": 1.3899828568780983,
+        "weeklyPremiumStockYieldPctText": "1.39%",
+        "weeklyPremiumLeapsYieldPct": 3.2341526520051747,
+        "weeklyPremiumLeapsYieldPctText": "3.23%",
+        "leapsLegText": "6/16/2028 $75.00C | Delta 0.84 | Cost $4,638.00",
+        "shortCallLegText": "10/2/2026 $119.00C | Delta 0.17 | Prem $150.00",
+        "earningsDate": "2026-10-21",
+        "earningsDateText": "10/21",
+        "action": "Eligible - wider strike",
+        "score": 92,
+        "scoreText": "92"
+      },
+      {
+        "ticker": "SKHY",
+        "price": 176.86,
+        "priceText": "$176.86",
+        "below52wHighPct": -11.47926624790409,
+        "below52wHighPctText": "-11.48%",
+        "avgWeeklyMovePct": 15.099701018820369,
+        "avgWeeklyMovePctText": "15.10%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 115.0,
+        "leapsStrikeText": "$115.00",
+        "leapsDelta": 0.8488,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 9275.0,
+        "leapsCostText": "$9,275.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 205.0,
+        "weeklyCallStrikeText": "$205.00",
+        "weeklyCallDelta": 0.1849,
+        "weeklyCallDeltaText": "0.18",
+        "weeklyCallPremium": 291.0,
+        "weeklyCallPremiumText": "$291.00",
+        "weeklyPremiumStockYieldPct": 1.6453692185909758,
+        "weeklyPremiumStockYieldPctText": "1.65%",
+        "weeklyPremiumLeapsYieldPct": 3.137466307277628,
+        "weeklyPremiumLeapsYieldPctText": "3.14%",
+        "leapsLegText": "12/15/2028 $115.00C | Delta 0.85 | Cost $9,275.00",
+        "shortCallLegText": "10/2/2026 $205.00C | Delta 0.18 | Prem $291.00",
+        "earningsDate": null,
+        "earningsDateText": "N/A",
+        "action": "Eligible - aggressive",
+        "score": 86,
+        "scoreText": "86"
+      },
+      {
+        "ticker": "HOOD",
+        "price": 113.42,
+        "priceText": "$113.42",
+        "below52wHighPct": -26.247683454173032,
+        "below52wHighPctText": "-26.25%",
+        "avgWeeklyMovePct": 14.238098269055266,
+        "avgWeeklyMovePctText": "14.24%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 75.0,
+        "leapsStrikeText": "$75.00",
+        "leapsDelta": 0.8444,
+        "leapsDeltaText": "0.84",
+        "leapsCost": 6295.0,
+        "leapsCostText": "$6,295.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 131.0,
+        "weeklyCallStrikeText": "$131.00",
+        "weeklyCallDelta": 0.1849,
+        "weeklyCallDeltaText": "0.18",
+        "weeklyCallPremium": 168.0,
+        "weeklyCallPremiumText": "$168.00",
+        "weeklyPremiumStockYieldPct": 1.4812202433433257,
+        "weeklyPremiumStockYieldPctText": "1.48%",
+        "weeklyPremiumLeapsYieldPct": 2.6687847498014294,
+        "weeklyPremiumLeapsYieldPctText": "2.67%",
+        "leapsLegText": "12/15/2028 $75.00C | Delta 0.84 | Cost $6,295.00",
+        "shortCallLegText": "10/2/2026 $131.00C | Delta 0.18 | Prem $168.00",
+        "earningsDate": "2026-11-04",
+        "earningsDateText": "11/4",
+        "action": "Eligible - aggressive",
+        "score": 86,
+        "scoreText": "86"
+      },
+      {
+        "ticker": "APO",
+        "price": 127.94,
+        "priceText": "$127.94",
+        "below52wHighPct": -15.456287583426956,
+        "below52wHighPctText": "-15.46%",
+        "avgWeeklyMovePct": 7.501578863422659,
+        "avgWeeklyMovePctText": "7.50%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 95.0,
+        "leapsStrikeText": "$95.00",
+        "leapsDelta": 0.8393,
+        "leapsDeltaText": "0.84",
+        "leapsCost": 5250.0,
+        "leapsCostText": "$5,250.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 139.0,
+        "weeklyCallStrikeText": "$139.00",
+        "weeklyCallDelta": 0.1873,
+        "weeklyCallDeltaText": "0.19",
+        "weeklyCallPremium": 109.5,
+        "weeklyCallPremiumText": "$109.50",
+        "weeklyPremiumStockYieldPct": 0.8558699390339222,
+        "weeklyPremiumStockYieldPctText": "0.86%",
+        "weeklyPremiumLeapsYieldPct": 2.0857142857142854,
+        "weeklyPremiumLeapsYieldPctText": "2.09%",
+        "leapsLegText": "12/15/2028 $95.00C | Delta 0.84 | Cost $5,250.00",
+        "shortCallLegText": "10/2/2026 $139.00C | Delta 0.19 | Prem $109.50",
+        "earningsDate": "2026-11-03",
+        "earningsDateText": "11/3",
+        "action": "Eligible",
+        "score": 92,
+        "scoreText": "92"
+      },
+      {
+        "ticker": "UBER",
+        "price": 71.565,
+        "priceText": "$71.56",
+        "below52wHighPct": -29.83135601529562,
+        "below52wHighPctText": "-29.83%",
+        "avgWeeklyMovePct": 7.210638356730264,
+        "avgWeeklyMovePctText": "7.21%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 50.0,
+        "leapsStrikeText": "$50.00",
+        "leapsDelta": 0.846,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 3198.0,
+        "leapsCostText": "$3,198.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 77.0,
+        "weeklyCallStrikeText": "$77.00",
+        "weeklyCallDelta": 0.1923,
+        "weeklyCallDeltaText": "0.19",
+        "weeklyCallPremium": 57.99999999999999,
+        "weeklyCallPremiumText": "$58.00",
+        "weeklyPremiumStockYieldPct": 0.8104520366100747,
+        "weeklyPremiumStockYieldPctText": "0.81%",
+        "weeklyPremiumLeapsYieldPct": 1.813633520950594,
+        "weeklyPremiumLeapsYieldPctText": "1.81%",
+        "leapsLegText": "12/15/2028 $50.00C | Delta 0.85 | Cost $3,198.00",
+        "shortCallLegText": "10/2/2026 $77.00C | Delta 0.19 | Prem $58.00",
+        "earningsDate": "2026-11-03",
+        "earningsDateText": "11/3",
+        "action": "Eligible",
+        "score": 84,
+        "scoreText": "84"
+      },
+      {
+        "ticker": "PLTR",
+        "price": 167.86,
+        "priceText": "$167.86",
+        "below52wHighPct": -19.10166510036386,
+        "below52wHighPctText": "-19.10%",
+        "avgWeeklyMovePct": 11.48849932096751,
+        "avgWeeklyMovePctText": "11.49%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 110.0,
+        "leapsStrikeText": "$110.00",
+        "leapsDelta": 0.848,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 8832.0,
+        "leapsCostText": "$8,832.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 187.5,
+        "weeklyCallStrikeText": "$187.50",
+        "weeklyCallDelta": 0.1723,
+        "weeklyCallDeltaText": "0.17",
+        "weeklyCallPremium": 154.0,
+        "weeklyCallPremiumText": "$154.00",
+        "weeklyPremiumStockYieldPct": 0.9174311926605503,
+        "weeklyPremiumStockYieldPctText": "0.92%",
+        "weeklyPremiumLeapsYieldPct": 1.7436594202898552,
+        "weeklyPremiumLeapsYieldPctText": "1.74%",
+        "leapsLegText": "12/15/2028 $110.00C | Delta 0.85 | Cost $8,832.00",
+        "shortCallLegText": "10/2/2026 $187.50C | Delta 0.17 | Prem $154.00",
+        "earningsDate": "2026-11-02",
+        "earningsDateText": "11/2",
+        "action": "Eligible - aggressive",
+        "score": 83,
+        "scoreText": "83"
+      },
+      {
+        "ticker": "NOW",
+        "price": 138.89,
+        "priceText": "$138.89",
+        "below52wHighPct": -28.421974850546285,
+        "below52wHighPctText": "-28.42%",
+        "avgWeeklyMovePct": 10.896576207867385,
+        "avgWeeklyMovePctText": "10.90%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 90.0,
+        "leapsStrikeText": "$90.00",
+        "leapsDelta": 0.8521,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 6825.0,
+        "leapsCostText": "$6,825.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 160.0,
+        "weeklyCallStrikeText": "$160.00",
+        "weeklyCallDelta": 0.1458,
+        "weeklyCallDeltaText": "0.15",
+        "weeklyCallPremium": 118.0,
+        "weeklyCallPremiumText": "$118.00",
+        "weeklyPremiumStockYieldPct": 0.8495932032543739,
+        "weeklyPremiumStockYieldPctText": "0.85%",
+        "weeklyPremiumLeapsYieldPct": 1.7289377289377288,
+        "weeklyPremiumLeapsYieldPctText": "1.73%",
+        "leapsLegText": "12/15/2028 $90.00C | Delta 0.85 | Cost $6,825.00",
+        "shortCallLegText": "10/2/2026 $160.00C | Delta 0.15 | Prem $118.00",
+        "earningsDate": "2026-11-04",
+        "earningsDateText": "11/4",
+        "action": "Eligible - aggressive",
+        "score": 83,
+        "scoreText": "83"
+      },
+      {
+        "ticker": "ADBE",
+        "price": 261.985,
+        "priceText": "$261.99",
+        "below52wHighPct": -28.937803455664955,
+        "below52wHighPctText": "-28.94%",
+        "avgWeeklyMovePct": 8.273062143488136,
+        "avgWeeklyMovePctText": "8.27%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 175.0,
+        "leapsStrikeText": "$175.00",
+        "leapsDelta": 0.8549,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 13019.999999999998,
+        "leapsCostText": "$13,020.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 290.0,
+        "weeklyCallStrikeText": "$290.00",
+        "weeklyCallDelta": 0.1593,
+        "weeklyCallDeltaText": "0.16",
+        "weeklyCallPremium": 219.0,
+        "weeklyCallPremiumText": "$219.00",
+        "weeklyPremiumStockYieldPct": 0.8359257209382217,
+        "weeklyPremiumStockYieldPctText": "0.84%",
+        "weeklyPremiumLeapsYieldPct": 1.6820276497695852,
+        "weeklyPremiumLeapsYieldPctText": "1.68%",
+        "leapsLegText": "12/15/2028 $175.00C | Delta 0.85 | Cost $13,020.00",
+        "shortCallLegText": "10/2/2026 $290.00C | Delta 0.16 | Prem $219.00",
+        "earningsDate": null,
+        "earningsDateText": "N/A",
+        "action": "Eligible - wider strike",
+        "score": 89,
+        "scoreText": "89"
+      },
+      {
+        "ticker": "NVDA",
+        "price": 210.47,
+        "priceText": "$210.47",
+        "below52wHighPct": -10.817796610169491,
+        "below52wHighPctText": "-10.82%",
+        "avgWeeklyMovePct": 7.793499435619972,
+        "avgWeeklyMovePctText": "7.79%",
+        "leapsExpiration": "2028-12-15",
+        "leapsExpirationText": "12/15/2028",
+        "leapsStrike": 150.0,
+        "leapsStrikeText": "$150.00",
+        "leapsDelta": 0.8457,
+        "leapsDeltaText": "0.85",
+        "leapsCost": 9016.0,
+        "leapsCostText": "$9,016.00",
+        "weeklyCallExpiration": "2026-10-02",
+        "weeklyCallExpirationText": "10/2/2026",
+        "weeklyCallStrike": 227.5,
+        "weeklyCallStrikeText": "$227.50",
+        "weeklyCallDelta": 0.1617,
+        "weeklyCallDeltaText": "0.16",
+        "weeklyCallPremium": 132.0,
+        "weeklyCallPremiumText": "$132.00",
+        "weeklyPremiumStockYieldPct": 0.6271677673777736,
+        "weeklyPremiumStockYieldPctText": "0.63%",
+        "weeklyPremiumLeapsYieldPct": 1.4640638864241349,
+        "weeklyPremiumLeapsYieldPctText": "1.46%",
+        "leapsLegText": "12/15/2028 $150.00C | Delta 0.85 | Cost $9,016.00",
+        "shortCallLegText": "10/2/2026 $227.50C | Delta 0.16 | Prem $132.00",
+        "earningsDate": null,
+        "earningsDateText": "N/A",
+        "action": "Eligible",
+        "score": 83,
+        "scoreText": "83"
+      }
+    ]
   },
   "creditSpreadCandidates": {
     "title": "Credit Spread Candidates",
-    "expiration": "10/9/2026",
+    "expiration": "10/16/2026",
     "rows": [
       {
         "ticker": "QQQ",
-        "price": 715.42,
-        "priceText": "$715.42",
+        "price": 704.87,
+        "priceText": "$704.87",
         "strategy": "Bear Call",
-        "expiration": "2026-10-09",
-        "expirationText": "10/9/2026",
-        "shortStrike": 741.0,
-        "shortStrikeText": "$741.00 Call",
-        "longStrike": 746.0,
-        "longStrikeText": "$746.00 Call",
-        "shortDelta": 0.2345,
-        "shortDeltaText": "0.23",
-        "longDelta": 0.1839,
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 733.0,
+        "shortStrikeText": "$733.00 Call",
+        "longStrike": 739.0,
+        "longStrikeText": "$739.00 Call",
+        "shortDelta": 0.236,
+        "shortDeltaText": "0.24",
+        "longDelta": 0.1832,
         "longDeltaText": "0.18",
-        "credit": 130.99999999999997,
-        "creditText": "$131.00",
-        "maxLoss": 369.00000000000006,
-        "maxLossText": "$369.00",
-        "maxRoiPct": 35.501355013550125,
-        "maxRoiPctText": "35.50%",
+        "credit": 169.0,
+        "creditText": "$169.00",
+        "maxLoss": 431.00000000000006,
+        "maxLossText": "$431.00",
+        "maxRoiPct": 39.21113689095127,
+        "maxRoiPctText": "39.21%",
         "status": "Qualified"
       },
       {
         "ticker": "SPY",
-        "price": 764.59,
-        "priceText": "$764.59",
+        "price": 758.45,
+        "priceText": "$758.45",
         "strategy": "Bear Call",
-        "expiration": "2026-10-09",
-        "expirationText": "10/9/2026",
-        "shortStrike": 783.0,
-        "shortStrikeText": "$783.00 Call",
-        "longStrike": 788.0,
-        "longStrikeText": "$788.00 Call",
-        "shortDelta": 0.2361,
-        "shortDeltaText": "0.24",
-        "longDelta": 0.1691,
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 779.0,
+        "shortStrikeText": "$779.00 Call",
+        "longStrike": 785.0,
+        "longStrikeText": "$785.00 Call",
+        "shortDelta": 0.247,
+        "shortDeltaText": "0.25",
+        "longDelta": 0.1739,
         "longDeltaText": "0.17",
-        "credit": 116.00000000000001,
-        "creditText": "$116.00",
-        "maxLoss": 384.0,
-        "maxLossText": "$384.00",
-        "maxRoiPct": 30.208333333333336,
-        "maxRoiPctText": "30.21%",
+        "credit": 144.0,
+        "creditText": "$144.00",
+        "maxLoss": 456.00000000000006,
+        "maxLossText": "$456.00",
+        "maxRoiPct": 31.578947368421044,
+        "maxRoiPctText": "31.58%",
+        "status": "Qualified"
+      },
+      {
+        "ticker": "META",
+        "price": 652.27,
+        "priceText": "$652.27",
+        "strategy": "Bull Put",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 600.0,
+        "shortStrikeText": "$600.00 Put",
+        "longStrike": 595.0,
+        "longStrikeText": "$595.00 Put",
+        "shortDelta": 0.208,
+        "shortDeltaText": "0.21",
+        "longDelta": 0.1878,
+        "longDeltaText": "0.19",
+        "credit": 117.0,
+        "creditText": "$117.00",
+        "maxLoss": 383.0,
+        "maxLossText": "$383.00",
+        "maxRoiPct": 30.54830287206266,
+        "maxRoiPctText": "30.55%",
+        "status": "Qualified"
+      },
+      {
+        "ticker": "GOOGL",
+        "price": 343.88,
+        "priceText": "$343.88",
+        "strategy": "Bull Put",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 325.0,
+        "shortStrikeText": "$325.00 Put",
+        "longStrike": 320.0,
+        "longStrikeText": "$320.00 Put",
+        "shortDelta": 0.2378,
+        "shortDeltaText": "0.24",
+        "longDelta": 0.1904,
+        "longDeltaText": "0.19",
+        "credit": 112.99999999999994,
+        "creditText": "$113.00",
+        "maxLoss": 387.00000000000006,
+        "maxLossText": "$387.00",
+        "maxRoiPct": 29.198966408268717,
+        "maxRoiPctText": "29.20%",
         "status": "Qualified"
       },
       {
         "ticker": "TSLA",
-        "price": 365.51,
-        "priceText": "$365.51",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/"
-      },
-      {
-        "ticker": "NVDA",
-        "price": 220.09,
-        "priceText": "$220.09",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/"
+        "price": 358.28,
+        "priceText": "$358.28",
+        "strategy": "Bull Put",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 330.0,
+        "shortStrikeText": "$330.00 Put",
+        "longStrike": 325.0,
+        "longStrikeText": "$325.00 Put",
+        "shortDelta": 0.2212,
+        "shortDeltaText": "0.22",
+        "longDelta": 0.1877,
+        "longDeltaText": "0.19",
+        "credit": 102.99999999999994,
+        "creditText": "$103.00",
+        "maxLoss": 397.00000000000006,
+        "maxLossText": "$397.00",
+        "maxRoiPct": 25.944584382871515,
+        "maxRoiPctText": "25.94%",
+        "status": "Qualified"
       },
       {
         "ticker": "MSFT",
-        "price": 494.835,
-        "priceText": "$494.83",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/msft/statistics/"
-      },
-      {
-        "ticker": "META",
-        "price": 651.72,
-        "priceText": "$651.72",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/meta/statistics/"
-      },
-      {
-        "ticker": "GOOGL",
-        "price": 339.81,
-        "priceText": "$339.81",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/googl/statistics/"
+        "price": 498.92,
+        "priceText": "$498.92",
+        "strategy": "Bear Call",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 530.0,
+        "shortStrikeText": "$530.00 Call",
+        "longStrike": 535.0,
+        "longStrikeText": "$535.00 Call",
+        "shortDelta": 0.2231,
+        "shortDeltaText": "0.22",
+        "longDelta": 0.1893,
+        "longDeltaText": "0.19",
+        "credit": 99.99999999999996,
+        "creditText": "$100.00",
+        "maxLoss": 400.0,
+        "maxLossText": "$400.00",
+        "maxRoiPct": 24.99999999999999,
+        "maxRoiPctText": "25.00%",
+        "status": "Qualified"
       },
       {
         "ticker": "AMZN",
-        "price": 255.2,
-        "priceText": "$255.20",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/amzn/statistics/"
+        "price": 251.72,
+        "priceText": "$251.72",
+        "strategy": "Bear Call",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 270.0,
+        "shortStrikeText": "$270.00 Call",
+        "longStrike": 275.0,
+        "longStrikeText": "$275.00 Call",
+        "shortDelta": 0.243,
+        "shortDeltaText": "0.24",
+        "longDelta": 0.1877,
+        "longDeltaText": "0.19",
+        "credit": 93.00000000000001,
+        "creditText": "$93.00",
+        "maxLoss": 407.0,
+        "maxLossText": "$407.00",
+        "maxRoiPct": 22.850122850122855,
+        "maxRoiPctText": "22.85%",
+        "status": "Qualified"
       },
       {
         "ticker": "AAPL",
-        "price": 334.08,
-        "priceText": "$334.08",
-        "strategy": "No Trade",
-        "expiration": null,
-        "expirationText": "N/A",
-        "shortStrike": null,
-        "shortStrikeText": "N/A",
-        "longStrike": null,
-        "longStrikeText": "N/A",
-        "shortDelta": null,
-        "shortDeltaText": "N/A",
-        "longDelta": null,
-        "longDeltaText": "N/A",
-        "credit": null,
-        "creditText": "N/A",
-        "maxLoss": null,
-        "maxLossText": "N/A",
-        "maxRoiPct": null,
-        "maxRoiPctText": "N/A",
-        "status": "No Trade - HTTP 403 for https://stockanalysis.com/stocks/aapl/statistics/"
+        "price": 332.975,
+        "priceText": "$332.98",
+        "strategy": "Bull Put",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 315.0,
+        "shortStrikeText": "$315.00 Put",
+        "longStrike": 310.0,
+        "longStrikeText": "$310.00 Put",
+        "shortDelta": 0.2117,
+        "shortDeltaText": "0.21",
+        "longDelta": 0.1614,
+        "longDeltaText": "0.16",
+        "credit": 79.99999999999999,
+        "creditText": "$80.00",
+        "maxLoss": 420.0,
+        "maxLossText": "$420.00",
+        "maxRoiPct": 19.047619047619044,
+        "maxRoiPctText": "19.05%",
+        "status": "Qualified"
+      },
+      {
+        "ticker": "NVDA",
+        "price": 210.47,
+        "priceText": "$210.47",
+        "strategy": "Bear Call",
+        "expiration": "2026-10-16",
+        "expirationText": "10/16/2026",
+        "shortStrike": 230.0,
+        "shortStrikeText": "$230.00 Call",
+        "longStrike": 235.0,
+        "longStrikeText": "$235.00 Call",
+        "shortDelta": 0.2038,
+        "shortDeltaText": "0.20",
+        "longDelta": 0.1489,
+        "longDeltaText": "0.15",
+        "credit": 75.0,
+        "creditText": "$75.00",
+        "maxLoss": 425.0,
+        "maxLossText": "$425.00",
+        "maxRoiPct": 17.647058823529413,
+        "maxRoiPctText": "17.65%",
+        "status": "Qualified"
       }
     ]
   },
@@ -431,800 +1010,270 @@
   },
   "teamReview": {
     "title": "Team Review",
-    "bestBalance": [],
+    "bestBalance": [
+      {
+        "ticker": "OUST",
+        "price": 34.46,
+        "priceText": "$34.46",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 21.209479773936305,
+        "avgWeeklyMovePctText": "21.21%",
+        "strike": 27.0,
+        "strikeText": "$27.00",
+        "premium": 57.99999999999999,
+        "premiumText": "$58.00",
+        "roiPct": 1.6831108531630876,
+        "roiPctText": "1.68%",
+        "action": "Sell",
+        "label": "Cash Secured Put"
+      },
+      {
+        "ticker": "FIGR",
+        "price": 35.5,
+        "priceText": "$35.50",
+        "trend": "Buy",
+        "avgWeeklyMovePct": 19.579285204206904,
+        "avgWeeklyMovePctText": "19.58%",
+        "strike": 29.0,
+        "strikeText": "$29.00",
+        "premium": 68.0,
+        "premiumText": "$68.00",
+        "roiPct": 1.915492957746479,
+        "roiPctText": "1.92%",
+        "action": "Sell",
+        "label": "Cash Secured Put"
+      },
+      {
+        "ticker": "DUOL",
+        "price": 147.84,
+        "priceText": "$147.84",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 12.904787578292432,
+        "avgWeeklyMovePctText": "12.90%",
+        "strike": 129.0,
+        "strikeText": "$129.00",
+        "premium": 501.99999999999994,
+        "premiumText": "$502.00",
+        "roiPct": 3.3955627705627704,
+        "roiPctText": "3.40%",
+        "action": "Sell",
+        "label": "Cash Secured Put"
+      }
+    ],
     "bestBalanceWhy": "these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
-    "aggressivePremium": []
+    "aggressivePremium": [
+      {
+        "ticker": "QBTS",
+        "price": 16.92,
+        "priceText": "$16.92",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 20.45610725547837,
+        "avgWeeklyMovePctText": "20.46%",
+        "strike": 13.5,
+        "strikeText": "$13.50",
+        "premium": 54.0,
+        "premiumText": "$54.00",
+        "roiPct": 3.1914893617021276,
+        "roiPctText": "3.19%",
+        "action": "Sell",
+        "label": "Cash Secured Put"
+      }
+    ]
   },
   "skippedTickers": [
     {
-      "ticker": "ACHR",
-      "reason": "ACHR: HTTP 403 for https://stockanalysis.com/stocks/achr/statistics/"
-    },
-    {
-      "ticker": "AFRM",
-      "reason": "AFRM: HTTP 403 for https://stockanalysis.com/stocks/afrm/statistics/"
-    },
-    {
-      "ticker": "ALAB",
-      "reason": "ALAB: HTTP 403 for https://stockanalysis.com/stocks/alab/statistics/"
-    },
-    {
-      "ticker": "AAPL",
-      "reason": "AAPL: HTTP 403 for https://stockanalysis.com/stocks/aapl/statistics/"
-    },
-    {
-      "ticker": "RBRK",
-      "reason": "RBRK: HTTP 403 for https://stockanalysis.com/stocks/rbrk/statistics/"
-    },
-    {
-      "ticker": "PURR",
-      "reason": "PURR: HTTP 403 for https://stockanalysis.com/stocks/purr/statistics/"
-    },
-    {
-      "ticker": "TER",
-      "reason": "TER: HTTP 403 for https://stockanalysis.com/stocks/ter/statistics/"
-    },
-    {
-      "ticker": "AI",
-      "reason": "AI: HTTP 403 for https://stockanalysis.com/stocks/ai/statistics/"
-    },
-    {
-      "ticker": "AMPX",
-      "reason": "AMPX: HTTP 403 for https://stockanalysis.com/stocks/ampx/statistics/"
-    },
-    {
-      "ticker": "AMAT",
-      "reason": "AMAT: HTTP 403 for https://stockanalysis.com/stocks/amat/statistics/"
-    },
-    {
-      "ticker": "AMD",
-      "reason": "AMD: HTTP 403 for https://stockanalysis.com/stocks/amd/statistics/"
-    },
-    {
-      "ticker": "AMZN",
-      "reason": "AMZN: HTTP 403 for https://stockanalysis.com/stocks/amzn/statistics/"
-    },
-    {
-      "ticker": "APO",
-      "reason": "APO: HTTP 403 for https://stockanalysis.com/stocks/apo/statistics/"
-    },
-    {
-      "ticker": "ANET",
-      "reason": "ANET: HTTP 403 for https://stockanalysis.com/stocks/anet/statistics/"
-    },
-    {
-      "ticker": "APP",
-      "reason": "APP: HTTP 403 for https://stockanalysis.com/stocks/app/statistics/"
-    },
-    {
-      "ticker": "APLD",
-      "reason": "APLD: HTTP 403 for https://stockanalysis.com/stocks/apld/statistics/"
-    },
-    {
-      "ticker": "AVGO",
-      "reason": "AVGO: HTTP 403 for https://stockanalysis.com/stocks/avgo/statistics/"
-    },
-    {
-      "ticker": "ASTS",
-      "reason": "ASTS: HTTP 403 for https://stockanalysis.com/stocks/asts/statistics/"
-    },
-    {
-      "ticker": "BE",
-      "reason": "BE: HTTP 403 for https://stockanalysis.com/stocks/be/statistics/"
-    },
-    {
-      "ticker": "AXTI",
-      "reason": "AXTI: HTTP 403 for https://stockanalysis.com/stocks/axti/statistics/"
-    },
-    {
-      "ticker": "AVAV",
-      "reason": "AVAV: HTTP 403 for https://stockanalysis.com/stocks/avav/statistics/"
-    },
-    {
-      "ticker": "MDB",
-      "reason": "MDB: HTTP 403 for https://stockanalysis.com/stocks/mdb/statistics/"
-    },
-    {
-      "ticker": "ENPH",
-      "reason": "ENPH: HTTP 403 for https://stockanalysis.com/stocks/enph/statistics/"
-    },
-    {
-      "ticker": "BROS",
-      "reason": "BROS: HTTP 403 for https://stockanalysis.com/stocks/bros/statistics/"
-    },
-    {
-      "ticker": "BULL",
-      "reason": "BULL: HTTP 403 for https://stockanalysis.com/stocks/bull/statistics/"
-    },
-    {
-      "ticker": "KLAC",
-      "reason": "KLAC: HTTP 403 for https://stockanalysis.com/stocks/klac/statistics/"
-    },
-    {
-      "ticker": "CEG",
-      "reason": "CEG: HTTP 403 for https://stockanalysis.com/stocks/ceg/statistics/"
-    },
-    {
-      "ticker": "CAVA",
-      "reason": "CAVA: HTTP 403 for https://stockanalysis.com/stocks/cava/statistics/"
-    },
-    {
-      "ticker": "CLSK",
-      "reason": "CLSK: HTTP 403 for https://stockanalysis.com/stocks/clsk/statistics/"
-    },
-    {
-      "ticker": "CIFR",
-      "reason": "CIFR: HTTP 403 for https://stockanalysis.com/stocks/cifr/statistics/"
-    },
-    {
-      "ticker": "COIN",
-      "reason": "COIN: HTTP 403 for https://stockanalysis.com/stocks/coin/statistics/"
-    },
-    {
-      "ticker": "CRM",
-      "reason": "CRM: HTTP 403 for https://stockanalysis.com/stocks/crm/statistics/"
-    },
-    {
-      "ticker": "CORZ",
-      "reason": "CORZ: HTTP 403 for https://stockanalysis.com/stocks/corz/statistics/"
-    },
-    {
-      "ticker": "CRWD",
-      "reason": "CRWD: HTTP 403 for https://stockanalysis.com/stocks/crwd/statistics/"
-    },
-    {
-      "ticker": "CRWV",
-      "reason": "CRWV: HTTP 403 for https://stockanalysis.com/stocks/crwv/statistics/"
-    },
-    {
-      "ticker": "CMG",
-      "reason": "CMG: HTTP 403 for https://stockanalysis.com/stocks/cmg/statistics/"
-    },
-    {
-      "ticker": "CRCL",
-      "reason": "CRCL: HTTP 403 for https://stockanalysis.com/stocks/crcl/statistics/"
-    },
-    {
-      "ticker": "COHR",
-      "reason": "COHR: HTTP 403 for https://stockanalysis.com/stocks/cohr/statistics/"
-    },
-    {
-      "ticker": "CVNA",
-      "reason": "CVNA: HTTP 403 for https://stockanalysis.com/stocks/cvna/statistics/"
-    },
-    {
-      "ticker": "DAL",
-      "reason": "DAL: HTTP 403 for https://stockanalysis.com/stocks/dal/statistics/"
-    },
-    {
-      "ticker": "DASH",
-      "reason": "DASH: HTTP 403 for https://stockanalysis.com/stocks/dash/statistics/"
-    },
-    {
-      "ticker": "DDOG",
-      "reason": "DDOG: HTTP 403 for https://stockanalysis.com/stocks/ddog/statistics/"
-    },
-    {
-      "ticker": "DELL",
-      "reason": "DELL: HTTP 403 for https://stockanalysis.com/stocks/dell/statistics/"
-    },
-    {
-      "ticker": "FSLY",
-      "reason": "FSLY: HTTP 403 for https://stockanalysis.com/stocks/fsly/statistics/"
-    },
-    {
-      "ticker": "DKNG",
-      "reason": "DKNG: HTTP 403 for https://stockanalysis.com/stocks/dkng/statistics/"
-    },
-    {
-      "ticker": "DUOL",
-      "reason": "DUOL: HTTP 403 for https://stockanalysis.com/stocks/duol/statistics/"
-    },
-    {
-      "ticker": "AMBA",
-      "reason": "AMBA: HTTP 403 for https://stockanalysis.com/stocks/amba/statistics/"
-    },
-    {
-      "ticker": "ASML",
-      "reason": "ASML: HTTP 403 for https://stockanalysis.com/stocks/asml/statistics/"
-    },
-    {
-      "ticker": "ETSY",
-      "reason": "ETSY: HTTP 403 for https://stockanalysis.com/stocks/etsy/statistics/"
-    },
-    {
-      "ticker": "TXN",
-      "reason": "TXN: HTTP 403 for https://stockanalysis.com/stocks/txn/statistics/"
-    },
-    {
-      "ticker": "FIGR",
-      "reason": "FIGR: HTTP 403 for https://stockanalysis.com/stocks/figr/statistics/"
-    },
-    {
-      "ticker": "FCX",
-      "reason": "FCX: HTTP 403 for https://stockanalysis.com/stocks/fcx/statistics/"
-    },
-    {
-      "ticker": "FISV",
-      "reason": "FISV: HTTP 403 for https://stockanalysis.com/stocks/fisv/statistics/"
-    },
-    {
-      "ticker": "EXPE",
-      "reason": "EXPE: HTTP 403 for https://stockanalysis.com/stocks/expe/statistics/"
-    },
-    {
-      "ticker": "FLY",
-      "reason": "FLY: HTTP 403 for https://stockanalysis.com/stocks/fly/statistics/"
-    },
-    {
-      "ticker": "FTNT",
-      "reason": "FTNT: HTTP 403 for https://stockanalysis.com/stocks/ftnt/statistics/"
-    },
-    {
-      "ticker": "NFLX",
-      "reason": "NFLX: HTTP 403 for https://stockanalysis.com/stocks/nflx/statistics/"
-    },
-    {
-      "ticker": "FSLR",
-      "reason": "FSLR: HTTP 403 for https://stockanalysis.com/stocks/fslr/statistics/"
-    },
-    {
-      "ticker": "SPOT",
-      "reason": "SPOT: HTTP 403 for https://stockanalysis.com/stocks/spot/statistics/"
-    },
-    {
-      "ticker": "GLW",
-      "reason": "GLW: HTTP 403 for https://stockanalysis.com/stocks/glw/statistics/"
-    },
-    {
-      "ticker": "GLXY",
-      "reason": "GLXY: HTTP 403 for https://stockanalysis.com/stocks/glxy/statistics/"
-    },
-    {
-      "ticker": "ARM",
-      "reason": "ARM: HTTP 403 for https://stockanalysis.com/stocks/arm/statistics/"
-    },
-    {
-      "ticker": "HIMS",
-      "reason": "HIMS: HTTP 403 for https://stockanalysis.com/stocks/hims/statistics/"
-    },
-    {
-      "ticker": "AAOI",
-      "reason": "AAOI: HTTP 403 for https://stockanalysis.com/stocks/aaoi/statistics/"
-    },
-    {
-      "ticker": "HUT",
-      "reason": "HUT: HTTP 403 for https://stockanalysis.com/stocks/hut/statistics/"
-    },
-    {
-      "ticker": "SNDK",
-      "reason": "SNDK: HTTP 403 for https://stockanalysis.com/stocks/sndk/statistics/"
-    },
-    {
-      "ticker": "HPE",
-      "reason": "HPE: HTTP 403 for https://stockanalysis.com/stocks/hpe/statistics/"
-    },
-    {
-      "ticker": "HOOD",
-      "reason": "HOOD: HTTP 403 for https://stockanalysis.com/stocks/hood/statistics/"
-    },
-    {
-      "ticker": "INTC",
-      "reason": "INTC: HTTP 403 for https://stockanalysis.com/stocks/intc/statistics/"
-    },
-    {
-      "ticker": "IONQ",
-      "reason": "IONQ: HTTP 403 for https://stockanalysis.com/stocks/ionq/statistics/"
-    },
-    {
-      "ticker": "IOT",
-      "reason": "IOT: HTTP 403 for https://stockanalysis.com/stocks/iot/statistics/"
-    },
-    {
-      "ticker": "JOBY",
-      "reason": "JOBY: HTTP 403 for https://stockanalysis.com/stocks/joby/statistics/"
-    },
-    {
-      "ticker": "IREN",
-      "reason": "IREN: HTTP 403 for https://stockanalysis.com/stocks/iren/statistics/"
-    },
-    {
-      "ticker": "LRCX",
-      "reason": "LRCX: HTTP 403 for https://stockanalysis.com/stocks/lrcx/statistics/"
-    },
-    {
-      "ticker": "LUMN",
-      "reason": "LUMN: HTTP 403 for https://stockanalysis.com/stocks/lumn/statistics/"
-    },
-    {
-      "ticker": "CRDO",
-      "reason": "CRDO: HTTP 403 for https://stockanalysis.com/stocks/crdo/statistics/"
-    },
-    {
-      "ticker": "KKR",
-      "reason": "KKR: HTTP 403 for https://stockanalysis.com/stocks/kkr/statistics/"
-    },
-    {
-      "ticker": "LUNR",
-      "reason": "LUNR: HTTP 403 for https://stockanalysis.com/stocks/lunr/statistics/"
-    },
-    {
-      "ticker": "LITE",
-      "reason": "LITE: HTTP 403 for https://stockanalysis.com/stocks/lite/statistics/"
-    },
-    {
-      "ticker": "MBLY",
-      "reason": "MBLY: HTTP 403 for https://stockanalysis.com/stocks/mbly/statistics/"
-    },
-    {
-      "ticker": "MRVL",
-      "reason": "MRVL: HTTP 403 for https://stockanalysis.com/stocks/mrvl/statistics/"
-    },
-    {
-      "ticker": "MCHP",
-      "reason": "MCHP: HTTP 403 for https://stockanalysis.com/stocks/mchp/statistics/"
-    },
-    {
-      "ticker": "MSTR",
-      "reason": "MSTR: HTTP 403 for https://stockanalysis.com/stocks/mstr/statistics/"
-    },
-    {
-      "ticker": "MU",
-      "reason": "MU: HTTP 403 for https://stockanalysis.com/stocks/mu/statistics/"
-    },
-    {
-      "ticker": "MSFT",
-      "reason": "MSFT: HTTP 403 for https://stockanalysis.com/stocks/msft/statistics/"
-    },
-    {
-      "ticker": "NBIS",
-      "reason": "NBIS: HTTP 403 for https://stockanalysis.com/stocks/nbis/statistics/"
-    },
-    {
-      "ticker": "NET",
-      "reason": "NET: HTTP 403 for https://stockanalysis.com/stocks/net/statistics/"
-    },
-    {
-      "ticker": "MP",
-      "reason": "MP: HTTP 403 for https://stockanalysis.com/stocks/mp/statistics/"
-    },
-    {
-      "ticker": "NOW",
-      "reason": "NOW: HTTP 403 for https://stockanalysis.com/stocks/now/statistics/"
-    },
-    {
-      "ticker": "NVDA",
-      "reason": "NVDA: HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/"
-    },
-    {
-      "ticker": "ONON",
-      "reason": "ONON: HTTP 403 for https://stockanalysis.com/stocks/onon/statistics/"
-    },
-    {
-      "ticker": "NVTS",
-      "reason": "NVTS: HTTP 403 for https://stockanalysis.com/stocks/nvts/statistics/"
-    },
-    {
-      "ticker": "ONDS",
-      "reason": "ONDS: HTTP 403 for https://stockanalysis.com/stocks/onds/statistics/"
-    },
-    {
-      "ticker": "WDC",
-      "reason": "WDC: HTTP 403 for https://stockanalysis.com/stocks/wdc/statistics/"
-    },
-    {
-      "ticker": "OKTA",
-      "reason": "OKTA: HTTP 403 for https://stockanalysis.com/stocks/okta/statistics/"
-    },
-    {
-      "ticker": "CRSP",
-      "reason": "CRSP: HTTP 403 for https://stockanalysis.com/stocks/crsp/statistics/"
-    },
-    {
-      "ticker": "ORCL",
-      "reason": "ORCL: HTTP 403 for https://stockanalysis.com/stocks/orcl/statistics/"
-    },
-    {
-      "ticker": "OKLO",
-      "reason": "OKLO: HTTP 403 for https://stockanalysis.com/stocks/oklo/statistics/"
-    },
-    {
-      "ticker": "OSCR",
-      "reason": "OSCR: HTTP 403 for https://stockanalysis.com/stocks/oscr/statistics/"
-    },
-    {
-      "ticker": "KTOS",
-      "reason": "KTOS: HTTP 403 for https://stockanalysis.com/stocks/ktos/statistics/"
-    },
-    {
-      "ticker": "PANW",
-      "reason": "PANW: HTTP 403 for https://stockanalysis.com/stocks/panw/statistics/"
-    },
-    {
-      "ticker": "PLTR",
-      "reason": "PLTR: HTTP 403 for https://stockanalysis.com/stocks/pltr/statistics/"
-    },
-    {
-      "ticker": "GNRC",
-      "reason": "GNRC: HTTP 403 for https://stockanalysis.com/stocks/gnrc/statistics/"
-    },
-    {
-      "ticker": "AXON",
-      "reason": "AXON: HTTP 403 for https://stockanalysis.com/stocks/axon/statistics/"
-    },
-    {
-      "ticker": "PL",
-      "reason": "PL: HTTP 403 for https://stockanalysis.com/stocks/pl/statistics/"
-    },
-    {
-      "ticker": "PATH",
-      "reason": "PATH: HTTP 403 for https://stockanalysis.com/stocks/path/statistics/"
-    },
-    {
-      "ticker": "POET",
-      "reason": "POET: HTTP 403 for https://stockanalysis.com/stocks/poet/statistics/"
-    },
-    {
-      "ticker": "QCOM",
-      "reason": "QCOM: HTTP 403 for https://stockanalysis.com/stocks/qcom/statistics/"
-    },
-    {
-      "ticker": "PYPL",
-      "reason": "PYPL: HTTP 403 for https://stockanalysis.com/stocks/pypl/statistics/"
-    },
-    {
-      "ticker": "OUST",
-      "reason": "OUST: HTTP 403 for https://stockanalysis.com/stocks/oust/statistics/"
-    },
-    {
-      "ticker": "QBTS",
-      "reason": "QBTS: HTTP 403 for https://stockanalysis.com/stocks/qbts/statistics/"
-    },
-    {
-      "ticker": "RCAT",
-      "reason": "RCAT: HTTP 403 for https://stockanalysis.com/stocks/rcat/statistics/"
-    },
-    {
-      "ticker": "RDDT",
-      "reason": "RDDT: HTTP 403 for https://stockanalysis.com/stocks/rddt/statistics/"
-    },
-    {
-      "ticker": "RDW",
-      "reason": "RDW: HTTP 403 for https://stockanalysis.com/stocks/rdw/statistics/"
-    },
-    {
-      "ticker": "RBLX",
-      "reason": "RBLX: HTTP 403 for https://stockanalysis.com/stocks/rblx/statistics/"
-    },
-    {
-      "ticker": "RIVN",
-      "reason": "RIVN: HTTP 403 for https://stockanalysis.com/stocks/rivn/statistics/"
-    },
-    {
-      "ticker": "RGTI",
-      "reason": "RGTI: HTTP 403 for https://stockanalysis.com/stocks/rgti/statistics/"
-    },
-    {
-      "ticker": "RKLB",
-      "reason": "RKLB: HTTP 403 for https://stockanalysis.com/stocks/rklb/statistics/"
-    },
-    {
-      "ticker": "RKT",
-      "reason": "RKT: HTTP 403 for https://stockanalysis.com/stocks/rkt/statistics/"
-    },
-    {
-      "ticker": "ROKU",
-      "reason": "ROKU: HTTP 403 for https://stockanalysis.com/stocks/roku/statistics/"
-    },
-    {
-      "ticker": "SMTC",
-      "reason": "SMTC: HTTP 403 for https://stockanalysis.com/stocks/smtc/statistics/"
-    },
-    {
       "ticker": "TE",
       "reason": "TE: stock price below $5 threshold for Options Report"
-    },
-    {
-      "ticker": "SNOW",
-      "reason": "SNOW: HTTP 403 for https://stockanalysis.com/stocks/snow/statistics/"
-    },
-    {
-      "ticker": "SHOP",
-      "reason": "SHOP: HTTP 403 for https://stockanalysis.com/stocks/shop/statistics/"
-    },
-    {
-      "ticker": "UUUU",
-      "reason": "UUUU: HTTP 403 for https://stockanalysis.com/stocks/uuuu/statistics/"
-    },
-    {
-      "ticker": "SOFI",
-      "reason": "SOFI: HTTP 403 for https://stockanalysis.com/stocks/sofi/statistics/"
-    },
-    {
-      "ticker": "SMCI",
-      "reason": "SMCI: HTTP 403 for https://stockanalysis.com/stocks/smci/statistics/"
-    },
-    {
-      "ticker": "SOUN",
-      "reason": "SOUN: HTTP 403 for https://stockanalysis.com/stocks/soun/statistics/"
-    },
-    {
-      "ticker": "ECHO",
-      "reason": "ECHO: HTTP 403 for https://stockanalysis.com/stocks/echo/statistics/"
-    },
-    {
-      "ticker": "TEM",
-      "reason": "TEM: HTTP 403 for https://stockanalysis.com/stocks/tem/statistics/"
-    },
-    {
-      "ticker": "TOST",
-      "reason": "TOST: HTTP 403 for https://stockanalysis.com/stocks/tost/statistics/"
-    },
-    {
-      "ticker": "TTD",
-      "reason": "TTD: HTTP 403 for https://stockanalysis.com/stocks/ttd/statistics/"
-    },
-    {
-      "ticker": "UAL",
-      "reason": "UAL: HTTP 403 for https://stockanalysis.com/stocks/ual/statistics/"
-    },
-    {
-      "ticker": "TSM",
-      "reason": "TSM: HTTP 403 for https://stockanalysis.com/stocks/tsm/statistics/"
-    },
-    {
-      "ticker": "U",
-      "reason": "U: HTTP 403 for https://stockanalysis.com/stocks/u/statistics/"
-    },
-    {
-      "ticker": "UBER",
-      "reason": "UBER: HTTP 403 for https://stockanalysis.com/stocks/uber/statistics/"
-    },
-    {
-      "ticker": "TSLA",
-      "reason": "TSLA: HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/"
-    },
-    {
-      "ticker": "UEC",
-      "reason": "UEC: HTTP 403 for https://stockanalysis.com/stocks/uec/statistics/"
-    },
-    {
-      "ticker": "UPST",
-      "reason": "UPST: HTTP 403 for https://stockanalysis.com/stocks/upst/statistics/"
-    },
-    {
-      "ticker": "USAR",
-      "reason": "USAR: HTTP 403 for https://stockanalysis.com/stocks/usar/statistics/"
-    },
-    {
-      "ticker": "SKHY",
-      "reason": "SKHY: HTTP 403 for https://stockanalysis.com/stocks/skhy/statistics/"
-    },
-    {
-      "ticker": "VRT",
-      "reason": "VRT: HTTP 403 for https://stockanalysis.com/stocks/vrt/statistics/"
-    },
-    {
-      "ticker": "W",
-      "reason": "W: HTTP 403 for https://stockanalysis.com/stocks/w/statistics/"
-    },
-    {
-      "ticker": "WULF",
-      "reason": "WULF: HTTP 403 for https://stockanalysis.com/stocks/wulf/statistics/"
-    },
-    {
-      "ticker": "VST",
-      "reason": "VST: HTTP 403 for https://stockanalysis.com/stocks/vst/statistics/"
-    },
-    {
-      "ticker": "XYZ",
-      "reason": "XYZ: HTTP 403 for https://stockanalysis.com/stocks/xyz/statistics/"
-    },
-    {
-      "ticker": "META",
-      "reason": "META: HTTP 403 for https://stockanalysis.com/stocks/meta/statistics/"
-    },
-    {
-      "ticker": "GOOGL",
-      "reason": "GOOGL: HTTP 403 for https://stockanalysis.com/stocks/googl/statistics/"
-    },
-    {
-      "ticker": "ZS",
-      "reason": "ZS: HTTP 403 for https://stockanalysis.com/stocks/zs/statistics/"
-    },
-    {
-      "ticker": "ZETA",
-      "reason": "ZETA: HTTP 403 for https://stockanalysis.com/stocks/zeta/statistics/"
     }
   ],
   "myPortfolioPuts": {
     "title": "My Portfolio Cash Secured Puts",
-    "expiration": "9/11",
+    "expiration": "9/18",
     "rows": [
       {
         "ticker": "LITE",
-        "price": 939.46,
-        "priceText": "$939.46",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 18.834792626367328,
-        "avgWeeklyMovePctText": "18.83%",
-        "strike": 765.0,
-        "strikeText": "$765.00",
-        "premium": 6.0,
-        "premiumText": "$6.00",
-        "roiPct": 0.006386647648649223,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "NBIS",
-        "price": 230.99,
-        "priceText": "$230.99",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 20.516759513321635,
-        "avgWeeklyMovePctText": "20.52%",
-        "strike": 182.5,
-        "strikeText": "$182.50",
-        "premium": 2.0,
-        "premiumText": "$2.00",
-        "roiPct": 0.00865838347980432,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "PLTR",
-        "price": 166.95,
-        "priceText": "$166.95",
+        "price": 849.99,
+        "priceText": "$849.99",
         "trend": "Sell",
-        "avgWeeklyMovePct": 11.690157000610455,
-        "avgWeeklyMovePctText": "11.69%",
-        "strike": 147.0,
-        "strikeText": "$147.00",
-        "premium": 3.0,
-        "premiumText": "$3.00",
-        "roiPct": 0.017969451931716084,
-        "roiPctText": "0.02%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "NVDA",
-        "price": 220.09,
-        "priceText": "$220.09",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 7.873983253731362,
-        "avgWeeklyMovePctText": "7.87%",
-        "strike": 202.5,
-        "strikeText": "$202.50",
-        "premium": 2.0,
-        "premiumText": "$2.00",
-        "roiPct": 0.00908719160343496,
-        "roiPctText": "0.01%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "ASTS",
-        "price": 60.335,
-        "priceText": "$60.34",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 21.16510574565066,
-        "avgWeeklyMovePctText": "21.17%",
-        "strike": 47.5,
-        "strikeText": "$47.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.01657412778652523,
-        "roiPctText": "0.02%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "MU",
-        "price": 978.17,
-        "priceText": "$978.17",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 14.647383599735111,
-        "avgWeeklyMovePctText": "14.65%",
-        "strike": 835.0,
-        "strikeText": "$835.00",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.0010223171841295482,
-        "roiPctText": "0.00%",
-        "action": "Wait"
-      },
-      {
-        "ticker": "AVGO",
-        "price": 364.69,
-        "priceText": "$364.69",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 9.296041279117977,
-        "avgWeeklyMovePctText": "9.30%",
-        "strike": 330.0,
-        "strikeText": "$330.00",
-        "premium": 3.0,
-        "premiumText": "$3.00",
-        "roiPct": 0.00822616468781705,
-        "roiPctText": "0.01%",
+        "avgWeeklyMovePct": 18.771721406054446,
+        "avgWeeklyMovePctText": "18.77%",
+        "strike": 690.0,
+        "strikeText": "$690.00",
+        "premium": 60.0,
+        "premiumText": "$60.00",
+        "roiPct": 0.07058906575371475,
+        "roiPctText": "0.07%",
         "action": "Wait"
       },
       {
         "ticker": "CRWD",
-        "price": 207.29,
-        "priceText": "$207.29",
-        "trend": "Sell",
-        "avgWeeklyMovePct": 10.478370528203957,
-        "avgWeeklyMovePctText": "10.48%",
-        "strike": 185.0,
-        "strikeText": "$185.00",
-        "premium": 3.0,
-        "premiumText": "$3.00",
-        "roiPct": 0.01447247817067876,
-        "roiPctText": "0.01%",
+        "price": 231.15,
+        "priceText": "$231.15",
+        "trend": "Buy",
+        "avgWeeklyMovePct": 10.34242446189955,
+        "avgWeeklyMovePctText": "10.34%",
+        "strike": 207.5,
+        "strikeText": "$207.50",
+        "premium": 60.0,
+        "premiumText": "$60.00",
+        "roiPct": 0.25957170668397145,
+        "roiPctText": "0.26%",
         "action": "Wait"
       },
       {
-        "ticker": "IONQ",
-        "price": 37.21,
-        "priceText": "$37.21",
+        "ticker": "MU",
+        "price": 912.44,
+        "priceText": "$912.44",
         "trend": "Sell",
-        "avgWeeklyMovePct": 19.22531731930596,
-        "avgWeeklyMovePctText": "19.23%",
-        "strike": 30.0,
-        "strikeText": "$30.00",
-        "premium": 13.0,
-        "premiumText": "$13.00",
-        "roiPct": 0.34936844934157485,
-        "roiPctText": "0.35%",
+        "avgWeeklyMovePct": 14.508349225736941,
+        "avgWeeklyMovePctText": "14.51%",
+        "strike": 780.0,
+        "strikeText": "$780.00",
+        "premium": 93.0,
+        "premiumText": "$93.00",
+        "roiPct": 0.101924510104774,
+        "roiPctText": "0.10%",
         "action": "Wait"
       },
       {
         "ticker": "AMD",
-        "price": 518.07,
-        "priceText": "$518.07",
-        "trend": "Buy",
-        "avgWeeklyMovePct": 12.649592250974456,
-        "avgWeeklyMovePctText": "12.65%",
-        "strike": 452.5,
-        "strikeText": "$452.50",
-        "premium": 1.0,
-        "premiumText": "$1.00",
-        "roiPct": 0.00193024108711178,
-        "roiPctText": "0.00%",
+        "price": 483.97,
+        "priceText": "$483.97",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 12.552782895308992,
+        "avgWeeklyMovePctText": "12.55%",
+        "strike": 422.5,
+        "strikeText": "$422.50",
+        "premium": 41.0,
+        "premiumText": "$41.00",
+        "roiPct": 0.08471599479306567,
+        "roiPctText": "0.08%",
         "action": "Wait"
       },
       {
-        "ticker": "RKLB",
-        "price": 63.9,
-        "priceText": "$63.90",
+        "ticker": "NBIS",
+        "price": 212.965,
+        "priceText": "$212.97",
         "trend": "Sell",
-        "avgWeeklyMovePct": 18.686394401300515,
-        "avgWeeklyMovePctText": "18.69%",
-        "strike": 52.0,
-        "strikeText": "$52.00",
-        "premium": 2.0,
-        "premiumText": "$2.00",
-        "roiPct": 0.03129890453834116,
-        "roiPctText": "0.03%",
+        "avgWeeklyMovePct": 20.45507344519297,
+        "avgWeeklyMovePctText": "20.46%",
+        "strike": 170.0,
+        "strikeText": "$170.00",
+        "premium": 20.0,
+        "premiumText": "$20.00",
+        "roiPct": 0.09391214518817646,
+        "roiPctText": "0.09%",
         "action": "Wait"
       },
       {
         "ticker": "BE",
-        "price": 274.29,
-        "priceText": "$274.29",
+        "price": 255.09,
+        "priceText": "$255.09",
         "trend": "Buy",
-        "avgWeeklyMovePct": 23.332753182178664,
-        "avgWeeklyMovePctText": "23.33%",
-        "strike": 210.0,
-        "strikeText": "$210.00",
-        "premium": 3.0,
-        "premiumText": "$3.00",
-        "roiPct": 0.010937329104232747,
-        "roiPctText": "0.01%",
+        "avgWeeklyMovePct": 22.94047371100342,
+        "avgWeeklyMovePctText": "22.94%",
+        "strike": 197.5,
+        "strikeText": "$197.50",
+        "premium": 13.0,
+        "premiumText": "$13.00",
+        "roiPct": 0.050962405425536095,
+        "roiPctText": "0.05%",
         "action": "Wait"
+      },
+      {
+        "ticker": "ANET",
+        "price": 189.76,
+        "priceText": "$189.76",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 10.99493901793929,
+        "avgWeeklyMovePctText": "10.99%",
+        "strike": 170.0,
+        "strikeText": "$170.00",
+        "premium": 41.0,
+        "premiumText": "$41.00",
+        "roiPct": 0.21606239460370993,
+        "roiPctText": "0.22%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "AVGO",
+        "price": 344.985,
+        "priceText": "$344.99",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 9.16648867143172,
+        "avgWeeklyMovePctText": "9.17%",
+        "strike": 315.0,
+        "strikeText": "$315.00",
+        "premium": 30.0,
+        "premiumText": "$30.00",
+        "roiPct": 0.08696030262185311,
+        "roiPctText": "0.09%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "PLTR",
+        "price": 167.86,
+        "priceText": "$167.86",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 11.48849932096751,
+        "avgWeeklyMovePctText": "11.49%",
+        "strike": 149.0,
+        "strikeText": "$149.00",
+        "premium": 20.0,
+        "premiumText": "$20.00",
+        "roiPct": 0.11914690813773382,
+        "roiPctText": "0.12%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "NVDA",
+        "price": 210.47,
+        "priceText": "$210.47",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 7.793499435619972,
+        "avgWeeklyMovePctText": "7.79%",
+        "strike": 195.0,
+        "strikeText": "$195.00",
+        "premium": 35.0,
+        "premiumText": "$35.00",
+        "roiPct": 0.16629448377440964,
+        "roiPctText": "0.17%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "ASTS",
+        "price": 59.54,
+        "priceText": "$59.54",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 20.973448549862596,
+        "avgWeeklyMovePctText": "20.97%",
+        "strike": 49.0,
+        "strikeText": "$49.00",
+        "premium": 7.000000000000001,
+        "premiumText": "$7.00",
+        "roiPct": 0.11756802149815251,
+        "roiPctText": "0.12%",
+        "action": "Wait"
+      },
+      {
+        "ticker": "IONQ",
+        "price": 37.47,
+        "priceText": "$37.47",
+        "trend": "Sell",
+        "avgWeeklyMovePct": 18.961404101542357,
+        "avgWeeklyMovePctText": "18.96%",
+        "strike": 30.0,
+        "strikeText": "$30.00",
+        "premium": 77.0,
+        "premiumText": "$77.00",
+        "roiPct": 2.0549773151854818,
+        "roiPctText": "2.05%",
+        "action": "Sell"
       }
     ],
-    "totalPositionValue": 406144.5,
-    "totalPositionValueText": "$406,144.50",
-    "totalPremium": 40.0,
-    "totalPremiumText": "$40.00"
+    "totalPositionValue": 395569.0,
+    "totalPositionValueText": "$395,569.00",
+    "totalPremium": 497.0,
+    "totalPremiumText": "$497.00"
   }
 }
