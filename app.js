@@ -118,7 +118,7 @@ function renderPortfolioTicker(row, earningsTickers) {
   return `<span class="${className}"${title}>${escapeHtml(ticker)}</span>`;
 }
 
-function renderTable(targetId, columns, rows) {
+function renderTable(targetId, columns, rows, emptyMessage = "None") {
   const table = byId(targetId);
   const headerHtml = `
     <thead>
@@ -141,7 +141,7 @@ function renderTable(targetId, columns, rows) {
         }).join("")}
       </tr>
     `).join("")
-    : `<tr><td colspan="${columns.length}">None</td></tr>`;
+    : `<tr><td colspan="${columns.length}">${escapeHtml(emptyMessage)}</td></tr>`;
 
   table.innerHTML = `${headerHtml}<tbody>${bodyRows}</tbody>`;
 }
@@ -305,7 +305,12 @@ function renderDashboard() {
     { key: "roiPctText", label: "ROI %", numeric: true },
   ];
 
-  renderTable("covered-table", optionColumns, snapshot.coveredCalls?.rows || []);
+  renderTable(
+    "covered-table",
+    optionColumns,
+    snapshot.coveredCalls?.rows || [],
+    "No covered calls met the 1.00% ROI threshold today.",
+  );
   renderTable("puts-table", optionColumns, snapshot.cashSecuredPuts?.rows || []);
 
   renderTable(

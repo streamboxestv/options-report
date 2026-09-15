@@ -1313,7 +1313,8 @@ def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> st
     )
     lines = [f"## {title} - Expiration {expiration_label}", ""]
     if not sorted_rows:
-        table_rows = [["None", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
+        empty_label = "No covered calls met the 1.00% ROI threshold today." if title == "Covered Calls" else "None"
+        table_rows = [[empty_label, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
         lines.append("")
     else:
         table_rows = []
@@ -1452,10 +1453,10 @@ def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) 
     )
     table_rows = []
     if not sorted_rows:
+        empty_message = "No covered calls met the 1.00% ROI threshold today." if title == "Covered Calls" else "No sell candidates"
         table_rows.append(
             "<tr>"
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;">None</td>'
-            '<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;text-align:right;color:#6b7280;" colspan="6">No sell candidates</td>'
+            f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;" colspan="7">{escape(empty_message)}</td>'
             "</tr>"
         )
     else:
