@@ -182,6 +182,8 @@ EARNINGS_CACHE_FILE = "earnings_calendar_cache.json"
 REPORT_HISTORY_FILE = "report_history.json"
 CREDIT_SPREAD_SYMBOLS = ["SPY", "QQQ", "AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "TSLA"]
 ETF_SYMBOLS = {"SPY", "QQQ"}
+CREDIT_SPREAD_MIN_CREDIT_RATIO = 0.15
+CREDIT_SPREAD_MAX_CREDIT_RATIO = 0.25
 
 DATA_BASE_URL = "https://data.alpaca.markets"
 STOCK_FEED = "iex"
@@ -737,6 +739,17 @@ def option_snapshot_price(snapshot: Dict) -> Optional[float]:
     return None
 
 
+def option_snapshot_bid_ask(snapshot: Dict) -> Tuple[Optional[float], Optional[float]]:
+    quote = snapshot.get("latestQuote") or {}
+    bid_value = quote.get("bp")
+    ask_value = quote.get("ap")
+    bid = float(bid_value) if bid_value is not None and float(bid_value) > 0 else None
+    ask = float(ask_value) if ask_value is not None and float(ask_value) > 0 else None
+    if bid is None or ask is None or ask < bid:
+        return None, None
+    return bid, ask
+
+
 def option_snapshot_strike(snapshot: Dict) -> Optional[float]:
     contract = snapshot.get("option_contract") or snapshot.get("contract") or {}
     strike_value = contract.get("strike_price")
@@ -973,8 +986,8 @@ def choose_credit_spread(
     for snapshot in contracts:
         strike = option_snapshot_strike(snapshot)
         delta = option_snapshot_delta(snapshot)
-        option_price = option_snapshot_price(snapshot)
-        if strike is None or delta is None or option_price is None:
+        bid, ask = option_snapshot_bid_ask(snapshot)
+        if strike is None or delta is None or bid is None or ask is None:
             continue
         if option_type == "put" and strike >= price:
             continue
@@ -985,7 +998,8 @@ def choose_credit_spread(
                 "snapshot": snapshot,
                 "strike": strike,
                 "delta": abs(delta),
-                "price": option_price,
+                "bid": bid,
+                "ask": ask,
                 "open_interest": option_snapshot_open_interest(snapshot),
                 "spread": option_snapshot_spread(snapshot),
             }
@@ -1000,11 +1014,14 @@ def choose_credit_spread(
             spread_width = abs(short_item["strike"] - long_item["strike"])
             if spread_width < 5 or spread_width > 10:
                 continue
-            credit_per_share = short_item["price"] - long_item["price"]
+            # Use a conservative executable credit: sell at the short bid and
+            # buy at the long ask. Independent last trades can be stale and
+            # create credits that could never be filled as a spread.
+            credit_per_share = short_item["bid"] - long_item["ask"]
             if credit_per_share <= 0:
                 continue
             credit_ratio = credit_per_share / spread_width
-            if credit_ratio < 0.15:
+            if not CREDIT_SPREAD_MIN_CREDIT_RATIO <= credit_ratio <= CREDIT_SPREAD_MAX_CREDIT_RATIO:
                 continue
             max_loss_per_share = spread_width - credit_per_share
             if max_loss_per_share <= 0:
