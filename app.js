@@ -200,6 +200,13 @@ function renderStatus(value) {
   return `<span class="status-pill ${qualified ? "status-qualified" : "status-muted"}">${escapeHtml(text)}</span>`;
 }
 
+function validCreditSpreadRow(row) {
+  if (row.credit == null || row.shortStrike == null || row.longStrike == null) return true;
+  const width = Math.abs(Number(row.shortStrike) - Number(row.longStrike));
+  const creditRatio = Number(row.credit) / 100 / width;
+  return Number.isFinite(creditRatio) && creditRatio >= 0.15 && creditRatio <= 0.25;
+}
+
 function renderReviewList(targetId, rows) {
   const target = byId(targetId);
   if (!rows.length) {
@@ -348,7 +355,7 @@ function renderDashboard() {
       { key: "maxRoiPctText", label: "Max ROI", numeric: true },
       { key: "status", label: "Status", render: (row) => renderStatus(row.status) },
     ],
-    [...(snapshot.creditSpreadCandidates?.rows || [])].sort(
+    [...(snapshot.creditSpreadCandidates?.rows || [])].filter(validCreditSpreadRow).sort(
       (left, right) =>
         (right.maxRoiPct || -1) - (left.maxRoiPct || -1)
         || (right.credit || 0) - (left.credit || 0)
