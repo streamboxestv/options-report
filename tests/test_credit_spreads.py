@@ -95,6 +95,30 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
             )
 
 
+class CronOptionSelectorCompatibilityTests(unittest.TestCase):
+    def test_cash_budget_is_forwarded_to_liquidity_aware_selector(self):
+        from api.cron import refresh
+
+        contracts = [
+            {
+                "option_contract": {"strike_price": "55", "open_interest": "100"},
+                "greeks": {"delta": -0.20},
+                "latestQuote": {"bp": 0.50, "ap": 0.60, "bs": 10},
+                "latestTrade": {"p": 0.70},
+            }
+        ]
+        strike, premium = refresh.choose_priced_option_contract(
+            contracts,
+            price=65.98,
+            target_strike=55.0,
+            option_type="put",
+            cash_budget=20_000.0,
+        )
+
+        self.assertEqual(strike, 55)
+        self.assertEqual(premium, 0.50)
+
+
 class CashSecuredPutUniverseTests(unittest.TestCase):
     def test_extra_universe_contains_100_unique_non_primary_symbols(self):
         extras = report.cash_secured_put_extra_symbols(report.OPTIONS_REPORT_STOCKS)
