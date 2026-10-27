@@ -184,6 +184,10 @@ CREDIT_SPREAD_SYMBOLS = ["SPY", "QQQ", "AAPL", "MSFT", "GOOGL", "AMZN", "META", 
 ETF_SYMBOLS = {"SPY", "QQQ"}
 CREDIT_SPREAD_MIN_CREDIT_RATIO = 0.15
 CREDIT_SPREAD_MAX_CREDIT_RATIO = 0.25
+CASH_SECURED_PUT_BUDGET = 20_000.0
+CASH_SECURED_PUT_MIN_OPEN_INTEREST = 50
+CASH_SECURED_PUT_OPEN_INTEREST_MULTIPLIER = 10
+CASH_SECURED_PUT_MAX_RELATIVE_SPREAD = 0.30
 
 DATA_BASE_URL = "https://data.alpaca.markets"
 STOCK_FEED = "iex"
@@ -635,10 +639,17 @@ def strike_from_contract_symbol(contract_symbol: str) -> Optional[float]:
     return int(strike_digits) / 1000.0
 
 
-def choose_option_contract(contracts: Iterable[Dict], price: float, target_strike: float, option_type: str) -> Tuple[float, Optional[float]]:
+def choose_option_contract(
+    contracts: Iterable[Dict],
+    price: float,
+    target_strike: float,
+    option_type: str,
+    cash_budget: Optional[float] = None,
+) -> Tuple[float, Optional[float]]:
     parsed = []
     for snapshot in contracts:
         trade = snapshot.get("latestTrade") or {}
+        quote = snapshot.get("latestQuote") or {}
         greeks = snapshot.get("greeks") or {}
         contract = snapshot.get("option_contract") or snapshot.get("contract") or {}
         strike_value = contract.get("strike_price")
@@ -650,13 +661,37 @@ def choose_option_contract(contracts: Iterable[Dict], price: float, target_strik
         if option_type == "put" and strike > price:
             continue
         last = trade.get("p")
+        premium_price = float(last) if last is not None else None
+        open_interest = float(contract.get("open_interest") or 0)
+        if option_type == "put" and cash_budget is not None:
+            required_contracts = int(cash_budget // (strike * 100.0))
+            bid_value = quote.get("bp")
+            ask_value = quote.get("ap")
+            bid_size = int(quote.get("bs") or 0)
+            bid = float(bid_value) if bid_value is not None else 0.0
+            ask = float(ask_value) if ask_value is not None else 0.0
+            if required_contracts < 1 or bid <= 0 or ask <= 0 or ask < bid:
+                continue
+            if bid_size < required_contracts:
+                continue
+            minimum_open_interest = max(
+                CASH_SECURED_PUT_MIN_OPEN_INTEREST,
+                required_contracts * CASH_SECURED_PUT_OPEN_INTEREST_MULTIPLIER,
+            )
+            if open_interest < minimum_open_interest:
+                continue
+            midpoint = (bid + ask) / 2.0
+            relative_spread = (ask - bid) / midpoint if midpoint > 0 else math.inf
+            if relative_spread > CASH_SECURED_PUT_MAX_RELATIVE_SPREAD:
+                continue
+            premium_price = bid
         parsed.append(
             {
                 "strike": strike,
-                "last": float(last) if last is not None else None,
+                "last": premium_price,
                 "delta_target_distance": abs(strike - target_strike),
-                "has_last": last is not None,
-                "open_interest": float(contract.get("open_interest") or 0),
+                "has_last": premium_price is not None,
+                "open_interest": open_interest,
                 "delta": abs(float(greeks.get("delta"))) if greeks.get("delta") is not None else math.inf,
             }
         )
@@ -1286,6 +1321,7 @@ def build_row(
     api_key: str,
     api_secret: str,
     expiration_override: Optional[date] = None,
+    cash_budget: Optional[float] = None,
 ) -> Tuple[OptionRow, date]:
     target_strike = price * (1 + pct_otm) if option_type == "call" else price * (1 - pct_otm)
 
@@ -1309,6 +1345,7 @@ def build_row(
         price=price,
         target_strike=target_strike,
         option_type=option_type,
+        cash_budget=cash_budget,
     )
     return OptionRow(
         stock=symbol,
@@ -2150,7 +2187,17 @@ def build_report(
     def build_active_symbol(symbol: str) -> Dict[str, object]:
         try:
             covered_call, covered_call_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm_by_symbol[symbol], "call", api_key, api_secret, expiration_override)
-            cash_secured_put, cash_secured_put_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm_by_symbol[symbol], "put", api_key, api_secret, expiration_override)
+            cash_secured_put, cash_secured_put_expiration = build_row(
+                symbol,
+                latest_prices[symbol],
+                trend_by_symbol[symbol],
+                pct_otm_by_symbol[symbol],
+                "put",
+                api_key,
+                api_secret,
+                expiration_override,
+                cash_budget=CASH_SECURED_PUT_BUDGET,
+            )
             return {
                 "status": "ok",
                 "symbol": symbol,
