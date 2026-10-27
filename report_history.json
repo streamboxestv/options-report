@@ -1,6 +1,1895 @@
 [
   {
     "reportTitle": "Options Report",
+    "reportDate": "10/27",
+    "reportDateIso": "2026-10-27",
+    "generatedAt": "2026-10-27 14:40:36",
+    "pricingRefreshedAt": "2026-10-27 14:39:15",
+    "warnings": [
+      "AAPL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/aapl/statistics/)",
+      "PURR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/purr/statistics/)",
+      "AFRM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/afrm/statistics/)",
+      "ALAB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/alab/statistics/)",
+      "AMAT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amat/statistics/)",
+      "AI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ai/statistics/)",
+      "TER: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ter/statistics/)",
+      "RBRK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rbrk/statistics/)",
+      "AMPX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ampx/statistics/)",
+      "ANET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/anet/statistics/)",
+      "APO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/apo/statistics/)",
+      "AMZN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amzn/statistics/)",
+      "APLD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/apld/statistics/)",
+      "ASTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/asts/statistics/)",
+      "APP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/app/statistics/)",
+      "AVGO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/avgo/statistics/)",
+      "AMD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amd/statistics/)",
+      "AXTI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/axti/statistics/)",
+      "BE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/be/statistics/)",
+      "CAVA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cava/statistics/)",
+      "AVAV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/avav/statistics/)",
+      "BULL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bull/statistics/)",
+      "CEG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ceg/statistics/)",
+      "KLAC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/klac/statistics/)",
+      "BROS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bros/statistics/)",
+      "ENPH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/enph/statistics/)",
+      "MDB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mdb/statistics/)",
+      "CLSK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/clsk/statistics/)",
+      "CIFR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cifr/statistics/)",
+      "CMG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cmg/statistics/)",
+      "COHR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cohr/statistics/)",
+      "CRCL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crcl/statistics/)",
+      "CRM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crm/statistics/)",
+      "CRWV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crwv/statistics/)",
+      "CRWD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crwd/statistics/)",
+      "CORZ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/corz/statistics/)",
+      "COIN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/coin/statistics/)",
+      "CVNA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cvna/statistics/)",
+      "DAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dal/statistics/)",
+      "DUOL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/duol/statistics/)",
+      "FSLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fsly/statistics/)",
+      "DDOG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ddog/statistics/)",
+      "DELL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dell/statistics/)",
+      "DASH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dash/statistics/)",
+      "AMBA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/amba/statistics/)",
+      "DKNG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dkng/statistics/)",
+      "ASML: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/asml/statistics/)",
+      "TXN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/txn/statistics/)",
+      "ETSY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/etsy/statistics/)",
+      "FCX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fcx/statistics/)",
+      "FIGR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/figr/statistics/)",
+      "FLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fly/statistics/)",
+      "FISV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fisv/statistics/)",
+      "NFLX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nflx/statistics/)",
+      "FSLR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fslr/statistics/)",
+      "EXPE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/expe/statistics/)",
+      "FTNT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ftnt/statistics/)",
+      "GLW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/glw/statistics/)",
+      "SPOT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/spot/statistics/)",
+      "HIMS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hims/statistics/)",
+      "HOOD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hood/statistics/)",
+      "GLXY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/glxy/statistics/)",
+      "HUT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hut/statistics/)",
+      "AAOI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/aaoi/statistics/)",
+      "ARM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/arm/statistics/)",
+      "HPE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hpe/statistics/)",
+      "SNDK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sndk/statistics/)",
+      "IONQ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ionq/statistics/)",
+      "INTC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/intc/statistics/)",
+      "IOT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/iot/statistics/)",
+      "LITE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lite/statistics/)",
+      "IREN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/iren/statistics/)",
+      "KKR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/kkr/statistics/)",
+      "LUNR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lunr/statistics/)",
+      "MBLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mbly/statistics/)",
+      "CRDO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crdo/statistics/)",
+      "LRCX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lrcx/statistics/)",
+      "MP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mp/statistics/)",
+      "MU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mu/statistics/)",
+      "MRVL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mrvl/statistics/)",
+      "MCHP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mchp/statistics/)",
+      "NBIS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nbis/statistics/)",
+      "MSTR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mstr/statistics/)",
+      "NET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/net/statistics/)",
+      "MSFT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/msft/statistics/)",
+      "NOW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/now/statistics/)",
+      "NVDA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvda/statistics/)",
+      "ADBE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/adbe/statistics/)",
+      "ONDS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/onds/statistics/)",
+      "OKLO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oklo/statistics/)",
+      "ORCL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/orcl/statistics/)",
+      "OKTA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/okta/statistics/)",
+      "NVTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvts/statistics/)",
+      "WDC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wdc/statistics/)",
+      "ONON: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/onon/statistics/)",
+      "OSCR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oscr/statistics/)",
+      "KTOS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ktos/statistics/)",
+      "PATH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/path/statistics/)",
+      "GNRC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/gnrc/statistics/)",
+      "PANW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/panw/statistics/)",
+      "PL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pl/statistics/)",
+      "PLTR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pltr/statistics/)",
+      "POET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/poet/statistics/)",
+      "PYPL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pypl/statistics/)",
+      "AXON: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/axon/statistics/)",
+      "QCOM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/qcom/statistics/)",
+      "OUST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oust/statistics/)",
+      "QBTS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/qbts/statistics/)",
+      "RIVN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rivn/statistics/)",
+      "RGTI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rgti/statistics/)",
+      "RDDT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rddt/statistics/)",
+      "RKLB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rklb/statistics/)",
+      "RKT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rkt/statistics/)",
+      "RDW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rdw/statistics/)",
+      "RBLX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rblx/statistics/)",
+      "ROKU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/roku/statistics/)",
+      "SMTC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/smtc/statistics/)",
+      "SMCI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/smci/statistics/)",
+      "ECHO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/echo/statistics/)",
+      "UUUU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uuuu/statistics/)",
+      "SOFI: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sofi/statistics/)",
+      "SHOP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/shop/statistics/)",
+      "SNOW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/snow/statistics/)",
+      "TEM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tem/statistics/)",
+      "TOST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tost/statistics/)",
+      "TSM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsm/statistics/)",
+      "UEC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uec/statistics/)",
+      "U: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/u/statistics/)",
+      "TTD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ttd/statistics/)",
+      "UAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ual/statistics/)",
+      "TSLA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/)",
+      "UBER: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/uber/statistics/)",
+      "UPST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/upst/statistics/)",
+      "USAR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/usar/statistics/)",
+      "META: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/meta/statistics/)",
+      "VST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vst/statistics/)",
+      "GOOGL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/googl/statistics/)",
+      "XYZ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/xyz/statistics/)",
+      "SKHY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/skhy/statistics/)",
+      "W: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/w/statistics/)",
+      "VRT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vrt/statistics/)",
+      "WULF: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wulf/statistics/)",
+      "ZETA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/zeta/statistics/)",
+      "ZS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/zs/statistics/)",
+      "SPCX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/spcx/statistics/)",
+      "BMNR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bmnr/statistics/)",
+      "MRNA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mrna/statistics/)",
+      "MARA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mara/statistics/)",
+      "NOK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nok/statistics/)",
+      "GME: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/gme/statistics/)",
+      "BAC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bac/statistics/)",
+      "WMT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wmt/statistics/)",
+      "NKE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nke/statistics/)",
+      "AAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/aal/statistics/)",
+      "RIOT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/riot/statistics/)",
+      "PFE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pfe/statistics/)",
+      "F: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/f/statistics/)",
+      "UNH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/unh/statistics/)",
+      "SNAP: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/snap/statistics/)",
+      "XOM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/xom/statistics/)",
+      "BA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ba/statistics/)",
+      "BYND: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bynd/statistics/)",
+      "NVO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nvo/statistics/)",
+      "T: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/t/statistics/)",
+      "C: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/c/statistics/)",
+      "OXY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/oxy/statistics/)",
+      "VZ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vz/statistics/)",
+      "JPM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/jpm/statistics/)",
+      "CSCO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/csco/statistics/)",
+      "IBM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ibm/statistics/)",
+      "PCG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pcg/statistics/)",
+      "BTDR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/btdr/statistics/)",
+      "WBD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wbd/statistics/)",
+      "AG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ag/statistics/)",
+      "KO: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ko/statistics/)",
+      "CLF: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/clf/statistics/)",
+      "PDD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pdd/statistics/)",
+      "WFC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wfc/statistics/)",
+      "CVX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cvx/statistics/)",
+      "BB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bb/statistics/)",
+      "ASST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/asst/statistics/)",
+      "BSX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bsx/statistics/)",
+      "FIG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/fig/statistics/)",
+      "OWL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/owl/statistics/)",
+      "HL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hl/statistics/)",
+      "COST: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cost/statistics/)",
+      "LLY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lly/statistics/)",
+      "DIS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dis/statistics/)",
+      "CDE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cde/statistics/)",
+      "RIG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/rig/statistics/)",
+      "JD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/jd/statistics/)",
+      "ET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/et/statistics/)",
+      "BRK.B: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/brk.b/statistics/)",
+      "GS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/gs/statistics/)",
+      "PBR: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pbr/statistics/)",
+      "CMCSA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cmcsa/statistics/)",
+      "DVN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dvn/statistics/)",
+      "B: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/b/statistics/)",
+      "VG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vg/statistics/)",
+      "MRK: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mrk/statistics/)",
+      "V: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/v/statistics/)",
+      "SLS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sls/statistics/)",
+      "WEN: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/wen/statistics/)",
+      "LULU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/lulu/statistics/)",
+      "TGT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tgt/statistics/)",
+      "CRML: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/crml/statistics/)",
+      "BMY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bmy/statistics/)",
+      "CAT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/cat/statistics/)",
+      "HPQ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hpq/statistics/)",
+      "JNJ: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/jnj/statistics/)",
+      "NCLH: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nclh/statistics/)",
+      "AGNC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/agnc/statistics/)",
+      "XPEV: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/xpev/statistics/)",
+      "DJT: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/djt/statistics/)",
+      "DOW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dow/statistics/)",
+      "SBET: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sbet/statistics/)",
+      "SBUX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/sbux/statistics/)",
+      "UPS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ups/statistics/)",
+      "BIDU: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/bidu/statistics/)",
+      "VALE: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/vale/statistics/)",
+      "IBRX: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ibrx/statistics/)",
+      "KHC: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/khc/statistics/)",
+      "PG: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pg/statistics/)",
+      "SCHW: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/schw/statistics/)",
+      "NEM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/nem/statistics/)",
+      "PTON: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/pton/statistics/)",
+      "PAAS: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/paas/statistics/)",
+      "SLB: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/slb/statistics/)",
+      "HD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/hd/statistics/)",
+      "MCD: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/mcd/statistics/)",
+      "DAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/dal/statistics/)",
+      "UAL: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/ual/statistics/)",
+      "SKHY: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/skhy/statistics/)",
+      "TSLA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/)",
+      "TSM: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsm/statistics/)",
+      "META: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/meta/statistics/)",
+      "TSLA: earnings lookup unavailable (HTTP 403 for https://stockanalysis.com/stocks/tsla/statistics/)"
+    ],
+    "expiration": "N/A",
+    "includedCount": 0,
+    "requestedCount": 150,
+    "myPortfolio": {
+      "title": "My Portfolio Report",
+      "expiration": "N/A",
+      "rows": [],
+      "totalPremium": 0,
+      "totalPremiumText": "$0.00",
+      "totalPositionValue": 0,
+      "totalPositionValueText": "$0.00"
+    },
+    "coveredCalls": {
+      "title": "Covered Calls",
+      "expiration": "N/A",
+      "rows": []
+    },
+    "cashSecuredPuts": {
+      "title": "Cash Secured Puts",
+      "expiration": "N/A",
+      "rows": []
+    },
+    "pmccCandidates": {
+      "title": "PMCC Candidates",
+      "weeklyExpiration": "11/13/2026",
+      "rows": [
+        {
+          "ticker": "MCHP",
+          "price": 77.75,
+          "priceText": "$77.75",
+          "below52wHighPct": -25.683425731217746,
+          "below52wHighPctText": "-25.68%",
+          "avgWeeklyMovePct": 9.716718218583893,
+          "avgWeeklyMovePctText": "9.72%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 55.0,
+          "leapsStrikeText": "$55.00",
+          "leapsDelta": 0.842,
+          "leapsDeltaText": "0.84",
+          "leapsCost": 3050.0,
+          "leapsCostText": "$3,050.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 92.0,
+          "weeklyCallStrikeText": "$92.00",
+          "weeklyCallDelta": 0.1807,
+          "weeklyCallDeltaText": "0.18",
+          "weeklyCallPremium": 117.44999999999999,
+          "weeklyCallPremiumText": "$117.45",
+          "weeklyPremiumStockYieldPct": 1.510610932475884,
+          "weeklyPremiumStockYieldPctText": "1.51%",
+          "weeklyPremiumLeapsYieldPct": 3.850819672131147,
+          "weeklyPremiumLeapsYieldPctText": "3.85%",
+          "leapsLegText": "12/15/2028 $55.00C | Delta 0.84 | Cost $3,050.00",
+          "shortCallLegText": "11/13/2026 $92.00C | Delta 0.18 | Prem $117.45",
+          "earningsDate": "2026-11-05",
+          "earningsDateText": "11/5",
+          "action": "Eligible - wider strike",
+          "score": 92,
+          "scoreText": "92"
+        },
+        {
+          "ticker": "ZS",
+          "price": 257.39,
+          "priceText": "$257.39",
+          "below52wHighPct": -23.600474918373404,
+          "below52wHighPctText": "-23.60%",
+          "avgWeeklyMovePct": 12.310886373138846,
+          "avgWeeklyMovePctText": "12.31%",
+          "leapsExpiration": "2028-06-16",
+          "leapsExpirationText": "6/16/2028",
+          "leapsStrike": 165.0,
+          "leapsStrikeText": "$165.00",
+          "leapsDelta": 0.8493,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 9356.0,
+          "leapsCostText": "$9,356.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 297.5,
+          "weeklyCallStrikeText": "$297.50",
+          "weeklyCallDelta": 0.1785,
+          "weeklyCallDeltaText": "0.18",
+          "weeklyCallPremium": 330.5,
+          "weeklyCallPremiumText": "$330.50",
+          "weeklyPremiumStockYieldPct": 1.2840436691402155,
+          "weeklyPremiumStockYieldPctText": "1.28%",
+          "weeklyPremiumLeapsYieldPct": 3.5324925181701583,
+          "weeklyPremiumLeapsYieldPctText": "3.53%",
+          "leapsLegText": "6/16/2028 $165.00C | Delta 0.85 | Cost $9,356.00",
+          "shortCallLegText": "11/13/2026 $297.50C | Delta 0.18 | Prem $330.50",
+          "earningsDate": "2026-11-24",
+          "earningsDateText": "11/24",
+          "action": "Eligible - aggressive",
+          "score": 86,
+          "scoreText": "86"
+        },
+        {
+          "ticker": "SKHY",
+          "price": 144.39,
+          "priceText": "$144.39",
+          "below52wHighPct": -27.730924197302237,
+          "below52wHighPctText": "-27.73%",
+          "avgWeeklyMovePct": 14.223532441758,
+          "avgWeeklyMovePctText": "14.22%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 95.0,
+          "leapsStrikeText": "$95.00",
+          "leapsDelta": 0.8505,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 6680.0,
+          "leapsCostText": "$6,680.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 170.0,
+          "weeklyCallStrikeText": "$170.00",
+          "weeklyCallDelta": 0.175,
+          "weeklyCallDeltaText": "0.17",
+          "weeklyCallPremium": 206.0,
+          "weeklyCallPremiumText": "$206.00",
+          "weeklyPremiumStockYieldPct": 1.426691599141215,
+          "weeklyPremiumStockYieldPctText": "1.43%",
+          "weeklyPremiumLeapsYieldPct": 3.0838323353293418,
+          "weeklyPremiumLeapsYieldPctText": "3.08%",
+          "leapsLegText": "12/15/2028 $95.00C | Delta 0.85 | Cost $6,680.00",
+          "shortCallLegText": "11/13/2026 $170.00C | Delta 0.17 | Prem $206.00",
+          "earningsDate": null,
+          "earningsDateText": "N/A",
+          "action": "Eligible - aggressive",
+          "score": 86,
+          "scoreText": "86"
+        },
+        {
+          "ticker": "TEM",
+          "price": 68.245,
+          "priceText": "$68.25",
+          "below52wHighPct": -24.582826831694103,
+          "below52wHighPctText": "-24.58%",
+          "avgWeeklyMovePct": 15.248760231933762,
+          "avgWeeklyMovePctText": "15.25%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 45.0,
+          "leapsStrikeText": "$45.00",
+          "leapsDelta": 0.8459,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 3909.0000000000005,
+          "leapsCostText": "$3,909.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 84.0,
+          "weeklyCallStrikeText": "$84.00",
+          "weeklyCallDelta": 0.1853,
+          "weeklyCallDeltaText": "0.19",
+          "weeklyCallPremium": 120.0,
+          "weeklyCallPremiumText": "$120.00",
+          "weeklyPremiumStockYieldPct": 1.7583705765990179,
+          "weeklyPremiumStockYieldPctText": "1.76%",
+          "weeklyPremiumLeapsYieldPct": 3.069838833461243,
+          "weeklyPremiumLeapsYieldPctText": "3.07%",
+          "leapsLegText": "12/15/2028 $45.00C | Delta 0.85 | Cost $3,909.00",
+          "shortCallLegText": "11/13/2026 $84.00C | Delta 0.19 | Prem $120.00",
+          "earningsDate": "2026-11-02",
+          "earningsDateText": "11/2",
+          "action": "Eligible - aggressive",
+          "score": 81,
+          "scoreText": "81"
+        },
+        {
+          "ticker": "VST",
+          "price": 144.56,
+          "priceText": "$144.56",
+          "below52wHighPct": -25.976752521890518,
+          "below52wHighPctText": "-25.98%",
+          "avgWeeklyMovePct": 10.016002773895375,
+          "avgWeeklyMovePctText": "10.02%",
+          "leapsExpiration": "2028-06-16",
+          "leapsExpirationText": "6/16/2028",
+          "leapsStrike": 95.0,
+          "leapsStrikeText": "$95.00",
+          "leapsDelta": 0.8563,
+          "leapsDeltaText": "0.86",
+          "leapsCost": 6128.0,
+          "leapsCostText": "$6,128.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 162.5,
+          "weeklyCallStrikeText": "$162.50",
+          "weeklyCallDelta": 0.1867,
+          "weeklyCallDeltaText": "0.19",
+          "weeklyCallPremium": 185.0,
+          "weeklyCallPremiumText": "$185.00",
+          "weeklyPremiumStockYieldPct": 1.2797454344216934,
+          "weeklyPremiumStockYieldPctText": "1.28%",
+          "weeklyPremiumLeapsYieldPct": 3.0189295039164494,
+          "weeklyPremiumLeapsYieldPctText": "3.02%",
+          "leapsLegText": "6/16/2028 $95.00C | Delta 0.86 | Cost $6,128.00",
+          "shortCallLegText": "11/13/2026 $162.50C | Delta 0.19 | Prem $185.00",
+          "earningsDate": "2026-11-06",
+          "earningsDateText": "11/6",
+          "action": "Eligible - aggressive",
+          "score": 86,
+          "scoreText": "86"
+        },
+        {
+          "ticker": "APO",
+          "price": 115.3,
+          "priceText": "$115.30",
+          "below52wHighPct": -23.808894469041174,
+          "below52wHighPctText": "-23.81%",
+          "avgWeeklyMovePct": 7.409363689736888,
+          "avgWeeklyMovePctText": "7.41%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 85.0,
+          "leapsStrikeText": "$85.00",
+          "leapsDelta": 0.8457,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 4403.5,
+          "leapsCostText": "$4,403.50",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 127.0,
+          "weeklyCallStrikeText": "$127.00",
+          "weeklyCallDelta": 0.1792,
+          "weeklyCallDeltaText": "0.18",
+          "weeklyCallPremium": 110.00000000000001,
+          "weeklyCallPremiumText": "$110.00",
+          "weeklyPremiumStockYieldPct": 0.9540329575021683,
+          "weeklyPremiumStockYieldPctText": "0.95%",
+          "weeklyPremiumLeapsYieldPct": 2.4980129442488934,
+          "weeklyPremiumLeapsYieldPctText": "2.50%",
+          "leapsLegText": "12/15/2028 $85.00C | Delta 0.85 | Cost $4,403.50",
+          "shortCallLegText": "11/13/2026 $127.00C | Delta 0.18 | Prem $110.00",
+          "earningsDate": "2026-11-03",
+          "earningsDateText": "11/3",
+          "action": "Eligible",
+          "score": 92,
+          "scoreText": "92"
+        },
+        {
+          "ticker": "UAL",
+          "price": 101.36,
+          "priceText": "$101.36",
+          "below52wHighPct": -26.937216175304545,
+          "below52wHighPctText": "-26.94%",
+          "avgWeeklyMovePct": 9.099924249270588,
+          "avgWeeklyMovePctText": "9.10%",
+          "leapsExpiration": "2028-06-16",
+          "leapsExpirationText": "6/16/2028",
+          "leapsStrike": 70.0,
+          "leapsStrikeText": "$70.00",
+          "leapsDelta": 0.8418,
+          "leapsDeltaText": "0.84",
+          "leapsCost": 4034.0000000000005,
+          "leapsCostText": "$4,034.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 113.0,
+          "weeklyCallStrikeText": "$113.00",
+          "weeklyCallDelta": 0.1865,
+          "weeklyCallDeltaText": "0.19",
+          "weeklyCallPremium": 100.0,
+          "weeklyCallPremiumText": "$100.00",
+          "weeklyPremiumStockYieldPct": 0.9865824782951855,
+          "weeklyPremiumStockYieldPctText": "0.99%",
+          "weeklyPremiumLeapsYieldPct": 2.4789291026276645,
+          "weeklyPremiumLeapsYieldPctText": "2.48%",
+          "leapsLegText": "6/16/2028 $70.00C | Delta 0.84 | Cost $4,034.00",
+          "shortCallLegText": "11/13/2026 $113.00C | Delta 0.19 | Prem $100.00",
+          "earningsDate": null,
+          "earningsDateText": "N/A",
+          "action": "Eligible - wider strike",
+          "score": 92,
+          "scoreText": "92"
+        },
+        {
+          "ticker": "XYZ",
+          "price": 74.33,
+          "priceText": "$74.33",
+          "below52wHighPct": -14.445211786372006,
+          "below52wHighPctText": "-14.45%",
+          "avgWeeklyMovePct": 9.37099944709036,
+          "avgWeeklyMovePctText": "9.37%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 50.0,
+          "leapsStrikeText": "$50.00",
+          "leapsDelta": 0.847,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 3665.0,
+          "leapsCostText": "$3,665.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 86.0,
+          "weeklyCallStrikeText": "$86.00",
+          "weeklyCallDelta": 0.1877,
+          "weeklyCallDeltaText": "0.19",
+          "weeklyCallPremium": 85.0,
+          "weeklyCallPremiumText": "$85.00",
+          "weeklyPremiumStockYieldPct": 1.143549038073456,
+          "weeklyPremiumStockYieldPctText": "1.14%",
+          "weeklyPremiumLeapsYieldPct": 2.3192360163710775,
+          "weeklyPremiumLeapsYieldPctText": "2.32%",
+          "leapsLegText": "12/15/2028 $50.00C | Delta 0.85 | Cost $3,665.00",
+          "shortCallLegText": "11/13/2026 $86.00C | Delta 0.19 | Prem $85.00",
+          "earningsDate": "2026-11-03",
+          "earningsDateText": "11/3",
+          "action": "Eligible - wider strike",
+          "score": 87,
+          "scoreText": "87"
+        },
+        {
+          "ticker": "MRVL",
+          "price": 238.92,
+          "priceText": "$238.92",
+          "below52wHighPct": -27.53412192902639,
+          "below52wHighPctText": "-27.53%",
+          "avgWeeklyMovePct": 14.224542586001906,
+          "avgWeeklyMovePctText": "14.22%",
+          "leapsExpiration": "2028-06-16",
+          "leapsExpirationText": "6/16/2028",
+          "leapsStrike": 155.0,
+          "leapsStrikeText": "$155.00",
+          "leapsDelta": 0.8491,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 13594.0,
+          "leapsCostText": "$13,594.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 277.5,
+          "weeklyCallStrikeText": "$277.50",
+          "weeklyCallDelta": 0.1736,
+          "weeklyCallDeltaText": "0.17",
+          "weeklyCallPremium": 308.0,
+          "weeklyCallPremiumText": "$308.00",
+          "weeklyPremiumStockYieldPct": 1.2891344383057093,
+          "weeklyPremiumStockYieldPctText": "1.29%",
+          "weeklyPremiumLeapsYieldPct": 2.2657054582904226,
+          "weeklyPremiumLeapsYieldPctText": "2.27%",
+          "leapsLegText": "6/16/2028 $155.00C | Delta 0.85 | Cost $13,594.00",
+          "shortCallLegText": "11/13/2026 $277.50C | Delta 0.17 | Prem $308.00",
+          "earningsDate": "2026-12-01",
+          "earningsDateText": "12/1",
+          "action": "Eligible - aggressive",
+          "score": 86,
+          "scoreText": "86"
+        },
+        {
+          "ticker": "TSLA",
+          "price": 401.115,
+          "priceText": "$401.12",
+          "below52wHighPct": -19.584001603849238,
+          "below52wHighPctText": "-19.58%",
+          "avgWeeklyMovePct": 8.65238188934035,
+          "avgWeeklyMovePctText": "8.65%",
+          "leapsExpiration": "2028-12-15",
+          "leapsExpirationText": "12/15/2028",
+          "leapsStrike": 270.0,
+          "leapsStrikeText": "$270.00",
+          "leapsDelta": 0.8486,
+          "leapsDeltaText": "0.85",
+          "leapsCost": 17820.0,
+          "leapsCostText": "$17,820.00",
+          "weeklyCallExpiration": "2026-11-13",
+          "weeklyCallExpirationText": "11/13/2026",
+          "weeklyCallStrike": 437.5,
+          "weeklyCallStrikeText": "$437.50",
+          "weeklyCallDelta": 0.1742,
+          "weeklyCallDeltaText": "0.17",
+          "weeklyCallPremium": 334.0,
+          "weeklyCallPremiumText": "$334.00",
+          "weeklyPremiumStockYieldPct": 0.8326789075452177,
+          "weeklyPremiumStockYieldPctText": "0.83%",
+          "weeklyPremiumLeapsYieldPct": 1.8742985409652075,
+          "weeklyPremiumLeapsYieldPctText": "1.87%",
+          "leapsLegText": "12/15/2028 $270.00C | Delta 0.85 | Cost $17,820.00",
+          "shortCallLegText": "11/13/2026 $437.50C | Delta 0.17 | Prem $334.00",
+          "earningsDate": null,
+          "earningsDateText": "N/A",
+          "action": "Eligible - wider strike",
+          "score": 89,
+          "scoreText": "89"
+        }
+      ]
+    },
+    "creditSpreadCandidates": {
+      "title": "Credit Spread Candidates",
+      "expiration": "11/27/2026",
+      "rows": [
+        {
+          "ticker": "SPY",
+          "price": 767.07,
+          "priceText": "$767.07",
+          "strategy": "Bear Call",
+          "expiration": "2026-11-27",
+          "expirationText": "11/27/2026",
+          "shortStrike": 790.0,
+          "shortStrikeText": "$790.00 Call",
+          "longStrike": 796.0,
+          "longStrikeText": "$796.00 Call",
+          "shortDelta": 0.2394,
+          "shortDeltaText": "0.24",
+          "longDelta": 0.1713,
+          "longDeltaText": "0.17",
+          "credit": 133.0,
+          "creditText": "$133.00",
+          "maxLoss": 467.0,
+          "maxLossText": "$467.00",
+          "maxRoiPct": 28.479657387580303,
+          "maxRoiPctText": "28.48%",
+          "status": "Qualified"
+        },
+        {
+          "ticker": "QQQ",
+          "price": 716.69,
+          "priceText": "$716.69",
+          "strategy": "Bear Call",
+          "expiration": "2026-11-27",
+          "expirationText": "11/27/2026",
+          "shortStrike": 752.0,
+          "shortStrikeText": "$752.00 Call",
+          "longStrike": 758.0,
+          "longStrikeText": "$758.00 Call",
+          "shortDelta": 0.2213,
+          "shortDeltaText": "0.22",
+          "longDelta": 0.1751,
+          "longDeltaText": "0.18",
+          "credit": 129.0,
+          "creditText": "$129.00",
+          "maxLoss": 471.0,
+          "maxLossText": "$471.00",
+          "maxRoiPct": 27.388535031847134,
+          "maxRoiPctText": "27.39%",
+          "status": "Qualified"
+        },
+        {
+          "ticker": "TSLA",
+          "price": 401.115,
+          "priceText": "$401.12",
+          "strategy": "Bull Put",
+          "expiration": "2026-11-27",
+          "expirationText": "11/27/2026",
+          "shortStrike": 365.0,
+          "shortStrikeText": "$365.00 Put",
+          "longStrike": 360.0,
+          "longStrikeText": "$360.00 Put",
+          "shortDelta": 0.1908,
+          "shortDeltaText": "0.19",
+          "longDelta": 0.1613,
+          "longDeltaText": "0.16",
+          "credit": 92.99999999999997,
+          "creditText": "$93.00",
+          "maxLoss": 407.0,
+          "maxLossText": "$407.00",
+          "maxRoiPct": 22.85012285012284,
+          "maxRoiPctText": "22.85%",
+          "status": "Qualified"
+        },
+        {
+          "ticker": "NVDA",
+          "price": 216.805,
+          "priceText": "$216.81",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "Skip - Earnings Before Expiration"
+        },
+        {
+          "ticker": "MSFT",
+          "price": 532.14,
+          "priceText": "$532.14",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "Skip - Earnings Before Expiration"
+        },
+        {
+          "ticker": "META",
+          "price": 623.77,
+          "priceText": "$623.77",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "No Trade - No Bear Call Meets Credit/Delta"
+        },
+        {
+          "ticker": "GOOGL",
+          "price": 319.12,
+          "priceText": "$319.12",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "Skip - Earnings Before Expiration"
+        },
+        {
+          "ticker": "AMZN",
+          "price": 250.945,
+          "priceText": "$250.94",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "Skip - Earnings Before Expiration"
+        },
+        {
+          "ticker": "AAPL",
+          "price": 345.62,
+          "priceText": "$345.62",
+          "strategy": "No Trade",
+          "expiration": null,
+          "expirationText": "N/A",
+          "shortStrike": null,
+          "shortStrikeText": "N/A",
+          "longStrike": null,
+          "longStrikeText": "N/A",
+          "shortDelta": null,
+          "shortDeltaText": "N/A",
+          "longDelta": null,
+          "longDeltaText": "N/A",
+          "credit": null,
+          "creditText": "N/A",
+          "maxLoss": null,
+          "maxLossText": "N/A",
+          "maxRoiPct": null,
+          "maxRoiPctText": "N/A",
+          "status": "Skip - Earnings Before Expiration"
+        }
+      ]
+    },
+    "earningsThisWeek": {
+      "title": "Earnings this Week",
+      "rows": [
+        {
+          "ticker": "ENPH",
+          "price": 30.295,
+          "priceText": "$30.30",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 11.8501402871761,
+          "expectedMovePctText": "11.85%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "FCX",
+          "price": 65.4,
+          "priceText": "$65.40",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 4.235474006116208,
+          "expectedMovePctText": "4.24%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "GLW",
+          "price": 125.78,
+          "priceText": "$125.78",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 5.978692955954842,
+          "expectedMovePctText": "5.98%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "GLXY",
+          "price": 16.725,
+          "priceText": "$16.73",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 8.251121076233183,
+          "expectedMovePctText": "8.25%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "HOOD",
+          "price": 95.75,
+          "priceText": "$95.75",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 8.532637075718014,
+          "expectedMovePctText": "8.53%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "PYPL",
+          "price": 55.19,
+          "priceText": "$55.19",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 3.8050371444102185,
+          "expectedMovePctText": "3.81%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SOFI",
+          "price": 16.325,
+          "priceText": "$16.32",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 5.084226646248086,
+          "expectedMovePctText": "5.08%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "TER",
+          "price": 319.96,
+          "priceText": "$319.96",
+          "earningsDate": "2026-10-27",
+          "earningsDateText": "10/27",
+          "expectedMovePct": 11.388923615451931,
+          "expectedMovePctText": "11.39%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "CMG",
+          "price": 27.965,
+          "priceText": "$27.96",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 7.580904702306455,
+          "expectedMovePctText": "7.58%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "CVNA",
+          "price": 56.91,
+          "priceText": "$56.91",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 12.14197856264277,
+          "expectedMovePctText": "12.14%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "ETSY",
+          "price": 84.2,
+          "priceText": "$84.20",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 10.15439429928741,
+          "expectedMovePctText": "10.15%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "FTNT",
+          "price": 183.51,
+          "priceText": "$183.51",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 11.198299820173286,
+          "expectedMovePctText": "11.20%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "GNRC",
+          "price": 191.32,
+          "priceText": "$191.32",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 9.75851975747439,
+          "expectedMovePctText": "9.76%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "GOOGL",
+          "price": 319.12,
+          "priceText": "$319.12",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 5.8912008022060665,
+          "expectedMovePctText": "5.89%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "KLAC",
+          "price": 150.69,
+          "priceText": "$150.69",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 8.023093768664145,
+          "expectedMovePctText": "8.02%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "MSFT",
+          "price": 531.54,
+          "priceText": "$531.54",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 5.279000639650826,
+          "expectedMovePctText": "5.28%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "NOW",
+          "price": 154.5,
+          "priceText": "$154.50",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 10.032362459546926,
+          "expectedMovePctText": "10.03%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "VRT",
+          "price": 208.48,
+          "priceText": "$208.48",
+          "earningsDate": "2026-10-28",
+          "earningsDateText": "10/28",
+          "expectedMovePct": 10.691673062164236,
+          "expectedMovePctText": "10.69%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AMZN",
+          "price": 250.87,
+          "priceText": "$250.87",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 7.549726950213256,
+          "expectedMovePctText": "7.55%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "AXTI",
+          "price": 56.365,
+          "priceText": "$56.37",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 15.718974540938524,
+          "expectedMovePctText": "15.72%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "COIN",
+          "price": 159.03,
+          "priceText": "$159.03",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 8.941709111488398,
+          "expectedMovePctText": "8.94%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "FSLR",
+          "price": 173.02,
+          "priceText": "$173.02",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 10.027742457519363,
+          "expectedMovePctText": "10.03%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "INTC",
+          "price": 92.92,
+          "priceText": "$92.92",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 9.599655617735687,
+          "expectedMovePctText": "9.60%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "MBLY",
+          "price": 6.665,
+          "priceText": "$6.67",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 9.00225056264066,
+          "expectedMovePctText": "9.00%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "MSTR",
+          "price": 141.145,
+          "priceText": "$141.15",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 7.077827765772786,
+          "expectedMovePctText": "7.08%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RBLX",
+          "price": 54.05,
+          "priceText": "$54.05",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 14.986123959296949,
+          "expectedMovePctText": "14.99%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RDDT",
+          "price": 137.96,
+          "priceText": "$137.96",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 12.60510292838504,
+          "expectedMovePctText": "12.61%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RIVN",
+          "price": 11.735,
+          "priceText": "$11.73",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 9.7997443544951,
+          "expectedMovePctText": "9.80%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "RKT",
+          "price": 11.575,
+          "priceText": "$11.57",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 8.55291576673866,
+          "expectedMovePctText": "8.55%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        },
+        {
+          "ticker": "SNDK",
+          "price": 1295.89,
+          "priceText": "$1,295.89",
+          "earningsDate": "2026-10-29",
+          "earningsDateText": "10/29",
+          "expectedMovePct": 9.408977613840682,
+          "expectedMovePctText": "9.41%",
+          "action": "N/A",
+          "premium": null,
+          "premiumText": "N/A",
+          "roiPct": null,
+          "roiPctText": "N/A"
+        }
+      ]
+    },
+    "teamReview": {
+      "title": "Team Review",
+      "bestBalance": [],
+      "bestBalanceWhy": "these are the strongest remaining candidates after the earnings-week exclusions, biased toward moderate ROI rather than the most aggressive premium.",
+      "aggressivePremium": []
+    },
+    "skippedTickers": [
+      {
+        "ticker": "ACHR",
+        "reason": "ACHR: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "TER",
+        "reason": "TER: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "AMZN",
+        "reason": "AMZN: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "AXTI",
+        "reason": "AXTI: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "ENPH",
+        "reason": "ENPH: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "KLAC",
+        "reason": "KLAC: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "CMG",
+        "reason": "CMG: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "COIN",
+        "reason": "COIN: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "CVNA",
+        "reason": "CVNA: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "ETSY",
+        "reason": "ETSY: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "FCX",
+        "reason": "FCX: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "FSLR",
+        "reason": "FSLR: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "GLW",
+        "reason": "GLW: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "FTNT",
+        "reason": "FTNT: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "GLXY",
+        "reason": "GLXY: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "INTC",
+        "reason": "INTC: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "HOOD",
+        "reason": "HOOD: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "SNDK",
+        "reason": "SNDK: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "JOBY",
+        "reason": "JOBY: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "LUMN",
+        "reason": "LUMN: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "MBLY",
+        "reason": "MBLY: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "MSTR",
+        "reason": "MSTR: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "NOW",
+        "reason": "NOW: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "MSFT",
+        "reason": "MSFT: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "GNRC",
+        "reason": "GNRC: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "PYPL",
+        "reason": "PYPL: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "RCAT",
+        "reason": "RCAT: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "RBLX",
+        "reason": "RBLX: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "RIVN",
+        "reason": "RIVN: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "RDDT",
+        "reason": "RDDT: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "RKT",
+        "reason": "RKT: earnings during report week (2026-10-29)"
+      },
+      {
+        "ticker": "SOUN",
+        "reason": "SOUN: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "TE",
+        "reason": "TE: stock price below $5 threshold for Options Report"
+      },
+      {
+        "ticker": "SOFI",
+        "reason": "SOFI: earnings during report week (2026-10-27)"
+      },
+      {
+        "ticker": "GOOGL",
+        "reason": "GOOGL: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "VRT",
+        "reason": "VRT: earnings during report week (2026-10-28)"
+      },
+      {
+        "ticker": "AMAT",
+        "reason": "AMAT: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AMPX",
+        "reason": "AMPX: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "RBRK",
+        "reason": "RBRK: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ALAB",
+        "reason": "ALAB: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AFRM",
+        "reason": "AFRM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AAPL",
+        "reason": "AAPL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ANET",
+        "reason": "ANET: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "PURR",
+        "reason": "PURR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AI",
+        "reason": "AI: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "APO",
+        "reason": "APO: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ASTS",
+        "reason": "ASTS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "APLD",
+        "reason": "APLD: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "BULL",
+        "reason": "BULL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "BE",
+        "reason": "BE: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "APP",
+        "reason": "APP: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "BROS",
+        "reason": "BROS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AVGO",
+        "reason": "AVGO: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AMD",
+        "reason": "AMD: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AVAV",
+        "reason": "AVAV: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CAVA",
+        "reason": "CAVA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CIFR",
+        "reason": "CIFR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CEG",
+        "reason": "CEG: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CRWV",
+        "reason": "CRWV: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "MDB",
+        "reason": "MDB: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "COHR",
+        "reason": "COHR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CRWD",
+        "reason": "CRWD: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CORZ",
+        "reason": "CORZ: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CRCL",
+        "reason": "CRCL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CRM",
+        "reason": "CRM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CLSK",
+        "reason": "CLSK: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DAL",
+        "reason": "DAL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DUOL",
+        "reason": "DUOL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DKNG",
+        "reason": "DKNG: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ASML",
+        "reason": "ASML: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "FSLY",
+        "reason": "FSLY: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AMBA",
+        "reason": "AMBA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TXN",
+        "reason": "TXN: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DELL",
+        "reason": "DELL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DASH",
+        "reason": "DASH: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "DDOG",
+        "reason": "DDOG: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "HPE",
+        "reason": "HPE: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "FLY",
+        "reason": "FLY: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "NFLX",
+        "reason": "NFLX: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "EXPE",
+        "reason": "EXPE: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "HIMS",
+        "reason": "HIMS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SPOT",
+        "reason": "SPOT: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "FIGR",
+        "reason": "FIGR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ARM",
+        "reason": "ARM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "HUT",
+        "reason": "HUT: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "FISV",
+        "reason": "FISV: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "IONQ",
+        "reason": "IONQ: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AAOI",
+        "reason": "AAOI: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "KKR",
+        "reason": "KKR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "LUNR",
+        "reason": "LUNR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "IOT",
+        "reason": "IOT: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "CRDO",
+        "reason": "CRDO: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "LRCX",
+        "reason": "LRCX: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "LITE",
+        "reason": "LITE: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "MCHP",
+        "reason": "MCHP: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "IREN",
+        "reason": "IREN: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "MRVL",
+        "reason": "MRVL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "NVDA",
+        "reason": "NVDA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "OKTA",
+        "reason": "OKTA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ADBE",
+        "reason": "ADBE: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "NBIS",
+        "reason": "NBIS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "MP",
+        "reason": "MP: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "NET",
+        "reason": "NET: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "MU",
+        "reason": "MU: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "NVTS",
+        "reason": "NVTS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ORCL",
+        "reason": "ORCL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ONDS",
+        "reason": "ONDS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ONON",
+        "reason": "ONON: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "OSCR",
+        "reason": "OSCR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "KTOS",
+        "reason": "KTOS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "PANW",
+        "reason": "PANW: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "PATH",
+        "reason": "PATH: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "PL",
+        "reason": "PL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "WDC",
+        "reason": "WDC: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "OKLO",
+        "reason": "OKLO: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "AXON",
+        "reason": "AXON: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "POET",
+        "reason": "POET: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "QBTS",
+        "reason": "QBTS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "OUST",
+        "reason": "OUST: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "RGTI",
+        "reason": "RGTI: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "PLTR",
+        "reason": "PLTR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "RDW",
+        "reason": "RDW: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "RKLB",
+        "reason": "RKLB: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ROKU",
+        "reason": "ROKU: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SMCI",
+        "reason": "SMCI: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "QCOM",
+        "reason": "QCOM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ECHO",
+        "reason": "ECHO: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TSM",
+        "reason": "TSM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SNOW",
+        "reason": "SNOW: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SMTC",
+        "reason": "SMTC: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TEM",
+        "reason": "TEM: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "UBER",
+        "reason": "UBER: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SHOP",
+        "reason": "SHOP: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "UAL",
+        "reason": "UAL: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TOST",
+        "reason": "TOST: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "UUUU",
+        "reason": "UUUU: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "USAR",
+        "reason": "USAR: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TTD",
+        "reason": "TTD: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "U",
+        "reason": "U: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "META",
+        "reason": "META: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "SKHY",
+        "reason": "SKHY: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "W",
+        "reason": "W: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "UPST",
+        "reason": "UPST: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "XYZ",
+        "reason": "XYZ: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "TSLA",
+        "reason": "TSLA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "UEC",
+        "reason": "UEC: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "VST",
+        "reason": "VST: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ZS",
+        "reason": "ZS: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "WULF",
+        "reason": "WULF: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      },
+      {
+        "ticker": "ZETA",
+        "reason": "ZETA: choose_priced_option_contract() got an unexpected keyword argument 'cash_budget'"
+      }
+    ],
+    "myPortfolioPuts": {
+      "title": "My Portfolio Cash Secured Puts",
+      "expiration": "N/A",
+      "rows": [],
+      "totalPositionValue": 0,
+      "totalPositionValueText": "$0.00",
+      "totalPremium": 0,
+      "totalPremiumText": "$0.00"
+    }
+  },
+  {
+    "reportTitle": "Options Report",
     "reportDate": "10/26",
     "reportDateIso": "2026-10-26",
     "generatedAt": "2026-10-26 14:40:25",
