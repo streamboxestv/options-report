@@ -2187,6 +2187,17 @@ def build_report(
     def build_active_symbol(symbol: str) -> Dict[str, object]:
         try:
             covered_call, covered_call_expiration = build_row(symbol, latest_prices[symbol], trend_by_symbol[symbol], pct_otm_by_symbol[symbol], "call", api_key, api_secret, expiration_override)
+        except Exception as exc:
+            return {
+                "status": "skip",
+                "symbol": symbol,
+                "skip_message": f"{symbol}: {exc}",
+                "excluded_row": ExcludedTickerRow(symbol, latest_prices.get(symbol), None, "N/A", None, None),
+            }
+
+        cash_secured_put = None
+        cash_secured_put_expiration = None
+        try:
             cash_secured_put, cash_secured_put_expiration = build_row(
                 symbol,
                 latest_prices[symbol],
@@ -2198,21 +2209,17 @@ def build_report(
                 expiration_override,
                 cash_budget=CASH_SECURED_PUT_BUDGET,
             )
-            return {
-                "status": "ok",
-                "symbol": symbol,
-                "covered_call": covered_call,
-                "covered_call_expiration": covered_call_expiration,
-                "cash_secured_put": cash_secured_put,
-                "cash_secured_put_expiration": cash_secured_put_expiration,
-            }
-        except Exception as exc:
-            return {
-                "status": "skip",
-                "symbol": symbol,
-                "skip_message": f"{symbol}: {exc}",
-                "excluded_row": ExcludedTickerRow(symbol, latest_prices.get(symbol), None, "N/A", None, None),
-            }
+        except Exception:
+            pass
+
+        return {
+            "status": "ok",
+            "symbol": symbol,
+            "covered_call": covered_call,
+            "covered_call_expiration": covered_call_expiration,
+            "cash_secured_put": cash_secured_put,
+            "cash_secured_put_expiration": cash_secured_put_expiration,
+        }
 
     active_batches = batched_symbols(active_symbols)
     for batch_index, symbol_batch in enumerate(active_batches):
@@ -2224,9 +2231,10 @@ def build_report(
                 if result["status"] == "ok":
                     symbol = str(result["symbol"])
                     covered_calls.append(result["covered_call"])
-                    cash_secured_puts.append(result["cash_secured_put"])
                     covered_call_expirations[symbol] = result["covered_call_expiration"]
-                    cash_secured_put_expirations[symbol] = result["cash_secured_put_expiration"]
+                    if result["cash_secured_put"] is not None and result["cash_secured_put_expiration"] is not None:
+                        cash_secured_puts.append(result["cash_secured_put"])
+                        cash_secured_put_expirations[symbol] = result["cash_secured_put_expiration"]
                     final_symbols.append(symbol)
                 else:
                     skipped.append(str(result["skip_message"]))
