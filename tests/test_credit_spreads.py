@@ -55,5 +55,45 @@ class CreditSpreadPricingTests(unittest.TestCase):
         self.assertIsNone(row.max_roi_pct)
 
 
+class CashSecuredPutLiquidityTests(unittest.TestCase):
+    def snapshot(self, strike, bid, ask, bid_size, open_interest, last):
+        return {
+            "option_contract": {
+                "strike_price": str(strike),
+                "open_interest": str(open_interest),
+            },
+            "greeks": {"delta": -0.20},
+            "latestQuote": {"bp": bid, "ap": ask, "bs": bid_size},
+            "latestTrade": {"p": last},
+        }
+
+    def test_skips_stale_last_trade_when_there_is_no_bid(self):
+        strike, premium = report.choose_option_contract(
+            contracts=[
+                self.snapshot(57, None, 0.60, 0, 100, 0.88),
+                self.snapshot(55, 0.50, 0.60, 10, 100, 0.70),
+            ],
+            price=65.98,
+            target_strike=57.0,
+            option_type="put",
+            cash_budget=20_000.0,
+        )
+
+        self.assertEqual(strike, 55)
+        self.assertEqual(premium, 0.50)
+
+    def test_rejects_contract_without_enough_open_interest(self):
+        with self.assertRaisesRegex(RuntimeError, "No OTM put contracts available"):
+            report.choose_option_contract(
+                contracts=[
+                    self.snapshot(57, 0.50, 0.60, 10, 20, 0.55),
+                ],
+                price=65.98,
+                target_strike=57.0,
+                option_type="put",
+                cash_budget=20_000.0,
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
