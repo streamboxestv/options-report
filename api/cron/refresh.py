@@ -355,7 +355,25 @@ def snapshot_option_price(snapshot: Dict) -> Optional[float]:
     return None
 
 
-def choose_priced_option_contract(contracts, price: float, target_strike: float, option_type: str) -> Tuple[float, Optional[float]]:
+_base_choose_option_contract = report_module.choose_option_contract
+
+
+def choose_priced_option_contract(
+    contracts,
+    price: float,
+    target_strike: float,
+    option_type: str,
+    cash_budget: Optional[float] = None,
+) -> Tuple[float, Optional[float]]:
+    if cash_budget is not None:
+        return _base_choose_option_contract(
+            contracts,
+            price,
+            target_strike,
+            option_type,
+            cash_budget=cash_budget,
+        )
+
     parsed = []
     for snapshot in contracts:
         greeks = snapshot.get("greeks") or {}
@@ -510,6 +528,10 @@ class handler(BaseHTTPRequestHandler):
                 batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
             )
+            if int(snapshot.get("includedCount") or 0) == 0:
+                raise RuntimeError(
+                    "Refusing to publish an empty report; preserving the last successful dashboard snapshot."
+                )
             snapshot["skippedTickers"] = skipped_tickers_from_html(html_report)
             include_all_earnings_skips(snapshot)
             add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
