@@ -95,5 +95,20 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
             )
 
 
+class CashSecuredPutUniverseTests(unittest.TestCase):
+    def test_extra_universe_contains_100_unique_non_primary_symbols(self):
+        extras = report.cash_secured_put_extra_symbols(report.OPTIONS_REPORT_STOCKS)
+
+        self.assertEqual(len(extras), 100)
+        self.assertEqual(len(extras), len(set(extras)))
+        self.assertTrue(set(extras).isdisjoint(report.OPTIONS_REPORT_STOCKS))
+
+    def test_primary_symbol_is_removed_from_extra_scan(self):
+        extras = report.cash_secured_put_extra_symbols(["MARA"])
+
+        self.assertNotIn("MARA", extras)
+        self.assertIn("NOK", extras)
+
+
 if __name__ == "__main__":
     unittest.main()
