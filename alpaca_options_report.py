@@ -177,6 +177,115 @@ def dedupe_keep_order(symbols: List[str]) -> List[str]:
 
 REPORT2_STOCKS = dedupe_keep_order(REPORT2_INPUT_STOCKS)
 OPTIONS_REPORT_STOCKS = REPORT2_STOCKS
+CASH_SECURED_PUT_EXTRA_SYMBOLS = [
+    "MARA",
+    "SPCX",
+    "NOK",
+    "BMNR",
+    "GME",
+    "BAC",
+    "OPEN",
+    "MRNA",
+    "WMT",
+    "NKE",
+    "F",
+    "PFE",
+    "AAL",
+    "SNAP",
+    "NIO",
+    "UNH",
+    "XOM",
+    "RIOT",
+    "AMC",
+    "BA",
+    "T",
+    "NVO",
+    "CSCO",
+    "BYND",
+    "JPM",
+    "VZ",
+    "OXY",
+    "C",
+    "IBM",
+    "PCG",
+    "BTDR",
+    "WBD",
+    "AG",
+    "KO",
+    "CLF",
+    "PLUG",
+    "BBAI",
+    "WFC",
+    "CVX",
+    "PDD",
+    "BB",
+    "OWL",
+    "ASST",
+    "HTZ",
+    "FIG",
+    "SPCE",
+    "FRMI",
+    "BSX",
+    "HL",
+    "COST",
+    "DIS",
+    "JD",
+    "LLY",
+    "LCID",
+    "RIG",
+    "BRK.B",
+    "CDE",
+    "GS",
+    "ET",
+    "PBR",
+    "VG",
+    "CMCSA",
+    "WEN",
+    "DVN",
+    "B",
+    "MRK",
+    "SLS",
+    "V",
+    "GRAB",
+    "LULU",
+    "TGT",
+    "HPQ",
+    "AGNC",
+    "JBLU",
+    "NCLH",
+    "CRML",
+    "BMY",
+    "JNJ",
+    "CAT",
+    "XPEV",
+    "CLOV",
+    "SBET",
+    "BIDU",
+    "IBRX",
+    "SBUX",
+    "DOW",
+    "UPS",
+    "DJT",
+    "VALE",
+    "KHC",
+    "SLB",
+    "SCHW",
+    "NEM",
+    "PAAS",
+    "PTON",
+    "HD",
+    "BTG",
+    "UAMY",
+    "PG",
+    "MCD",
+]
+
+
+def cash_secured_put_extra_symbols(primary_symbols: List[str]) -> List[str]:
+    primary = set(primary_symbols)
+    return [symbol for symbol in CASH_SECURED_PUT_EXTRA_SYMBOLS if symbol not in primary]
+
+
 MY_PORTFOLIO_REPORT_FILE = "my_portfolio_report.txt"
 EARNINGS_CACHE_FILE = "earnings_calendar_cache.json"
 REPORT_HISTORY_FILE = "report_history.json"
@@ -1981,7 +2090,9 @@ def build_report(
     start = today - timedelta(days=400)
     report_expiration = expiration_override or fridays_from(today, 1)[0]
     report_start = monday_of_week(report_expiration)
-    latest_prices = get_latest_prices(symbols, api_key, api_secret)
+    cash_secured_put_extra_scan = cash_secured_put_extra_symbols(symbols)
+    all_scan_symbols = dedupe_keep_order(symbols + cash_secured_put_extra_scan)
+    latest_prices = get_latest_prices(all_scan_symbols, api_key, api_secret)
     missing_credit_symbols = [symbol for symbol in CREDIT_SPREAD_SYMBOLS if symbol not in latest_prices]
     if missing_credit_symbols:
         latest_prices.update(get_latest_prices(missing_credit_symbols, api_key, api_secret))
@@ -2161,10 +2272,28 @@ def build_report(
                     excluded_rows.append(result["excluded_row"])
         if batch_pause_seconds > 0 and batch_index < len(batched_symbols(symbols)) - 1:
             time.sleep(batch_pause_seconds)
+
+    cash_secured_put_extra_active_symbols: List[str] = []
+    extra_batches = batched_symbols(cash_secured_put_extra_scan)
+    for batch_index, symbol_batch in enumerate(extra_batches):
+        max_workers = min(len(symbol_batch), 8) or 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(preprocess_symbol, symbol) for symbol in symbol_batch]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result["status"] != "active":
+                    continue
+                symbol = str(result["symbol"])
+                pct_otm_by_symbol[symbol] = float(result["pct_otm"])
+                high_52w_by_symbol[symbol] = float(result["high_52w"])
+                trend_by_symbol[symbol] = str(result["trend"])
+                cash_secured_put_extra_active_symbols.append(symbol)
+        if batch_pause_seconds > 0 and batch_index < len(extra_batches) - 1:
+            time.sleep(batch_pause_seconds)
     save_earnings_cache(earnings_cache)
 
     portfolio_tickers = load_my_portfolio_tickers()
-    pricing_symbols = dedupe_keep_order(symbols + CREDIT_SPREAD_SYMBOLS + portfolio_tickers)
+    pricing_symbols = dedupe_keep_order(all_scan_symbols + CREDIT_SPREAD_SYMBOLS + portfolio_tickers)
     pricing_refreshed_dt = datetime.now()
     try:
         fresh_prices = get_latest_prices(pricing_symbols, api_key, api_secret)
@@ -2240,6 +2369,38 @@ def build_report(
                     skipped.append(str(result["skip_message"]))
                     excluded_rows.append(result["excluded_row"])
         if batch_pause_seconds > 0 and batch_index < len(active_batches) - 1:
+            time.sleep(batch_pause_seconds)
+
+    def build_cash_secured_put_only_symbol(symbol: str) -> Optional[Tuple[str, OptionRow, date]]:
+        try:
+            row, row_expiration = build_row(
+                symbol,
+                latest_prices[symbol],
+                trend_by_symbol[symbol],
+                pct_otm_by_symbol[symbol],
+                "put",
+                api_key,
+                api_secret,
+                expiration_override,
+                cash_budget=CASH_SECURED_PUT_BUDGET,
+            )
+            return symbol, row, row_expiration
+        except Exception:
+            return None
+
+    extra_put_batches = batched_symbols(cash_secured_put_extra_active_symbols)
+    for batch_index, symbol_batch in enumerate(extra_put_batches):
+        max_workers = min(len(symbol_batch), 8) or 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(build_cash_secured_put_only_symbol, symbol) for symbol in symbol_batch]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result is None:
+                    continue
+                symbol, row, row_expiration = result
+                cash_secured_puts.append(row)
+                cash_secured_put_expirations[symbol] = row_expiration
+        if batch_pause_seconds > 0 and batch_index < len(extra_put_batches) - 1:
             time.sleep(batch_pause_seconds)
 
     pmcc_short_expiration = nearest_pmcc_short_call_expiration(today)
