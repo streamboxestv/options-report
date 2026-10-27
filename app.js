@@ -31,6 +31,9 @@ function dedupeSnapshots(items) {
     if (!item || !item.reportDate || !dateIso) {
       continue;
     }
+    if (Number(item.requestedCount || 0) > 0 && Number(item.includedCount || 0) === 0) {
+      continue;
+    }
     const key = `${dateIso}::${item.expiration || ""}`;
     if (!map.has(key)) {
       map.set(key, item);
