@@ -2119,25 +2119,25 @@ def build_report(
 
     def get_nasdaq_earnings_symbols(day_value: date) -> List[str]:
         nonlocal nasdaq_warning_logged
+        # Keep each backup-calendar date to one request even when many ticker
+        # workers reach the fallback at the same time.
         with nasdaq_earnings_cache_lock:
             cached_symbols = nasdaq_earnings_cache.get(day_value)
             if cached_symbols is not None:
                 return cached_symbols
 
-        url = NASDAQ_EARNINGS_CALENDAR_URL + "?" + urllib.parse.urlencode({"date": day_value.isoformat()})
-        try:
-            payload = http_get_json(url, NASDAQ_EARNINGS_HEADERS)
-            symbols_for_day = parse_nasdaq_earnings_symbols(payload)
-        except Exception as exc:
-            symbols_for_day = []
-            with nasdaq_earnings_cache_lock:
+            url = NASDAQ_EARNINGS_CALENDAR_URL + "?" + urllib.parse.urlencode({"date": day_value.isoformat()})
+            try:
+                payload = http_get_json(url, NASDAQ_EARNINGS_HEADERS)
+                symbols_for_day = parse_nasdaq_earnings_symbols(payload)
+            except Exception as exc:
+                symbols_for_day = []
                 if not nasdaq_warning_logged:
                     warnings.append(f"Nasdaq earnings backup unavailable ({exc})")
                     nasdaq_warning_logged = True
 
-        with nasdaq_earnings_cache_lock:
             nasdaq_earnings_cache[day_value] = symbols_for_day
-        return symbols_for_day
+            return symbols_for_day
 
     def get_nasdaq_earnings_date(symbol: str) -> Optional[date]:
         lookup_symbol = symbol.upper()
