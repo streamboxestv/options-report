@@ -2085,15 +2085,17 @@ def build_report(
     batch_size: int = 0,
     batch_pause_seconds: float = 0.0,
     enforce_min_price_filter: bool = False,
+    include_cash_secured_put_extras: bool = True,
+    supplemental_cash_puts_only: bool = False,
 ) -> Tuple[str, str, Dict[str, object]]:
     today = date.today()
     start = today - timedelta(days=400)
     report_expiration = expiration_override or fridays_from(today, 1)[0]
     report_start = monday_of_week(report_expiration)
-    cash_secured_put_extra_scan = cash_secured_put_extra_symbols(symbols)
+    cash_secured_put_extra_scan = cash_secured_put_extra_symbols(symbols) if include_cash_secured_put_extras else []
     all_scan_symbols = dedupe_keep_order(symbols + cash_secured_put_extra_scan)
     latest_prices = get_latest_prices(all_scan_symbols, api_key, api_secret)
-    missing_credit_symbols = [symbol for symbol in CREDIT_SPREAD_SYMBOLS if symbol not in latest_prices]
+    missing_credit_symbols = [] if supplemental_cash_puts_only else [symbol for symbol in CREDIT_SPREAD_SYMBOLS if symbol not in latest_prices]
     if missing_credit_symbols:
         latest_prices.update(get_latest_prices(missing_credit_symbols, api_key, api_secret))
     earnings_cache = load_earnings_cache()
@@ -2292,8 +2294,9 @@ def build_report(
             time.sleep(batch_pause_seconds)
     save_earnings_cache(earnings_cache)
 
-    portfolio_tickers = load_my_portfolio_tickers()
-    pricing_symbols = dedupe_keep_order(all_scan_symbols + CREDIT_SPREAD_SYMBOLS + portfolio_tickers)
+    portfolio_tickers = [] if supplemental_cash_puts_only else load_my_portfolio_tickers()
+    supporting_symbols = [] if supplemental_cash_puts_only else CREDIT_SPREAD_SYMBOLS + portfolio_tickers
+    pricing_symbols = dedupe_keep_order(all_scan_symbols + supporting_symbols)
     pricing_refreshed_dt = datetime.now()
     try:
         fresh_prices = get_latest_prices(pricing_symbols, api_key, api_secret)
@@ -2482,6 +2485,9 @@ def build_report(
         ),
     )[:90]
 
+    if supplemental_cash_puts_only:
+        preliminary_pmcc_symbols = []
+
     pmcc_batches = batched_symbols(preliminary_pmcc_symbols)
     for batch_index, symbol_batch in enumerate(pmcc_batches):
         max_workers = min(len(symbol_batch), 4) or 1
@@ -2536,13 +2542,14 @@ def build_report(
         except Exception as exc:
             return credit_spread_status_row(symbol, latest_prices.get(symbol), f"No Trade - {exc}")
 
-    max_workers = min(len(CREDIT_SPREAD_SYMBOLS), 4) or 1
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(build_credit_spread_symbol, symbol) for symbol in CREDIT_SPREAD_SYMBOLS]
-        for future in concurrent.futures.as_completed(futures):
-            credit_spread_rows.append(future.result())
+    if not supplemental_cash_puts_only:
+        max_workers = min(len(CREDIT_SPREAD_SYMBOLS), 4) or 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(build_credit_spread_symbol, symbol) for symbol in CREDIT_SPREAD_SYMBOLS]
+            for future in concurrent.futures.as_completed(futures):
+                credit_spread_rows.append(future.result())
 
-    credit_spread_rows = sorted_credit_spread_rows(credit_spread_rows)
+        credit_spread_rows = sorted_credit_spread_rows(credit_spread_rows)
 
     def build_portfolio_symbol(symbol: str) -> Optional[Tuple[str, OptionRow, date]]:
         if symbol not in latest_prices:
@@ -2560,16 +2567,17 @@ def build_report(
         except Exception:
             return None
 
-    max_workers = min(len(portfolio_tickers), 4) or 1
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        futures = [executor.submit(build_portfolio_symbol, symbol) for symbol in portfolio_tickers]
-        for future in concurrent.futures.as_completed(futures):
-            result = future.result()
-            if result is None:
-                continue
-            symbol, portfolio_row, portfolio_expiration = result
-            portfolio_rows.append(portfolio_row)
-            portfolio_expirations[symbol] = portfolio_expiration
+    if portfolio_tickers:
+        max_workers = min(len(portfolio_tickers), 4) or 1
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            futures = [executor.submit(build_portfolio_symbol, symbol) for symbol in portfolio_tickers]
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                if result is None:
+                    continue
+                symbol, portfolio_row, portfolio_expiration = result
+                portfolio_rows.append(portfolio_row)
+                portfolio_expirations[symbol] = portfolio_expiration
 
     portfolio_rows.sort(key=lambda row: row.last_price or 0.0, reverse=True)
 
