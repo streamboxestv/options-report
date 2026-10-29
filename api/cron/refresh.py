@@ -245,7 +245,22 @@ def include_all_earnings_skips(snapshot: Dict[str, object]) -> None:
 
 def should_run_refresh(now_utc: datetime) -> bool:
     chicago_now = now_utc.astimezone(CHICAGO_TZ)
-    return chicago_now.weekday() < 5 and chicago_now.hour == 9
+    return chicago_now.weekday() < 5 and chicago_now.hour in {9, 10}
+
+
+def latest_report_is_current(report_text: Optional[str], report_date: date) -> bool:
+    if not report_text:
+        return False
+    try:
+        snapshot = json.loads(report_text)
+    except (TypeError, json.JSONDecodeError):
+        return False
+    if not isinstance(snapshot, dict):
+        return False
+    return (
+        str(snapshot.get("reportDateIso") or "") == report_date.isoformat()
+        and int(snapshot.get("includedCount") or 0) > 0
+    )
 
 
 def options_report_stocks() -> List[str]:
@@ -515,8 +530,27 @@ class handler(BaseHTTPRequestHandler):
             json_response(self, 500, {"error": f"Missing environment variables: {', '.join(missing)}"})
             return
 
+        today = now_utc.astimezone(CHICAGO_TZ).date()
+        if not force_refresh:
+            try:
+                _, latest_text = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
+                if latest_report_is_current(latest_text, today):
+                    json_response(
+                        self,
+                        200,
+                        {
+                            "ok": True,
+                            "skipped": True,
+                            "reason": "A valid report has already been published for today.",
+                            "reportDateIso": today.isoformat(),
+                        },
+                    )
+                    return
+            except Exception:
+                # A failed freshness check must not block the scheduled retry.
+                pass
+
         try:
-            today = now_utc.astimezone(CHICAGO_TZ).date()
             expiration_override = expiration_override_for_today(today)
             markdown_report, html_report, snapshot = build_report(
                 api_key=api_key,
