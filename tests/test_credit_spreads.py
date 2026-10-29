@@ -1,5 +1,5 @@
 import unittest
-from datetime import date
+from datetime import date, datetime, timezone
 from unittest.mock import patch
 
 import alpaca_options_report as report
@@ -117,6 +117,38 @@ class CronOptionSelectorCompatibilityTests(unittest.TestCase):
 
         self.assertEqual(strike, 55)
         self.assertEqual(premium, 0.50)
+
+
+class CronScheduleRetryTests(unittest.TestCase):
+    def test_runs_at_nine_and_ten_chicago_time(self):
+        from api.cron import refresh
+
+        self.assertTrue(refresh.should_run_refresh(datetime(2026, 10, 28, 14, tzinfo=timezone.utc)))
+        self.assertTrue(refresh.should_run_refresh(datetime(2026, 10, 28, 15, tzinfo=timezone.utc)))
+        self.assertFalse(refresh.should_run_refresh(datetime(2026, 10, 28, 16, tzinfo=timezone.utc)))
+
+    def test_retry_skips_only_a_valid_current_report(self):
+        from api.cron import refresh
+
+        report_date = date(2026, 10, 28)
+        self.assertTrue(
+            refresh.latest_report_is_current(
+                '{"reportDateIso":"2026-10-28","includedCount":150}',
+                report_date,
+            )
+        )
+        self.assertFalse(
+            refresh.latest_report_is_current(
+                '{"reportDateIso":"2026-10-28","includedCount":0}',
+                report_date,
+            )
+        )
+        self.assertFalse(
+            refresh.latest_report_is_current(
+                '{"reportDateIso":"2026-10-27","includedCount":150}',
+                report_date,
+            )
+        )
 
 
 class CashSecuredPutUniverseTests(unittest.TestCase):
