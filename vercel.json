@@ -4,7 +4,7 @@
   "fluid": true,
   "functions": {
     "api/cron/refresh.py": {
-      "maxDuration": 1800
+      "maxDuration": 300
     },
     "api/report.py": {
       "maxDuration": 30
