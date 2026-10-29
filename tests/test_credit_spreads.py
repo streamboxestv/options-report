@@ -151,6 +151,42 @@ class CronScheduleRetryTests(unittest.TestCase):
         )
 
 
+class CashPutSupplementMergeTests(unittest.TestCase):
+    def test_merges_extra_rows_without_replacing_core_report(self):
+        from api.cron import refresh
+
+        base = {
+            "reportDateIso": "2026-10-28",
+            "includedCount": 150,
+            "warnings": ["core warning"],
+            "cashSecuredPuts": {
+                "rows": [
+                    {"ticker": "AAPL", "roiPct": 1.0, "premium": 100.0},
+                ]
+            },
+        }
+        supplement = {
+            "pricingRefreshedAt": "2026-10-28 10:05:00",
+            "warnings": ["extra warning"],
+            "cashSecuredPuts": {
+                "rows": [
+                    {"ticker": "MARA", "roiPct": 2.0, "premium": 80.0},
+                ]
+            },
+        }
+
+        merged = refresh.merge_cash_put_supplement(base, supplement)
+
+        self.assertEqual(merged["reportDateIso"], "2026-10-28")
+        self.assertEqual(merged["includedCount"], 150)
+        self.assertEqual(
+            [row["ticker"] for row in merged["cashSecuredPuts"]["rows"]],
+            ["MARA", "AAPL"],
+        )
+        self.assertEqual(merged["cashPutPricingRefreshedAt"], "2026-10-28 10:05:00")
+        self.assertEqual(merged["warnings"], ["core warning", "extra warning"])
+
+
 class CashSecuredPutUniverseTests(unittest.TestCase):
     def test_extra_universe_contains_100_unique_non_primary_symbols(self):
         extras = report.cash_secured_put_extra_symbols(report.OPTIONS_REPORT_STOCKS)
