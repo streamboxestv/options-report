@@ -263,6 +263,41 @@ def latest_report_is_current(report_text: Optional[str], report_date: date) -> b
     )
 
 
+def merge_cash_put_supplement(
+    base_snapshot: Dict[str, object],
+    supplemental_snapshot: Dict[str, object],
+) -> Dict[str, object]:
+    base_section = base_snapshot.get("cashSecuredPuts")
+    if not isinstance(base_section, dict):
+        base_section = {"title": "Cash Secured Puts", "rows": []}
+        base_snapshot["cashSecuredPuts"] = base_section
+
+    base_rows = base_section.get("rows") if isinstance(base_section.get("rows"), list) else []
+    extra_section = supplemental_snapshot.get("cashSecuredPuts")
+    extra_rows = extra_section.get("rows") if isinstance(extra_section, dict) and isinstance(extra_section.get("rows"), list) else []
+    rows_by_ticker = {
+        str(row.get("ticker")): row
+        for row in base_rows + extra_rows
+        if isinstance(row, dict) and row.get("ticker")
+    }
+    base_section["rows"] = sorted(
+        rows_by_ticker.values(),
+        key=lambda row: (
+            float(row.get("roiPct") or -1.0),
+            float(row.get("premium") or -1.0),
+            str(row.get("ticker") or ""),
+        ),
+        reverse=True,
+    )
+
+    warnings = base_snapshot.get("warnings") if isinstance(base_snapshot.get("warnings"), list) else []
+    extra_warnings = supplemental_snapshot.get("warnings") if isinstance(supplemental_snapshot.get("warnings"), list) else []
+    base_snapshot["warnings"] = list(dict.fromkeys(str(item) for item in warnings + extra_warnings))
+    if supplemental_snapshot.get("pricingRefreshedAt"):
+        base_snapshot["cashPutPricingRefreshedAt"] = supplemental_snapshot["pricingRefreshedAt"]
+    return base_snapshot
+
+
 def options_report_stocks() -> List[str]:
     replacements = {
         "AA": "PURR",
@@ -530,22 +565,30 @@ class handler(BaseHTTPRequestHandler):
             json_response(self, 500, {"error": f"Missing environment variables: {', '.join(missing)}"})
             return
 
-        today = now_utc.astimezone(CHICAGO_TZ).date()
+        chicago_now = now_utc.astimezone(CHICAGO_TZ)
+        today = chicago_now.date()
+        supplemental_cash_puts = False
+        current_snapshot: Optional[Dict[str, object]] = None
         if not force_refresh:
             try:
                 _, latest_text = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
                 if latest_report_is_current(latest_text, today):
-                    json_response(
-                        self,
-                        200,
-                        {
-                            "ok": True,
-                            "skipped": True,
-                            "reason": "A valid report has already been published for today.",
-                            "reportDateIso": today.isoformat(),
-                        },
-                    )
-                    return
+                    parsed_snapshot = json.loads(latest_text or "{}")
+                    if chicago_now.hour == 10 and isinstance(parsed_snapshot, dict):
+                        supplemental_cash_puts = True
+                        current_snapshot = parsed_snapshot
+                    else:
+                        json_response(
+                            self,
+                            200,
+                            {
+                                "ok": True,
+                                "skipped": True,
+                                "reason": "A valid report has already been published for today.",
+                                "reportDateIso": today.isoformat(),
+                            },
+                        )
+                        return
             except Exception:
                 # A failed freshness check must not block the scheduled retry.
                 pass
@@ -555,20 +598,27 @@ class handler(BaseHTTPRequestHandler):
             markdown_report, html_report, snapshot = build_report(
                 api_key=api_key,
                 api_secret=api_secret,
-                symbols=options_report_stocks(),
+                symbols=[] if supplemental_cash_puts else options_report_stocks(),
                 report_title="Options Report",
                 expiration_override=expiration_override,
                 batch_size=10,
                 batch_pause_seconds=0.5,
                 enforce_min_price_filter=True,
+                include_cash_secured_put_extras=supplemental_cash_puts,
+                supplemental_cash_puts_only=supplemental_cash_puts,
             )
-            if int(snapshot.get("includedCount") or 0) == 0:
-                raise RuntimeError(
-                    "Refusing to publish an empty report; preserving the last successful dashboard snapshot."
-                )
-            snapshot["skippedTickers"] = skipped_tickers_from_html(html_report)
-            include_all_earnings_skips(snapshot)
-            add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
+            if supplemental_cash_puts:
+                if current_snapshot is None:
+                    raise RuntimeError("Cannot merge cash-put supplement without today's core report.")
+                snapshot = merge_cash_put_supplement(current_snapshot, snapshot)
+            else:
+                if int(snapshot.get("includedCount") or 0) == 0:
+                    raise RuntimeError(
+                        "Refusing to publish an empty report; preserving the last successful dashboard snapshot."
+                    )
+                snapshot["skippedTickers"] = skipped_tickers_from_html(html_report)
+                include_all_earnings_skips(snapshot)
+                add_my_portfolio_puts(snapshot, api_key, api_secret, expiration_override)
 
             latest_sha, _ = fetch_repo_file(repository, LATEST_REPORT_PATH, branch, github_token)
             history_sha, history_text = fetch_repo_file(repository, REPORT_HISTORY_PATH, branch, github_token)
@@ -613,15 +663,16 @@ class handler(BaseHTTPRequestHandler):
                 github_token,
                 f"Back up options report history for {report_date}",
             )
-            update_repo_file(
-                repository,
-                branch,
-                MARKDOWN_REPORT_PATH,
-                markdown_report,
-                markdown_sha,
-                github_token,
-                f"Refresh options report markdown for {report_date}",
-            )
+            if not supplemental_cash_puts:
+                update_repo_file(
+                    repository,
+                    branch,
+                    MARKDOWN_REPORT_PATH,
+                    markdown_report,
+                    markdown_sha,
+                    github_token,
+                    f"Refresh options report markdown for {report_date}",
+                )
         except Exception as exc:
             json_response(self, 500, {"error": str(exc)})
             return
@@ -632,6 +683,7 @@ class handler(BaseHTTPRequestHandler):
             {
                 "ok": True,
                 "forced": force_refresh,
+                "phase": "cash-put-supplement" if supplemental_cash_puts else "core",
                 "reportDate": snapshot.get("reportDate"),
                 "reportDateIso": snapshot.get("reportDateIso"),
                 "pricingRefreshedAt": snapshot.get("pricingRefreshedAt"),
