@@ -841,6 +841,15 @@ def action_for_premium(last_price: Optional[float], stock_price: float) -> str:
     return "Sell" if current_roi >= 1.0 else "Wait"
 
 
+def action_for_option(last_price: Optional[float], stock_price: float, option_type: str) -> str:
+    current_roi = roi_pct(last_price, stock_price)
+    if current_roi is None or current_roi <= 0:
+        return "Wait"
+    if option_type == "put":
+        return "Sell"
+    return "Sell" if current_roi >= 1.0 else "Wait"
+
+
 def roi_pct(last_price: Optional[float], stock_price: float) -> Optional[float]:
     if last_price is None or stock_price <= 0:
         return None
@@ -1463,7 +1472,7 @@ def build_row(
         pct_otm=pct_otm,
         strike=strike,
         last_price=last_price,
-        action=action_for_premium(last_price, price),
+        action=action_for_option(last_price, price, option_type),
     ), expiration_used
 
 
