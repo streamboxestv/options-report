@@ -108,6 +108,44 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
             )
 
 
+class CashSecuredPutBudgetTests(unittest.TestCase):
+    def snapshot(self, strike, bid_size, open_interest):
+        return {
+            "option_contract": {
+                "strike_price": str(strike),
+                "open_interest": str(open_interest),
+            },
+            "greeks": {"delta": -0.20},
+            "latestQuote": {"bp": 0.50, "ap": 0.60, "bs": bid_size},
+            "latestTrade": {"p": 0.55},
+        }
+
+    def test_budget_is_ten_thousand_dollars(self):
+        self.assertEqual(report.CASH_SECURED_PUT_BUDGET, 10_000.0)
+
+    def test_required_bid_size_scales_down_with_ten_thousand_budget(self):
+        contracts = [self.snapshot(90, bid_size=1, open_interest=50)]
+
+        strike, premium = report.choose_option_contract(
+            contracts=contracts,
+            price=100.0,
+            target_strike=90.0,
+            option_type="put",
+            cash_budget=10_000.0,
+        )
+
+        self.assertEqual(strike, 90)
+        self.assertEqual(premium, 0.50)
+        with self.assertRaisesRegex(RuntimeError, "No OTM put contracts available"):
+            report.choose_option_contract(
+                contracts=contracts,
+                price=100.0,
+                target_strike=90.0,
+                option_type="put",
+                cash_budget=20_000.0,
+            )
+
+
 class CronOptionSelectorCompatibilityTests(unittest.TestCase):
     def test_cash_budget_is_forwarded_to_liquidity_aware_selector(self):
         from api.cron import refresh
