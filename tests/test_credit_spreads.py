@@ -55,6 +55,19 @@ class CreditSpreadPricingTests(unittest.TestCase):
         self.assertIsNone(row.max_roi_pct)
 
 
+class CashSecuredPutRoiTests(unittest.TestCase):
+    def test_put_with_positive_premium_is_sell_below_one_percent_roi(self):
+        self.assertEqual(report.action_for_option(0.50, 100.0, "put"), "Sell")
+
+    def test_covered_call_keeps_one_percent_minimum(self):
+        self.assertEqual(report.action_for_option(0.50, 100.0, "call"), "Wait")
+        self.assertEqual(report.action_for_option(1.00, 100.0, "call"), "Sell")
+
+    def test_put_without_positive_premium_still_waits(self):
+        self.assertEqual(report.action_for_option(None, 100.0, "put"), "Wait")
+        self.assertEqual(report.action_for_option(0.0, 100.0, "put"), "Wait")
+
+
 class CashSecuredPutLiquidityTests(unittest.TestCase):
     def snapshot(self, strike, bid, ask, bid_size, open_interest, last):
         return {
