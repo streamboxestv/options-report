@@ -174,9 +174,15 @@ class CronScheduleRetryTests(unittest.TestCase):
     def test_runs_at_nine_and_ten_chicago_time(self):
         from api.cron import refresh
 
+        # Daylight time: 14:00/15:00 UTC map to 9:00/10:00 Chicago.
         self.assertTrue(refresh.should_run_refresh(datetime(2026, 10, 28, 14, tzinfo=timezone.utc)))
         self.assertTrue(refresh.should_run_refresh(datetime(2026, 10, 28, 15, tzinfo=timezone.utc)))
         self.assertFalse(refresh.should_run_refresh(datetime(2026, 10, 28, 16, tzinfo=timezone.utc)))
+
+        # Standard time: 15:00/16:00 UTC map to 9:00/10:00 Chicago.
+        self.assertFalse(refresh.should_run_refresh(datetime(2026, 11, 2, 14, tzinfo=timezone.utc)))
+        self.assertTrue(refresh.should_run_refresh(datetime(2026, 11, 2, 15, tzinfo=timezone.utc)))
+        self.assertTrue(refresh.should_run_refresh(datetime(2026, 11, 2, 16, tzinfo=timezone.utc)))
 
     def test_retry_skips_only_a_valid_current_report(self):
         from api.cron import refresh
