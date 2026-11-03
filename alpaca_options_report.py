@@ -771,7 +771,8 @@ def choose_option_contract(
             continue
         last = trade.get("p")
         premium_price = float(last) if last is not None else None
-        open_interest = float(contract.get("open_interest") or 0)
+        open_interest_value = contract.get("open_interest")
+        open_interest = float(open_interest_value) if open_interest_value is not None else None
         if option_type == "put" and cash_budget is not None:
             required_contracts = int(cash_budget // (strike * 100.0))
             bid_value = quote.get("bp")
@@ -787,7 +788,10 @@ def choose_option_contract(
                 CASH_SECURED_PUT_MIN_OPEN_INTEREST,
                 required_contracts * CASH_SECURED_PUT_OPEN_INTEREST_MULTIPLIER,
             )
-            if open_interest < minimum_open_interest:
+            # Alpaca option-chain snapshots do not include open interest.
+            # Enforce it when another feed supplies the field; otherwise rely on
+            # executable bid size and spread for the requested cash budget.
+            if open_interest is not None and open_interest < minimum_open_interest:
                 continue
             midpoint = (bid + ask) / 2.0
             relative_spread = (ask - bid) / midpoint if midpoint > 0 else math.inf
@@ -800,7 +804,7 @@ def choose_option_contract(
                 "last": premium_price,
                 "delta_target_distance": abs(strike - target_strike),
                 "has_last": premium_price is not None,
-                "open_interest": open_interest,
+                "open_interest": open_interest or 0.0,
                 "delta": abs(float(greeks.get("delta"))) if greeks.get("delta") is not None else math.inf,
             }
         )
