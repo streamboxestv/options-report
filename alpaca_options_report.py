@@ -769,6 +769,8 @@ def choose_option_contract(
             continue
         if option_type == "put" and strike > price:
             continue
+        if option_type == "put" and strike > target_strike:
+            continue
         last = trade.get("p")
         premium_price = float(last) if last is not None else None
         open_interest_value = contract.get("open_interest")
