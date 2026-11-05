@@ -111,6 +111,19 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
             )
 
 
+    def test_put_strike_must_be_outside_average_weekly_move(self):
+        with self.assertRaisesRegex(RuntimeError, "No OTM put contracts available"):
+            report.choose_option_contract(
+                contracts=[
+                    self.snapshot(44.50, 1.50, 1.67, 10, 100, 1.60),
+                ],
+                price=45.08,
+                target_strike=31.36,
+                option_type="put",
+                cash_budget=10_000.0,
+            )
+
+
 class CashSecuredPutBudgetTests(unittest.TestCase):
     def snapshot(self, strike, bid_size, open_interest):
         return {
