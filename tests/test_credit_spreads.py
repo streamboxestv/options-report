@@ -56,8 +56,11 @@ class CreditSpreadPricingTests(unittest.TestCase):
 
 
 class CashSecuredPutRoiTests(unittest.TestCase):
-    def test_put_with_positive_premium_is_sell_below_one_percent_roi(self):
-        self.assertEqual(report.action_for_option(0.50, 100.0, "put"), "Sell")
+    def test_put_below_one_percent_roi_waits(self):
+        self.assertEqual(report.action_for_option(0.99, 100.0, "put"), "Wait")
+
+    def test_put_at_one_percent_roi_sells(self):
+        self.assertEqual(report.action_for_option(1.00, 100.0, "put"), "Sell")
 
     def test_covered_call_keeps_one_percent_minimum(self):
         self.assertEqual(report.action_for_option(0.50, 100.0, "call"), "Wait")
