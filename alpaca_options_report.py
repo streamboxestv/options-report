@@ -847,10 +847,8 @@ def action_for_premium(last_price: Optional[float], stock_price: float) -> str:
 
 def action_for_option(last_price: Optional[float], stock_price: float, option_type: str) -> str:
     current_roi = roi_pct(last_price, stock_price)
-    if current_roi is None or current_roi <= 0:
+    if current_roi is None:
         return "Wait"
-    if option_type == "put":
-        return "Sell"
     return "Sell" if current_roi >= 1.0 else "Wait"
 
 
@@ -1489,7 +1487,7 @@ def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> st
     )
     lines = [f"## {title} - Expiration {expiration_label}", ""]
     if not sorted_rows:
-        empty_label = "No covered calls met the 1.00% ROI threshold today." if title == "Covered Calls" else "None"
+        empty_label = f"No {title.lower()} met the 1.00% ROI threshold today."
         table_rows = [[empty_label, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
         lines.append("")
     else:
@@ -1629,7 +1627,7 @@ def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) 
     )
     table_rows = []
     if not sorted_rows:
-        empty_message = "No covered calls met the 1.00% ROI threshold today." if title == "Covered Calls" else "No sell candidates"
+        empty_message = f"No {title.lower()} met the 1.00% ROI threshold today."
         table_rows.append(
             "<tr>"
             f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;" colspan="7">{escape(empty_message)}</td>'
