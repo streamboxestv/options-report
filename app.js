@@ -321,7 +321,12 @@ function renderDashboard() {
     snapshot.coveredCalls?.rows || [],
     "No covered calls met the 1.00% ROI threshold today.",
   );
-  renderTable("puts-table", optionColumns, snapshot.cashSecuredPuts?.rows || []);
+  renderTable(
+    "puts-table",
+    optionColumns,
+    snapshot.cashSecuredPuts?.rows || [],
+    "No cash secured puts met the 0.50% ROI threshold today.",
+  );
 
   renderTable(
     "pmcc-table",
