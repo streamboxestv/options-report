@@ -294,9 +294,11 @@ ETF_SYMBOLS = {"SPY", "QQQ"}
 CREDIT_SPREAD_MIN_CREDIT_RATIO = 0.15
 CREDIT_SPREAD_MAX_CREDIT_RATIO = 0.25
 CASH_SECURED_PUT_BUDGET = 10_000.0
+CASH_SECURED_PUT_MIN_ROI_PCT = 0.50
 CASH_SECURED_PUT_MIN_OPEN_INTEREST = 50
 CASH_SECURED_PUT_OPEN_INTEREST_MULTIPLIER = 10
 CASH_SECURED_PUT_MAX_RELATIVE_SPREAD = 0.30
+OPTION_MIN_ROI_PCT = 1.00
 
 DATA_BASE_URL = "https://data.alpaca.markets"
 STOCK_FEED = "iex"
@@ -844,14 +846,15 @@ def action_for_premium(last_price: Optional[float], stock_price: float) -> str:
     current_roi = roi_pct(last_price, stock_price)
     if current_roi is None:
         return "Wait"
-    return "Sell" if current_roi >= 1.0 else "Wait"
+    return "Sell" if current_roi >= OPTION_MIN_ROI_PCT else "Wait"
 
 
 def action_for_option(last_price: Optional[float], stock_price: float, option_type: str) -> str:
     current_roi = roi_pct(last_price, stock_price)
     if current_roi is None:
         return "Wait"
-    return "Sell" if current_roi >= 1.0 else "Wait"
+    minimum_roi = CASH_SECURED_PUT_MIN_ROI_PCT if option_type == "put" else OPTION_MIN_ROI_PCT
+    return "Sell" if current_roi >= minimum_roi else "Wait"
 
 
 def roi_pct(last_price: Optional[float], stock_price: float) -> Optional[float]:
@@ -1489,7 +1492,8 @@ def render_table(title: str, rows: List[OptionRow], expiration_label: str) -> st
     )
     lines = [f"## {title} - Expiration {expiration_label}", ""]
     if not sorted_rows:
-        empty_label = f"No {title.lower()} met the 1.00% ROI threshold today."
+        minimum_roi = CASH_SECURED_PUT_MIN_ROI_PCT if title == "Cash Secured Puts" else OPTION_MIN_ROI_PCT
+        empty_label = f"No {title.lower()} met the {minimum_roi:.2f}% ROI threshold today."
         table_rows = [[empty_label, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"]]
         lines.append("")
     else:
@@ -1629,7 +1633,8 @@ def render_html_table(title: str, rows: List[OptionRow], expiration_label: str) 
     )
     table_rows = []
     if not sorted_rows:
-        empty_message = f"No {title.lower()} met the 1.00% ROI threshold today."
+        minimum_roi = CASH_SECURED_PUT_MIN_ROI_PCT if title == "Cash Secured Puts" else OPTION_MIN_ROI_PCT
+        empty_message = f"No {title.lower()} met the {minimum_roi:.2f}% ROI threshold today."
         table_rows.append(
             "<tr>"
             f'<td style="padding:12px 14px;border-bottom:1px solid #e5e7eb;color:#6b7280;" colspan="7">{escape(empty_message)}</td>'
