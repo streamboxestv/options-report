@@ -706,6 +706,11 @@ def display_expiration_with_year(expiration_date: date) -> str:
     return f"{expiration_date.month}/{expiration_date.day}/{expiration_date.year}"
 
 
+def option_root_from_contract_symbol(contract_symbol: str) -> Optional[str]:
+    match = re.fullmatch(r"([A-Z0-9.]+)\d{6}[CP]\d{8}", contract_symbol)
+    return match.group(1) if match else None
+
+
 def paged_option_chain(
     symbol: str,
     expiration_date: date,
@@ -721,6 +726,7 @@ def paged_option_chain(
             "type": option_type,
             "feed": "indicative",
             "limit": "1000",
+            "root_symbol": symbol,
         }
         if page_token:
             params["page_token"] = page_token
@@ -732,6 +738,8 @@ def paged_option_chain(
         )
         snapshots = payload.get("snapshots", {})
         for contract_symbol, snapshot in snapshots.items():
+            if option_root_from_contract_symbol(contract_symbol) != symbol:
+                continue
             enriched = dict(snapshot)
             enriched["contract_symbol"] = contract_symbol
             rows.append(enriched)
