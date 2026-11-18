@@ -148,8 +148,9 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
 
     def test_budget_is_ten_thousand_dollars(self):
         self.assertEqual(report.CASH_SECURED_PUT_BUDGET, 10_000.0)
+        self.assertEqual(report.CASH_SECURED_PUT_MIN_POSITION_VALUE, 5_000.0)
 
-    def test_required_bid_size_scales_down_with_ten_thousand_budget(self):
+    def test_one_contract_meets_minimum_for_ninety_dollar_strike(self):
         contracts = [self.snapshot(90, bid_size=1, open_interest=50)]
 
         strike, premium = report.choose_option_contract(
@@ -162,14 +163,28 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
 
         self.assertEqual(strike, 90)
         self.assertEqual(premium, 0.50)
+
+    def test_requires_bid_size_for_at_least_five_thousand_of_collateral(self):
+        insufficient = [self.snapshot(12, bid_size=4, open_interest=100)]
         with self.assertRaisesRegex(RuntimeError, "No OTM put contracts available"):
             report.choose_option_contract(
-                contracts=contracts,
-                price=100.0,
-                target_strike=90.0,
+                contracts=insufficient,
+                price=15.0,
+                target_strike=12.0,
                 option_type="put",
-                cash_budget=20_000.0,
+                cash_budget=10_000.0,
             )
+
+        strike, premium = report.choose_option_contract(
+            contracts=[self.snapshot(12, bid_size=5, open_interest=100)],
+            price=15.0,
+            target_strike=12.0,
+            option_type="put",
+            cash_budget=10_000.0,
+        )
+
+        self.assertEqual(strike, 12)
+        self.assertEqual(premium, 0.50)
 
 
 class CronOptionSelectorCompatibilityTests(unittest.TestCase):
