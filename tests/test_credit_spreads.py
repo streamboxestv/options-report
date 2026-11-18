@@ -56,11 +56,11 @@ class CreditSpreadPricingTests(unittest.TestCase):
 
 
 class CashSecuredPutRoiTests(unittest.TestCase):
-    def test_put_below_half_percent_roi_waits(self):
-        self.assertEqual(report.action_for_option(0.49, 100.0, "put"), "Wait")
+    def test_put_below_four_tenths_percent_roi_waits(self):
+        self.assertEqual(report.action_for_option(0.39, 100.0, "put"), "Wait")
 
-    def test_put_at_half_percent_roi_sells(self):
-        self.assertEqual(report.action_for_option(0.50, 100.0, "put"), "Sell")
+    def test_put_at_four_tenths_percent_roi_sells(self):
+        self.assertEqual(report.action_for_option(0.40, 100.0, "put"), "Sell")
 
     def test_covered_call_keeps_one_percent_minimum(self):
         self.assertEqual(report.action_for_option(0.50, 100.0, "call"), "Wait")
@@ -70,10 +70,10 @@ class CashSecuredPutRoiTests(unittest.TestCase):
         self.assertEqual(report.action_for_option(None, 100.0, "put"), "Wait")
         self.assertEqual(report.action_for_option(0.0, 100.0, "put"), "Wait")
 
-    def test_empty_cash_put_report_shows_half_percent_threshold(self):
+    def test_empty_cash_put_report_shows_four_tenths_percent_threshold(self):
         rendered = report.render_table("Cash Secured Puts", [], "11/13")
 
-        self.assertIn("0.50% ROI threshold", rendered)
+        self.assertIn("0.40% ROI threshold", rendered)
 
     def test_empty_covered_call_report_keeps_one_percent_threshold(self):
         rendered = report.render_table("Covered Calls", [], "11/13")
