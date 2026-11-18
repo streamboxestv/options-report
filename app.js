@@ -325,7 +325,7 @@ function renderDashboard() {
     "puts-table",
     optionColumns,
     snapshot.cashSecuredPuts?.rows || [],
-    "No cash secured puts met the 0.50% ROI threshold today.",
+    "No cash secured puts met the 0.40% ROI threshold today.",
   );
 
   renderTable(
