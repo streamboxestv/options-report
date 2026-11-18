@@ -294,6 +294,7 @@ ETF_SYMBOLS = {"SPY", "QQQ"}
 CREDIT_SPREAD_MIN_CREDIT_RATIO = 0.15
 CREDIT_SPREAD_MAX_CREDIT_RATIO = 0.25
 CASH_SECURED_PUT_BUDGET = 10_000.0
+CASH_SECURED_PUT_MIN_POSITION_VALUE = 5_000.0
 CASH_SECURED_PUT_MIN_ROI_PCT = 0.50
 CASH_SECURED_PUT_MIN_OPEN_INTEREST = 50
 CASH_SECURED_PUT_OPEN_INTEREST_MULTIPLIER = 10
@@ -786,13 +787,15 @@ def choose_option_contract(
         open_interest_value = contract.get("open_interest")
         open_interest = float(open_interest_value) if open_interest_value is not None else None
         if option_type == "put" and cash_budget is not None:
-            required_contracts = int(cash_budget // (strike * 100.0))
+            collateral_per_contract = strike * 100.0
+            required_contracts = math.ceil(CASH_SECURED_PUT_MIN_POSITION_VALUE / collateral_per_contract)
+            maximum_contracts = int(cash_budget // collateral_per_contract)
             bid_value = quote.get("bp")
             ask_value = quote.get("ap")
             bid_size = int(quote.get("bs") or 0)
             bid = float(bid_value) if bid_value is not None else 0.0
             ask = float(ask_value) if ask_value is not None else 0.0
-            if required_contracts < 1 or bid <= 0 or ask <= 0 or ask < bid:
+            if maximum_contracts < required_contracts or bid <= 0 or ask <= 0 or ask < bid:
                 continue
             if bid_size < required_contracts:
                 continue
