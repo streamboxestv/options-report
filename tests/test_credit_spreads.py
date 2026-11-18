@@ -285,5 +285,27 @@ class CashSecuredPutUniverseTests(unittest.TestCase):
         self.assertIn("NOK", extras)
 
 
+class OptionChainRootTests(unittest.TestCase):
+    def test_requests_and_keeps_only_the_exact_option_root(self):
+        payload = {
+            "snapshots": {
+                "CDE261120P00009000": {"latestQuote": {"bp": 0.0, "ap": 0.13}},
+                "CDE2261120P00009000": {"latestQuote": {"bp": 2.41, "ap": 3.08}},
+            }
+        }
+
+        with patch.object(report, "api_get", return_value=payload) as api_get:
+            rows = report.paged_option_chain(
+                "CDE",
+                date(2026, 11, 20),
+                "put",
+                "key",
+                "secret",
+            )
+
+        self.assertEqual([row["contract_symbol"] for row in rows], ["CDE261120P00009000"])
+        self.assertEqual(api_get.call_args.args[3]["root_symbol"], "CDE")
+
+
 if __name__ == "__main__":
     unittest.main()
