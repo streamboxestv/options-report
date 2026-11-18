@@ -413,15 +413,15 @@ def choose_priced_option_contract(
     price: float,
     target_strike: float,
     option_type: str,
-    cash_budget: Optional[float] = None,
+    minimum_position_value: Optional[float] = None,
 ) -> Tuple[float, Optional[float]]:
-    if cash_budget is not None:
+    if minimum_position_value is not None:
         return _base_choose_option_contract(
             contracts,
             price,
             target_strike,
             option_type,
-            cash_budget=cash_budget,
+            minimum_position_value=minimum_position_value,
         )
 
     parsed = []
