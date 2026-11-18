@@ -293,7 +293,6 @@ CREDIT_SPREAD_SYMBOLS = ["SPY", "QQQ", "AAPL", "MSFT", "GOOGL", "AMZN", "META", 
 ETF_SYMBOLS = {"SPY", "QQQ"}
 CREDIT_SPREAD_MIN_CREDIT_RATIO = 0.15
 CREDIT_SPREAD_MAX_CREDIT_RATIO = 0.25
-CASH_SECURED_PUT_BUDGET = 10_000.0
 CASH_SECURED_PUT_MIN_POSITION_VALUE = 5_000.0
 CASH_SECURED_PUT_MIN_ROI_PCT = 0.50
 CASH_SECURED_PUT_MIN_OPEN_INTEREST = 50
@@ -764,7 +763,7 @@ def choose_option_contract(
     price: float,
     target_strike: float,
     option_type: str,
-    cash_budget: Optional[float] = None,
+    minimum_position_value: Optional[float] = None,
 ) -> Tuple[float, Optional[float]]:
     parsed = []
     for snapshot in contracts:
@@ -786,16 +785,15 @@ def choose_option_contract(
         premium_price = float(last) if last is not None else None
         open_interest_value = contract.get("open_interest")
         open_interest = float(open_interest_value) if open_interest_value is not None else None
-        if option_type == "put" and cash_budget is not None:
+        if option_type == "put" and minimum_position_value is not None:
             collateral_per_contract = strike * 100.0
-            required_contracts = math.ceil(CASH_SECURED_PUT_MIN_POSITION_VALUE / collateral_per_contract)
-            maximum_contracts = int(cash_budget // collateral_per_contract)
+            required_contracts = math.ceil(minimum_position_value / collateral_per_contract)
             bid_value = quote.get("bp")
             ask_value = quote.get("ap")
             bid_size = int(quote.get("bs") or 0)
             bid = float(bid_value) if bid_value is not None else 0.0
             ask = float(ask_value) if ask_value is not None else 0.0
-            if maximum_contracts < required_contracts or bid <= 0 or ask <= 0 or ask < bid:
+            if bid <= 0 or ask <= 0 or ask < bid:
                 continue
             if bid_size < required_contracts:
                 continue
@@ -1457,7 +1455,7 @@ def build_row(
     api_key: str,
     api_secret: str,
     expiration_override: Optional[date] = None,
-    cash_budget: Optional[float] = None,
+    minimum_position_value: Optional[float] = None,
 ) -> Tuple[OptionRow, date]:
     target_strike = price * (1 + pct_otm) if option_type == "call" else price * (1 - pct_otm)
 
@@ -1481,7 +1479,7 @@ def build_row(
         price=price,
         target_strike=target_strike,
         option_type=option_type,
-        cash_budget=cash_budget,
+        minimum_position_value=minimum_position_value,
     )
     return OptionRow(
         stock=symbol,
@@ -2368,7 +2366,7 @@ def build_report(
                 api_key,
                 api_secret,
                 expiration_override,
-                cash_budget=CASH_SECURED_PUT_BUDGET,
+                minimum_position_value=CASH_SECURED_PUT_MIN_POSITION_VALUE,
             )
         except Exception:
             pass
@@ -2414,7 +2412,7 @@ def build_report(
                 api_key,
                 api_secret,
                 expiration_override,
-                cash_budget=CASH_SECURED_PUT_BUDGET,
+                minimum_position_value=CASH_SECURED_PUT_MIN_POSITION_VALUE,
             )
             return symbol, row, row_expiration
         except Exception:
