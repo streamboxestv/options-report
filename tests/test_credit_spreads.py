@@ -102,7 +102,7 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
             price=65.98,
             target_strike=57.0,
             option_type="put",
-            cash_budget=20_000.0,
+            minimum_position_value=20_000.0,
         )
 
         self.assertEqual(strike, 55)
@@ -117,7 +117,7 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
                 price=65.98,
                 target_strike=57.0,
                 option_type="put",
-                cash_budget=20_000.0,
+                minimum_position_value=20_000.0,
             )
 
 
@@ -130,7 +130,7 @@ class CashSecuredPutLiquidityTests(unittest.TestCase):
                 price=45.08,
                 target_strike=31.36,
                 option_type="put",
-                cash_budget=10_000.0,
+                minimum_position_value=10_000.0,
             )
 
 
@@ -146,8 +146,7 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
             "latestTrade": {"p": 0.55},
         }
 
-    def test_budget_is_ten_thousand_dollars(self):
-        self.assertEqual(report.CASH_SECURED_PUT_BUDGET, 10_000.0)
+    def test_minimum_position_is_five_thousand_dollars(self):
         self.assertEqual(report.CASH_SECURED_PUT_MIN_POSITION_VALUE, 5_000.0)
 
     def test_one_contract_meets_minimum_for_ninety_dollar_strike(self):
@@ -158,7 +157,7 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
             price=100.0,
             target_strike=90.0,
             option_type="put",
-            cash_budget=10_000.0,
+            minimum_position_value=5_000.0,
         )
 
         self.assertEqual(strike, 90)
@@ -172,7 +171,7 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
                 price=15.0,
                 target_strike=12.0,
                 option_type="put",
-                cash_budget=10_000.0,
+                minimum_position_value=5_000.0,
             )
 
         strike, premium = report.choose_option_contract(
@@ -180,15 +179,27 @@ class CashSecuredPutBudgetTests(unittest.TestCase):
             price=15.0,
             target_strike=12.0,
             option_type="put",
-            cash_budget=10_000.0,
+            minimum_position_value=5_000.0,
         )
 
         self.assertEqual(strike, 12)
         self.assertEqual(premium, 0.50)
 
+    def test_position_has_no_maximum_cap(self):
+        strike, premium = report.choose_option_contract(
+            contracts=[self.snapshot(120, bid_size=1, open_interest=50)],
+            price=130.0,
+            target_strike=120.0,
+            option_type="put",
+            minimum_position_value=5_000.0,
+        )
+
+        self.assertEqual(strike, 120)
+        self.assertEqual(premium, 0.50)
+
 
 class CronOptionSelectorCompatibilityTests(unittest.TestCase):
-    def test_cash_budget_is_forwarded_to_liquidity_aware_selector(self):
+    def test_minimum_position_value_is_forwarded_to_liquidity_aware_selector(self):
         from api.cron import refresh
 
         contracts = [
@@ -204,7 +215,7 @@ class CronOptionSelectorCompatibilityTests(unittest.TestCase):
             price=65.98,
             target_strike=55.0,
             option_type="put",
-            cash_budget=20_000.0,
+            minimum_position_value=20_000.0,
         )
 
         self.assertEqual(strike, 55)
