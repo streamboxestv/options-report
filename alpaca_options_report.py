@@ -118,7 +118,7 @@ REPORT2_INPUT_STOCKS = [
     "OSCR",
     "KTOS",
     "PANW",
-    "PATH",
+    "CLS",
     "PINS",
     "PL",
     "PLTR",
