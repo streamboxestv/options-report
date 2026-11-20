@@ -145,7 +145,7 @@ REPORT2_INPUT_STOCKS = [
     "SOUN",
     "SPCX",
     "SPOT",
-    "TE",
+    "ANT",
     "TEM",
     "TER",
     "TOST",
