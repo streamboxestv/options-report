@@ -142,7 +142,7 @@ REPORT2_INPUT_STOCKS = [
     "SNDK",
     "SNOW",
     "SOFI",
-    "SOUN",
+    "CBRS",
     "SPCX",
     "SPOT",
     "ANT",
