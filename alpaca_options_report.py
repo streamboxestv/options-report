@@ -127,7 +127,7 @@ REPORT2_INPUT_STOCKS = [
     "QCOM",
     "RBLX",
     "RBRK",
-    "RCAT",
+    "ETN",
     "RDDT",
     "RDW",
     "RGTI",
