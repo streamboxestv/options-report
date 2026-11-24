@@ -1106,11 +1106,29 @@ def choose_pmcc_short_call(
     return parsed[0]["snapshot"]
 
 
-def nearest_credit_spread_expiration(today: date) -> date:
+def nearest_credit_spread_expiration(today: date, api_key: str, api_secret: str) -> Optional[date]:
     expirations = fridays_from(today, 8)
-    preferred = [expiration_date for expiration_date in expirations if 24 <= (expiration_date - today).days <= 40]
-    candidates = preferred or expirations
-    return min(candidates, key=lambda expiration_date: (abs((expiration_date - today).days - 30), expiration_date))
+    expirations.sort(key=lambda expiration_date: (abs((expiration_date - today).days - 30), expiration_date))
+    # AAPL's weekly chain anchors the shared expiration. Unlike SPY, it
+    # doesn't list options for every trading day.
+    for friday in expirations:
+        for expiration_date in (friday, friday - timedelta(days=1)):
+            if expiration_date < today:
+                continue
+            payload = api_get(
+                "/v1beta1/options/snapshots/AAPL",
+                api_key,
+                api_secret,
+                {
+                    "expiration_date": expiration_date.isoformat(),
+                    "feed": "indicative",
+                    "root_symbol": "AAPL",
+                    "limit": "1",
+                },
+            )
+            if payload.get("snapshots"):
+                return expiration_date
+    return None
 
 
 def credit_spread_status_row(symbol: str, price: Optional[float], status: str) -> CreditSpreadRow:
@@ -1151,6 +1169,8 @@ def choose_credit_spread(
         return credit_spread_status_row(symbol, price, "No Trade - Neutral Trend")
 
     contracts = paged_option_chain(symbol, expiration_date, option_type, api_key, api_secret)
+    if not contracts:
+        return credit_spread_status_row(symbol, price, "No Trade - No Listed Contracts")
     parsed = []
     for snapshot in contracts:
         strike = option_snapshot_strike(snapshot)
@@ -2539,7 +2559,12 @@ def build_report(
     )
     pmcc_rows = pmcc_rows[:10]
 
-    credit_spread_expiration = nearest_credit_spread_expiration(today)
+    credit_spread_expiration = None
+    if not supplemental_cash_puts_only:
+        try:
+            credit_spread_expiration = nearest_credit_spread_expiration(today, api_key, api_secret)
+        except Exception as exc:
+            warnings.append(f"Credit spread expiration lookup unavailable ({exc})")
 
     def ensure_symbol_market_context(symbol: str) -> Tuple[Optional[float], Optional[float], Optional[str]]:
         price = latest_prices.get(symbol)
@@ -2562,6 +2587,8 @@ def build_report(
             price, _pct_otm, trend = ensure_symbol_market_context(symbol)
             if price is None or trend is None:
                 return credit_spread_status_row(symbol, price, "No Trade - Missing Price/Trend")
+            if credit_spread_expiration is None:
+                return credit_spread_status_row(symbol, price, "No Trade - No Expiration Available")
             earnings_date = None if symbol in ETF_SYMBOLS else get_earnings_date_safe(symbol)
             if earnings_date is not None and today <= earnings_date <= credit_spread_expiration:
                 return credit_spread_status_row(symbol, price, "Skip - Earnings Before Expiration")
@@ -2669,7 +2696,7 @@ def build_report(
         },
         "creditSpreadCandidates": {
             "title": "Credit Spread Candidates",
-            "expiration": display_expiration_with_year(credit_spread_expiration),
+            "expiration": display_expiration_with_year(credit_spread_expiration) if credit_spread_expiration else "N/A",
             "rows": [credit_spread_row_to_dict(row) for row in credit_spread_rows],
         },
         "earningsThisWeek": {
